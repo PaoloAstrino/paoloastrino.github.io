@@ -1,24 +1,36 @@
-# Paolo Astrino - Portfolio Website
+# Paolo Astrino - Data Analyst Portfolio
 
-A modern, responsive portfolio website showcasing my projects, skills, and professional experience.
+A modern, responsive portfolio website showcasing my data analytics projects, technical skills, and professional experience in the field of data science and machine learning.
 
 ## 🌟 Features
 
 - **Responsive Design**: Optimized for all devices (desktop, tablet, mobile)
 - **Modern UI/UX**: Clean, professional design with smooth animations
 - **Interactive Navigation**: Smooth scrolling and mobile-friendly hamburger menu
-- **Project Showcase**: Dedicated section for featured projects
-- **Skills Display**: Organized technical skills by category
-- **Contact Form**: Functional contact form for inquiries
-- **Social Links**: Easy access to social media profiles
+- **Experience Timeline**: Interactive timeline showcasing education and work experience
+- **Project Showcase**: Featured data analytics and machine learning projects
+- **Skills Display**: Organized technical skills by category (Data Analysis, Visualization, etc.)
+- **Certifications**: Dedicated section for professional certifications
+- **CV Download**: Direct download link for CV in PDF format
+- **Contact Form**: Functional contact form for professional inquiries
+- **Social Links**: LinkedIn and GitHub profiles
 - **Performance Optimized**: Fast loading with optimized assets
+
+## 👨‍💼 About Paolo
+
+Data Analyst and Machine Learning enthusiast with a strong background in:
+- **Programming**: Python (Pandas, NumPy, Matplotlib, Scikit-learn), R, SQL, VBA
+- **Data Visualization**: Power BI, Excel Charts, Python plotting libraries
+- **Databases**: PostgreSQL, MySQL, SQLite
+- **Statistical Analysis**: Hypothesis testing, Regression, Forecasting
+- **Education**: Master's in Data Analytics for Business and Society (Ca' Foscari University)
 
 ## 🛠️ Technologies Used
 
 - **HTML5**: Semantic markup and structure
-- **CSS3**: Modern styling with Flexbox and Grid
-- **JavaScript**: Interactive functionality and animations
-- **Font Awesome**: Professional icons
+- **CSS3**: Modern styling with Flexbox and Grid, custom animations
+- **JavaScript**: Interactive functionality and smooth animations
+- **Font Awesome**: Professional icons for better visual appeal
 - **GitHub Pages**: Free hosting platform
 
 ## 📁 Project Structure
