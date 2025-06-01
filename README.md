@@ -19,6 +19,7 @@ A modern, responsive portfolio website showcasing my data analytics projects, te
 ## 👨‍💼 About Paolo
 
 Data Analyst and Machine Learning enthusiast with a strong background in:
+
 - **Programming**: Python (Pandas, NumPy, Matplotlib, Scikit-learn), R, SQL, VBA
 - **Data Visualization**: Power BI, Excel Charts, Python plotting libraries
 - **Databases**: PostgreSQL, MySQL, SQLite

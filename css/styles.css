@@ -305,7 +305,7 @@ body {
 }
 
 .timeline::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 2px;
   background: #3498db;
@@ -323,7 +323,7 @@ body {
 }
 
 .timeline-item::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 20px;
   height: 20px;
@@ -390,17 +390,17 @@ body {
   .timeline::before {
     left: 31px;
   }
-  
+
   .timeline-item {
     width: 100%;
     padding-left: 70px;
     padding-right: 25px;
   }
-  
+
   .timeline-item::before {
     left: 21px;
   }
-  
+
   .timeline-item:nth-child(even) {
     left: 0%;
   }
