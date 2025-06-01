@@ -10,16 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
   initSmoothScrolling();
   initParallaxEffects();
   initThemeToggle();
-  initScrollProgress();
-  initCursorTrail();
-
-  // Initialize page load animation
-  setTimeout(() => {
-    const loadingOverlay = document.querySelector(".loading-overlay");
-    if (loadingOverlay) {
-      loadingOverlay.classList.add("hidden");
-    }
-  }, 1000);
 });
 
 // Navigation functionality
@@ -301,104 +291,91 @@ function initParallaxEffects() {
 
 // Theme toggle functionality
 function initThemeToggle() {
-  const toggleButton = document.getElementById("theme-toggle");
-  const toggleIcon = toggleButton?.querySelector("i");
+  // Create theme toggle button
+  const themeToggle = document.createElement("button");
+  themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+  themeToggle.className = "theme-toggle";
+  themeToggle.style.cssText = `
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: none;
+        background: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+        cursor: pointer;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 5px 15px hsl(var(--primary) / 0.3);
+        transition: all 0.3s ease;
+    `;
 
-  if (!toggleButton || !toggleIcon) return;
+  document.body.appendChild(themeToggle);
 
-  // Check for saved theme preference or default to light mode
-  const savedTheme = localStorage.getItem("theme") || "light";
-  document.documentElement.setAttribute("data-theme", savedTheme);
-
+  // Check for saved theme
+  const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") {
     document.body.classList.add("dark");
-    toggleIcon.className = "fas fa-sun";
-  } else {
-    toggleIcon.className = "fas fa-moon";
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
   }
 
-  toggleButton.addEventListener("click", () => {
+  themeToggle.addEventListener("click", function () {
+    document.body.classList.toggle("dark");
     const isDark = document.body.classList.contains("dark");
 
-    if (isDark) {
-      document.body.classList.remove("dark");
-      document.documentElement.setAttribute("data-theme", "light");
-      toggleIcon.className = "fas fa-moon";
-      localStorage.setItem("theme", "light");
-    } else {
-      document.body.classList.add("dark");
-      document.documentElement.setAttribute("data-theme", "dark");
-      toggleIcon.className = "fas fa-sun";
-      localStorage.setItem("theme", "dark");
-    }
+    this.innerHTML = isDark
+      ? '<i class="fas fa-sun"></i>'
+      : '<i class="fas fa-moon"></i>';
+    localStorage.setItem("theme", isDark ? "dark" : "light");
 
-    // Add a nice transition effect
-    document.body.style.transition =
-      "background-color 0.3s ease, color 0.3s ease";
+    // Add animation effect
+    this.style.transform = "scale(0.9)";
     setTimeout(() => {
-      document.body.style.transition = "";
-    }, 300);
+      this.style.transform = "scale(1)";
+    }, 150);
+  });
+
+  // Hover effect
+  themeToggle.addEventListener("mouseenter", function () {
+    this.style.transform = "scale(1.1)";
+  });
+
+  themeToggle.addEventListener("mouseleave", function () {
+    this.style.transform = "scale(1)";
   });
 }
 
-// Scroll progress bar
-function initScrollProgress() {
-  const progressBar = document.getElementById("scroll-progress");
-  if (!progressBar) return;
-
-  window.addEventListener("scroll", () => {
-    const windowHeight =
-      document.documentElement.scrollHeight - window.innerHeight;
-    const scrolled = (window.scrollY / windowHeight) * 100;
-    progressBar.style.width = scrolled + "%";
-  });
-}
-
-// Cursor trail effect
+// Add cursor trail effect
 function initCursorTrail() {
-  const trail = [];
-  const trailLength = 10;
+  const cursor = document.createElement("div");
+  cursor.className = "cursor-trail";
+  cursor.style.cssText = `
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        background: hsl(var(--primary));
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0.7;
+        transition: all 0.1s ease;
+        transform: translate(-50%, -50%);
+    `;
+  document.body.appendChild(cursor);
 
-  // Create trail elements
-  for (let i = 0; i < trailLength; i++) {
-    const dot = document.createElement("div");
-    dot.className = "cursor-trail";
-    dot.style.opacity = (i / trailLength).toString();
-    document.body.appendChild(dot);
-    trail.push(dot);
-  }
-
-  let mouseX = 0;
-  let mouseY = 0;
-
-  document.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+  document.addEventListener("mousemove", function (e) {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
   });
 
-  // Animate trail
-  function animateTrail() {
-    let x = mouseX;
-    let y = mouseY;
-
-    trail.forEach((dot, index) => {
-      dot.style.left = x + "px";
-      dot.style.top = y + "px";
-      dot.style.transform = `translate(-50%, -50%) scale(${
-        (trail.length - index) / trail.length
-      })`;
-
-      if (index < trail.length - 1) {
-        const nextDot = trail[index + 1];
-        x += (parseInt(nextDot.style.left) - x) * 0.3;
-        y += (parseInt(nextDot.style.top) - y) * 0.3;
-      }
-    });
-
-    requestAnimationFrame(animateTrail);
+  // Hide cursor trail on mobile
+  if (window.innerWidth <= 768) {
+    cursor.style.display = "none";
   }
-
-  animateTrail();
 }
 
 // Performance optimization

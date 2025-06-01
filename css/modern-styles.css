@@ -1,37 +1,37 @@
 /* Modern Portfolio CSS - Based on Creative Agency Design */
 
-/* CSS Variables for consistent theming */
+/* CSS Variables for consistent theming - Black, White & Blue */
 :root {
   --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
+  --foreground: 0 0% 0%;
   --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
-  --primary: 221.2 83.2% 53.3%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
-  --border: 214.3 31.8% 91.4%;
+  --card-foreground: 0 0% 0%;
+  --primary: 220 100% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 96%;
+  --secondary-foreground: 0 0% 20%;
+  --muted: 0 0% 95%;
+  --muted-foreground: 0 0% 40%;
+  --accent: 0 0% 98%;
+  --accent-foreground: 0 0% 10%;
+  --border: 0 0% 90%;
   --radius: 0.5rem;
 }
 
 .dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --card: 222.2 84% 4.9%;
-  --card-foreground: 210 40% 98%;
-  --primary: 217.2 91.2% 59.8%;
-  --primary-foreground: 222.2 47.4% 11.2%;
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
-  --border: 217.2 32.6% 17.5%;
+  --background: 0 0% 8%;
+  --foreground: 0 0% 98%;
+  --card: 0 0% 12%;
+  --card-foreground: 0 0% 98%;
+  --primary: 220 100% 60%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 16%;
+  --secondary-foreground: 0 0% 90%;
+  --muted: 0 0% 14%;
+  --muted-foreground: 0 0% 70%;
+  --accent: 0 0% 18%;
+  --accent-foreground: 0 0% 95%;
+  --border: 0 0% 20%;
 }
 
 /* Reset and Base Styles */
@@ -46,7 +46,8 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
   line-height: 1.6;
   color: hsl(var(--foreground));
   background: hsl(var(--background));
@@ -56,7 +57,12 @@ body {
 
 /* Utility Classes */
 .text-gradient {
-  background: linear-gradient(135deg, hsl(var(--primary)), #3b82f6, #8b5cf6);
+  background: linear-gradient(
+    135deg,
+    hsl(220, 100%, 50%),
+    hsl(200, 100%, 40%),
+    hsl(0, 0%, 20%)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -174,7 +180,7 @@ body {
 }
 
 .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -0.5rem;
   left: 0;
@@ -211,6 +217,29 @@ body {
   padding: 6rem 0 2rem;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    hsl(0, 0%, 100%) 0%,
+    hsl(220, 100%, 98%) 50%,
+    hsl(0, 0%, 100%) 100%
+  );
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 30% 20%,
+      hsl(220, 100%, 95%) 0%,
+      transparent 50%
+    ),
+    radial-gradient(circle at 80% 80%, hsl(200, 100%, 95%) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .hero-container {
@@ -221,6 +250,8 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-content {
@@ -230,13 +261,14 @@ body {
 .hero-badge {
   display: inline-block;
   padding: 0.5rem 1rem;
-  background: hsl(var(--accent));
-  color: hsl(var(--accent-foreground));
+  background: linear-gradient(135deg, hsl(220, 100%, 50%), hsl(200, 100%, 40%));
+  color: white;
   border-radius: 9999px;
   font-size: 0.875rem;
   font-weight: 500;
   margin-bottom: 1.5rem;
-  border: 1px solid hsl(var(--border));
+  border: 1px solid hsl(220, 100%, 70%);
+  box-shadow: 0 4px 20px hsl(220, 100%, 50%, 0.3);
 }
 
 .hero-title {
@@ -357,7 +389,11 @@ body {
 /* About Section */
 .about-section {
   padding: 6rem 0;
-  background: hsl(var(--secondary));
+  background: linear-gradient(
+    135deg,
+    hsl(0, 0%, 98%) 0%,
+    hsl(220, 100%, 98%) 100%
+  );
 }
 
 .about-content {
@@ -450,7 +486,7 @@ body {
 }
 
 .timeline::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -520,7 +556,20 @@ body {
 /* Skills Section */
 .skills-section {
   padding: 6rem 0;
-  background: hsl(var(--secondary));
+  background: linear-gradient(
+    135deg,
+    hsl(0, 0%, 4%) 0%,
+    hsl(220, 100%, 8%) 100%
+  );
+  color: white;
+}
+
+.skills-section .section-title {
+  color: white;
+}
+
+.skills-section .section-subtitle {
+  color: hsl(0, 0%, 80%);
 }
 
 .skills-grid {
@@ -610,7 +659,7 @@ body {
 
 .project-image {
   height: 200px;
-  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  background: linear-gradient(135deg, hsl(220, 100%, 50%), hsl(200, 100%, 60%));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -682,7 +731,11 @@ body {
 /* Contact Section */
 .contact-section {
   padding: 6rem 0;
-  background: hsl(var(--secondary));
+  background: linear-gradient(
+    135deg,
+    hsl(220, 100%, 96%) 0%,
+    hsl(0, 0%, 100%) 100%
+  );
 }
 
 .contact-content {
@@ -811,14 +864,14 @@ body {
 
 /* Footer */
 .footer {
-  background: hsl(var(--card));
-  border-top: 1px solid hsl(var(--border));
+  background: hsl(0, 0%, 4%);
+  border-top: 1px solid hsl(0, 0%, 20%);
   padding: 2rem 0;
   text-align: center;
 }
 
 .footer p {
-  color: hsl(var(--muted-foreground));
+  color: hsl(0, 0%, 80%);
   margin-bottom: 1rem;
 }
 
@@ -975,26 +1028,39 @@ body {
 
 .skill-progress {
   height: 100%;
-  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
+  background: linear-gradient(
+    90deg,
+    hsl(var(--primary)),
+    hsl(var(--primary) / 0.8)
+  );
   border-radius: 9999px;
   transition: width 1s ease;
   position: relative;
 }
 
 .skill-progress::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
   animation: shimmer 2s infinite;
 }
 
 @keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 /* Contact Cards */
@@ -1052,6 +1118,30 @@ body {
   gap: 1rem;
 }
 
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
 /* Footer Updates */
 .footer-content {
   display: flex;
@@ -1098,8 +1188,60 @@ body {
   box-shadow: 0 20px 40px hsl(var(--foreground) / 0.1);
 }
 
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: hsl(var(--foreground));
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px hsl(var(--foreground) / 0.1);
+  z-index: 1000;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 10px 25px hsl(var(--foreground) / 0.2);
+}
+
+/* Cursor Trail Effect */
+.cursor-trail {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: hsl(var(--primary) / 0.3);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: all 0.1s ease;
+}
+
+/* Scroll Progress Bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, hsl(var(--primary)), hsl(200, 100%, 60%));
+  z-index: 1001;
+  transition: width 0.1s ease;
+}
+
 /* Loading Animation */
-.loader {
+.loading-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -1114,19 +1256,27 @@ body {
   transition: opacity 0.5s ease;
 }
 
-.loader::before {
-  content: '';
+.loading-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader {
   width: 50px;
   height: 50px;
-  border: 4px solid hsl(var(--border));
-  border-top: 4px solid hsl(var(--primary));
+  border: 3px solid hsl(var(--border));
+  border-top: 3px solid hsl(var(--primary));
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Responsive Design */
@@ -1233,6 +1383,26 @@ body {
   .floating-card i {
     font-size: 1.5rem;
   }
+
+  .theme-toggle {
+    right: 1rem;
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
+
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .cursor-trail {
+    display: none; /* Hide cursor trail on mobile */
+  }
 }
 
 @media (max-width: 480px) {
@@ -1267,5 +1437,40 @@ body {
   .floating-card {
     position: static;
     animation: none;
+  }
+
+  .theme-toggle {
+    right: 0.5rem;
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+
+  .scroll-progress {
+    height: 2px;
+  }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .cursor-trail {
+    display: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border: 0 0% 60%;
+  }
+
+  .dark {
+    --border: 0 0% 40%;
   }
 }
