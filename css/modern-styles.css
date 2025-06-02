@@ -92,6 +92,19 @@ body {
   background-clip: text;
 }
 
+/* Light mode gradient with better contrast */
+html[data-theme="light"] .text-gradient {
+  background: linear-gradient(
+    135deg,
+    hsl(220, 100%, 45%),
+    hsl(200, 100%, 35%),
+    hsl(0, 0%, 15%)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .apple-button {
   display: inline-flex;
   align-items: center;
@@ -1004,7 +1017,20 @@ body {
 .form-group textarea {
   resize: vertical;
   min-height: 120px;
-  flex-grow: 1; /* Take remaining space */
+}
+
+/* Placeholder styling for better readability */
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.contact-form input:focus::placeholder,
+.contact-form textarea:focus::placeholder {
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
 }
 
 .form-submit {
@@ -1218,24 +1244,41 @@ body {
 .contact-form textarea {
   width: 100%;
   padding: 1rem;
-  border: none; /* Clean, no border */
+  border: 1px solid hsl(var(--primary) / 0.3); /* Subtle blue border */
   border-radius: 0.5rem;
   background: hsl(var(--background));
   color: hsl(var(--foreground));
   font-size: 1rem;
   transition: all 0.3s ease;
+  box-shadow: 0 0 0 1px hsl(var(--primary) / 0.2),
+    0 0 8px hsl(var(--primary) / 0.1); /* Subtle blue glow */
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline: none;
   border-color: hsl(var(--primary));
-  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.3),
+    0 0 15px hsl(var(--primary) / 0.2); /* Enhanced glow on focus */
 }
 
 .contact-form textarea {
   resize: vertical;
   min-height: 120px;
+}
+
+/* Placeholder styling for better readability */
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.contact-form input:focus::placeholder,
+.contact-form textarea:focus::placeholder {
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
 }
 
 /* Footer Updates */
