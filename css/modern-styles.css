@@ -41,18 +41,32 @@
   box-sizing: border-box;
 }
 
+/* Ensure black theme everywhere */
+*:not(.hero-badge):not(.btn-primary):not(.nav-link.active) {
+  background-color: inherit !important;
+}
+
 html {
   scroll-behavior: smooth;
+  background: #0a0a0a !important;
 }
 
 body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     sans-serif;
+  background: #0a0a0a !important;
+  color: #fafafa !important;
   line-height: 1.6;
   color: hsl(var(--foreground));
   background: hsl(var(--background));
   font-feature-settings: "rlig" 1, "calt" 1;
   overflow-x: hidden;
+}
+
+/* Force black theme immediately */
+body.dark {
+  background: #0a0a0a !important;
+  color: #fafafa !important;
 }
 
 /* Utility Classes */
@@ -234,10 +248,10 @@ body {
   bottom: 0;
   background: radial-gradient(
       circle at 30% 20%,
-      hsl(220, 100%, 95%) 0%,
+      hsl(220, 100%, 15%) 0%,
       transparent 50%
     ),
-    radial-gradient(circle at 80% 80%, hsl(200, 100%, 95%) 0%, transparent 50%);
+    radial-gradient(circle at 80% 80%, hsl(200, 100%, 15%) 0%, transparent 50%);
   pointer-events: none;
   z-index: 0;
 }
