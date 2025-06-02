@@ -242,7 +242,7 @@ body {
   padding: 6rem 0;
   position: relative;
   overflow: hidden;
-  background: #0a0a0a;
+  background: hsl(var(--background));
 }
 
 .hero-container {
@@ -265,7 +265,7 @@ body {
   display: inline-block;
   padding: 0.5rem 1rem;
   background: linear-gradient(135deg, hsl(220, 100%, 50%), hsl(200, 100%, 40%));
-  color: white;
+  color: hsl(var(--primary-foreground));
   border-radius: 0; /* Clean rectangular shape */
   font-size: 0.875rem;
   font-weight: 500;
@@ -392,7 +392,7 @@ body {
 /* About Section */
 .about-section {
   padding: 6rem 0;
-  background: #0a0a0a;
+  background: hsl(var(--background));
 }
 
 .about-content {
@@ -476,7 +476,7 @@ body {
 /* Experience Section */
 .experience-section {
   padding: 6rem 0;
-  background: #0a0a0a;
+  background: hsl(var(--background));
 }
 
 .timeline {
@@ -577,16 +577,16 @@ body {
 /* Skills Section */
 .skills-section {
   padding: 6rem 0;
-  background: #0a0a0a;
-  color: white;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
 }
 
 .skills-section .section-title {
-  color: white;
+  color: hsl(var(--foreground));
 }
 
 .skills-section .section-subtitle {
-  color: hsl(0, 0%, 80%);
+  color: hsl(var(--muted-foreground));
 }
 
 .skills-grid {
@@ -651,7 +651,7 @@ body {
 /* Projects Section */
 .projects-section {
   padding: 6rem 0;
-  background: #0a0a0a;
+  background: hsl(var(--background));
 }
 
 .projects-grid {
@@ -749,7 +749,7 @@ body {
 /* Contact Section */
 .contact-section {
   padding: 6rem 0;
-  background: #0a0a0a;
+  background: hsl(var(--background));
 }
 
 .contact-content {
@@ -878,14 +878,14 @@ body {
 
 /* Footer */
 .footer {
-  background: hsl(0, 0%, 4%);
+  background: hsl(var(--background));
   border-top: none; /* Clean, no border */
   padding: 2rem 0;
   text-align: center;
 }
 
 .footer p {
-  color: hsl(0, 0%, 80%);
+  color: hsl(var(--muted-foreground));
   margin-bottom: 1rem;
 }
 
@@ -985,7 +985,7 @@ body {
 /* Timeline Section */
 .timeline-section {
   padding: 6rem 0;
-  background: #0a0a0a;
+  background: hsl(var(--background));
 }
 
 /* Timeline Tags */
