@@ -335,7 +335,7 @@ body {
 
 .floating-card {
   position: absolute;
-  background: hsl(var(--card));
+  background: hsl(var(--background)); /* Match page background */
   border: none; /* Clean, no border */
   border-radius: 0; /* Sharp, clean edges */
   padding: 1.5rem;
@@ -436,11 +436,11 @@ body {
 }
 
 .about-card {
-  background: hsl(var(--card));
+  background: hsl(var(--background)); /* Match page background */
   border-radius: 0; /* Clean rectangular shape */
   padding: 2rem;
   border: none; /* No border for clean look */
-  box-shadow: 0 10px 25px hsl(var(--foreground) / 0.05);
+  box-shadow: none; /* Completely clean, no shadow */
 }
 
 .education-item {
@@ -512,7 +512,7 @@ body {
 }
 
 .timeline-content {
-  background: hsl(var(--card));
+  background: hsl(var(--background)); /* Match page background */
   border: none; /* Clean, no border */
   border-radius: 0; /* Sharp, clean edges */
   padding: 1.5rem;
@@ -596,7 +596,7 @@ body {
 }
 
 .skill-category {
-  background: hsl(var(--card));
+  background: hsl(var(--background)); /* Match page background */
   border: none; /* Clean, no border */
   border-radius: 0; /* Sharp, clean edges */
   padding: 2rem;
@@ -637,14 +637,14 @@ body {
   border-radius: 0; /* Clean rectangular shape */
   font-size: 0.875rem;
   font-weight: 500;
-  border: 1px solid hsl(var(--border));
+  border: none; /* Clean, no border */
   transition: all 0.3s ease;
 }
 
 .skill-tag:hover {
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
-  border-color: hsl(var(--primary));
+  border: none; /* Keep no border on hover */
   transform: translateY(-2px);
 }
 
@@ -662,7 +662,7 @@ body {
 }
 
 .project-card {
-  background: hsl(var(--card));
+  background: hsl(var(--background)); /* Match page background */
   border: none; /* Clean, no border */
   border-radius: 0; /* Clean rectangular shape */
   overflow: hidden;
@@ -786,7 +786,7 @@ body {
   gap: 1rem;
   margin-bottom: 1rem;
   padding: 1rem;
-  background: hsl(var(--card));
+  background: hsl(var(--background)); /* Match page background */
   border: none; /* Clean, no border */
   border-radius: 0; /* Sharp, clean edges */
   transition: all 0.3s ease;
@@ -815,11 +815,11 @@ body {
 }
 
 .contact-form {
-  background: hsl(var(--card));
+  background: hsl(var(--background)); /* Match page background */
   border: none; /* Clean, no border */
   border-radius: 0; /* Sharp, clean edges */
   padding: 2rem;
-  box-shadow: 0 10px 25px hsl(var(--foreground) / 0.05);
+  box-shadow: none; /* Completely clean, no shadow */
   animation: fadeInRight 0.8s ease;
 }
 
@@ -948,7 +948,7 @@ body {
 .feature-item {
   text-align: center;
   padding: 1.5rem;
-  background: hsl(var(--card));
+  background: hsl(var(--background)); /* Match page background */
   border: none; /* Clean, no border */
   border-radius: 0; /* Sharp, clean edges */
   transition: all 0.3s ease;
@@ -1026,7 +1026,7 @@ body {
 
 /* Contact Cards */
 .contact-card {
-  background: hsl(var(--card));
+  background: hsl(var(--background)); /* Match page background */
   border: none; /* Clean, no border */
   border-radius: 0; /* Clean rectangular shape */
   padding: 2rem;
@@ -1066,7 +1066,7 @@ body {
 
 /* Contact Form Container */
 .contact-form-container {
-  background: hsl(var(--card));
+  background: hsl(var(--background)); /* Match page background */
   border: none; /* Clean, no border */
   border-radius: 0; /* Clean rectangular shape */
   padding: 2rem;
@@ -1094,7 +1094,7 @@ body {
 .contact-form textarea {
   width: 100%;
   padding: 1rem;
-  border: 1px solid hsl(var(--border));
+  border: none; /* Clean, no border */
   border-radius: 0.5rem;
   background: hsl(var(--background));
   color: hsl(var(--foreground));
@@ -1168,8 +1168,8 @@ body {
   transform: translateY(-50%);
   width: 50px;
   height: 50px;
-  background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
+  background: hsl(var(--background)); /* Match page background */
+  border: none; /* Clean, no border */
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1178,7 +1178,7 @@ body {
   font-size: 1.2rem;
   color: hsl(var(--foreground));
   transition: all 0.3s ease;
-  box-shadow: 0 5px 15px hsl(var(--foreground) / 0.1);
+  box-shadow: none; /* Remove shadow for seamless look */
   z-index: 1000;
 }
 
