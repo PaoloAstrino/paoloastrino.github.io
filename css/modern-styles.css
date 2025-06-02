@@ -480,41 +480,48 @@ body {
 }
 
 .timeline {
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto;
   position: relative;
+  overflow-x: auto;
+  padding: 2rem 0;
 }
 
 .timeline::before {
   content: "";
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 2px;
-  height: 100%;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
   background: hsl(var(--border));
+  transform: translateY(-50%);
 }
 
 .timeline-item {
   position: relative;
-  margin-bottom: 3rem;
-  display: flex;
+  display: inline-flex;
+  flex-direction: column;
   align-items: center;
+  margin-right: 2rem;
+  min-width: 280px;
+  vertical-align: top;
 }
 
 .timeline-item:nth-child(odd) {
-  flex-direction: row-reverse;
+  flex-direction: column;
 }
 
 .timeline-content {
   background: hsl(var(--card));
   border: none; /* Clean, no border */
   border-radius: 0; /* Sharp, clean edges */
-  padding: 2rem;
-  width: calc(50% - 2rem);
+  padding: 1.5rem;
+  width: 100%;
   position: relative;
   box-shadow: none; /* Completely clean, no shadow */
   transition: all 0.3s ease;
+  margin-top: 2rem;
 }
 
 .timeline-content:hover {
@@ -523,9 +530,7 @@ body {
 }
 
 .timeline-date {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
   padding: 0.5rem 1rem;
@@ -533,6 +538,22 @@ body {
   font-weight: 600;
   font-size: 0.875rem;
   white-space: nowrap;
+  margin-bottom: 1rem;
+  z-index: 2;
+}
+
+.timeline-date::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: hsl(var(--primary));
+  border: 3px solid hsl(var(--background));
+  border-radius: 50%;
+  margin-top: 0.5rem;
 }
 
 .timeline-title {
@@ -1329,15 +1350,29 @@ body {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+  .timeline {
+    flex-direction: column;
+    align-items: center;
+    overflow-x: visible;
+  }
 
   .timeline::before {
-    left: 2rem;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    transform: translateX(-50%);
   }
 
   .timeline-item {
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding-left: 4rem;
+    align-items: center;
+    margin-right: 0;
+    margin-bottom: 2rem;
+    min-width: auto;
+    width: 100%;
   }
 
   .timeline-item:nth-child(odd) {
@@ -1345,12 +1380,21 @@ body {
   }
 
   .timeline-content {
-    width: 100%;
+    width: 90%;
+    margin-top: 1rem;
   }
 
   .timeline-date {
-    left: 2rem;
-    transform: none;
+    position: relative;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-date::after {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0.25rem;
   }
 
   .section-title {
