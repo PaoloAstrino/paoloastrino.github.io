@@ -1,6 +1,6 @@
 /* Modern Portfolio CSS - Based on Creative Agency Design */
 
-/* CSS Variables for consistent theming - Black Theme */
+/* CSS Variables for consistent theming */
 :root {
   --background: 0 0% 4%;
   --foreground: 0 0% 98%;
@@ -16,6 +16,22 @@
   --accent-foreground: 0 0% 95%;
   --border: 0 0% 20%;
   --radius: 0rem; /* Minimal radius for clean edges */
+}
+
+html[data-theme="light"] {
+  --background: 0 0% 98%; /* Off-white */
+  --foreground: 0 0% 4%; /* Dark gray for text */
+  --card: 0 0% 95%; /* Light gray for cards */
+  --card-foreground: 0 0% 10%;
+  --primary: 220 100% 50%; /* A slightly adjusted primary blue */
+  --primary-foreground: 0 0% 100%; /* White text on primary */
+  --secondary: 0 0% 90%;
+  --secondary-foreground: 0 0% 10%;
+  --muted: 0 0% 85%;
+  --muted-foreground: 0 0% 40%;
+  --accent: 0 0% 80%;
+  --accent-foreground: 0 0% 10%;
+  --border: 0 0% 80%;
 }
 
 .dark {
@@ -41,33 +57,28 @@
   box-sizing: border-box;
 }
 
-/* Ensure black theme everywhere */
-*:not(.hero-badge):not(.btn-primary):not(.nav-link.active) {
-  background-color: inherit !important;
-}
-
 html {
   scroll-behavior: smooth;
-  background: #0a0a0a !important;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
 }
 
 body {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    sans-serif;
-  background: #0a0a0a !important;
-  color: #fafafa !important;
+  font-family: "Poppins", sans-serif;
   line-height: 1.6;
+  background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  background: hsl(var(--background));
-  font-feature-settings: "rlig" 1, "calt" 1;
+  transition: background-color 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
+  display: flex;
 }
 
-/* Force black theme immediately */
-body.dark {
-  background: #0a0a0a !important;
-  color: #fafafa !important;
+/* Ensure black theme everywhere */
+/*
+*:not(.hero-badge):not(.btn-primary):not(.nav-link.active) {
+  background-color: inherit !important; 
 }
+*/
 
 /* Utility Classes */
 .text-gradient {
