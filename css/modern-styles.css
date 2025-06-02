@@ -631,19 +631,20 @@ body {
 }
 
 .skill-tag {
-  background: hsl(var(--accent));
-  color: hsl(var(--accent-foreground));
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
   padding: 0.5rem 1rem;
   border-radius: 0; /* Clean rectangular shape */
   font-size: 0.875rem;
   font-weight: 500;
-  border: none; /* Clean, no border */
+  border: 1px solid hsl(var(--border));
   transition: all 0.3s ease;
 }
 
 .skill-tag:hover {
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
+  border-color: hsl(var(--primary));
   transform: translateY(-2px);
 }
 
@@ -755,7 +756,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: start;
+  align-items: stretch; /* Make both columns same height */
 }
 
 .contact-info {
@@ -823,7 +824,7 @@ body {
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0; /* Remove margin, use gap instead */
 }
 
 .form-group label {
@@ -855,6 +856,7 @@ body {
 .form-group textarea {
   resize: vertical;
   min-height: 120px;
+  flex-grow: 1; /* Take remaining space */
 }
 
 .form-submit {
@@ -867,6 +869,7 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-top: auto; /* Push to bottom */
 }
 
 .form-submit:hover {
@@ -1068,6 +1071,17 @@ body {
   border-radius: 0; /* Clean rectangular shape */
   padding: 2rem;
   box-shadow: none; /* Completely clean, no shadow */
+  height: 100%; /* Take full height of the grid item */
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
 }
 
 .form-row {
