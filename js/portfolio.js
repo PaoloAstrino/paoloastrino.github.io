@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initNavigation();
   initScrollProgress();
   initThemeToggle();
+  initScrollToTop();
   initScrollAnimations();
   initTypingEffect();
   initFloatingCards();
@@ -54,9 +55,10 @@ function initNavigation() {
       });
     });
   }
-
   // Navbar scroll effect with debouncing
   let lastScrollTop = 0;
+  let isMouseNearTop = false;
+
   const debouncedScroll = debounce(() => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
@@ -70,8 +72,8 @@ function initNavigation() {
       navbar.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
     }
 
-    // Auto-hide navbar on scroll down, show on scroll up
-    if (scrollTop > lastScrollTop && scrollTop > 200) {
+    // Auto-hide navbar on scroll down, show on scroll up or when mouse is near top
+    if (scrollTop > lastScrollTop && scrollTop > 200 && !isMouseNearTop) {
       navbar.style.transform = "translateY(-100%)";
     } else {
       navbar.style.transform = "translateY(0)";
@@ -79,7 +81,27 @@ function initNavigation() {
     lastScrollTop = scrollTop;
   }, 10);
 
+  // Mouse movement detection for navbar reveal
+  const handleMouseMove = debounce((e) => {
+    const mouseY = e.clientY;
+    const topThreshold = 80; // Show navbar when mouse is within 80px from top
+
+    if (mouseY <= topThreshold) {
+      isMouseNearTop = true;
+      navbar.style.transform = "translateY(0)";
+    } else {
+      isMouseNearTop = false;
+      // Re-trigger scroll logic to potentially hide navbar
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop > lastScrollTop && scrollTop > 200) {
+        navbar.style.transform = "translateY(-100%)";
+      }
+    }
+  }, 50);
+
   window.addEventListener("scroll", debouncedScroll);
+  window.addEventListener("mousemove", handleMouseMove);
 
   // Active nav link highlighting
   const sections = document.querySelectorAll("section[id]");
@@ -167,6 +189,54 @@ function initThemeToggle() {
 
   themeToggle.addEventListener("mouseleave", () => {
     themeToggle.style.transform = "scale(1)";
+  });
+}
+
+// Scroll to Top Button functionality
+function initScrollToTop() {
+  const scrollToTopBtn = document.getElementById("scrollToTop");
+  if (!scrollToTopBtn) return;
+
+  // Show/hide button based on scroll position
+  const toggleScrollButton = debounce(() => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollTop > 300) {
+      scrollToTopBtn.classList.add("visible");
+    } else {
+      scrollToTopBtn.classList.remove("visible");
+    }
+  }, 100);
+
+  // Smooth scroll to top
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
+    // Add click animation
+    scrollToTopBtn.style.transform = "translateY(-5px) scale(0.95)";
+    setTimeout(() => {
+      scrollToTopBtn.style.transform = "translateY(0) scale(1)";
+    }, 150);
+  };
+
+  // Event listeners
+  window.addEventListener("scroll", toggleScrollButton);
+  scrollToTopBtn.addEventListener("click", scrollToTop);
+
+  // Hover effects
+  scrollToTopBtn.addEventListener("mouseenter", () => {
+    if (scrollToTopBtn.classList.contains("visible")) {
+      scrollToTopBtn.style.transform = "translateY(-5px) scale(1.1)";
+    }
+  });
+
+  scrollToTopBtn.addEventListener("mouseleave", () => {
+    if (scrollToTopBtn.classList.contains("visible")) {
+      scrollToTopBtn.style.transform = "translateY(0) scale(1)";
+    }
   });
 }
 

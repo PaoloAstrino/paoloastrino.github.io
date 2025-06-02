@@ -8,23 +8,27 @@ A professional, modern portfolio website showcasing Paolo Astrino's expertise in
 
 ## 🌟 Live Demo
 
-- **Classic Design**: [https://paoloastrino.github.io](https://paoloastrino.github.io)
-- **Modern Black Theme**: [https://paoloastrino.github.io/index-modern.html](https://paoloastrino.github.io/index-modern.html)
+- **Portfolio Website**: [https://paoloastrino.github.io](https://paoloastrino.github.io)
+- **Modern Black Theme** with custom favicon and PWA support
+- **Responsive Design** optimized for all devices
 
 ## 👨‍💼 About Paolo
 
 **Data Analyst & Machine Learning Enthusiast** with strong analytical skills and programming expertise. Currently pursuing a Master's in Data Analytics for Business and Society at Ca' Foscari University Venice.
 
 ### 🎓 Education
+
 - **Master's in Data Analytics** - Ca' Foscari University Venice (2024-2026)
 - **Erasmus+ Program** - University of Göttingen, Germany (2024)
 - **Bachelor's in Economics** - University of Padova (2020-2023)
 
 ### 💼 Professional Experience
+
 - **Junior Data Analyst** - Adecco (2024-Present)
 - **Credit Analyst** - Power 4U (2023-2024)
 
 ### 🏆 Certifications
+
 - Machine Learning Specialization
 - B2 English Certification (Cambridge)
 - Safety Training Certifications
@@ -32,12 +36,14 @@ A professional, modern portfolio website showcasing Paolo Astrino's expertise in
 ## 🚀 Portfolio Features
 
 ### 🎨 Modern Black Theme Design
+
 - **Professional black background** with blue accents
 - **Immediate loading** without white flash
 - **Smooth animations** and interactions
 - **Responsive design** for all devices
 
 ### ⚡ Interactive Elements
+
 - **Scroll progress bar** showing page navigation
 - **Theme toggle** (dark/light mode)
 - **Typing animation** for hero title
@@ -47,6 +53,7 @@ A professional, modern portfolio website showcasing Paolo Astrino's expertise in
 - **Cursor trail effect** (desktop only)
 
 ### 📊 Professional Sections
+
 1. **Hero Section** - Introduction with animated statistics
 2. **About** - Professional background and achievements
 3. **Experience & Education** - Interactive timeline
@@ -57,18 +64,21 @@ A professional, modern portfolio website showcasing Paolo Astrino's expertise in
 ## 🛠️ Technical Skills Showcased
 
 ### Programming Languages
+
 - **Python** (Pandas, NumPy, Matplotlib, Scikit-learn)
 - **R** (Statistical analysis and modeling)
 - **SQL** (PostgreSQL, MySQL, SQLite)
 - **VBA** (Excel automation and macros)
 
 ### Data Visualization
+
 - **Power BI** (Dashboard creation and reporting)
 - **Tableau** (Data visualization and analytics)
 - **Excel** (Advanced charting and analysis)
 - **Python Libraries** (Matplotlib, Seaborn, Plotly)
 
 ### Machine Learning & Analytics
+
 - **Statistical Modeling** (Regression, forecasting)
 - **Data Mining** (Pattern recognition, clustering)
 - **Business Intelligence** (KPI development, reporting)
@@ -78,29 +88,32 @@ A professional, modern portfolio website showcasing Paolo Astrino's expertise in
 
 ```
 paoloastrino.github.io/
-├── index.html                  # Classic portfolio design
-├── index-modern.html           # Modern black theme design
+├── index.html                  # Main portfolio (modern black theme)
+├── manifest.json               # PWA manifest for installable app
 ├── css/
-│   ├── styles.css             # Classic styles
+│   ├── styles.css             # Legacy styles
 │   └── modern-styles.css      # Modern theme styles
 ├── js/
-│   ├── script.js              # Basic functionality
-│   ├── modern-script.js       # Enhanced interactions
-│   └── modern-script-new.js   # Additional features
+│   └── portfolio.js           # Interactive functionality
 ├── assets/
-│   └── images/                # Project screenshots
+│   └── images/                # Favicon and brand assets
+│       ├── favicon.svg        # Main favicon (32x32)
+│       ├── apple-touch-icon.svg # iOS home screen icon (180x180)
+│       ├── icon-512.svg       # High-res icon for PWA (512x512)
+│       └── README.md
 ├── CV/
 │   ├── CV_PaoloAstrino_eng.tex
 │   ├── CV_PaoloAstrino_eng.pdf
 │   └── README.md
 ├── README.md                  # This file
-├── README-MODERN.md           # Modern design docs
-└── BLACK-THEME-SUMMARY.md     # Theme implementation
+├── README-COMPLETE.md         # Comprehensive documentation
+└── BLACK-THEME-SUMMARY.md     # Theme implementation details
 ```
 
 ## 🎨 Design Specifications
 
 ### Color Palette
+
 - **Background**: `#0a0a0a` (Deep Black)
 - **Text**: `#fafafa` (Near White)
 - **Primary Accent**: `hsl(220, 100%, 55%)` (Professional Blue)
@@ -108,11 +121,13 @@ paoloastrino.github.io/
 - **Borders**: `hsl(0, 0%, 20%)` (Medium Gray)
 
 ### Typography
+
 - **Font Family**: Inter (Google Fonts)
 - **Weights**: 300, 400, 500, 600, 700, 800, 900
 - **Responsive**: Fluid typography scaling
 
 ### Responsive Breakpoints
+
 - **Mobile**: < 768px
 - **Tablet**: 768px - 1024px
 - **Desktop**: > 1024px
@@ -120,6 +135,7 @@ paoloastrino.github.io/
 ## 🚀 Technologies Used
 
 ### Frontend Stack
+
 - **HTML5**: Semantic markup and accessibility
 - **CSS3**: Modern features (Grid, Flexbox, Custom Properties)
 - **JavaScript ES6+**: Interactive functionality
@@ -127,13 +143,25 @@ paoloastrino.github.io/
 - **Google Fonts**: Typography (Inter)
 
 ### Advanced Features
+
 - **Intersection Observer API**: Scroll animations
 - **CSS Custom Properties**: Theme system
 - **LocalStorage**: Theme persistence
 - **Responsive Images**: Performance optimization
 - **Progressive Enhancement**: Accessibility support
 
+### 🎨 Brand Identity & Favicon
+
+- **Custom Favicon**: Personalized "P" logo with brand colors
+- **Multi-Format Support**: SVG favicon for crisp display at any size
+- **Cross-Platform**: Works on all browsers and devices
+- **PWA Ready**: Web app manifest for installable experience
+- **Brand Consistent**: Dark theme with blue gradient matching site design
+- **Apple Touch Icon**: iOS home screen optimization
+- **Professional**: Clean, modern typography and design
+
 ### Performance Optimizations
+
 - **Lazy Loading**: Images and animations
 - **Debounced Events**: Smooth scroll handling
 - **CSS Containment**: Rendering optimization
@@ -142,16 +170,19 @@ paoloastrino.github.io/
 ## 📱 Featured Projects
 
 ### 1. Credit Risk Analysis
+
 - **Description**: Statistical modeling for credit risk assessment
 - **Technologies**: Python, Pandas, Scikit-learn, Statistical Analysis
 - **Impact**: Improved risk prediction accuracy for financial decisions
 
 ### 2. Process Automation Dashboard
+
 - **Description**: Automated reporting system with interactive dashboards
 - **Technologies**: VBA, Power BI, SQL, Excel
 - **Impact**: Reduced manual reporting time by 75%
 
 ### 3. Machine Learning Analysis
+
 - **Description**: Comprehensive data science project with ML algorithms
 - **Technologies**: Python, Machine Learning, Data Visualization
 - **Impact**: Delivered actionable insights for business optimization
@@ -169,14 +200,16 @@ paoloastrino.github.io/
 ### Local Development
 
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/paoloastrino/paoloastrino.github.io.git
    cd paoloastrino.github.io
    ```
 
 2. **Open locally**:
-   - Open `index.html` for classic design
-   - Open `index-modern.html` for modern black theme
+
+   - Open `index.html` for the portfolio
+   - Favicon will display in browser tab and bookmarks
 
 3. **Live Server** (recommended):
    ```bash
@@ -188,6 +221,7 @@ paoloastrino.github.io/
 ### Deployment
 
 The portfolio is automatically deployed via **GitHub Pages**:
+
 - Push changes to `main` branch
 - GitHub Pages builds and deploys automatically
 - Live at: `https://paoloastrino.github.io`
@@ -195,6 +229,8 @@ The portfolio is automatically deployed via **GitHub Pages**:
 ## 🎯 Key Achievements
 
 - ✅ **Modern Black Theme**: Professional design with blue accents
+- ✅ **Custom Favicon**: Personalized "P" logo with brand consistency
+- ✅ **PWA Ready**: Web app manifest for installable experience
 - ✅ **Zero White Flash**: Immediate black loading experience
 - ✅ **Fully Responsive**: Optimized for all devices
 - ✅ **Interactive Animations**: Smooth scroll-based effects
