@@ -16,15 +16,18 @@ A professional, modern portfolio website showcasing Paolo Astrino's expertise in
 **Data Analyst & Machine Learning Enthusiast** with strong analytical skills and programming expertise. Currently pursuing a Master's in Data Analytics for Business and Society at Ca' Foscari University Venice.
 
 ### 🎓 Education
+
 - **Master's in Data Analytics** - Ca' Foscari University Venice (2024-2026)
 - **Erasmus+ Program** - University of Göttingen, Germany (2024)
 - **Bachelor's in Economics** - University of Padova (2020-2023)
 
 ### 💼 Professional Experience
+
 - **Junior Data Analyst** - Adecco (2024-Present)
 - **Credit Analyst** - Power 4U (2023-2024)
 
 ### 🏆 Certifications
+
 - Machine Learning Specialization
 - B2 English Certification (Cambridge)
 - Safety Training Certifications
@@ -32,12 +35,14 @@ A professional, modern portfolio website showcasing Paolo Astrino's expertise in
 ## 🚀 Portfolio Features
 
 ### 🎨 Modern Black Theme Design
+
 - **Professional black background** with blue accents
 - **Immediate loading** without white flash
 - **Smooth animations** and interactions
 - **Responsive design** for all devices
 
 ### ⚡ Interactive Elements
+
 - **Scroll progress bar** showing page navigation
 - **Theme toggle** (dark/light mode)
 - **Typing animation** for hero title
@@ -47,6 +52,7 @@ A professional, modern portfolio website showcasing Paolo Astrino's expertise in
 - **Cursor trail effect** (desktop only)
 
 ### 📊 Professional Sections
+
 1. **Hero Section** - Introduction with animated statistics
 2. **About** - Professional background and achievements
 3. **Experience & Education** - Interactive timeline
@@ -57,18 +63,21 @@ A professional, modern portfolio website showcasing Paolo Astrino's expertise in
 ## 🛠️ Technical Skills Showcased
 
 ### Programming Languages
+
 - **Python** (Pandas, NumPy, Matplotlib, Scikit-learn)
 - **R** (Statistical analysis and modeling)
 - **SQL** (PostgreSQL, MySQL, SQLite)
 - **VBA** (Excel automation and macros)
 
 ### Data Visualization
+
 - **Power BI** (Dashboard creation and reporting)
 - **Tableau** (Data visualization and analytics)
 - **Excel** (Advanced charting and analysis)
 - **Python Libraries** (Matplotlib, Seaborn, Plotly)
 
 ### Machine Learning & Analytics
+
 - **Statistical Modeling** (Regression, forecasting)
 - **Data Mining** (Pattern recognition, clustering)
 - **Business Intelligence** (KPI development, reporting)
@@ -101,6 +110,7 @@ paoloastrino.github.io/
 ## 🎨 Design Specifications
 
 ### Color Palette
+
 - **Background**: `#0a0a0a` (Deep Black)
 - **Text**: `#fafafa` (Near White)
 - **Primary Accent**: `hsl(220, 100%, 55%)` (Professional Blue)
@@ -108,11 +118,13 @@ paoloastrino.github.io/
 - **Borders**: `hsl(0, 0%, 20%)` (Medium Gray)
 
 ### Typography
+
 - **Font Family**: Inter (Google Fonts)
 - **Weights**: 300, 400, 500, 600, 700, 800, 900
 - **Responsive**: Fluid typography scaling
 
 ### Responsive Breakpoints
+
 - **Mobile**: < 768px
 - **Tablet**: 768px - 1024px
 - **Desktop**: > 1024px
@@ -120,6 +132,7 @@ paoloastrino.github.io/
 ## 🚀 Technologies Used
 
 ### Frontend Stack
+
 - **HTML5**: Semantic markup and accessibility
 - **CSS3**: Modern features (Grid, Flexbox, Custom Properties)
 - **JavaScript ES6+**: Interactive functionality
@@ -127,6 +140,7 @@ paoloastrino.github.io/
 - **Google Fonts**: Typography (Inter)
 
 ### Advanced Features
+
 - **Intersection Observer API**: Scroll animations
 - **CSS Custom Properties**: Theme system
 - **LocalStorage**: Theme persistence
@@ -134,6 +148,7 @@ paoloastrino.github.io/
 - **Progressive Enhancement**: Accessibility support
 
 ### Performance Optimizations
+
 - **Lazy Loading**: Images and animations
 - **Debounced Events**: Smooth scroll handling
 - **CSS Containment**: Rendering optimization
@@ -142,16 +157,19 @@ paoloastrino.github.io/
 ## 📱 Featured Projects
 
 ### 1. Credit Risk Analysis
+
 - **Description**: Statistical modeling for credit risk assessment
 - **Technologies**: Python, Pandas, Scikit-learn, Statistical Analysis
 - **Impact**: Improved risk prediction accuracy for financial decisions
 
 ### 2. Process Automation Dashboard
+
 - **Description**: Automated reporting system with interactive dashboards
 - **Technologies**: VBA, Power BI, SQL, Excel
 - **Impact**: Reduced manual reporting time by 75%
 
 ### 3. Machine Learning Analysis
+
 - **Description**: Comprehensive data science project with ML algorithms
 - **Technologies**: Python, Machine Learning, Data Visualization
 - **Impact**: Delivered actionable insights for business optimization
@@ -169,12 +187,14 @@ paoloastrino.github.io/
 ### Local Development
 
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/paoloastrino/paoloastrino.github.io.git
    cd paoloastrino.github.io
    ```
 
 2. **Open locally**:
+
    - Open `index.html` for classic design
    - Open `index-modern.html` for modern black theme
 
@@ -188,6 +208,7 @@ paoloastrino.github.io/
 ### Deployment
 
 The portfolio is automatically deployed via **GitHub Pages**:
+
 - Push changes to `main` branch
 - GitHub Pages builds and deploys automatically
 - Live at: `https://paoloastrino.github.io`

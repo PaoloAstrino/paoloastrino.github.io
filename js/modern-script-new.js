@@ -301,7 +301,7 @@ function initThemeToggle() {
         right: 2rem;
         width: 50px;
         height: 50px;
-        border-radius: 50%;
+        border-radius: 0; /* Clean rectangular button */
         border: none;
         background: hsl(var(--primary));
         color: hsl(var(--primary-foreground));
@@ -358,7 +358,7 @@ function initCursorTrail() {
         width: 20px;
         height: 20px;
         background: hsl(var(--primary));
-        border-radius: 50%;
+        border-radius: 0; /* Clean rectangular cursor */
         pointer-events: none;
         z-index: 9999;
         opacity: 0.7;

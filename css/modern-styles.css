@@ -15,7 +15,7 @@
   --accent: 0 0% 15%;
   --accent-foreground: 0 0% 95%;
   --border: 0 0% 20%;
-  --radius: 0.5rem;
+  --radius: 0rem; /* Minimal radius for clean edges */
 }
 
 .dark {
@@ -86,7 +86,7 @@ body.dark {
   display: inline-flex;
   align-items: center;
   padding: 0.75rem 1.5rem;
-  border-radius: 9999px;
+  border-radius: 0; /* Clean edges, no rounded corners */
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
   font-weight: 600;
@@ -151,7 +151,7 @@ body.dark {
   width: 100%;
   background: hsl(var(--background) / 0.9);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid hsl(var(--border));
+  border: none; /* Clean, no border */
   z-index: 1000;
   transition: all 0.3s ease;
 }
@@ -277,11 +277,11 @@ body.dark {
   padding: 0.5rem 1rem;
   background: linear-gradient(135deg, hsl(220, 100%, 50%), hsl(200, 100%, 40%));
   color: white;
-  border-radius: 9999px;
+  border-radius: 0; /* Clean rectangular shape */
   font-size: 0.875rem;
   font-weight: 500;
   margin-bottom: 1.5rem;
-  border: 1px solid hsl(220, 100%, 70%);
+  border: none; /* No border for clean look */
   box-shadow: 0 4px 20px hsl(220, 100%, 50%, 0.3);
 }
 
@@ -348,8 +348,8 @@ body.dark {
 .floating-card {
   position: absolute;
   background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  border-radius: 1rem;
+  border: none; /* Clean, no border */
+  border-radius: 0; /* Sharp, clean edges */
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -453,16 +453,16 @@ body.dark {
 
 .about-card {
   background: hsl(var(--card));
-  border-radius: 1.5rem;
+  border-radius: 0; /* Clean rectangular shape */
   padding: 2rem;
-  border: 1px solid hsl(var(--border));
+  border: none; /* No border for clean look */
   box-shadow: 0 10px 25px hsl(var(--foreground) / 0.05);
 }
 
 .education-item {
   margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid hsl(var(--border));
+  border-bottom: none; /* Remove separator line for cleaner look */
 }
 
 .education-item:last-child {
@@ -522,8 +522,8 @@ body.dark {
 
 .timeline-content {
   background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  border-radius: 1rem;
+  border: none; /* Clean, no border */
+  border-radius: 0; /* Sharp, clean edges */
   padding: 2rem;
   width: calc(50% - 2rem);
   position: relative;
@@ -543,7 +543,7 @@ body.dark {
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
   padding: 0.5rem 1rem;
-  border-radius: 9999px;
+  border-radius: 0; /* Clean rectangular shape */
   font-weight: 600;
   font-size: 0.875rem;
   white-space: nowrap;
@@ -595,8 +595,8 @@ body.dark {
 
 .skill-category {
   background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  border-radius: 1rem;
+  border: none; /* Clean, no border */
+  border-radius: 0; /* Sharp, clean edges */
   padding: 2rem;
   box-shadow: 0 10px 25px hsl(var(--foreground) / 0.05);
   transition: all 0.3s ease;
@@ -715,10 +715,10 @@ body.dark {
   background: hsl(var(--accent));
   color: hsl(var(--accent-foreground));
   padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
+  border-radius: 0; /* Clean rectangular shape */
   font-size: 0.75rem;
   font-weight: 500;
-  border: 1px solid hsl(var(--border));
+  border: none; /* No border for clean look */
 }
 
 .project-links {
@@ -787,8 +787,8 @@ body.dark {
   margin-bottom: 1rem;
   padding: 1rem;
   background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  border-radius: 0.5rem;
+  border: none; /* Clean, no border */
+  border-radius: 0; /* Sharp, clean edges */
   transition: all 0.3s ease;
 }
 
@@ -816,8 +816,8 @@ body.dark {
 
 .contact-form {
   background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  border-radius: 1rem;
+  border: none; /* Clean, no border */
+  border-radius: 0; /* Sharp, clean edges */
   padding: 2rem;
   box-shadow: 0 10px 25px hsl(var(--foreground) / 0.05);
   animation: fadeInRight 0.8s ease;
@@ -838,18 +838,18 @@ body.dark {
 .form-group textarea {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 1px solid hsl(var(--border));
-  border-radius: 0.5rem;
+  border: none; /* Clean, no border */
+  border-radius: 0; /* Sharp, clean edges */
   background: hsl(var(--background));
   color: hsl(var(--foreground));
   font-family: inherit;
   transition: all 0.3s ease;
+  outline: 1px solid transparent; /* Invisible outline for focus */
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-  outline: none;
-  border-color: hsl(var(--primary));
+  outline: 1px solid hsl(var(--primary)); /* Clean outline on focus */
   box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
 }
 
@@ -864,7 +864,7 @@ body.dark {
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0; /* Clean rectangular button */
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -879,7 +879,7 @@ body.dark {
 /* Footer */
 .footer {
   background: hsl(0, 0%, 4%);
-  border-top: 1px solid hsl(0, 0%, 20%);
+  border-top: none; /* Clean, no border */
   padding: 2rem 0;
   text-align: center;
 }
@@ -903,10 +903,10 @@ body.dark {
   height: 40px;
   background: hsl(var(--accent));
   color: hsl(var(--accent-foreground));
-  border-radius: 50%;
+  border-radius: 0; /* Clean rectangular shape */
   text-decoration: none;
   transition: all 0.3s ease;
-  border: 1px solid hsl(var(--border));
+  border: none; /* Clean, no border */
 }
 
 .social-link:hover {
@@ -947,8 +947,8 @@ body.dark {
   text-align: center;
   padding: 1.5rem;
   background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  border-radius: 1rem;
+  border: none; /* Clean, no border */
+  border-radius: 0; /* Sharp, clean edges */
   transition: all 0.3s ease;
 }
 
