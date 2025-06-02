@@ -13,11 +13,10 @@ document.addEventListener("DOMContentLoaded", function () {
   initSmoothScrolling();
   initParallaxEffects();
   initPerformanceOptimizations();
-
   // Desktop-only features
-  if (window.innerWidth > 768) {
-    initCursorTrail();
-  }
+  // if (window.innerWidth > 768) {
+  //   initCursorTrail();
+  // }
 
   // Page load animation
   initPageLoadAnimation();
