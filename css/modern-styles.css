@@ -228,32 +228,10 @@ body.dark {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 6rem 0 2rem;
+  padding: 6rem 0;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(
-    135deg,
-    hsl(0, 0%, 4%) 0%,
-    hsl(220, 100%, 8%) 50%,
-    hsl(0, 0%, 2%) 100%
-  );
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(
-      circle at 30% 20%,
-      hsl(220, 100%, 15%) 0%,
-      transparent 50%
-    ),
-    radial-gradient(circle at 80% 80%, hsl(200, 100%, 15%) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 0;
+  background: #0a0a0a;
 }
 
 .hero-container {
@@ -355,14 +333,14 @@ body.dark {
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
-  box-shadow: 0 10px 25px hsl(var(--foreground) / 0.05);
+  box-shadow: none; /* Completely clean, no shadow */
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
 }
 
 .floating-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px hsl(var(--foreground) / 0.1);
+  box-shadow: none; /* Completely clean, no shadow */
 }
 
 .floating-card i {
@@ -403,11 +381,7 @@ body.dark {
 /* About Section */
 .about-section {
   padding: 6rem 0;
-  background: linear-gradient(
-    135deg,
-    hsl(0, 0%, 6%) 0%,
-    hsl(220, 100%, 8%) 100%
-  );
+  background: #0a0a0a;
 }
 
 .about-content {
@@ -491,6 +465,7 @@ body.dark {
 /* Experience Section */
 .experience-section {
   padding: 6rem 0;
+  background: #0a0a0a;
 }
 
 .timeline {
@@ -527,13 +502,13 @@ body.dark {
   padding: 2rem;
   width: calc(50% - 2rem);
   position: relative;
-  box-shadow: 0 10px 25px hsl(var(--foreground) / 0.05);
+  box-shadow: none; /* Completely clean, no shadow */
   transition: all 0.3s ease;
 }
 
 .timeline-content:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px hsl(var(--foreground) / 0.1);
+  box-shadow: none; /* Completely clean, no shadow */
 }
 
 .timeline-date {
@@ -570,11 +545,7 @@ body.dark {
 /* Skills Section */
 .skills-section {
   padding: 6rem 0;
-  background: linear-gradient(
-    135deg,
-    hsl(0, 0%, 4%) 0%,
-    hsl(220, 100%, 8%) 100%
-  );
+  background: #0a0a0a;
   color: white;
 }
 
@@ -598,13 +569,13 @@ body.dark {
   border: none; /* Clean, no border */
   border-radius: 0; /* Sharp, clean edges */
   padding: 2rem;
-  box-shadow: 0 10px 25px hsl(var(--foreground) / 0.05);
+  box-shadow: none; /* Completely clean, no shadow */
   transition: all 0.3s ease;
 }
 
 .skill-category:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px hsl(var(--foreground) / 0.1);
+  box-shadow: none; /* Completely clean, no shadow */
 }
 
 .skill-category h3 {
@@ -632,10 +603,10 @@ body.dark {
   background: hsl(var(--accent));
   color: hsl(var(--accent-foreground));
   padding: 0.5rem 1rem;
-  border-radius: 9999px;
+  border-radius: 0; /* Clean rectangular shape */
   font-size: 0.875rem;
   font-weight: 500;
-  border: 1px solid hsl(var(--border));
+  border: none; /* Clean, no border */
   transition: all 0.3s ease;
 }
 
@@ -648,6 +619,7 @@ body.dark {
 /* Projects Section */
 .projects-section {
   padding: 6rem 0;
+  background: #0a0a0a;
 }
 
 .projects-grid {
@@ -659,16 +631,16 @@ body.dark {
 
 .project-card {
   background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  border-radius: 1rem;
+  border: none; /* Clean, no border */
+  border-radius: 0; /* Clean rectangular shape */
   overflow: hidden;
-  box-shadow: 0 10px 25px hsl(var(--foreground) / 0.05);
+  box-shadow: none; /* Completely clean, no shadow */
   transition: all 0.3s ease;
 }
 
 .project-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px hsl(var(--foreground) / 0.1);
+  box-shadow: none; /* Completely clean, no shadow */
 }
 
 .project-image {
@@ -745,11 +717,7 @@ body.dark {
 /* Contact Section */
 .contact-section {
   padding: 6rem 0;
-  background: linear-gradient(
-    135deg,
-    hsl(0, 0%, 6%) 0%,
-    hsl(220, 100%, 8%) 100%
-  );
+  background: #0a0a0a;
 }
 
 .contact-content {
@@ -985,7 +953,7 @@ body.dark {
 /* Timeline Section */
 .timeline-section {
   padding: 6rem 0;
-  background: hsl(var(--secondary));
+  background: #0a0a0a;
 }
 
 /* Timeline Tags */
@@ -1000,10 +968,10 @@ body.dark {
   background: hsl(var(--accent));
   color: hsl(var(--accent-foreground));
   padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
+  border-radius: 0; /* Clean rectangular shape */
   font-size: 0.75rem;
   font-weight: 500;
-  border: 1px solid hsl(var(--border));
+  border: none; /* Clean, no border */
 }
 
 /* Skills Section Updates */
@@ -1080,8 +1048,8 @@ body.dark {
 /* Contact Cards */
 .contact-card {
   background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  border-radius: 1rem;
+  border: none; /* Clean, no border */
+  border-radius: 0; /* Clean rectangular shape */
   padding: 2rem;
   text-align: center;
   margin-bottom: 1.5rem;
@@ -1120,10 +1088,10 @@ body.dark {
 /* Contact Form Container */
 .contact-form-container {
   background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  border-radius: 1rem;
+  border: none; /* Clean, no border */
+  border-radius: 0; /* Clean rectangular shape */
   padding: 2rem;
-  box-shadow: 0 10px 25px hsl(var(--foreground) / 0.05);
+  box-shadow: none; /* Completely clean, no shadow */
 }
 
 .form-row {
