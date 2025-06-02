@@ -13,15 +13,15 @@ document.addEventListener("DOMContentLoaded", function () {
   initSmoothScrolling();
   initParallaxEffects();
   initPerformanceOptimizations();
-  
+
   // Desktop-only features
   if (window.innerWidth > 768) {
     initCursorTrail();
   }
-  
+
   // Page load animation
   initPageLoadAnimation();
-  
+
   // Console styling
   console.log(
     "%c🚀 Paolo Astrino Portfolio Loaded!",
@@ -113,7 +113,8 @@ function initScrollProgress() {
 
   const updateProgress = debounce(() => {
     const scrollTop = window.pageYOffset;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const docHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
     const scrollPercent = (scrollTop / docHeight) * 100;
     progressBar.style.width = scrollPercent + "%";
   }, 10);
@@ -128,7 +129,10 @@ function initThemeToggle() {
 
   // Check for saved theme
   const savedTheme = localStorage.getItem("theme");
-  if (savedTheme === "dark" || (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+  if (
+    savedTheme === "dark" ||
+    (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+  ) {
     document.body.classList.add("dark");
     document.documentElement.setAttribute("data-theme", "dark");
     themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
@@ -140,9 +144,14 @@ function initThemeToggle() {
 
   themeToggle.addEventListener("click", function () {
     const isDark = document.body.classList.toggle("dark");
-    document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
-    
-    this.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    document.documentElement.setAttribute(
+      "data-theme",
+      isDark ? "dark" : "light"
+    );
+
+    this.innerHTML = isDark
+      ? '<i class="fas fa-sun"></i>'
+      : '<i class="fas fa-moon"></i>';
     localStorage.setItem("theme", isDark ? "dark" : "light");
 
     // Add animation effect
@@ -194,7 +203,7 @@ function initScrollAnimations() {
   const animatedElements = document.querySelectorAll(
     ".skill-category, .project-card, .timeline-item, .about-card, .contact-card, .feature-item"
   );
-  
+
   animatedElements.forEach((el) => {
     el.style.opacity = "0";
     el.style.transform = "translateY(30px)";
@@ -204,30 +213,33 @@ function initScrollAnimations() {
 
   // Stats counter animation
   const statNumbers = document.querySelectorAll(".stat-number");
-  const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const target = entry.target;
-        const finalValue = parseInt(target.textContent.replace("+", ""));
-        const duration = 2000;
-        const increment = finalValue / (duration / 16);
-        let current = 0;
+  const statsObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const target = entry.target;
+          const finalValue = parseInt(target.textContent.replace("+", ""));
+          const duration = 2000;
+          const increment = finalValue / (duration / 16);
+          let current = 0;
 
-        const counter = setInterval(() => {
-          current += increment;
-          if (current >= finalValue) {
-            current = finalValue;
-            clearInterval(counter);
-            target.textContent = finalValue + "+";
-          } else {
-            target.textContent = Math.floor(current) + "+";
-          }
-        }, 16);
+          const counter = setInterval(() => {
+            current += increment;
+            if (current >= finalValue) {
+              current = finalValue;
+              clearInterval(counter);
+              target.textContent = finalValue + "+";
+            } else {
+              target.textContent = Math.floor(current) + "+";
+            }
+          }, 16);
 
-        statsObserver.unobserve(target);
-      }
-    });
-  }, { threshold: 0.5 });
+          statsObserver.unobserve(target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
 
   statNumbers.forEach((stat) => statsObserver.observe(stat));
 }
@@ -294,7 +306,9 @@ function initContactForm() {
   contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const submitBtn = this.querySelector("button[type='submit']") || this.querySelector(".apple-button");
+    const submitBtn =
+      this.querySelector("button[type='submit']") ||
+      this.querySelector(".apple-button");
     if (!submitBtn) return;
 
     const originalText = submitBtn.textContent;
@@ -367,8 +381,10 @@ function initSmoothScrolling() {
 
 // Parallax effects
 function initParallaxEffects() {
-  const parallaxElements = document.querySelectorAll(".floating-cards, .hero-visual");
-  
+  const parallaxElements = document.querySelectorAll(
+    ".floating-cards, .hero-visual"
+  );
+
   const updateParallax = debounce(() => {
     const scrolled = window.pageYOffset;
     parallaxElements.forEach((element) => {
@@ -396,7 +412,7 @@ function initCursorTrail() {
       border-radius: 50%;
       pointer-events: none;
       z-index: 9999;
-      opacity: ${1 - (i / trailLength)};
+      opacity: ${1 - i / trailLength};
       transition: all 0.1s ease;
       transform: translate(-50%, -50%);
     `;
@@ -451,7 +467,7 @@ function initPerformanceOptimizations() {
   // Preload critical resources
   const criticalResources = [
     "css/modern-styles.css",
-    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css",
   ];
 
   criticalResources.forEach((resource) => {
