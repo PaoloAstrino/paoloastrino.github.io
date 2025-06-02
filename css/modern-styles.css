@@ -1118,6 +1118,91 @@ html[data-theme="light"] .text-gradient {
   box-shadow: 0 10px 25px hsl(var(--primary) / 0.2);
 }
 
+/* Contact Form Wrapper - Streamlined Layout */
+.contact-form-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: hsl(var(--background));
+  border: 1px solid hsl(var(--border) / 0.3);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 20px hsl(var(--foreground) / 0.05);
+}
+
+.contact-form-wrapper .contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* Send Message Button */
+.send-message-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 1rem 2rem;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px hsl(var(--primary) / 0.3);
+}
+
+.send-message-btn:hover {
+  background: hsl(var(--primary) / 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px hsl(var(--primary) / 0.4);
+}
+
+.send-message-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px hsl(var(--primary) / 0.3);
+}
+
+.send-message-btn i {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.send-message-btn:hover i {
+  transform: translateX(3px);
+}
+
+/* Responsive Design for Contact Form Wrapper */
+@media (max-width: 768px) {
+  .contact-form-wrapper {
+    margin: 0 1rem;
+    padding: 1.5rem;
+  }
+
+  .send-message-btn {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form-wrapper {
+    margin: 0 0.5rem;
+    padding: 1rem;
+  }
+
+  .send-message-btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
 /* Footer */
 .footer {
   background: hsl(var(--background));

@@ -350,18 +350,16 @@ function initFloatingCards() {
     const randomDuration = 4000 + Math.random() * 2000;
 
     card.style.animationDelay = randomDelay + "ms";
-    card.style.animationDuration = randomDuration + "ms";
-
-    // Enhanced hover interactions
+    card.style.animationDuration = randomDuration + "ms"; // Enhanced hover interactions
     card.addEventListener("mouseenter", function () {
       this.style.transform = "translateY(-15px) scale(1.05)";
-      this.style.boxShadow = "0 25px 50px hsla(var(--primary), 0.3)";
+      this.style.boxShadow = "none"; // Remove shadow
       this.style.zIndex = "10";
     });
 
     card.addEventListener("mouseleave", function () {
       this.style.transform = "translateY(0) scale(1)";
-      this.style.boxShadow = "0 10px 25px hsl(var(--foreground) / 0.05)";
+      this.style.boxShadow = "none"; // Remove shadow
       this.style.zIndex = "1";
     });
   });
@@ -374,10 +372,10 @@ function initContactForm() {
 
   contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
-
     const submitBtn =
       this.querySelector("button[type='submit']") ||
-      this.querySelector(".apple-button");
+      this.querySelector(".apple-button") ||
+      this.querySelector(".send-message-btn");
     if (!submitBtn) return;
 
     const originalText = submitBtn.textContent;
@@ -451,7 +449,7 @@ function initSmoothScrolling() {
 // Parallax effects
 function initParallaxEffects() {
   const parallaxElements = document.querySelectorAll(
-    ".floating-cards, .hero-visual"
+    ".hero-visual:not(.floating-cards)"
   );
 
   const updateParallax = debounce(() => {
