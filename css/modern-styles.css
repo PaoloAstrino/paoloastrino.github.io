@@ -1,35 +1,35 @@
 /* Modern Portfolio CSS - Based on Creative Agency Design */
 
-/* CSS Variables for consistent theming - Black, White & Blue */
+/* CSS Variables for consistent theming - Black Theme */
 :root {
-  --background: 0 0% 100%;
-  --foreground: 0 0% 0%;
-  --card: 0 0% 100%;
-  --card-foreground: 0 0% 0%;
-  --primary: 220 100% 50%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 0 0% 96%;
-  --secondary-foreground: 0 0% 20%;
-  --muted: 0 0% 95%;
-  --muted-foreground: 0 0% 40%;
-  --accent: 0 0% 98%;
-  --accent-foreground: 0 0% 10%;
-  --border: 0 0% 90%;
+  --background: 0 0% 4%;
+  --foreground: 0 0% 98%;
+  --card: 0 0% 8%;
+  --card-foreground: 0 0% 95%;
+  --primary: 220 100% 55%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 12%;
+  --secondary-foreground: 0 0% 90%;
+  --muted: 0 0% 10%;
+  --muted-foreground: 0 0% 70%;
+  --accent: 0 0% 15%;
+  --accent-foreground: 0 0% 95%;
+  --border: 0 0% 20%;
   --radius: 0.5rem;
 }
 
 .dark {
-  --background: 0 0% 8%;
+  --background: 0 0% 4%;
   --foreground: 0 0% 98%;
-  --card: 0 0% 12%;
-  --card-foreground: 0 0% 98%;
+  --card: 0 0% 8%;
+  --card-foreground: 0 0% 95%;
   --primary: 220 100% 60%;
   --primary-foreground: 0 0% 98%;
-  --secondary: 0 0% 16%;
+  --secondary: 0 0% 12%;
   --secondary-foreground: 0 0% 90%;
-  --muted: 0 0% 14%;
+  --muted: 0 0% 10%;
   --muted-foreground: 0 0% 70%;
-  --accent: 0 0% 18%;
+  --accent: 0 0% 15%;
   --accent-foreground: 0 0% 95%;
   --border: 0 0% 20%;
 }
@@ -59,9 +59,9 @@ body {
 .text-gradient {
   background: linear-gradient(
     135deg,
-    hsl(220, 100%, 50%),
-    hsl(200, 100%, 40%),
-    hsl(0, 0%, 20%)
+    hsl(220, 100%, 70%),
+    hsl(200, 100%, 60%),
+    hsl(0, 0%, 95%)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -219,9 +219,9 @@ body {
   overflow: hidden;
   background: linear-gradient(
     135deg,
-    hsl(0, 0%, 100%) 0%,
-    hsl(220, 100%, 98%) 50%,
-    hsl(0, 0%, 100%) 100%
+    hsl(0, 0%, 4%) 0%,
+    hsl(220, 100%, 8%) 50%,
+    hsl(0, 0%, 2%) 100%
   );
 }
 
@@ -391,8 +391,8 @@ body {
   padding: 6rem 0;
   background: linear-gradient(
     135deg,
-    hsl(0, 0%, 98%) 0%,
-    hsl(220, 100%, 98%) 100%
+    hsl(0, 0%, 6%) 0%,
+    hsl(220, 100%, 8%) 100%
   );
 }
 
@@ -733,8 +733,8 @@ body {
   padding: 6rem 0;
   background: linear-gradient(
     135deg,
-    hsl(220, 100%, 96%) 0%,
-    hsl(0, 0%, 100%) 100%
+    hsl(0, 0%, 6%) 0%,
+    hsl(220, 100%, 8%) 100%
   );
 }
 

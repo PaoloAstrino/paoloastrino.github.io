@@ -84,7 +84,7 @@ Organized by categories:
 
 ### 6. Contact Information
 
-- **Email**: astrino01@gmail.com
+- **Email**: paoloastrino01@gmail.com
 - **Phone**: +39 3426202332
 - **Location**: Padova, Italy
 - **LinkedIn**: [Paolo Astrino](https://www.linkedin.com/in/paolo-astrino-9792061a3)
@@ -183,7 +183,7 @@ const observer = new IntersectionObserver(callback, {
 
 For questions about this portfolio or potential collaborations:
 
-- **Email**: astrino01@gmail.com
+- **Email**: paoloastrino01@gmail.com
 - **LinkedIn**: [Paolo Astrino](https://www.linkedin.com/in/paolo-astrino-9792061a3)
 - **GitHub**: [paoloastrino](https://github.com/paoloastrino)
 
