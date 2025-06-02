@@ -367,7 +367,7 @@ html[data-theme="light"] .text-gradient {
 }
 
 .floating-card i {
-  font-size: 2rem;
+  font-size: 3rem;
   color: hsl(var(--primary));
 }
 
@@ -1526,13 +1526,12 @@ html[data-theme="light"] .text-gradient {
   .hero-visual {
     height: 300px;
   }
-
   .floating-card {
     padding: 1rem;
   }
 
   .floating-card i {
-    font-size: 1.5rem;
+    font-size: 2.25rem;
   }
 
   .theme-toggle {
