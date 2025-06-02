@@ -1,0 +1,30 @@
+{
+  "name": "Paolo Astrino - Data Analyst Portfolio",
+  "short_name": "Paolo Astrino",
+  "description": "Data Analyst & Machine Learning Enthusiast portfolio showcasing expertise in Python, Power BI, Excel VBA, and SQL.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#4f9cff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "assets/images/favicon.svg",
+      "sizes": "32x32",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/apple-touch-icon.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
