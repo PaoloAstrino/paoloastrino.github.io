@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize all features
   initNavigation();
   initScrollProgress();
-  updateThemeToggle(); // Use privacy-compliant theme toggle
+  initThemeToggle();
   initScrollToTop();
   initScrollAnimations();
   initTypingEffect();
@@ -14,8 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
   initSmoothScrolling();
   initParallaxEffects();
   initPerformanceOptimizations();
-  initPrivacyFeatures(); // Initialize privacy features
-
   // Desktop-only features
   // if (window.innerWidth > 768) {
   //   initCursorTrail();
@@ -32,10 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log(
     "%cBuilt with modern web technologies and love for data analytics! 📊",
     "color: #10b981; font-size: 12px;"
-  );
-  console.log(
-    "%c🔒 Privacy-compliant with cookie consent and data protection",
-    "color: #059669; font-size: 12px;"
   );
 });
 
@@ -415,389 +409,205 @@ function initContactForm() {
   });
 }
 
-// Privacy and Cookie Management
-function initPrivacyFeatures() {
-  // Initialize cookie consent
-  initCookieConsent();
+// Smooth scrolling
+function initSmoothScrolling() {
+  const links = document.querySelectorAll('a[href^="#"]');
 
-  // Initialize privacy modal
-  initPrivacyModal();
+  links.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
 
-  // Initialize terms modal
-  initTermsModal();
+      const targetId = this.getAttribute("href");
+      const targetSection = document.querySelector(targetId);
 
-  // Initialize footer privacy links
-  initFooterPrivacyLinks();
+      if (targetSection) {
+        const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar
+
+        window.scrollTo({
+          top: offsetTop,
+          behavior: "smooth",
+        });
+      }
+    });
+  });
 }
 
-// Cookie Consent Banner
-function initCookieConsent() {
-  const cookieConsent = document.getElementById("cookieConsent");
-  const acceptBtn = document.getElementById("acceptCookies");
-  const declineBtn = document.getElementById("declineCookies");
-  const learnMoreBtn = document.getElementById("learnMoreCookies");
-
-  if (!cookieConsent) return;
-
-  // Check if user has already made a choice
-  const cookieChoice = localStorage.getItem("cookieConsent");
-
-  if (!cookieChoice) {
-    // Show banner after a short delay for better UX
-    setTimeout(() => {
-      cookieConsent.classList.add("show");
-    }, 2000);
-  }
-
-  // Accept cookies
-  if (acceptBtn) {
-    acceptBtn.addEventListener("click", () => {
-      localStorage.setItem("cookieConsent", "accepted");
-      localStorage.setItem("cookieConsentDate", new Date().toISOString());
-      hideCookieBanner();
-      // Show thank you message briefly
-      showTemporaryMessage(
-        "Thank you! Only your theme preference will be saved. Zero tracking, zero data collection.",
-        "success"
-      );
-    });
-  }
-
-  // Decline cookies
-  if (declineBtn) {
-    declineBtn.addEventListener("click", () => {
-      localStorage.setItem("cookieConsent", "declined");
-      localStorage.setItem("cookieConsentDate", new Date().toISOString());
-      // Clear any existing theme preference since user declined cookies
-      localStorage.removeItem("theme");
-
-      hideCookieBanner();
-      showTemporaryMessage(
-        "Perfect! No cookies saved. Your privacy is fully protected. Theme changes won't be remembered between visits.",
-        "info"
-      );
-    });
-  }
-
-  // Learn more - open privacy modal
-  if (learnMoreBtn) {
-    learnMoreBtn.addEventListener("click", () => {
-      hideCookieBanner();
-      showPrivacyModal();
-    });
-  }
-
-  function hideCookieBanner() {
-    cookieConsent.classList.remove("show");
-  }
-}
-
-// Privacy Policy Modal
-function initPrivacyModal() {
-  const privacyModal = document.getElementById("privacyModal");
-  const closeBtn = document.getElementById("closePrivacyModal");
-  const acceptBtn = document.getElementById("acceptPrivacyPolicy");
-  const privacyLinks = document.querySelectorAll(
-    "#privacy-policy-link, #footerPrivacyLink"
+// Parallax effects
+function initParallaxEffects() {
+  const parallaxElements = document.querySelectorAll(
+    ".hero-visual:not(.floating-cards)"
   );
 
-  if (!privacyModal) return;
-
-  // Open modal when privacy links are clicked
-  privacyLinks.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      showPrivacyModal();
+  const updateParallax = debounce(() => {
+    const scrolled = window.pageYOffset;
+    parallaxElements.forEach((element) => {
+      const speed = 0.3;
+      element.style.transform = `translateY(${scrolled * speed}px)`;
     });
-  });
+  }, 16);
 
-  // Close modal
-  if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-      hidePrivacyModal();
-    });
-  }
-
-  if (acceptBtn) {
-    acceptBtn.addEventListener("click", () => {
-      hidePrivacyModal();
-      showTemporaryMessage(
-        "Thank you for reading our Privacy Policy!",
-        "success"
-      );
-    });
-  }
-
-  // Close modal when clicking outside
-  privacyModal.addEventListener("click", (e) => {
-    if (e.target === privacyModal) {
-      hidePrivacyModal();
-    }
-  });
-
-  // Close modal with Escape key
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && privacyModal.classList.contains("show")) {
-      hidePrivacyModal();
-    }
-  });
-
-  function showPrivacyModal() {
-    privacyModal.classList.add("show");
-    document.body.style.overflow = "hidden";
-  }
-
-  function hidePrivacyModal() {
-    privacyModal.classList.remove("show");
-    document.body.style.overflow = "";
-  }
+  window.addEventListener("scroll", updateParallax);
 }
 
-// Terms of Service Modal
-function initTermsModal() {
-  const termsModal = document.getElementById("termsModal");
-  const closeBtn = document.getElementById("closeTermsModal");
-  const acceptBtn = document.getElementById("acceptTerms");
-  const termsLinks = document.querySelectorAll("#footerTermsLink");
+// Cursor trail effect (desktop only)
+function initCursorTrail() {
+  const trails = [];
+  const trailLength = 20;
 
-  if (!termsModal) return;
-
-  // Open modal when terms links are clicked
-  termsLinks.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      showTermsModal();
-    });
-  });
-
-  // Close modal
-  if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-      hideTermsModal();
-    });
-  }
-
-  if (acceptBtn) {
-    acceptBtn.addEventListener("click", () => {
-      hideTermsModal();
-      showTemporaryMessage(
-        "Thank you for reading our Terms of Service!",
-        "success"
-      );
-    });
-  }
-
-  // Close modal when clicking outside
-  termsModal.addEventListener("click", (e) => {
-    if (e.target === termsModal) {
-      hideTermsModal();
-    }
-  });
-
-  // Close modal with Escape key (already handled in privacy modal function)
-
-  function showTermsModal() {
-    termsModal.classList.add("show");
-    document.body.style.overflow = "hidden";
-  }
-
-  function hideTermsModal() {
-    termsModal.classList.remove("show");
-    document.body.style.overflow = "";
-  }
-}
-
-// Footer Privacy Links
-function initFooterPrivacyLinks() {
-  const cookiePreferencesLink = document.getElementById(
-    "footerCookiePreferences"
-  );
-
-  if (cookiePreferencesLink) {
-    cookiePreferencesLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      showCookiePreferences();
-    });
-  }
-}
-
-// Show cookie preferences (re-show cookie banner)
-function showCookiePreferences() {
-  const cookieConsent = document.getElementById("cookieConsent");
-  if (cookieConsent) {
-    // Clear existing choice temporarily
-    const existingChoice = localStorage.getItem("cookieConsent");
-
-    // Show banner
-    cookieConsent.classList.add("show");
-    // Add a note that this is updating preferences
-    const cookieText = cookieConsent.querySelector(".cookie-text span");
-    const originalText = cookieText.textContent;
-    cookieText.textContent =
-      "Update your privacy preferences. Current choice: " +
-      (existingChoice === "accepted"
-        ? "Cookies enabled (theme preference saved)"
-        : "Cookies disabled (maximum privacy)") +
-      ". You can change this below.";
-
-    // Restore original text after user makes a choice
-    const restoreText = () => {
-      setTimeout(() => {
-        cookieText.textContent = originalText;
-      }, 500);
-    };
-
-    // Add event listeners to restore text
-    const acceptBtn = document.getElementById("acceptCookies");
-    const declineBtn = document.getElementById("declineCookies");
-
-    if (acceptBtn) {
-      acceptBtn.addEventListener("click", restoreText, { once: true });
-    }
-    if (declineBtn) {
-      declineBtn.addEventListener("click", restoreText, { once: true });
-    }
-  }
-}
-
-// Utility function to show temporary messages
-function showTemporaryMessage(message, type = "info") {
-  // Create message element
-  const messageEl = document.createElement("div");
-  messageEl.className = `temporary-message ${type}`;
-  messageEl.innerHTML = `
-    <div class="message-content">
-      <i class="fas ${
-        type === "success"
-          ? "fa-check-circle"
-          : type === "info"
-          ? "fa-info-circle"
-          : "fa-exclamation-triangle"
-      }"></i>
-      <span>${message}</span>
-    </div>
-  `;
-
-  // Add styles if not already added
-  if (!document.querySelector("#temporary-message-styles")) {
-    const styles = document.createElement("style");
-    styles.id = "temporary-message-styles";
-    styles.textContent = `
-      .temporary-message {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 1rem 1.5rem;
-        border-radius: 0.5rem;
-        color: white;
-        font-weight: 500;
-        z-index: 3000;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-        max-width: 300px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-      }
-      
-      .temporary-message.success {
-        background: #10b981;
-      }
-      
-      .temporary-message.info {
-        background: #3b82f6;
-      }
-      
-      .temporary-message.warning {
-        background: #f59e0b;
-      }
-      
-      .message-content {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-      
-      .temporary-message.show {
-        transform: translateX(0);
-      }
-      
-      @media (max-width: 480px) {
-        .temporary-message {
-          right: 10px;
-          left: 10px;
-          max-width: none;
-          transform: translateY(-100%);
-        }
-        
-        .temporary-message.show {
-          transform: translateY(0);
-        }
-      }
+  for (let i = 0; i < trailLength; i++) {
+    const trail = document.createElement("div");
+    trail.className = "cursor-trail";
+    trail.style.cssText = `
+      position: fixed;
+      width: ${4 + i}px;
+      height: ${4 + i}px;
+      background: hsl(var(--primary));
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: ${1 - i / trailLength};
+      transition: all 0.1s ease;
+      transform: translate(-50%, -50%);
     `;
-    document.head.appendChild(styles);
+    document.body.appendChild(trail);
+    trails.push(trail);
   }
 
-  // Add to page
-  document.body.appendChild(messageEl);
+  let mouseX = 0;
+  let mouseY = 0;
+  const positions = Array(trailLength).fill({ x: 0, y: 0 });
 
-  // Show message
-  requestAnimationFrame(() => {
-    messageEl.classList.add("show");
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
   });
 
-  // Remove message after delay
-  setTimeout(() => {
-    messageEl.classList.remove("show");
-    setTimeout(() => {
-      if (messageEl.parentNode) {
-        messageEl.parentNode.removeChild(messageEl);
-      }
-    }, 300);
-  }, 4000);
-}
+  function animateTrail() {
+    positions.unshift({ x: mouseX, y: mouseY });
+    positions.pop();
 
-// Enhanced theme toggle with privacy compliance
-function updateThemeToggle() {
-  const originalThemeToggle = initThemeToggle;
-
-  // Override the theme toggle to respect cookie consent
-  window.initThemeToggle = function () {
-    const themeToggle = document.getElementById("theme-toggle");
-    if (!themeToggle) return;
-
-    // Get saved theme preference only if cookies are accepted
-    const cookieConsent = localStorage.getItem("cookieConsent");
-    let savedTheme = "dark"; // Default theme
-
-    if (cookieConsent === "accepted") {
-      savedTheme = localStorage.getItem("theme") || "dark";
-    }
-
-    // Set initial theme
-    document.documentElement.setAttribute("data-theme", savedTheme);
-    document.body.classList.toggle("light", savedTheme === "light");
-
-    // Theme toggle event
-    themeToggle.addEventListener("click", function () {
-      const currentTheme = document.documentElement.getAttribute("data-theme");
-      const newTheme = currentTheme === "dark" ? "light" : "dark";
-
-      document.documentElement.setAttribute("data-theme", newTheme);
-      document.body.classList.toggle("light", newTheme === "light");
-
-      // Save theme preference only if cookies are accepted
-      const cookieConsent = localStorage.getItem("cookieConsent");
-      if (cookieConsent === "accepted") {
-        localStorage.setItem("theme", newTheme);
-      } else if (cookieConsent === "declined") {
-        // Show message that theme won't be saved
-        showTemporaryMessage(
-          "Theme changed! Enable cookies to save this preference, or it will reset when you leave the page.",
-          "info"
-        );
-      }
+    trails.forEach((trail, index) => {
+      const position = positions[index];
+      trail.style.left = position.x + "px";
+      trail.style.top = position.y + "px";
     });
-  };
 
-  // Call the updated function
-  initThemeToggle();
+    requestAnimationFrame(animateTrail);
+  }
+
+  animateTrail();
 }
+
+// Performance optimizations
+function initPerformanceOptimizations() {
+  // Lazy load images
+  const images = document.querySelectorAll("img[data-src]");
+  if (images.length > 0) {
+    const imageObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.removeAttribute("data-src");
+          imageObserver.unobserve(img);
+        }
+      });
+    });
+
+    images.forEach((img) => imageObserver.observe(img));
+  }
+
+  // Preload critical resources
+  const criticalResources = [
+    "css/modern-styles.css",
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css",
+  ];
+
+  criticalResources.forEach((resource) => {
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.href = resource;
+    link.as = "style";
+    document.head.appendChild(link);
+  });
+}
+
+// Page load animation
+function initPageLoadAnimation() {
+  window.addEventListener("load", function () {
+    document.body.style.opacity = "0";
+    document.body.style.transition = "opacity 0.5s ease";
+
+    setTimeout(() => {
+      document.body.style.opacity = "1";
+    }, 100);
+
+    // Remove loading overlay if exists
+    const loadingOverlay = document.querySelector(".loading-overlay");
+    if (loadingOverlay) {
+      setTimeout(() => {
+        loadingOverlay.classList.add("hidden");
+      }, 1000);
+    }
+  });
+}
+
+// Utility function: Debounce
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Add CSS animations dynamically
+const additionalStyles = `
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+    @keyframes bounce {
+    0%, 20%, 60%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-5px); }
+    80% { transform: translateY(-2px); }
+  }
+  
+  .floating-card {
+    animation: float 6s ease-in-out infinite;
+  }
+    .skill-tag:hover,
+  .tech-tag:hover {
+    animation: bounce 0.5s ease;
+  }
+  
+  .loading-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+  
+  .cursor-trail {
+    mix-blend-mode: difference;
+  }
+  
+  @media (max-width: 768px) {
+    .cursor-trail {
+      display: none;
+    }
+  }
+`;
+
+// Inject additional styles
+const styleSheet = document.createElement("style");
+styleSheet.textContent = additionalStyles;
+document.head.appendChild(styleSheet);
