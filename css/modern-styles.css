@@ -1887,7 +1887,7 @@ html[data-theme="light"] .switch-handle {
     min-height: 40px; /* Minimum header height */
     font-size: 1.1rem;
   }
-  
+
   .skill-list {
     height: auto; /* Auto height on mobile */
     min-height: 100px; /* Minimum height for content */
