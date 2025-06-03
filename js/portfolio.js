@@ -382,14 +382,12 @@ function initContactForm() {
     // Show loading state
     submitBtn.textContent = "Opening Email...";
     submitBtn.disabled = true;
-    submitBtn.style.opacity = "0.7";
-
-    // Create mailto link with form data
+    submitBtn.style.opacity = "0.7"; // Create mailto link with form data
     const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
     const body = encodeURIComponent(
       `Hi Paolo,\n\n${message}\n\nBest regards,\n${name}\n${email}`
     );
-    const mailtoLink = `mailto:paoloastrino@gmail.com?subject=${subject}&body=${body}`;
+    const mailtoLink = `mailto:paoloastrino01@gmail.com?subject=${subject}&body=${body}`;
 
     // Open user's email client
     try {
@@ -417,15 +415,14 @@ function initContactForm() {
     } catch (error) {
       // Fallback if mailto fails
       submitBtn.textContent = "Copy Email Address";
-      submitBtn.style.background = "#f59e0b";
-      // Copy email to clipboard
+      submitBtn.style.background = "#f59e0b"; // Copy email to clipboard
       navigator.clipboard
-        .writeText("paoloastrino@gmail.com")
+        .writeText("paoloastrino01@gmail.com")
         .then(() => {
           showNotification("Email address copied to clipboard!", "info");
         })
         .catch(() => {
-          showNotification("Please email: paoloastrino@gmail.com", "info");
+          showNotification("Please email: paoloastrino01@gmail.com", "info");
         });
 
       setTimeout(() => {
@@ -481,15 +478,26 @@ function initSmoothScrolling() {
 
 // Parallax effects
 function initParallaxEffects() {
+  // More specific selector to exclude floating cards completely
   const parallaxElements = document.querySelectorAll(
-    ".hero-visual:not(.floating-cards)"
+    ".hero-visual:not(.floating-cards):not(.floating-card)"
   );
 
   const updateParallax = debounce(() => {
     const scrolled = window.pageYOffset;
+    const maxScroll = window.innerHeight; // Limit parallax to viewport height
+
     parallaxElements.forEach((element) => {
-      const speed = 0.3;
-      element.style.transform = `translateY(${scrolled * speed}px)`;
+      // Only apply parallax if element doesn't have floating-card class
+      if (
+        !element.classList.contains("floating-card") &&
+        !element.querySelector(".floating-card")
+      ) {
+        // Reduced speed and add maximum limit
+        const speed = 0.05; // Even slower parallax
+        const parallaxAmount = Math.min(scrolled * speed, maxScroll * 0.1); // Max 10% of viewport height
+        element.style.transform = `translateY(${parallaxAmount}px)`;
+      }
     });
   }, 16);
 
@@ -699,7 +707,7 @@ const additionalStyles = `
   
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-5px); }
   }
     @keyframes bounce {
     0%, 20%, 60%, 100% { transform: translateY(0); }
@@ -709,7 +717,15 @@ const additionalStyles = `
   
   .floating-card {
     animation: float 6s ease-in-out infinite;
+    will-change: transform;
+    transform-origin: center;
   }
+  
+  /* Ensure floating cards container doesn't get parallax */
+  .floating-cards {
+    transform: none !important;
+  }
+  
     .skill-tag:hover,
   .tech-tag:hover {
     animation: bounce 0.5s ease;
