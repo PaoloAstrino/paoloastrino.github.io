@@ -321,9 +321,6 @@ function initTypingEffect() {
   heroTitle.textContent = "";
   heroTitle.style.borderRight = "2px solid hsl(var(--primary))";
 
-  // Get the floating cards
-  const floatingCards = document.querySelectorAll(".floating-card");
-
   // Initialize animation state
   let i = 0;
   const typeWriter = () => {
@@ -331,17 +328,9 @@ function initTypingEffect() {
       heroTitle.textContent += text.charAt(i);
       i++;
 
-      // Calculate progress through the typing animation (0 to 1)
-      const progress = i / text.length;
-
-      // Use a smoother animation curve for the cards
-      animateCardsWithTyping(floatingCards, progress);
-
+      // Continue typing without affecting floating cards
       setTimeout(typeWriter, 100);
     } else {
-      // Return cards to their original animation
-      resetCardsAnimation(floatingCards);
-
       // Blinking cursor effect
       setTimeout(() => {
         heroTitle.style.borderRight = "none";
@@ -354,80 +343,31 @@ function initTypingEffect() {
 }
 
 // Floating cards animation
-// Helper function to animate cards with typing
+// Helper function to animate cards with typing - DISABLED to prevent position interference
 function animateCardsWithTyping(cards, progress) {
-  // Use a consistent, smooth animation curve
-  const smoothProgress = Math.sin((progress * Math.PI) / 2); // Easing function for smooth movement
-
-  // Different movement patterns for each card - more subtle
-  cards.forEach((card, index) => {
-    let xMove, yMove;
-
-    // Create gentle movements for each card
-    switch (index) {
-      case 0: // card-1 - top left
-        xMove = -10 * smoothProgress;
-        yMove = -8 * smoothProgress;
-        break;
-      case 1: // card-2 - top right
-        xMove = 10 * smoothProgress;
-        yMove = -8 * smoothProgress;
-        break;
-      case 2: // card-3 - bottom left
-        xMove = -10 * smoothProgress;
-        yMove = 8 * smoothProgress;
-        break;
-      case 3: // card-4 - bottom right
-        xMove = 10 * smoothProgress;
-        yMove = 8 * smoothProgress;
-        break;
-      default:
-        xMove = 0;
-        yMove = 0;
-    }
-
-    // Apply smooth transformations - no rotation which can cause jumpiness
-    card.style.transform = `translate(${xMove}px, ${yMove}px)`;
-
-    // Very subtle scale change to avoid layout shift
-    const scale = 1 + smoothProgress * 0.05; // Reduced from 0.1 to 0.05
-    card.style.transform += ` scale(${scale})`;
-
-    // Keep animation duration changes minimal
-    card.style.animationDuration = 5 - smoothProgress + "s";
-  });
+  // Completely disable card manipulation during typing to prevent position interference
+  // The cards should maintain their natural CSS animations without JavaScript interference
+  return;
 }
 
-// Helper function to reset cards to normal animation
+// Helper function to reset cards to normal animation - DISABLED
 function resetCardsAnimation(cards) {
-  cards.forEach((card) => {
-    // Add a transition for smooth return to original state
-    card.style.transition = "transform 1s ease-out, animation-duration 1s ease";
-
-    // Reset transform
-    card.style.transform = "";
-
-    // Reset animation duration with a delay
-    setTimeout(() => {
-      card.style.animationDuration = "";
-      // Remove the transition after reset is complete
-      setTimeout(() => {
-        card.style.transition = "";
-      }, 1000);
-    }, 500);
-  });
+  // No longer needed since we're not manipulating the cards during typing
+  return;
 }
 
 function initFloatingCards() {
   const floatingCards = document.querySelectorAll(".floating-card");
 
   floatingCards.forEach((card, index) => {
-    // Add random floating motion
+    // Add random floating motion without affecting position
     const randomDelay = Math.random() * 2000;
     const randomDuration = 4000 + Math.random() * 2000;
 
     card.style.animationDelay = randomDelay + "ms";
-    card.style.animationDuration = randomDuration + "ms"; // Enhanced hover interactions
+    card.style.animationDuration = randomDuration + "ms";
+
+    // Enhanced hover interactions that don't interfere with base positioning
     card.addEventListener("mouseenter", function () {
       this.style.transform = "translateY(-15px) scale(1.05)";
       this.style.boxShadow = "none"; // Remove shadow
@@ -435,7 +375,8 @@ function initFloatingCards() {
     });
 
     card.addEventListener("mouseleave", function () {
-      this.style.transform = "translateY(0) scale(1)";
+      // Reset to allow CSS animations to take over
+      this.style.transform = "";
       this.style.boxShadow = "none"; // Remove shadow
       this.style.zIndex = "1";
     });

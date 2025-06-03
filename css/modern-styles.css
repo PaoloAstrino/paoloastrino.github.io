@@ -1923,23 +1923,23 @@ html[data-theme="light"] .switch-handle {
   .project-card {
     min-height: 300px; /* Reduce minimum height on mobile */
   }
-  
+
   .project-image,
   .project-visual {
     height: 150px; /* Reduce image height on mobile */
   }
-  
+
   .project-content {
     padding: 1rem; /* Reduce padding on mobile */
     gap: 0.75rem; /* Reduce gap on mobile */
   }
-  
+
   .project-content h3,
   .project-title {
     min-height: 1.5rem; /* Adjust minimum height on mobile */
     font-size: 1.1rem; /* Slightly smaller on mobile */
   }
-  
+
   .project-content p,
   .project-description {
     min-height: 2.8rem; /* Adjust minimum height on mobile */
@@ -2105,29 +2105,29 @@ html[data-theme="light"] .switch-handle {
   .project-card {
     min-height: 250px; /* Further reduce minimum height on small mobile */
   }
-  
+
   .project-image,
   .project-visual {
     height: 120px; /* Further reduce image height on small mobile */
   }
-  
+
   .project-content {
     padding: 0.75rem; /* Further reduce padding on small mobile */
     gap: 0.5rem; /* Further reduce gap on small mobile */
   }
-  
+
   .project-title,
   .project-content h3 {
     font-size: 1rem; /* Smaller title on small mobile */
     min-height: 1.25rem; /* Adjust minimum height */
   }
-  
+
   .project-description,
   .project-content p {
     font-size: 0.875rem; /* Smaller description on small mobile */
     min-height: 2.5rem; /* Adjust minimum height */
   }
-  
+
   .project-links {
     min-height: 2rem; /* Adjust link area height */
     padding-top: 0.75rem; /* Reduce padding */
