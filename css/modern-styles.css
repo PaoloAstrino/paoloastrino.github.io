@@ -892,6 +892,7 @@ html[data-theme="light"] .switch-handle {
   flex-direction: column;
   position: relative;
   border-top: 4px solid hsl(var(--primary) / 0.6); /* Accent border on top */
+  overflow: visible; /* Ensure content doesn't get cut off */
 }
 
 .skill-category:hover {
@@ -907,16 +908,18 @@ html[data-theme="light"] .switch-handle {
   color: hsl(var(--foreground));
   margin-bottom: 1.5rem;
   display: flex;
-  align-items: center;
+  align-items: center; /* Center align icon with text */
   gap: 0.75rem;
   height: 60px; /* Fixed header height */
-  align-items: flex-start; /* Align to top for consistency */
 }
 
 .skill-category i {
   color: hsl(var(--primary));
   font-size: 1.5rem;
   flex-shrink: 0; /* Prevent icon from shrinking */
+  display: flex;
+  align-items: center; /* Ensure icon is centered */
+  justify-content: center; /* Center horizontally */
 }
 
 .skill-list {
@@ -925,8 +928,9 @@ html[data-theme="light"] .switch-handle {
   gap: 0.75rem;
   flex-grow: 1; /* Take up remaining space */
   align-content: flex-start; /* Align tags to top */
-  overflow-y: auto; /* Allow scrolling if content exceeds fixed height */
-  height: 150px; /* Fixed content area height */
+  height: auto; /* Auto height instead of fixed */
+  overflow: visible; /* Ensure no scrollbar is shown */
+  max-height: none; /* Remove max-height constraint to avoid scrollbars */
 }
 
 .skill-tag {
@@ -1274,13 +1278,6 @@ html[data-theme="light"] .switch-handle {
 }
 
 /* Skills Section Updates */
-.skill-header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-}
-
 .skill-list {
   display: flex;
   flex-wrap: wrap;
