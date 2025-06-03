@@ -358,35 +358,82 @@ function initContactForm() {
 
   contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
+
+    // Get form data
+    const formData = new FormData(this);
+    const name = formData.get("name").trim();
+    const email = formData.get("email").trim();
+    const message = formData.get("message").trim();
+
     const submitBtn =
       this.querySelector("button[type='submit']") ||
       this.querySelector(".apple-button") ||
       this.querySelector(".send-message-btn");
     if (!submitBtn) return;
 
+    // Validate form data
+    if (!name || !email || !message) {
+      showNotification("Please fill in all fields", "error");
+      return;
+    }
+
     const originalText = submitBtn.textContent;
 
     // Show loading state
-    submitBtn.textContent = "Sending...";
+    submitBtn.textContent = "Opening Email...";
     submitBtn.disabled = true;
     submitBtn.style.opacity = "0.7";
 
-    // Simulate form submission (replace with actual form handling)
-    setTimeout(() => {
-      submitBtn.textContent = "Message Sent!";
-      submitBtn.style.background = "#10b981";
-      submitBtn.style.opacity = "1";
+    // Create mailto link with form data
+    const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+    const body = encodeURIComponent(
+      `Hi Paolo,\n\n${message}\n\nBest regards,\n${name}\n${email}`
+    );
+    const mailtoLink = `mailto:paoloastrino@gmail.com?subject=${subject}&body=${body}`;
 
-      // Reset form
-      contactForm.reset();
+    // Open user's email client
+    try {
+      window.location.href = mailtoLink;
 
-      // Reset button after 3 seconds
+      // Show success message
+      setTimeout(() => {
+        submitBtn.textContent = "Email Client Opened!";
+        submitBtn.style.background = "#10b981";
+        submitBtn.style.opacity = "1";
+
+        showNotification(
+          "Your email client should open with the message pre-filled",
+          "success"
+        );
+
+        // Reset form and button after 3 seconds
+        setTimeout(() => {
+          contactForm.reset();
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+          submitBtn.style.background = "";
+        }, 3000);
+      }, 500);
+    } catch (error) {
+      // Fallback if mailto fails
+      submitBtn.textContent = "Copy Email Address";
+      submitBtn.style.background = "#f59e0b";
+      // Copy email to clipboard
+      navigator.clipboard
+        .writeText("paoloastrino@gmail.com")
+        .then(() => {
+          showNotification("Email address copied to clipboard!", "info");
+        })
+        .catch(() => {
+          showNotification("Please email: paoloastrino@gmail.com", "info");
+        });
+
       setTimeout(() => {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
         submitBtn.style.background = "";
       }, 3000);
-    }, 2000);
+    }
   });
 
   // Form validation
@@ -565,6 +612,84 @@ function debounce(func, wait) {
   };
 }
 
+// Notification system for user feedback
+function showNotification(message, type = "info") {
+  // Remove existing notifications
+  const existingNotifications = document.querySelectorAll(".notification");
+  existingNotifications.forEach((notif) => notif.remove());
+
+  const notification = document.createElement("div");
+  notification.className = `notification notification-${type}`;
+  notification.innerHTML = `
+    <div class="notification-content">
+      <i class="fas ${getNotificationIcon(type)}"></i>
+      <span>${message}</span>
+    </div>
+  `;
+
+  // Add styles
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: ${getNotificationColor(type)};
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    transform: translateX(400px);
+    transition: all 0.3s ease;
+    max-width: 350px;
+    font-size: 0.9rem;
+  `;
+
+  document.body.appendChild(notification);
+
+  // Animate in
+  setTimeout(() => {
+    notification.style.transform = "translateX(0)";
+  }, 100);
+
+  // Auto remove after 5 seconds
+  setTimeout(() => {
+    notification.style.transform = "translateX(400px)";
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.remove();
+      }
+    }, 300);
+  }, 5000);
+}
+
+function getNotificationIcon(type) {
+  switch (type) {
+    case "success":
+      return "fa-check-circle";
+    case "error":
+      return "fa-exclamation-circle";
+    case "warning":
+      return "fa-exclamation-triangle";
+    case "info":
+    default:
+      return "fa-info-circle";
+  }
+}
+
+function getNotificationColor(type) {
+  switch (type) {
+    case "success":
+      return "#10b981";
+    case "error":
+      return "#ef4444";
+    case "warning":
+      return "#f59e0b";
+    case "info":
+    default:
+      return "#3b82f6";
+  }
+}
+
 // Add CSS animations dynamically
 const additionalStyles = `
   @keyframes blink {
@@ -611,3 +736,18 @@ const additionalStyles = `
 const styleSheet = document.createElement("style");
 styleSheet.textContent = additionalStyles;
 document.head.appendChild(styleSheet);
+
+// ===== PRIVACY COMMITMENT =====
+// Paolo Astrino Portfolio - Privacy-First Design
+//
+// This website is built with privacy as a core principle:
+// • No tracking scripts or analytics
+// • No cookies for tracking purposes
+// • No data collection or storage
+// • No third-party integrations that compromise privacy
+// • Contact form data is handled locally and temporarily
+//
+// Your privacy matters. This portfolio respects it completely.
+//
+// Last updated: June 2025
+// ================================

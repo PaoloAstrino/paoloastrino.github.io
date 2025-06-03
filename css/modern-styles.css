@@ -1118,133 +1118,38 @@ html[data-theme="light"] .text-gradient {
   box-shadow: 0 10px 25px hsl(var(--primary) / 0.2);
 }
 
-/* Contact Form Wrapper - Streamlined Layout */
-.contact-form-wrapper {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2rem;
-  background: hsl(var(--background));
-  border: 1px solid hsl(var(--border) / 0.3);
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 20px hsl(var(--foreground) / 0.05);
-}
-
-.contact-form-wrapper .contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding: 0;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
-
-/* Send Message Button */
-.send-message-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  width: 100%;
-  padding: 1rem 2rem;
-  background: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
-  border: none;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px hsl(var(--primary) / 0.3);
-}
-
-.send-message-btn:hover {
-  background: hsl(var(--primary) / 0.9);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 25px hsl(var(--primary) / 0.4);
-}
-
-.send-message-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 10px hsl(var(--primary) / 0.3);
-}
-
-.send-message-btn i {
-  font-size: 1rem;
-  transition: transform 0.3s ease;
-}
-
-.send-message-btn:hover i {
-  transform: translateX(3px);
-}
-
-/* Navigation Contact Link Styles */
-.nav-contact {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-}
-
-.nav-contact .nav-link {
-  color: var(--text-color);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1rem;
-  transition: color 0.3s ease;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-}
-
-.nav-contact .nav-link:hover {
-  color: var(--accent-color);
-  background-color: var(--card-bg);
-}
-
-/* Navigation Right Side Container */
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-/* Footer */
-.footer {
-  background: hsl(var(--background));
-  border-top: none; /* Clean, no border */
-  padding: 2rem 0;
-  text-align: center;
-}
-
-.footer p {
+/* Form Note Styling */
+.form-note {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: hsl(var(--primary) / 0.1);
+  border: 1px solid hsl(var(--primary) / 0.2);
+  border-radius: 6px;
   color: hsl(var(--muted-foreground));
-  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  text-align: center;
+  line-height: 1.4;
 }
 
-.social-links {
+.form-note::before {
+  content: "ℹ️";
+  margin-right: 0.5rem;
+  opacity: 0.8;
+}
+
+/* Notification Styles */
+.notification {
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+.notification-content {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.social-link {
-  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: hsl(var(--accent));
-  color: hsl(var(--accent-foreground));
-  border-radius: 0; /* Clean rectangular shape */
-  text-decoration: none;
-  transition: all 0.3s ease;
-  border: none; /* Clean, no border */
+  gap: 0.75rem;
 }
 
-.social-link:hover {
-  background: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px hsl(var(--primary) / 0.3);
+.notification i {
+  flex-shrink: 0;
 }
 
 /* Additional styles for complete modern design */
@@ -1436,19 +1341,44 @@ html[data-theme="light"] .text-gradient {
   transition: opacity 0.3s ease;
 }
 
-/* Footer Updates */
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 2rem;
+/* Footer */
+.footer {
+  background: hsl(var(--background));
+  border-top: none; /* Clean, no border */
+  padding: 2rem 0;
+  text-align: center;
 }
 
-.footer-left {
+.footer p {
+  color: hsl(var(--muted-foreground));
+  margin-bottom: 1rem;
+}
+
+.social-links {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  border-radius: 0; /* Clean rectangular shape */
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none; /* Clean, no border */
+}
+
+.social-link:hover {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px hsl(var(--primary) / 0.3);
 }
 
 .footer-logo {
@@ -1457,19 +1387,26 @@ html[data-theme="light"] .text-gradient {
   color: hsl(var(--foreground));
 }
 
+.privacy-commitment {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: hsl(var(--primary));
+  font-weight: 500;
+}
+
+.privacy-commitment i {
+  color: hsl(var(--primary));
+  font-size: 0.875rem;
+}
+
 .footer-right {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 1rem;
-}
-
-/* About Text Styles */
-.lead-text {
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: hsl(var(--foreground));
-  margin-bottom: 1.5rem;
 }
 
 /* Enhanced Hover Effects */
