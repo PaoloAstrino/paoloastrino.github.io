@@ -108,7 +108,7 @@ html[data-theme="light"] .text-gradient {
 .apple-button {
   display: inline-flex;
   align-items: center;
-  padding: 0.75rem 1.5rem;
+  padding: 0.85rem 1.7rem;
   border-radius: 0; /* Clean edges, no rounded corners */
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
@@ -117,7 +117,7 @@ html[data-theme="light"] .text-gradient {
   transition: all 0.3s ease;
   border: none;
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 .apple-button:hover {
@@ -190,7 +190,7 @@ html[data-theme="light"] .text-gradient {
 }
 
 .nav-logo {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: hsl(var(--foreground));
   text-decoration: none;
@@ -213,6 +213,7 @@ html[data-theme="light"] .text-gradient {
   color: hsl(var(--muted-foreground));
   text-decoration: none;
   font-weight: 500;
+  font-size: 1.1rem;
   transition: all 0.3s ease;
   position: relative;
 }
@@ -347,11 +348,11 @@ html[data-theme="light"] .switch-handle {
 
 .hero-badge {
   display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
   background: linear-gradient(135deg, hsl(220, 100%, 50%), hsl(200, 100%, 40%));
   color: hsl(var(--primary-foreground));
   border-radius: 0; /* Clean rectangular shape */
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 500;
   margin-bottom: 1.5rem;
   border: none; /* No border for clean look */
@@ -359,14 +360,14 @@ html[data-theme="light"] .switch-handle {
 }
 
 .hero-title {
-  font-size: 4rem;
+  font-size: 4.5rem;
   font-weight: 900;
   line-height: 1.1;
   margin-bottom: 1.5rem;
 }
 
 .hero-description {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   color: hsl(var(--muted-foreground));
   margin-bottom: 2rem;
   line-height: 1.7;
@@ -392,13 +393,13 @@ html[data-theme="light"] .switch-handle {
 }
 
 .stat-number {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: hsl(var(--primary));
 }
 
 .stat-label {
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: hsl(var(--muted-foreground));
   font-weight: 500;
 }
@@ -439,14 +440,14 @@ html[data-theme="light"] .switch-handle {
 }
 
 .floating-card i {
-  font-size: 3rem;
+  font-size: 3.5rem;
   color: hsl(var(--primary));
 }
 
 .floating-card span {
   font-weight: 600;
   color: hsl(var(--foreground));
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 .card-1 {
@@ -962,22 +963,26 @@ html[data-theme="light"] .switch-handle {
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
+  gap: 2.5rem;
   margin-top: 3rem;
 }
 
 .project-card {
   background: hsl(var(--background)); /* Match page background */
-  border: none; /* Clean, no border */
-  border-radius: 0; /* Clean rectangular shape */
+  border: 2px solid hsl(var(--border) / 0.2); /* Subtle border for card-like appearance */
+  border-radius: 8px; /* Slight rounded corners like skill cards */
   overflow: hidden;
-  box-shadow: none; /* Completely clean, no shadow */
+  box-shadow: 0 4px 16px hsl(var(--foreground) / 0.08); /* Subtle shadow like skill cards */
   transition: all 0.3s ease;
+  height: 450px; /* Fixed height for all cards */
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card:hover {
-  transform: translateY(-10px);
-  box-shadow: none; /* Completely clean, no shadow */
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px hsl(var(--foreground) / 0.12);
+  border-color: hsl(var(--primary) / 0.3);
 }
 
 .project-image {
@@ -997,7 +1002,10 @@ html[data-theme="light"] .switch-handle {
 }
 
 .project-content {
-  padding: 2rem;
+  padding: 1.5rem;
+  flex-grow: 1; /* Allow content to grow and fill available space */
+  display: flex;
+  flex-direction: column;
 }
 
 .project-title {
@@ -1215,17 +1223,18 @@ html[data-theme="light"] .switch-handle {
 
 /* Project Visual Styles */
 .project-visual {
-  height: 200px;
+  height: 180px;
   background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
+  flex-shrink: 0; /* Prevent visual from shrinking */
 }
 
 .project-icon {
-  font-size: 3rem;
+  font-size: 3.5rem;
   color: hsl(var(--primary-foreground));
   opacity: 0.8;
 }
@@ -1841,9 +1850,8 @@ html[data-theme="light"] .switch-handle {
     text-align: center;
     gap: 2rem;
   }
-
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
 
   .hero-buttons {
@@ -1959,7 +1967,7 @@ html[data-theme="light"] .switch-handle {
   }
 
   .hero-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 
   .section-title {
