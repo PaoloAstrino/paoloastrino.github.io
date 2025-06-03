@@ -977,6 +977,7 @@ html[data-theme="light"] .switch-handle {
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2.5rem;
   margin-top: 3rem;
+  align-items: stretch; /* Make all cards same height automatically */
 }
 
 .project-card {
@@ -986,9 +987,10 @@ html[data-theme="light"] .switch-handle {
   overflow: hidden;
   box-shadow: 0 4px 16px hsl(var(--foreground) / 0.08); /* Subtle shadow like skill cards */
   transition: all 0.3s ease;
-  height: 500px; /* Increased fixed height for all cards */
+  /* Removed fixed height - cards now size to content and match tallest card */
   display: flex;
   flex-direction: column;
+  min-height: 400px; /* Minimum height to prevent cards from being too small */
 }
 
 .project-card:hover {
@@ -1038,7 +1040,7 @@ html[data-theme="light"] .switch-handle {
   flex-wrap: wrap;
   gap: 0.6rem;
   margin-bottom: 1.5rem;
-  min-height: 120px; /* Ensure consistent space for tags */
+  /* Removed fixed min-height - allow natural sizing based on content */
 }
 
 .tech-tag {
@@ -1890,9 +1892,21 @@ html[data-theme="light"] .switch-handle {
   .section-title {
     font-size: 2.5rem;
   }
-
   .projects-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem; /* Reduce gap on mobile */
+  }
+  
+  .project-card {
+    min-height: 300px; /* Reduce minimum height on mobile */
+  }
+  
+  .project-image {
+    height: 150px; /* Reduce image height on mobile */
+  }
+  
+  .project-content {
+    padding: 1rem; /* Reduce padding on mobile */
   }
   .skills-grid {
     grid-template-columns: 1fr;
@@ -2030,7 +2044,6 @@ html[data-theme="light"] .switch-handle {
   .contact-content {
     gap: 1rem;
   }
-
   .skills-grid {
     gap: 1rem;
   }
@@ -2048,6 +2061,30 @@ html[data-theme="light"] .switch-handle {
   .skill-tag {
     font-size: 0.75rem;
     padding: 0.3rem 0.6rem;
+  }
+
+  .projects-grid {
+    gap: 1rem; /* Further reduce gap on small mobile */
+  }
+  
+  .project-card {
+    min-height: 250px; /* Further reduce minimum height on small mobile */
+  }
+  
+  .project-image {
+    height: 120px; /* Further reduce image height on small mobile */
+  }
+  
+  .project-content {
+    padding: 0.75rem; /* Further reduce padding on small mobile */
+  }
+  
+  .project-title {
+    font-size: 1.1rem; /* Smaller title on small mobile */
+  }
+  
+  .project-description {
+    font-size: 0.9rem; /* Smaller description on small mobile */
   }
 }
 
