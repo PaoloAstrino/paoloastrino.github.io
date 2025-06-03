@@ -450,6 +450,18 @@ html[data-theme="light"] .switch-handle {
   font-size: 1rem;
 }
 
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 .card-1 {
   top: 10%;
   left: 20%;

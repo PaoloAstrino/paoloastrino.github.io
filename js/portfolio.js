@@ -309,24 +309,22 @@ function initTypingEffect() {
   const heroTitle = document.querySelector(".hero-title .text-gradient");
   if (!heroTitle) return;
 
+  // Set a fixed width to prevent layout shifts
   const text = heroTitle.textContent;
+  const container = heroTitle.parentElement;
+
+  // Preserve layout by using a placeholder with the same width
+  const textWidth = heroTitle.getBoundingClientRect().width;
+  container.style.minWidth = textWidth + "px";
+
+  // Clear and prepare for typing
   heroTitle.textContent = "";
   heroTitle.style.borderRight = "2px solid hsl(var(--primary))";
 
   // Get the floating cards
   const floatingCards = document.querySelectorAll(".floating-card");
-  const originalPositions = [];
 
-  // Save original positions
-  floatingCards.forEach((card) => {
-    originalPositions.push({
-      top: card.style.top,
-      left: card.style.left,
-      right: card.style.right,
-      bottom: card.style.bottom,
-    });
-  });
-
+  // Initialize animation state
   let i = 0;
   const typeWriter = () => {
     if (i < text.length) {
@@ -336,7 +334,7 @@ function initTypingEffect() {
       // Calculate progress through the typing animation (0 to 1)
       const progress = i / text.length;
 
-      // Move cards fluidly based on typing progress
+      // Use a smoother animation curve for the cards
       animateCardsWithTyping(floatingCards, progress);
 
       setTimeout(typeWriter, 100);
@@ -358,56 +356,64 @@ function initTypingEffect() {
 // Floating cards animation
 // Helper function to animate cards with typing
 function animateCardsWithTyping(cards, progress) {
-  // Different movement patterns for each card
+  // Use a consistent, smooth animation curve
+  const smoothProgress = Math.sin((progress * Math.PI) / 2); // Easing function for smooth movement
+
+  // Different movement patterns for each card - more subtle
   cards.forEach((card, index) => {
     let xMove, yMove;
 
-    // Create unique movements for each card
+    // Create gentle movements for each card
     switch (index) {
-      case 0: // card-1
-        xMove = -20 * Math.sin(progress * Math.PI);
-        yMove = -15 * progress;
+      case 0: // card-1 - top left
+        xMove = -10 * smoothProgress;
+        yMove = -8 * smoothProgress;
         break;
-      case 1: // card-2
-        xMove = 25 * progress;
-        yMove = 10 * Math.sin(progress * Math.PI * 2);
+      case 1: // card-2 - top right
+        xMove = 10 * smoothProgress;
+        yMove = -8 * smoothProgress;
         break;
-      case 2: // card-3
-        xMove = -15 * progress;
-        yMove = 20 * progress;
+      case 2: // card-3 - bottom left
+        xMove = -10 * smoothProgress;
+        yMove = 8 * smoothProgress;
         break;
-      case 3: // card-4
-        xMove = 20 * Math.sin(progress * Math.PI * 1.5);
-        yMove = -10 * progress;
+      case 3: // card-4 - bottom right
+        xMove = 10 * smoothProgress;
+        yMove = 8 * smoothProgress;
         break;
       default:
         xMove = 0;
         yMove = 0;
     }
 
-    // Apply fluid transformations
-    card.style.transform = `translate(${xMove}px, ${yMove}px) rotate(${
-      progress * 3
-    }deg)`;
+    // Apply smooth transformations - no rotation which can cause jumpiness
+    card.style.transform = `translate(${xMove}px, ${yMove}px)`;
 
-    // Gradually increase scale slightly
-    const scale = 1 + progress * 0.1;
+    // Very subtle scale change to avoid layout shift
+    const scale = 1 + smoothProgress * 0.05; // Reduced from 0.1 to 0.05
     card.style.transform += ` scale(${scale})`;
 
-    // Increase animation intensity
-    card.style.animationDuration = 6 - progress * 2 + "s";
+    // Keep animation duration changes minimal
+    card.style.animationDuration = 5 - smoothProgress + "s";
   });
 }
 
 // Helper function to reset cards to normal animation
 function resetCardsAnimation(cards) {
   cards.forEach((card) => {
-    // Reset transform but keep animation
+    // Add a transition for smooth return to original state
+    card.style.transition = "transform 1s ease-out, animation-duration 1s ease";
+
+    // Reset transform
     card.style.transform = "";
 
-    // Reset animation duration to original
+    // Reset animation duration with a delay
     setTimeout(() => {
       card.style.animationDuration = "";
+      // Remove the transition after reset is complete
+      setTimeout(() => {
+        card.style.transition = "";
+      }, 1000);
     }, 500);
   });
 }
