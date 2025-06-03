@@ -146,6 +146,7 @@ function initScrollProgress() {
 // Theme toggle functionality
 function initThemeToggle() {
   const themeToggle = document.getElementById("theme-toggle");
+  const toggleLabel = themeToggle?.querySelector(".toggle-label");
   if (!themeToggle) return;
 
   // Check for saved theme
@@ -156,11 +157,11 @@ function initThemeToggle() {
   ) {
     document.body.classList.add("dark");
     document.documentElement.setAttribute("data-theme", "dark");
-    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    if (toggleLabel) toggleLabel.textContent = "Dark";
   } else {
     document.body.classList.remove("dark");
     document.documentElement.setAttribute("data-theme", "light");
-    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    if (toggleLabel) toggleLabel.textContent = "Light";
   }
 
   themeToggle.addEventListener("click", function () {
@@ -170,25 +171,15 @@ function initThemeToggle() {
       isDark ? "dark" : "light"
     );
 
-    this.innerHTML = isDark
-      ? '<i class="fas fa-sun"></i>'
-      : '<i class="fas fa-moon"></i>';
+    if (toggleLabel) {
+      toggleLabel.textContent = isDark ? "Dark" : "Light";
+    }
     localStorage.setItem("theme", isDark ? "dark" : "light");
 
     // Add animation effect
-    this.style.transform = "scale(0.9)";
+    this.style.transform = "scale(0.95)";
     setTimeout(() => {
-      this.style.transform = "scale(1)";
-    }, 150);
-  });
-
-  // Hover effects
-  themeToggle.addEventListener("mouseenter", () => {
-    themeToggle.style.transform = "scale(1.1)";
-  });
-
-  themeToggle.addEventListener("mouseleave", () => {
-    themeToggle.style.transform = "scale(1)";
+      this.style.transform = "scale(1)";    }, 150);
   });
 }
 
