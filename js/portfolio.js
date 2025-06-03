@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initSmoothScrolling();
   initParallaxEffects();
   initPerformanceOptimizations();
+  initLegalOverlays();
   // Desktop-only features
   // if (window.innerWidth > 768) {
   //   initCursorTrail();
@@ -604,6 +605,72 @@ function initPageLoadAnimation() {
       setTimeout(() => {
         loadingOverlay.classList.add("hidden");
       }, 1000);
+    }
+  });
+}
+
+// Legal Document Overlay Functionality
+function initLegalOverlays() {
+  const privacyLink = document.getElementById("privacy-link");
+  const termsLink = document.getElementById("terms-link");
+  const privacyOverlay = document.getElementById("privacy-overlay");
+  const termsOverlay = document.getElementById("terms-overlay");
+  const closePrivacy = document.getElementById("close-privacy");
+  const closeTerms = document.getElementById("close-terms");
+
+  // Open overlays
+  if (privacyLink && privacyOverlay) {
+    privacyLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      privacyOverlay.classList.add("active");
+      document.body.style.overflow = "hidden"; // Prevent background scrolling
+    });
+  }
+
+  if (termsLink && termsOverlay) {
+    termsLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      termsOverlay.classList.add("active");
+      document.body.style.overflow = "hidden"; // Prevent background scrolling
+    });
+  }
+
+  // Close overlays
+  if (closePrivacy && privacyOverlay) {
+    closePrivacy.addEventListener("click", () => {
+      privacyOverlay.classList.remove("active");
+      document.body.style.overflow = ""; // Restore scrolling
+    });
+  }
+
+  if (closeTerms && termsOverlay) {
+    closeTerms.addEventListener("click", () => {
+      termsOverlay.classList.remove("active");
+      document.body.style.overflow = ""; // Restore scrolling
+    });
+  }
+
+  // Close overlays when clicking outside
+  [privacyOverlay, termsOverlay].forEach((overlay) => {
+    if (overlay) {
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) {
+          overlay.classList.remove("active");
+          document.body.style.overflow = ""; // Restore scrolling
+        }
+      });
+    }
+  });
+
+  // Close overlays with Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      [privacyOverlay, termsOverlay].forEach((overlay) => {
+        if (overlay && overlay.classList.contains("active")) {
+          overlay.classList.remove("active");
+          document.body.style.overflow = ""; // Restore scrolling
+        }
+      });
     }
   });
 }
