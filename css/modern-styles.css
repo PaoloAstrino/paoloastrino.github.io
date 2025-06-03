@@ -1179,29 +1179,26 @@ html[data-theme="light"] .text-gradient {
   transform: translateX(3px);
 }
 
-/* Responsive Design for Contact Form Wrapper */
-@media (max-width: 768px) {
-  .contact-form-wrapper {
-    margin: 0 1rem;
-    padding: 1.5rem;
-  }
-
-  .send-message-btn {
-    padding: 0.875rem 1.5rem;
-    font-size: 0.95rem;
-  }
+/* Navigation Contact Link Styles */
+.nav-contact {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
 }
 
-@media (max-width: 480px) {
-  .contact-form-wrapper {
-    margin: 0 0.5rem;
-    padding: 1rem;
-  }
+.nav-contact .nav-link {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
 
-  .send-message-btn {
-    padding: 0.75rem 1rem;
-    font-size: 0.9rem;
-  }
+.nav-contact .nav-link:hover {
+    color: var(--accent-color);
+    background-color: var(--card-bg);
 }
 
 /* Footer */
@@ -1482,13 +1479,12 @@ html[data-theme="light"] .text-gradient {
 /* Social Buttons */
 .social-buttons {
   position: fixed;
-  top: 50%;
-  right: 2rem;
-  transform: translateY(-50%);
+  top: 20px;
+  right: 20px;
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  gap: 15px;
   z-index: 1000;
+  align-items: center;
 }
 
 .social-btn {
@@ -1534,8 +1530,6 @@ html[data-theme="light"] .text-gradient {
 .theme-toggle {
   display: flex;
   align-items: center;
-  margin-left: auto;
-  padding-left: 2rem;
 }
 
 .toggle-switch {
@@ -1786,11 +1780,10 @@ html[data-theme="light"] .text-gradient {
   }
   .floating-card i {
     font-size: 2.25rem;
-  }
-  .social-buttons {
+  }  .social-buttons {
     right: 1rem;
-    top: 50%;
-    gap: 0.6rem;
+    top: 20px;
+    gap: 10px;
   }
   .social-btn {
     width: 42px;
@@ -1851,10 +1844,9 @@ html[data-theme="light"] .text-gradient {
   .floating-card {
     position: static;
     animation: none;
-  }
-  .social-buttons {
+  }  .social-buttons {
     right: 0.5rem;
-    top: 50%;
+    top: 20px;
     gap: 0.5rem;
   }
   .social-btn {
