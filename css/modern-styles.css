@@ -809,7 +809,9 @@ html[data-theme="light"] .text-gradient {
 /* Skills Section */
 .skills-section {
   padding: 6rem 0;
-  background: hsl(var(--muted) / 0.02); /* Slightly different background for subtle contrast */
+  background: hsl(
+    var(--muted) / 0.02
+  ); /* Slightly different background for subtle contrast */
   color: hsl(var(--foreground));
 }
 
@@ -1689,7 +1691,7 @@ html[data-theme="light"] .text-gradient {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
   }
-  
+
   .skill-category {
     min-height: 180px;
     padding: 1.5rem;

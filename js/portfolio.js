@@ -391,7 +391,7 @@ function initContactForm() {
 
     // Open user's email client
     try {
-      window.location.href = mailtoLink;      // Show success message
+      window.location.href = mailtoLink; // Show success message
       setTimeout(() => {
         submitBtn.textContent = "Email Client Opened!";
         submitBtn.style.background = "hsl(var(--accent))";
@@ -401,7 +401,7 @@ function initContactForm() {
         showNotification(
           "Your email client should open with the message pre-filled",
           "success"
-        );        // Reset form and button after 3 seconds
+        ); // Reset form and button after 3 seconds
         setTimeout(() => {
           contactForm.reset();
           submitBtn.textContent = originalText;
@@ -420,7 +420,8 @@ function initContactForm() {
         .writeText("paoloastrino01@gmail.com")
         .then(() => {
           showNotification("Email address copied to clipboard!", "info");
-        })        .catch(() => {
+        })
+        .catch(() => {
           showNotification("Please email: paoloastrino01@gmail.com", "info");
         });
 
