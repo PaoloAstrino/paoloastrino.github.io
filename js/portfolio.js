@@ -179,7 +179,8 @@ function initThemeToggle() {
     // Add animation effect
     this.style.transform = "scale(0.95)";
     setTimeout(() => {
-      this.style.transform = "scale(1)";    }, 150);
+      this.style.transform = "scale(1)";
+    }, 150);
   });
 }
 
