@@ -999,7 +999,9 @@ html[data-theme="light"] .switch-handle {
   border-color: hsl(var(--primary) / 0.3);
 }
 
-.project-image {
+/* Project visual/image section */
+.project-image,
+.project-visual {
   height: 200px;
   background: linear-gradient(135deg, hsl(220, 100%, 50%), hsl(200, 100%, 60%));
   display: flex;
@@ -1007,9 +1009,12 @@ html[data-theme="light"] .switch-handle {
   justify-content: center;
   position: relative;
   overflow: hidden;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
-.project-image i {
+.project-image i,
+.project-visual i,
+.project-icon i {
   font-size: 3rem;
   color: hsl(var(--primary-foreground));
   opacity: 0.8;
@@ -1020,27 +1025,38 @@ html[data-theme="light"] .switch-handle {
   flex-grow: 1; /* Allow content to grow and fill available space */
   display: flex;
   flex-direction: column;
+  gap: 1rem; /* Consistent spacing between elements */
 }
 
+/* Ensure all titles start at the same position */
+.project-content h3,
 .project-title {
   font-size: 1.25rem;
   font-weight: 700;
   color: hsl(var(--foreground));
-  margin-bottom: 1rem;
+  margin: 0; /* Remove default margins for consistent alignment */
+  line-height: 1.4;
+  min-height: 1.75rem; /* Minimum height to maintain alignment */
 }
 
+/* Ensure all descriptions start at the same position */
+.project-content p,
 .project-description {
   color: hsl(var(--muted-foreground));
   line-height: 1.6;
-  margin-bottom: 1.5rem;
+  margin: 0; /* Remove default margins for consistent alignment */
+  flex-grow: 1; /* Allow description to expand */
+  min-height: 3.2rem; /* Minimum height for 2 lines to maintain alignment */
 }
 
+/* Ensure all tech tags start from the same position */
 .project-tech {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
-  margin-bottom: 1.5rem;
-  /* Removed fixed min-height - allow natural sizing based on content */
+  margin: 0; /* Remove margins for consistent alignment */
+  min-height: 2rem; /* Minimum height to maintain alignment */
+  align-items: flex-start; /* Align tags to top */
 }
 
 .tech-tag {
@@ -1051,12 +1067,20 @@ html[data-theme="light"] .switch-handle {
   font-size: 0.75rem;
   font-weight: 500;
   border: none; /* No border for clean look */
+  height: 1.5rem; /* Consistent height for all tags */
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap; /* Prevent text wrapping in tags */
 }
 
 .project-links {
   display: flex;
   gap: 1rem;
   margin-top: auto; /* Push to the bottom */
+  padding-top: 1rem; /* Add consistent spacing from content above */
+  border-top: 1px solid hsl(var(--border) / 0.1); /* Subtle separator */
+  min-height: 2.5rem; /* Consistent height for link area */
+  align-items: center; /* Center links vertically */
 }
 
 .project-link {
@@ -1896,17 +1920,29 @@ html[data-theme="light"] .switch-handle {
     grid-template-columns: 1fr;
     gap: 1.5rem; /* Reduce gap on mobile */
   }
-  
   .project-card {
     min-height: 300px; /* Reduce minimum height on mobile */
   }
   
-  .project-image {
+  .project-image,
+  .project-visual {
     height: 150px; /* Reduce image height on mobile */
   }
   
   .project-content {
     padding: 1rem; /* Reduce padding on mobile */
+    gap: 0.75rem; /* Reduce gap on mobile */
+  }
+  
+  .project-content h3,
+  .project-title {
+    min-height: 1.5rem; /* Adjust minimum height on mobile */
+    font-size: 1.1rem; /* Slightly smaller on mobile */
+  }
+  
+  .project-content p,
+  .project-description {
+    min-height: 2.8rem; /* Adjust minimum height on mobile */
   }
   .skills-grid {
     grid-template-columns: 1fr;
@@ -2066,25 +2102,35 @@ html[data-theme="light"] .switch-handle {
   .projects-grid {
     gap: 1rem; /* Further reduce gap on small mobile */
   }
-  
   .project-card {
     min-height: 250px; /* Further reduce minimum height on small mobile */
   }
   
-  .project-image {
+  .project-image,
+  .project-visual {
     height: 120px; /* Further reduce image height on small mobile */
   }
   
   .project-content {
     padding: 0.75rem; /* Further reduce padding on small mobile */
+    gap: 0.5rem; /* Further reduce gap on small mobile */
   }
   
-  .project-title {
-    font-size: 1.1rem; /* Smaller title on small mobile */
+  .project-title,
+  .project-content h3 {
+    font-size: 1rem; /* Smaller title on small mobile */
+    min-height: 1.25rem; /* Adjust minimum height */
   }
   
-  .project-description {
-    font-size: 0.9rem; /* Smaller description on small mobile */
+  .project-description,
+  .project-content p {
+    font-size: 0.875rem; /* Smaller description on small mobile */
+    min-height: 2.5rem; /* Adjust minimum height */
+  }
+  
+  .project-links {
+    min-height: 2rem; /* Adjust link area height */
+    padding-top: 0.75rem; /* Reduce padding */
   }
 }
 
