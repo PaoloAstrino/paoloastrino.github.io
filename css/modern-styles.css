@@ -196,6 +196,12 @@ html[data-theme="light"] .text-gradient {
   text-decoration: none;
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
 .nav-menu {
   display: flex;
   list-style: none;
@@ -1653,9 +1659,11 @@ html[data-theme="light"] .text-gradient {
   .hamburger {
     display: flex;
   }
-
   .nav-right {
     position: relative;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1rem;
   }
 
   .nav-menu {
@@ -1680,15 +1688,13 @@ html[data-theme="light"] .text-gradient {
     margin: 1rem 0;
   }
   .nav-contact {
-    position: absolute;
-    top: 1rem;
-    right: 8rem;
+    position: static;
+    order: 1;
   }
 
   .theme-toggle {
-    position: absolute;
-    top: 1rem;
-    right: 4rem;
+    position: static;
+    order: 2;
     margin-left: 0;
   }
 
