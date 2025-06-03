@@ -146,7 +146,6 @@ function initScrollProgress() {
 // Theme toggle functionality
 function initThemeToggle() {
   const themeToggle = document.getElementById("theme-toggle");
-  const toggleLabel = themeToggle?.querySelector(".toggle-label");
   if (!themeToggle) return;
 
   // Check for saved theme
@@ -157,11 +156,9 @@ function initThemeToggle() {
   ) {
     document.body.classList.add("dark");
     document.documentElement.setAttribute("data-theme", "dark");
-    if (toggleLabel) toggleLabel.textContent = "Dark";
   } else {
     document.body.classList.remove("dark");
     document.documentElement.setAttribute("data-theme", "light");
-    if (toggleLabel) toggleLabel.textContent = "Light";
   }
 
   themeToggle.addEventListener("click", function () {
@@ -171,9 +168,6 @@ function initThemeToggle() {
       isDark ? "dark" : "light"
     );
 
-    if (toggleLabel) {
-      toggleLabel.textContent = isDark ? "Dark" : "Light";
-    }
     localStorage.setItem("theme", isDark ? "dark" : "light");
 
     // Add animation effect
@@ -582,30 +576,18 @@ const additionalStyles = `
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
   }
-  
-  @keyframes bounce {
+    @keyframes bounce {
     0%, 20%, 60%, 100% { transform: translateY(0); }
     40% { transform: translateY(-5px); }
     80% { transform: translateY(-2px); }
   }
   
-  @keyframes pulse {
-    0% { box-shadow: 0 5px 15px hsl(var(--primary) / 0.3); }
-    50% { box-shadow: 0 5px 25px hsl(var(--primary) / 0.5); }
-    100% { box-shadow: 0 5px 15px hsl(var(--primary) / 0.3); }
-  }
-  
   .floating-card {
     animation: float 6s ease-in-out infinite;
   }
-  
-  .skill-tag:hover,
+    .skill-tag:hover,
   .tech-tag:hover {
     animation: bounce 0.5s ease;
-  }
-  
-  .theme-toggle {
-    animation: pulse 2s infinite;
   }
   
   .loading-overlay.hidden {
