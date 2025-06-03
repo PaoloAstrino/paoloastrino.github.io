@@ -887,7 +887,7 @@ html[data-theme="light"] .switch-handle {
   padding: 2rem;
   box-shadow: 0 4px 16px hsl(var(--foreground) / 0.08); /* Subtle shadow for depth */
   transition: all 0.3s ease;
-  min-height: 200px; /* Ensure consistent minimum height */
+  height: 250px; /* Fixed height for all categories */
   display: flex;
   flex-direction: column;
   position: relative;
@@ -909,7 +909,7 @@ html[data-theme="light"] .switch-handle {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  min-height: 60px; /* Consistent header height */
+  height: 60px; /* Fixed header height */
   align-items: flex-start; /* Align to top for consistency */
 }
 
@@ -925,6 +925,8 @@ html[data-theme="light"] .switch-handle {
   gap: 0.75rem;
   flex-grow: 1; /* Take up remaining space */
   align-content: flex-start; /* Align tags to top */
+  overflow-y: auto; /* Allow scrolling if content exceeds fixed height */
+  height: 150px; /* Fixed content area height */
 }
 
 .skill-tag {
@@ -1877,15 +1879,21 @@ html[data-theme="light"] .switch-handle {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-
   .skill-category {
-    min-height: auto; /* Remove fixed height on mobile */
+    height: auto; /* Allow auto height on mobile */
+    min-height: 200px; /* Set min-height instead of fixed height */
     padding: 1.5rem;
   }
 
   .skill-category h3 {
-    min-height: auto; /* Remove fixed header height on mobile */
+    height: auto; /* Auto height on mobile */
+    min-height: 40px; /* Minimum header height */
     font-size: 1.1rem;
+  }
+  
+  .skill-list {
+    height: auto; /* Auto height on mobile */
+    min-height: 100px; /* Minimum height for content */
   }
 
   .skill-tag {
