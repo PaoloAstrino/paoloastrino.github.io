@@ -151,10 +151,11 @@ function initThemeToggle() {
 
   // Check for saved theme
   const savedTheme = localStorage.getItem("theme");
-  if (
+  const isDarkMode =
     savedTheme === "dark" ||
-    (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)
-  ) {
+    (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+  if (isDarkMode) {
     document.body.classList.add("dark");
     document.documentElement.setAttribute("data-theme", "dark");
   } else {
@@ -171,11 +172,14 @@ function initThemeToggle() {
 
     localStorage.setItem("theme", isDark ? "dark" : "light");
 
-    // Add animation effect
-    this.style.transform = "scale(0.95)";
-    setTimeout(() => {
-      this.style.transform = "scale(1)";
-    }, 150);
+    // Add animation effect to the switch
+    const switchElement = this.querySelector(".switch");
+    if (switchElement) {
+      switchElement.style.transform = "scale(0.95)";
+      setTimeout(() => {
+        switchElement.style.transform = "scale(1)";
+      }, 150);
+    }
   });
 }
 
