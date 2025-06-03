@@ -67,9 +67,12 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-badge">
+            <div class="hero-content">                <div class="hero-badge">
                     <span>Data Analyst & ML Enthusiast</span>
+                </div>
+                <div class="privacy-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Privacy-First Portfolio • Zero Tracking • Zero Data Collection</span>
                 </div>
                 <h1 class="hero-title">
                     <span class="text-gradient">Paolo Astrino</span>
@@ -549,11 +552,12 @@
                         <input type="text" name="name" placeholder="Your Name" required>
                         <input type="email" name="email" placeholder="Your Email" required>
                     </div>
-                    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-                    <button type="submit" class="send-message-btn">
+                    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>                    <button type="submit" class="send-message-btn">
                         <i class="fas fa-paper-plane"></i>
                         Send Message
-                    </button>
+                    </button>                    <div class="privacy-notice">
+                        <p><i class="fas fa-shield-alt"></i> <strong>Privacy First:</strong> I deeply respect your privacy. Your information is <strong>never shared, stored permanently, or used for marketing</strong>. I only use your contact details to respond directly to your inquiry, then it's deleted. No tracking, no analytics, no data collection. <a href="#" id="privacy-policy-link" class="privacy-link">Read full Privacy Policy</a></p>
+                    </div>
                 </form>
             </div>
         </div>
@@ -562,13 +566,12 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-left">
+            <div class="footer-content">                <div class="footer-left">
                     <div class="footer-logo">Paolo Astrino</div>
                     <p>Data Analyst & Machine Learning Enthusiast</p>
+                    <p class="privacy-statement"><i class="fas fa-shield-alt"></i> <strong>Privacy-First Portfolio</strong> - Zero tracking, zero data collection, maximum respect for your privacy.</p>
                 </div>
-                <div class="footer-right">
-                    <div class="social-links">
+                <div class="footer-right">                    <div class="social-links">
                         <a href="https://github.com/paoloastrino" class="social-link" target="_blank">
                             <i class="fab fa-github"></i>
                         </a>
@@ -576,7 +579,16 @@
                             <i class="fab fa-linkedin"></i>
                         </a>
                     </div>
-                    <p>&copy; 2025 Paolo Astrino. All rights reserved.</p>
+                    <div class="footer-legal">
+                        <p>&copy; 2025 Paolo Astrino. All rights reserved.</p>
+                        <div class="legal-links">
+                            <a href="#" id="footerPrivacyLink" class="legal-link">Privacy Policy</a>
+                            <span class="divider">•</span>
+                            <a href="#" id="footerTermsLink" class="legal-link">Terms of Service</a>
+                            <span class="divider">•</span>
+                            <a href="#" id="footerCookiePreferences" class="legal-link">Cookie Preferences</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -586,6 +598,179 @@
     <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
         <i class="fas fa-chevron-up"></i>
     </button>
+
+    <!-- Cookie Consent Banner -->
+    <div class="cookie-consent" id="cookieConsent">
+        <div class="cookie-content">            <div class="cookie-text">
+                <i class="fas fa-cookie-bite"></i>
+                <span>This website uses <strong>zero tracking cookies</strong>. Only one essential cookie to remember your theme preference (dark/light mode). <strong>No analytics, no tracking, no data collection.</strong> Your privacy is my priority.</span>
+            </div>
+            <div class="cookie-actions">
+                <button class="cookie-btn accept" id="acceptCookies">Accept</button>
+                <button class="cookie-btn decline" id="declineCookies">Decline</button>
+                <button class="cookie-btn learn-more" id="learnMoreCookies">Learn More</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div class="privacy-modal" id="privacyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-shield-alt"></i> Privacy Policy</h2>
+                <button class="close-modal" id="closePrivacyModal">&times;</button>
+            </div>
+            <div class="modal-body">                <div class="privacy-section">
+                    <h3>My Privacy Philosophy</h3>
+                    <p><strong>Your privacy is sacred to me.</strong> As a data analyst, I understand how valuable and sensitive personal information is. That's why I've built this portfolio with a "privacy-first" mindset:</p>
+                    <ul>
+                        <li><strong>Zero data collection</strong> - I don't collect, store, or analyze visitor behavior</li>
+                        <li><strong>No tracking whatsoever</strong> - No Google Analytics, no Facebook pixels, no hidden trackers</li>
+                        <li><strong>No third-party services</strong> - Your data never leaves this website</li>
+                        <li><strong>Minimal contact data handling</strong> - Contact form data is used solely for response purposes</li>
+                    </ul>
+                </div>
+                
+                <div class="privacy-section">
+                    <h3>Information We Collect</h3>
+                    <p><strong>I collect the absolute minimum information necessary.</strong> When you contact me through the contact form, I only collect:</p>
+                    <ul>
+                        <li>Your name and email address (only what you provide)</li>
+                        <li>The message content you choose to share</li>
+                        <li>Timestamp of your inquiry (for response organization only)</li>
+                    </ul>
+                    <p><strong>That's it.</strong> No IP addresses, no browser fingerprinting, no location tracking, no behavioral analysis.</p>
+                </div>
+                  <div class="privacy-section">
+                    <h3>How I Use Your Information</h3>
+                    <p><strong>I use your information for one purpose only:</strong> to respond to your inquiry. Specifically:</p>
+                    <ul>
+                        <li><strong>Direct response only</strong> - I'll email you back to answer your question or continue our conversation</li>
+                        <li><strong>No marketing ever</strong> - I will never send you promotional emails, newsletters, or marketing materials</li>
+                        <li><strong>No sharing, period</strong> - Your information stays with me and is never shared with anyone</li>
+                        <li><strong>No database storage</strong> - I don't build contact lists or customer databases</li>
+                        <li><strong>No automated processing</strong> - Your message is read and responded to personally by me</li>
+                    </ul>
+                    <p><strong>After our conversation ends, your contact information is deleted.</strong></p>
+                </div>
+                  <div class="privacy-section">
+                    <h3>Data Storage & Security</h3>
+                    <p><strong>Your data is handled with extreme care and minimal retention:</strong></p>
+                    <ul>
+                        <li><strong>Temporary storage only</strong> - Contact form data is held just long enough to respond to you</li>
+                        <li><strong>Secure transmission</strong> - All form submissions are processed securely</li>
+                        <li><strong>No third-party analytics</strong> - Zero Google Analytics, Facebook tracking, or any external analytics services</li>
+                        <li><strong>No advertising networks</strong> - No Google Ads, no retargeting pixels, no ad tracking</li>
+                        <li><strong>No social media tracking</strong> - Social media buttons don't track you until you click them</li>
+                        <li><strong>Local hosting</strong> - Website hosted without data-mining hosting providers</li>
+                        <li><strong>Immediate deletion</strong> - Contact data is deleted after our conversation concludes</li>
+                    </ul>
+                    <p><strong>I practice what I preach about data privacy.</strong></p>
+                </div>
+                  <div class="privacy-section">
+                    <h3>Your Rights (And My Commitments)</h3>
+                    <p><strong>You have complete control over your data:</strong></p>
+                    <ul>
+                        <li><strong>Right to know</strong> - Ask me what data I have about you (spoiler: very little, and temporarily)</li>
+                        <li><strong>Right to deletion</strong> - Request immediate deletion of your contact information at any time</li>
+                        <li><strong>Right to portability</strong> - Get a copy of any data I have about you</li>
+                        <li><strong>Right to withdraw consent</strong> - Change your mind about being contacted at any time</li>
+                        <li><strong>Right to contact me</strong> - Ask any privacy-related questions directly</li>
+                    </ul>
+                    <p><strong>I will respond to all privacy requests within 24 hours.</strong> Because your privacy matters that much to me.</p>
+                </div>
+                  <div class="privacy-section">
+                    <h3>Cookies (The Honest Truth)</h3>
+                    <p><strong>I use exactly ONE cookie, and here's why:</strong></p>
+                    <ul>
+                        <li><strong>Theme Preference:</strong> Remembers if you prefer dark or light mode (that's it!)</li>
+                        <li><strong>Cookie Consent:</strong> Remembers your choice about cookies (so I don't keep asking)</li>
+                        <li><strong>No tracking cookies</strong> - Zero. None. Nada.</li>
+                        <li><strong>No analytics cookies</strong> - I don't track your behavior, clicks, or time spent</li>
+                        <li><strong>No advertising cookies</strong> - No ads, no retargeting, no commercial tracking</li>
+                        <li><strong>No social media cookies</strong> - Social buttons don't track until you click them</li>
+                        <li><strong>No performance cookies</strong> - No speed tracking or performance monitoring of your usage</li>
+                    </ul>
+                    <p><strong>If you decline cookies, the website works perfectly fine</strong> - you just won't remember your theme choice between visits.</p>
+                </div>
+                  <div class="privacy-section">
+                    <h3>Contact Information & Privacy Inquiries</h3>
+                    <p><strong>Have questions about your privacy? I'm here to help:</strong></p>
+                    <p><strong>Email:</strong> paoloastrino@example.com</p>
+                    <p><strong>Subject:</strong> Privacy Inquiry (I prioritize these emails)</p>
+                    <p><strong>Response Time:</strong> Within 24 hours, guaranteed</p>
+                    <br>
+                    <p><em>As someone who works with data professionally, I understand how precious your personal information is. I treat your privacy with the same care I'd want for my own family's data.</em></p>
+                </div>
+                
+                <div class="privacy-section">
+                    <p class="last-updated"><small>Last updated: January 2025</small></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn primary" id="acceptPrivacyPolicy">I Understand</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms of Service Modal -->
+    <div class="terms-modal" id="termsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-file-contract"></i> Terms of Service</h2>
+                <button class="close-modal" id="closeTermsModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="privacy-section">
+                    <h3>Website Usage</h3>
+                    <p>This portfolio website is provided for informational purposes. By using this site, you agree to:</p>
+                    <ul>
+                        <li>Use the website in a lawful manner</li>
+                        <li>Respect intellectual property rights</li>
+                        <li>Not attempt to harm or disrupt the website</li>
+                    </ul>
+                </div>
+                
+                <div class="privacy-section">
+                    <h3>Content & Intellectual Property</h3>
+                    <p>All content on this website, including but not limited to:</p>
+                    <ul>
+                        <li>Text, images, and design elements</li>
+                        <li>Project descriptions and case studies</li>
+                        <li>Code samples and technical content</li>
+                    </ul>
+                    <p>Are the intellectual property of Paolo Astrino unless otherwise stated.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h3>Professional Services</h3>
+                    <p>Contact through this website does not establish:</p>
+                    <ul>
+                        <li>A formal business relationship</li>
+                        <li>Contractual obligations</li>
+                        <li>Guaranteed availability for projects</li>
+                    </ul>
+                </div>
+                
+                <div class="privacy-section">
+                    <h3>Disclaimer</h3>
+                    <p>Information provided is for general purposes. Paolo Astrino makes no warranties about:</p>
+                    <ul>
+                        <li>Completeness or accuracy of information</li>
+                        <li>Suitability for specific purposes</li>
+                        <li>Uninterrupted website availability</li>
+                    </ul>
+                </div>
+                
+                <div class="privacy-section">
+                    <p class="last-updated"><small>Last updated: January 2025</small></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn primary" id="acceptTerms">I Agree</button>
+            </div>
+        </div>
+    </div>
 
     <script src="js/portfolio.js"></script>
 </body>
