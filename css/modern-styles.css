@@ -1180,24 +1180,24 @@ html[data-theme="light"] .text-gradient {
 
 /* Navigation Contact Link Styles */
 .nav-contact {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
 }
 
 .nav-contact .nav-link {
-    color: var(--text-color);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1rem;
-    transition: color 0.3s ease;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
 }
 
 .nav-contact .nav-link:hover {
-    color: var(--accent-color);
-    background-color: var(--card-bg);
+  color: var(--accent-color);
+  background-color: var(--card-bg);
 }
 
 /* Navigation Right Side Container */
@@ -1535,12 +1535,9 @@ html[data-theme="light"] .text-gradient {
 
 /* Theme Toggle Button */
 .theme-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
   display: flex;
   align-items: center;
-  z-index: 1000;
+  margin-left: 1rem;
 }
 
 .toggle-switch {
@@ -1745,11 +1742,17 @@ html[data-theme="light"] .text-gradient {
   .nav-menu li {
     margin: 1rem 0;
   }
-
   .nav-contact {
     position: absolute;
     top: 1rem;
-    right: 6rem;
+    right: 8rem;
+  }
+
+  .theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 4rem;
+    margin-left: 0;
   }
 
   .hero-container {
@@ -1801,7 +1804,8 @@ html[data-theme="light"] .text-gradient {
   }
   .floating-card i {
     font-size: 2.25rem;
-  }  .social-buttons {
+  }
+  .social-buttons {
     right: 1rem;
     top: 50%;
     gap: 0.6rem;
@@ -1865,7 +1869,8 @@ html[data-theme="light"] .text-gradient {
   .floating-card {
     position: static;
     animation: none;
-  }  .social-buttons {
+  }
+  .social-buttons {
     right: 0.5rem;
     top: 50%;
     gap: 0.5rem;
@@ -1910,28 +1915,5 @@ html[data-theme="light"] .text-gradient {
 
   .dark {
     --border: 0 0% 40%;
-  }
-}
-
-/* Mobile navbar adjustments for theme toggle */
-@media (max-width: 768px) {
-  .nav-container {
-    justify-content: space-between;
-    gap: 1rem;
-  }
-
-  .nav-logo {
-    order: 1;
-  }
-
-  .theme-toggle {
-    order: 2;
-    margin-left: auto;
-    padding-left: 0;
-  }
-
-  .hamburger {
-    order: 3;
-    margin-left: 1rem;
   }
 }
