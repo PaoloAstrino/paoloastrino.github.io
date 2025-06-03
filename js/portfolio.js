@@ -313,13 +313,37 @@ function initTypingEffect() {
   heroTitle.textContent = "";
   heroTitle.style.borderRight = "2px solid hsl(var(--primary))";
 
+  // Get the floating cards
+  const floatingCards = document.querySelectorAll(".floating-card");
+  const originalPositions = [];
+
+  // Save original positions
+  floatingCards.forEach((card) => {
+    originalPositions.push({
+      top: card.style.top,
+      left: card.style.left,
+      right: card.style.right,
+      bottom: card.style.bottom,
+    });
+  });
+
   let i = 0;
   const typeWriter = () => {
     if (i < text.length) {
       heroTitle.textContent += text.charAt(i);
       i++;
+
+      // Calculate progress through the typing animation (0 to 1)
+      const progress = i / text.length;
+
+      // Move cards fluidly based on typing progress
+      animateCardsWithTyping(floatingCards, progress);
+
       setTimeout(typeWriter, 100);
     } else {
+      // Return cards to their original animation
+      resetCardsAnimation(floatingCards);
+
       // Blinking cursor effect
       setTimeout(() => {
         heroTitle.style.borderRight = "none";
@@ -332,6 +356,62 @@ function initTypingEffect() {
 }
 
 // Floating cards animation
+// Helper function to animate cards with typing
+function animateCardsWithTyping(cards, progress) {
+  // Different movement patterns for each card
+  cards.forEach((card, index) => {
+    let xMove, yMove;
+
+    // Create unique movements for each card
+    switch (index) {
+      case 0: // card-1
+        xMove = -20 * Math.sin(progress * Math.PI);
+        yMove = -15 * progress;
+        break;
+      case 1: // card-2
+        xMove = 25 * progress;
+        yMove = 10 * Math.sin(progress * Math.PI * 2);
+        break;
+      case 2: // card-3
+        xMove = -15 * progress;
+        yMove = 20 * progress;
+        break;
+      case 3: // card-4
+        xMove = 20 * Math.sin(progress * Math.PI * 1.5);
+        yMove = -10 * progress;
+        break;
+      default:
+        xMove = 0;
+        yMove = 0;
+    }
+
+    // Apply fluid transformations
+    card.style.transform = `translate(${xMove}px, ${yMove}px) rotate(${
+      progress * 3
+    }deg)`;
+
+    // Gradually increase scale slightly
+    const scale = 1 + progress * 0.1;
+    card.style.transform += ` scale(${scale})`;
+
+    // Increase animation intensity
+    card.style.animationDuration = 6 - progress * 2 + "s";
+  });
+}
+
+// Helper function to reset cards to normal animation
+function resetCardsAnimation(cards) {
+  cards.forEach((card) => {
+    // Reset transform but keep animation
+    card.style.transform = "";
+
+    // Reset animation duration to original
+    setTimeout(() => {
+      card.style.animationDuration = "";
+    }, 500);
+  });
+}
+
 function initFloatingCards() {
   const floatingCards = document.querySelectorAll(".floating-card");
 
@@ -776,10 +856,12 @@ const additionalStyles = `
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
   }
-  
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-5px); }
+    @keyframes float {
+    0% { transform: translateY(0px); }
+    25% { transform: translateY(-5px) translateX(2px); }
+    50% { transform: translateY(-8px) translateX(-2px); }
+    75% { transform: translateY(-3px) translateX(-4px); }
+    100% { transform: translateY(0px); }
   }
     @keyframes bounce {
     0%, 20%, 60%, 100% { transform: translateY(0); }
