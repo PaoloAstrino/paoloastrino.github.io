@@ -391,37 +391,36 @@ function initContactForm() {
 
     // Open user's email client
     try {
-      window.location.href = mailtoLink;
-
-      // Show success message
+      window.location.href = mailtoLink;      // Show success message
       setTimeout(() => {
         submitBtn.textContent = "Email Client Opened!";
-        submitBtn.style.background = "#10b981";
+        submitBtn.style.background = "hsl(var(--accent))";
+        submitBtn.style.color = "hsl(var(--accent-foreground))";
         submitBtn.style.opacity = "1";
 
         showNotification(
           "Your email client should open with the message pre-filled",
           "success"
-        );
-
-        // Reset form and button after 3 seconds
+        );        // Reset form and button after 3 seconds
         setTimeout(() => {
           contactForm.reset();
           submitBtn.textContent = originalText;
           submitBtn.disabled = false;
           submitBtn.style.background = "";
+          submitBtn.style.color = "";
         }, 3000);
       }, 500);
     } catch (error) {
       // Fallback if mailto fails
       submitBtn.textContent = "Copy Email Address";
-      submitBtn.style.background = "#f59e0b"; // Copy email to clipboard
+      submitBtn.style.background = "hsl(var(--secondary))";
+      submitBtn.style.color = "hsl(var(--secondary-foreground))";
+      // Copy email to clipboard
       navigator.clipboard
         .writeText("paoloastrino01@gmail.com")
         .then(() => {
           showNotification("Email address copied to clipboard!", "info");
-        })
-        .catch(() => {
+        })        .catch(() => {
           showNotification("Please email: paoloastrino01@gmail.com", "info");
         });
 
@@ -429,6 +428,7 @@ function initContactForm() {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
         submitBtn.style.background = "";
+        submitBtn.style.color = "";
       }, 3000);
     }
   });

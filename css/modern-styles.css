@@ -995,14 +995,14 @@ html[data-theme="light"] .text-gradient {
 
 /* Contact Section */
 .contact-section {
-  padding: 4rem 0;
+  padding: 3rem 0; /* Further reduced from 4rem */
   background: hsl(var(--background));
 }
 
 .contact-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: 2.5rem; /* Further reduced from 3rem */
   align-items: stretch; /* Make both columns same height */
 }
 
@@ -1136,25 +1136,6 @@ html[data-theme="light"] .text-gradient {
   background: hsl(var(--primary) / 0.9);
   transform: translateY(-2px);
   box-shadow: 0 10px 25px hsl(var(--primary) / 0.2);
-}
-
-/* Form Note Styling */
-.form-note {
-  margin-top: 1rem;
-  padding: 0.75rem;
-  background: hsl(var(--primary) / 0.1);
-  border: 1px solid hsl(var(--primary) / 0.2);
-  border-radius: 6px;
-  color: hsl(var(--muted-foreground));
-  font-size: 0.85rem;
-  text-align: center;
-  line-height: 1.4;
-}
-
-.form-note::before {
-  content: "ℹ️";
-  margin-right: 0.5rem;
-  opacity: 0.8;
 }
 
 /* Notification Styles */
@@ -1299,7 +1280,7 @@ html[data-theme="light"] .text-gradient {
   background: hsl(var(--background)); /* Match page background */
   border: none; /* Clean, no border */
   border-radius: 0; /* Clean rectangular shape */
-  padding: 1.5rem;
+  padding: 1.25rem; /* Further reduced from 1.5rem */
   box-shadow: none; /* Completely clean, no shadow */
   height: 100%; /* Take full height of the grid item */
   display: flex;
@@ -1311,27 +1292,26 @@ html[data-theme="light"] .text-gradient {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem; /* Further reduced from 1rem */
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
+  gap: 0.5rem; /* Further reduced from 0.75rem */
 }
 
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.6rem; /* Further reduced from 0.75rem */
   border: 1px solid hsl(var(--primary) / 0.3); /* Subtle blue border */
   border-radius: 0.5rem;
   background: hsl(var(--background));
   color: hsl(var(--foreground));
   font-size: 1rem;
   transition: all 0.3s ease;
-  box-shadow: 0 0 0 1px hsl(var(--primary) / 0.2),
-    0 0 8px hsl(var(--primary) / 0.1); /* Subtle blue glow */
+  font-family: inherit;
 }
 
 .contact-form input:focus,
@@ -1344,7 +1324,7 @@ html[data-theme="light"] .text-gradient {
 
 .contact-form textarea {
   resize: vertical;
-  min-height: 100px;
+  min-height: 80px; /* Further reduced from 100px */
 }
 
 /* Placeholder styling for better readability */
@@ -1359,6 +1339,41 @@ html[data-theme="light"] .text-gradient {
 .contact-form textarea:focus::placeholder {
   opacity: 0.5;
   transition: opacity 0.3s ease;
+}
+
+/* Send Message Button */
+.send-message-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+  font-family: inherit;
+}
+
+.send-message-btn:hover {
+  background: hsl(var(--primary) / 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px hsl(var(--primary) / 0.2);
+}
+
+.send-message-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.send-message-btn i {
+  font-size: 0.875rem;
 }
 
 /* Footer */
@@ -1810,13 +1825,12 @@ html[data-theme="light"] .text-gradient {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-
   .contact-section {
-    padding: 3rem 0;
+    padding: 2.5rem 0; /* Further reduced from 3rem */
   }
 
   .contact-form-container {
-    padding: 1rem;
+    padding: 1rem; /* Further reduced */
   }
 
   .form-row {
@@ -1881,13 +1895,12 @@ html[data-theme="light"] .text-gradient {
   .scroll-progress {
     height: 2px;
   }
-
   .contact-section {
-    padding: 2rem 0;
+    padding: 2rem 0; /* Further reduced from 3rem */
   }
 
   .contact-form-container {
-    padding: 0.75rem;
+    padding: 0.75rem; /* Further reduced */
   }
   .contact-content {
     gap: 1rem;
