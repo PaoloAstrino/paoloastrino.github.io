@@ -413,79 +413,6 @@ html[data-theme="light"] .switch-handle {
   justify-content: center;
 }
 
-.floating-cards {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.floating-card {
-  position: absolute;
-  background: hsl(var(--background)); /* Match page background */
-  border: none; /* Clean, no border */
-  border-radius: 0; /* Sharp, clean edges */
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  box-shadow: none; /* Completely clean, no shadow */
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.floating-card:hover {
-  transform: translateY(-10px);
-  box-shadow: none; /* Completely clean, no shadow */
-}
-
-.floating-card i {
-  font-size: 3.5rem;
-  color: hsl(var(--primary));
-}
-
-.floating-card span {
-  font-weight: 600;
-  color: hsl(var(--foreground));
-  font-size: 1rem;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-.card-1 {
-  top: 10%;
-  left: 20%;
-  animation: float 6s ease-in-out infinite;
-}
-
-.card-2 {
-  top: 20%;
-  right: 15%;
-  animation: float 6s ease-in-out infinite 1.5s;
-}
-
-.card-3 {
-  bottom: 30%;
-  left: 10%;
-  animation: float 6s ease-in-out infinite 3s;
-}
-
-.card-4 {
-  bottom: 15%;
-  right: 25%;
-  animation: float 6s ease-in-out infinite 4.5s;
-}
-
 /* DataLoud Glass Card */
 .dataloud-hero-card {
   position: absolute;
@@ -2053,15 +1980,8 @@ html[data-theme="light"] .switch-handle {
     /* Ensure tags fit within mobile constraints */
     max-width: calc(100% - 0.75rem);
   }
-
   .hero-visual {
     height: 300px;
-  }
-  .floating-card {
-    padding: 1rem;
-  }
-  .floating-card i {
-    font-size: 2.25rem;
   }
   .social-buttons {
     right: 1rem;
@@ -2150,22 +2070,10 @@ html[data-theme="light"] .switch-handle {
   .hero-title {
     font-size: 2.5rem;
   }
-
   .section-title {
     font-size: 2rem;
   }
 
-  .floating-cards {
-    position: static;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-  .floating-card {
-    position: static;
-    animation: none;
-  }
   .social-buttons {
     right: 0.5rem;
     top: 50%;
