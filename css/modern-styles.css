@@ -666,90 +666,6 @@ html[data-theme="light"] .switch-handle {
   }
 }
 
-/* About Section */
-.about-section {
-  padding: 6rem 0;
-  background: hsl(var(--background));
-}
-
-.about-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.about-text {
-  animation: fadeInLeft 0.8s ease;
-}
-
-.about-text p {
-  font-size: 1.125rem;
-  color: hsl(var(--muted-foreground));
-  margin-bottom: 1.5rem;
-  line-height: 1.7;
-}
-
-.about-highlights {
-  list-style: none;
-  margin-top: 2rem;
-}
-
-.about-highlights li {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-  font-weight: 500;
-}
-
-.about-highlights i {
-  color: hsl(var(--primary));
-  width: 20px;
-}
-
-.about-image {
-  position: relative;
-  animation: fadeInRight 0.8s ease;
-}
-
-.about-card {
-  background: hsl(var(--background)); /* Match page background */
-  border-radius: 0; /* Clean rectangular shape */
-  padding: 2rem;
-  border: none; /* No border for clean look */
-  box-shadow: none; /* Completely clean, no shadow */
-}
-
-.education-item {
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: none; /* Remove separator line for cleaner look */
-}
-
-.education-item:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.education-degree {
-  font-weight: 700;
-  color: hsl(var(--foreground));
-  margin-bottom: 0.5rem;
-}
-
-.education-school {
-  color: hsl(var(--primary));
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-}
-
-.education-year {
-  color: hsl(var(--muted-foreground));
-  font-size: 0.875rem;
-}
-
 /* Experience & Education Section */
 .experience-education-section {
   padding: 6rem 0;
@@ -1475,53 +1391,6 @@ html[data-theme="light"] .switch-handle {
   opacity: 0.8;
 }
 
-/* About Features */
-.about-features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.feature-item {
-  text-align: center;
-  padding: 1.5rem;
-  background: hsl(var(--background)); /* Match page background */
-  border: none; /* Clean, no border */
-  border-radius: 0; /* Sharp, clean edges */
-  transition: all 0.3s ease;
-}
-
-.feature-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px hsl(var(--foreground) / 0.1);
-}
-
-.feature-icon {
-  width: 60px;
-  height: 60px;
-  background: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1rem;
-  font-size: 1.5rem;
-}
-
-.feature-item h4 {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: hsl(var(--foreground));
-  margin-bottom: 0.5rem;
-}
-
-.feature-item p {
-  color: hsl(var(--muted-foreground));
-  font-size: 0.875rem;
-}
-
 /* Skills Section Updates */
 .skill-list {
   display: flex;
@@ -2117,10 +1986,6 @@ html[data-theme="light"] .switch-handle {
     justify-content: center;
   }
 
-  .about-content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
   .contact-content {
     grid-template-columns: 1fr;
     gap: 2rem;
