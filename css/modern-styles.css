@@ -1422,7 +1422,7 @@ html[data-theme="light"] .switch-handle {
   width: 100%;
   padding: 0.6rem; /* Further reduced from 0.75rem */
   border: 1px solid hsl(var(--primary) / 0.3); /* Subtle blue border */
-  border-radius: 0.5rem;
+  border-radius: 0; /* Sharp, squared edges */
   background: hsl(var(--background));
   color: hsl(var(--foreground));
   font-size: 1rem;
@@ -1467,7 +1467,7 @@ html[data-theme="light"] .switch-handle {
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0; /* Sharp, squared edges */
   font-weight: 600;
   font-size: 0.875rem;
   cursor: pointer;
