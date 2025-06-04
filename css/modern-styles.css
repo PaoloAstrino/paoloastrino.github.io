@@ -2052,32 +2052,15 @@ html[data-theme="light"] .switch-handle {
     max-width: 100%;
     overflow: hidden;
   }
-
   .skill-tag {
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
     /* Ensure tags fit within mobile constraints */
     max-width: calc(100% - 0.75rem);
   }
+
   .hero-visual {
     height: 300px;
-  }
-
-  /* DataLoud Card Responsive - Mobile */
-  .dataloud-hero-card {
-    position: relative;
-    top: auto;
-    right: auto;
-    transform: none;
-    margin: 2rem auto;
-    display: flex;
-    justify-content: center;
-  }
-
-  .dataloud-glass-card {
-    width: min(90vw, 360px);
-    height: min(75vh, 640px);
-    padding: clamp(1.5rem, 4vw, 2rem);
   }
 
   .social-buttons {
@@ -2108,27 +2091,12 @@ html[data-theme="light"] .switch-handle {
   .contact-form-container {
     padding: 1rem; /* Further reduced */
   }
-
   .form-row {
     grid-template-columns: 1fr;
   }
+
   .cursor-trail {
     display: none; /* Hide cursor trail on mobile */
-  } /* DataLoud Card Responsive - Mobile */
-  .dataloud-hero-card {
-    position: relative;
-    top: auto;
-    right: auto;
-    transform: none;
-    margin: 2rem auto;
-    display: flex;
-    justify-content: center;
-  }
-
-  .dataloud-glass-card {
-    width: min(90vw, 320px);
-    height: min(70vh, 568px);
-    padding: clamp(1.5rem, 4vw, 2rem);
   }
 
   .project-icon-wrapper {
@@ -2188,6 +2156,23 @@ html[data-theme="light"] .switch-handle {
   }
   .section-title {
     font-size: 2rem;
+  }
+
+  /* DataLoud Card Responsive - Mobile */
+  .dataloud-hero-card {
+    position: relative;
+    top: auto;
+    right: auto;
+    transform: none;
+    margin: 2rem auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .dataloud-glass-card {
+    width: min(90vw, 360px);
+    height: min(75vh, 640px);
+    padding: clamp(1.5rem, 4vw, 2rem);
   }
 
   .social-buttons {
