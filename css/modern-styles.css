@@ -415,11 +415,11 @@ html[data-theme="light"] .switch-handle {
 
 /* DataLoud Glass Card */
 .dataloud-hero-card {
-  position: absolute;
+  position: fixed;
   top: 50%;
-  right: clamp(0px, 2vw, 40px);
+  right: 8rem;
   transform: translateY(-50%);
-  z-index: 20;
+  z-index: 19;
 }
 
 .dataloud-card-link {
@@ -1808,6 +1808,10 @@ html[data-theme="light"] .switch-handle {
 
 /* Large Screen Optimization */
 @media (min-width: 1920px) {
+  .dataloud-hero-card {
+    right: 10rem;
+  }
+
   .dataloud-glass-card {
     width: min(40vw, 800px);
     height: min(75vh, 1400px);
@@ -1815,6 +1819,10 @@ html[data-theme="light"] .switch-handle {
 }
 
 @media (min-width: 2560px) {
+  .dataloud-hero-card {
+    right: 12rem;
+  }
+
   .dataloud-glass-card {
     width: min(35vw, 900px);
     height: min(70vh, 1600px);
@@ -1823,6 +1831,10 @@ html[data-theme="light"] .switch-handle {
 
 /* Responsive Design */
 @media (max-width: 1440px) {
+  .dataloud-hero-card {
+    right: 6rem;
+  }
+
   .dataloud-glass-card {
     width: min(42vw, 650px);
     height: min(78vh, 1200px);
@@ -1830,6 +1842,10 @@ html[data-theme="light"] .switch-handle {
 }
 
 @media (max-width: 1200px) {
+  .dataloud-hero-card {
+    right: 5rem;
+  }
+
   .dataloud-glass-card {
     width: min(48vw, 580px);
     height: min(82vh, 1050px);
@@ -1862,9 +1878,7 @@ html[data-theme="light"] .switch-handle {
     padding: 0.4rem 0.8rem;
   } /* DataLoud Card Responsive - Tablet */
   .dataloud-hero-card {
-    top: 50%;
-    right: 2%;
-    transform: translateY(-50%);
+    right: 4rem;
   }
 
   .dataloud-glass-card {
@@ -2048,6 +2062,24 @@ html[data-theme="light"] .switch-handle {
   .hero-visual {
     height: 300px;
   }
+
+  /* DataLoud Card Responsive - Mobile */
+  .dataloud-hero-card {
+    position: relative;
+    top: auto;
+    right: auto;
+    transform: none;
+    margin: 2rem auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .dataloud-glass-card {
+    width: min(90vw, 360px);
+    height: min(75vh, 640px);
+    padding: clamp(1.5rem, 4vw, 2rem);
+  }
+
   .social-buttons {
     right: 1rem;
     top: 50%;
