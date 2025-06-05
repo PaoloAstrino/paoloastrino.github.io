@@ -447,6 +447,35 @@ html[data-theme="light"] .switch-handle {
     inset 0 clamp(1px, 0.125vw, 2px) 0 rgba(255, 255, 255, 0.2);
   overflow: hidden;
   position: relative;
+  /* Spotlight effect variables */
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  --spotlight-color: rgba(59, 130, 246, 0.15);
+}
+
+/* Spotlight effect overlay */
+.dataloud-glass-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at var(--mouse-x) var(--mouse-y), 
+    var(--spotlight-color), 
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ensure content stays above spotlight */
+.dataloud-glass-card > * {
+  position: relative;
+  z-index: 2;
 }
 
 .dataloud-glass-card:hover {
@@ -458,6 +487,11 @@ html[data-theme="light"] .switch-handle {
     0 clamp(30px, 3.75vw, 60px) clamp(80px, 10vw, 160px)
       rgba(59, 130, 246, 0.25),
     inset 0 clamp(1px, 0.125vw, 2px) 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Activate spotlight on hover */
+.dataloud-glass-card:hover::before {
+  opacity: 0.8;
 }
 
 .glass-content {
