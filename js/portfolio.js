@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
   initScrollAnimations();
   initTypingEffect();
   initFloatingCards();
-  initSpotlightEffect();
   initContactForm();
   initSmoothScrolling();
   initParallaxEffects();
@@ -382,48 +381,6 @@ function initFloatingCards() {
       this.style.zIndex = "1";
     });
   });
-}
-
-// Spotlight effect for DataLoud card
-function initSpotlightEffect() {
-  const dataloudCard = document.querySelector(".dataloud-glass-card");
-  if (!dataloudCard) return;
-
-  // Handle mouse movement to update spotlight position
-  dataloudCard.addEventListener("mousemove", function(e) {
-    const rect = this.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    // Update CSS custom properties for spotlight position
-    this.style.setProperty("--mouse-x", `${x}px`);
-    this.style.setProperty("--mouse-y", `${y}px`);
-    
-    // Dynamically adjust spotlight color based on position
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const distanceFromCenter = Math.sqrt(
-      Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)
-    );
-    const maxDistance = Math.sqrt(Math.pow(centerX, 2) + Math.pow(centerY, 2));
-    const intensity = Math.max(0.1, 1 - (distanceFromCenter / maxDistance));
-    
-    // Create dynamic spotlight color with varying intensity
-    const spotlightColor = `rgba(59, 130, 246, ${0.1 + intensity * 0.15})`;
-    this.style.setProperty("--spotlight-color", spotlightColor);
-  });
-
-  // Reset spotlight position when mouse leaves
-  dataloudCard.addEventListener("mouseleave", function() {
-    this.style.setProperty("--mouse-x", "50%");
-    this.style.setProperty("--mouse-y", "50%");
-    this.style.setProperty("--spotlight-color", "rgba(59, 130, 246, 0.15)");
-  });
-
-  // Initialize with default position
-  dataloudCard.style.setProperty("--mouse-x", "50%");
-  dataloudCard.style.setProperty("--mouse-y", "50%");
-  dataloudCard.style.setProperty("--spotlight-color", "rgba(59, 130, 246, 0.15)");
 }
 
 // Contact form functionality
