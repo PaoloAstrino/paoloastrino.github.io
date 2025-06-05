@@ -8,8 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
   initThemeToggle();
   initScrollToTop();
   initScrollAnimations();
-  initTypingEffect();
+  initBlurTextEffect();
   initFloatingCards();
+  initSpotlightEffect();
   initContactForm();
   initSmoothScrolling();
   initParallaxEffects();
@@ -304,42 +305,91 @@ function initScrollAnimations() {
   statNumbers.forEach((stat) => statsObserver.observe(stat));
 }
 
-// Typing effect for hero title
-function initTypingEffect() {
+// BlurText effect for hero title (adapted from React component)
+function initBlurTextEffect() {
   const heroTitle = document.querySelector(".hero-title .text-gradient");
-  if (!heroTitle) return;
+  if (!heroTitle) {
+    console.log("BlurText: Hero title element not found");
+    return;
+  }
 
-  // Set a fixed width to prevent layout shifts
   const text = heroTitle.textContent;
-  const container = heroTitle.parentElement;
+  const words = text.split(" ");
+  const delay = 150; // milliseconds
+  const stepDuration = 0.35; // seconds per animation step
 
-  // Preserve layout by using a placeholder with the same width
-  const textWidth = heroTitle.getBoundingClientRect().width;
-  container.style.minWidth = textWidth + "px";
+  console.log(
+    `BlurText: Initializing with text "${text}" (${words.length} words)`
+  );
 
-  // Clear and prepare for typing
-  heroTitle.textContent = "";
-  heroTitle.style.borderRight = "2px solid hsl(var(--primary))";
+  // Add blur-text-active class for enhanced styling
+  heroTitle.classList.add("blur-text-active");
 
-  // Initialize animation state
-  let i = 0;
-  const typeWriter = () => {
-    if (i < text.length) {
-      heroTitle.textContent += text.charAt(i);
-      i++;
+  // Create container for word animation
+  heroTitle.innerHTML = "";
+  heroTitle.classList.add("blur-text-container");
 
-      // Continue typing without affecting floating cards
-      setTimeout(typeWriter, 100);
-    } else {
-      // Blinking cursor effect
-      setTimeout(() => {
-        heroTitle.style.borderRight = "none";
-      }, 1000);
-    }
+  // Create span elements for each word
+  const wordElements = words.map((word, index) => {
+    const span = document.createElement("span");
+    span.className = "blur-text-word";
+    span.textContent = word;
+    span.style.transitionDelay = `${(index * delay) / 1000}s`;
+    heroTitle.appendChild(span);
+    return span;
+  });
+
+  console.log(`BlurText: Created ${wordElements.length} word elements`);
+
+  // Animation completion callback
+  const handleAnimationComplete = () => {
+    console.log("BlurText animation completed!");
+    // Optional: Add additional effects after completion
+    heroTitle.style.filter = "drop-shadow(0 4px 20px hsl(220, 100%, 50%, 0.4))";
   };
 
-  // Start typing effect after a delay
-  setTimeout(typeWriter, 1000);
+  // Use Intersection Observer to trigger animation when in view
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          console.log("BlurText: Starting animation sequence");
+
+          // Start animation sequence
+          setTimeout(() => {
+            wordElements.forEach((span, index) => {
+              // First animation step (blur reduction, partial opacity)
+              setTimeout(() => {
+                span.classList.add("animate-in-step-1");
+                console.log(
+                  `BlurText: Step 1 for word ${index + 1}/${words.length}`
+                );
+              }, index * delay);
+
+              // Second animation step (complete reveal)
+              setTimeout(() => {
+                span.classList.remove("animate-in-step-1");
+                span.classList.add("animate-in-step-2");
+                console.log(
+                  `BlurText: Step 2 for word ${index + 1}/${words.length}`
+                );
+
+                // Call completion callback on last word
+                if (index === wordElements.length - 1) {
+                  setTimeout(handleAnimationComplete, stepDuration * 1000);
+                }
+              }, index * delay + stepDuration * 500);
+            });
+          }, 500); // Initial delay before starting animation
+
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: "0px" }
+  );
+
+  observer.observe(heroTitle);
 }
 
 // Floating cards animation
