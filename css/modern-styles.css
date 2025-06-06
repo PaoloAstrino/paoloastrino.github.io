@@ -427,8 +427,23 @@ html[data-theme="light"] .switch-handle {
 }
 
 .dataloud-glass-card {
-  width: clamp(250px, 35vw, 100vw);
-  height: clamp(350px, 60vh, 100vh);
+  /* Calculate width as 2x the hero-badge computed width */
+  --badge-font-size: clamp(0.875rem, 1.5vw, 1rem);
+  --badge-padding: 2.4rem; /* 0.6rem * 2 + 1.2rem * 2 */
+  --badge-base-width: calc(var(--badge-font-size) * 17); /* Approximate character width for "Data Analyst & ML Enthusiast" */
+  --card-width: calc((var(--badge-base-width) + var(--badge-padding)) * 2);
+  
+  /* Fallback dimensions for browsers that don't support CSS custom properties */
+  width: 400px;
+  height: 711px; /* 400px * 16/9 ≈ 711px */
+  
+  /* Modern responsive dimensions with 9:16 aspect ratio */
+  width: min(var(--card-width), 85vw);
+  height: calc(min(var(--card-width), 85vw) * 16 / 9);
+  
+  /* Additional fallback for calc() support */
+  aspect-ratio: 9 / 16; /* Modern browsers with aspect-ratio support */
+  
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1835,30 +1850,34 @@ html[data-theme="light"] .switch-handle {
 /* Large Screen Optimization */
 @media (min-width: 1920px) {
   .dataloud-glass-card {
-    width: min(40vw, 800px);
-    height: min(75vh, 1400px);
+    /* Maintain 2x badge width and 9:16 aspect ratio on large screens */
+    width: min(var(--card-width), 40vw, 800px);
+    height: calc(min(var(--card-width), 40vw, 800px) * 16 / 9);
   }
 }
 
 @media (min-width: 2560px) {
   .dataloud-glass-card {
-    width: min(35vw, 900px);
-    height: min(70vh, 1600px);
+    /* Maintain 2x badge width and 9:16 aspect ratio on extra large screens */
+    width: min(var(--card-width), 35vw, 900px);
+    height: calc(min(var(--card-width), 35vw, 900px) * 16 / 9);
   }
 }
 
 /* Responsive Design */
 @media (max-width: 1440px) {
   .dataloud-glass-card {
-    width: min(42vw, 650px);
-    height: min(78vh, 1200px);
+    /* Maintain 2x badge width and 9:16 aspect ratio */
+    width: min(var(--card-width), 42vw, 650px);
+    height: calc(min(var(--card-width), 42vw, 650px) * 16 / 9);
   }
 }
 
 @media (max-width: 1200px) {
   .dataloud-glass-card {
-    width: min(48vw, 580px);
-    height: min(82vh, 1050px);
+    /* Maintain 2x badge width and 9:16 aspect ratio */
+    width: min(var(--card-width), 48vw, 580px);
+    height: calc(min(var(--card-width), 48vw, 580px) * 16 / 9);
   }
 }
 
@@ -1887,11 +1906,11 @@ html[data-theme="light"] .switch-handle {
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
   }
-
   /* DataLoud Card Responsive - Tablet */
   .dataloud-glass-card {
-    width: min(50vw, 540px);
-    height: min(85vh, 960px);
+    /* Maintain 2x badge width and 9:16 aspect ratio */
+    width: min(var(--card-width), 50vw, 540px);
+    height: calc(min(var(--card-width), 50vw, 540px) * 16 / 9);
     padding: clamp(2rem, 3.5vw, 3.6rem);
   }
 
@@ -2164,10 +2183,10 @@ html[data-theme="light"] .switch-handle {
     justify-content: center;
     width: 100%;
   }
-
   .dataloud-glass-card {
-    width: min(75vw, 480px);
-    height: min(70vh, 800px);
+    /* Maintain 2x badge width and 9:16 aspect ratio */
+    width: min(var(--card-width), 75vw, 480px);
+    height: calc(min(var(--card-width), 75vw, 480px) * 16 / 9);
     padding: clamp(1.8rem, 3.5vw, 2.5rem);
   }
 }
@@ -2202,10 +2221,10 @@ html[data-theme="light"] .switch-handle {
     justify-content: center;
     width: 100%;
   }
-
   .dataloud-glass-card {
-    width: min(90vw, 360px);
-    height: min(75vh, 640px);
+    /* Maintain 2x badge width and 9:16 aspect ratio on mobile */
+    width: min(var(--card-width), 90vw, 360px);
+    height: calc(min(var(--card-width), 90vw, 360px) * 16 / 9);
     padding: clamp(1.5rem, 4vw, 2rem);
   }
   .social-buttons {

@@ -39,7 +39,8 @@ A professional, modern portfolio website showcasing Paolo Astrino's expertise in
 - **Professional black background** with blue accents
 - **Immediate loading** without white flash
 - **Smooth animations** and interactions
-- **Responsive design** for all devices
+- **Fully responsive design** with viewport-based scaling
+- **Advanced responsive typography** using clamp() functions
 
 ### ⚡ Interactive Elements
 
@@ -254,4 +255,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-**Built with ❤️ by Paolo Astrino** | **Data Analyst & ML Enthusiast** | **2024**
+**Built with ❤️ by Paolo Astrino** | **Data Analyst & ML Enthusiast** | **2025**

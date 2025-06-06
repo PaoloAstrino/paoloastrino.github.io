@@ -40,7 +40,8 @@ A professional, modern portfolio website showcasing Paolo Astrino's expertise in
 - **Professional black background** with blue accents
 - **Immediate loading** without white flash
 - **Smooth animations** and interactions
-- **Responsive design** for all devices
+- **Fully responsive design** with viewport-based scaling
+- **Advanced responsive typography** using clamp() functions
 
 ### ⚡ Interactive Elements
 
@@ -51,6 +52,14 @@ A professional, modern portfolio website showcasing Paolo Astrino's expertise in
 - **Smooth scrolling** navigation
 - **Contact form** with validation
 - **Cursor trail effect** (desktop only)
+
+### 📱 Responsive Design Features
+
+- **Adaptive DataLoud card** - Scales from 320px to full viewport
+- **Fluid typography** - All text scales proportionally with screen size
+- **Viewport-based dimensions** - No hardcoded pixel values
+- **Optimized for all devices** - Mobile, tablet, and desktop
+- **Touch-friendly interactions** - Enhanced mobile experience
 
 ### 📊 Professional Sections
 
@@ -124,13 +133,16 @@ paoloastrino.github.io/
 
 - **Font Family**: Inter (Google Fonts)
 - **Weights**: 300, 400, 500, 600, 700, 800, 900
-- **Responsive**: Fluid typography scaling
+- **Responsive Typography**: Fluid scaling using clamp() functions
+- **Viewport-based sizing**: All text scales proportionally with screen size
 
-### Responsive Breakpoints
+### Responsive Design System
 
-- **Mobile**: < 768px
-- **Tablet**: 768px - 1024px
-- **Desktop**: > 1024px
+- **Mobile First**: < 768px optimized
+- **Tablet Enhanced**: 768px - 1024px adaptive
+- **Desktop Optimized**: > 1024px full experience
+- **Fluid Scaling**: All elements use viewport-relative units
+- **No Hardcoded Values**: Complete responsive implementation
 
 ## 🚀 Technologies Used
 
@@ -149,6 +161,9 @@ paoloastrino.github.io/
 - **LocalStorage**: Theme persistence
 - **Responsive Images**: Performance optimization
 - **Progressive Enhancement**: Accessibility support
+- **CSS clamp() Functions**: Advanced responsive typography
+- **Viewport Units**: Fluid scaling system
+- **Modern CSS Grid**: Flexible layout system
 
 ### 🎨 Brand Identity & Favicon
 
@@ -232,12 +247,14 @@ The portfolio is automatically deployed via **GitHub Pages**:
 - ✅ **Custom Favicon**: Personalized "P" logo with brand consistency
 - ✅ **PWA Ready**: Web app manifest for installable experience
 - ✅ **Zero White Flash**: Immediate black loading experience
-- ✅ **Fully Responsive**: Optimized for all devices
+- ✅ **Fully Responsive**: Complete viewport-based scaling system
+- ✅ **Advanced Typography**: Fluid text scaling with clamp() functions
 - ✅ **Interactive Animations**: Smooth scroll-based effects
 - ✅ **Performance Optimized**: Fast loading and smooth interactions
 - ✅ **Accessibility**: Screen reader support and keyboard navigation
 - ✅ **SEO Optimized**: Meta tags and semantic HTML
 - ✅ **Professional Content**: Complete data analyst profile
+- ✅ **No Hardcoded Values**: 100% responsive implementation
 
 ## 📈 Performance Metrics
 
@@ -269,4 +286,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-**Built with ❤️ by Paolo Astrino** | **Data Analyst & ML Enthusiast** | **2024**
+**Built with ❤️ by Paolo Astrino** | **Data Analyst & ML Enthusiast** | **2025**
