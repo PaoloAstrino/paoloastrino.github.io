@@ -81,6 +81,8 @@ body {
 
 /* Utility Classes */
 .text-gradient {
+  /* Fallback color for better browser compatibility */
+  color: hsl(var(--foreground));
   background: linear-gradient(
     135deg,
     hsl(220, 100%, 70%),
@@ -90,10 +92,14 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  /* Ensure the gradient text is visible */
+  -webkit-text-stroke: 0.5px hsl(220, 100%, 70%);
 }
 
 /* Light mode gradient with better contrast */
 html[data-theme="light"] .text-gradient {
+  /* Fallback color for light mode */
+  color: hsl(220, 100%, 45%);
   background: linear-gradient(
     135deg,
     hsl(220, 100%, 45%),
@@ -103,6 +109,8 @@ html[data-theme="light"] .text-gradient {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  /* Ensure the gradient text is visible in light mode */
+  -webkit-text-stroke: 0.5px hsl(220, 100%, 45%);
 }
 
 .apple-button {
@@ -2412,6 +2420,8 @@ html[data-theme="light"] .switch-handle {
 
 /* Enhanced hero title for blur effect */
 .hero-title .text-gradient.blur-text-active {
+  /* Fallback color for blur animation */
+  color: hsl(220, 100%, 60%);
   background: linear-gradient(135deg, hsl(220, 100%, 60%), hsl(200, 100%, 50%));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
