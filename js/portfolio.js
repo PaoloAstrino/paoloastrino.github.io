@@ -59,13 +59,14 @@ function initNavigation() {
         navMenu.classList.remove("active");
         hamburger.classList.remove("active");
       });
-    });  } // Navbar scroll effect with debouncing and sliding window
+    });
+  } // Navbar scroll effect with debouncing and sliding window
   let lastScrollTop = 0;
   let isMouseNearTop = false;
   let navbarHeight = 0;
   let hideTimeout = null;
   let isAnimating = false;
-  
+
   const debouncedScroll = debounce(() => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const heroSection = document.querySelector(".hero");
@@ -110,9 +111,9 @@ function initNavigation() {
     }
 
     // Sliding window effect for navbar hiding/showing
-    const scrollDirection = scrollTop > lastScrollTop ? 'down' : 'up';
+    const scrollDirection = scrollTop > lastScrollTop ? "down" : "up";
     const scrollSpeed = Math.abs(scrollTop - lastScrollTop);
-    
+
     // Clear any pending hide timeout
     if (hideTimeout) {
       clearTimeout(hideTimeout);
@@ -120,7 +121,7 @@ function initNavigation() {
     }
 
     if (
-      scrollDirection === 'down' &&
+      scrollDirection === "down" &&
       scrollTop > 200 &&
       !isMouseNearTop &&
       scrollTop < experienceTop - 50 &&
@@ -129,24 +130,31 @@ function initNavigation() {
       // Implement sliding window effect - gradual hide with smooth timing
       if (!isAnimating) {
         isAnimating = true;
-        
+
         // Use a sliding window approach with eased timing
         const hideDelay = Math.max(150, 300 - scrollSpeed * 10); // Adaptive delay based on scroll speed
-        
+
         hideTimeout = setTimeout(() => {
-          navbar.style.transition = "transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-          
+          navbar.style.transition =
+            "transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+
           // Gradual hide with sliding window effect
           const currentTransform = parseFloat(
-            navbar.style.transform.replace(/translateY\((-?\d*\.?\d*)px\)/, "$1") || "0"
+            navbar.style.transform.replace(
+              /translateY\((-?\d*\.?\d*)px\)/,
+              "$1"
+            ) || "0"
           );
-          
+
           // Calculate smooth hide amount based on scroll position within hero section
-          const heroProgress = Math.min(1, (scrollTop - 200) / (experienceTop - 400));
+          const heroProgress = Math.min(
+            1,
+            (scrollTop - 200) / (experienceTop - 400)
+          );
           const hideAmount = -navbarHeight * 0.85 * heroProgress; // Don't hide completely, leave a small portion
-          
+
           navbar.style.transform = `translateY(${hideAmount}px)`;
-          
+
           setTimeout(() => {
             isAnimating = false;
             navbar.style.transition = "";
@@ -157,21 +165,23 @@ function initNavigation() {
       // Scrolling up, mouse near top, or in/past experience section - always show navbar with smooth reveal
       if (!isAnimating) {
         isAnimating = true;
-        navbar.style.transition = "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+        navbar.style.transition =
+          "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
         navbar.style.transform = "translateY(0)";
 
         // Ensure navbar is fully visible when at or past experience section
         if (scrollTop >= experienceTop - 100) {
           navbar.style.transform = "translateY(0)";
         }
-        
+
         setTimeout(() => {
           isAnimating = false;
           navbar.style.transition = "";
         }, 500);
       }
     }
-    lastScrollTop = scrollTop;  }, 10); // Mouse movement detection for navbar reveal with sliding window
+    lastScrollTop = scrollTop;
+  }, 10); // Mouse movement detection for navbar reveal with sliding window
   const handleMouseMove = debounce((e) => {
     const mouseY = e.clientY;
     const topThreshold = 80; // Show navbar when mouse is within 80px from top
@@ -198,11 +208,12 @@ function initNavigation() {
         clearTimeout(hideTimeout);
         hideTimeout = null;
       }
-      
+
       // Smooth reveal with sliding window effect
       if (!isAnimating) {
         isAnimating = true;
-        navbar.style.transition = "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+        navbar.style.transition =
+          "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
         navbar.style.transform = "translateY(0)";
         setTimeout(() => {
           isAnimating = false;
@@ -220,12 +231,16 @@ function initNavigation() {
       ) {
         // Use same sliding window approach as scroll handler
         isAnimating = true;
-        navbar.style.transition = "transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-        
-        const heroProgress = Math.min(1, (scrollTop - 200) / (experienceTop - 400));
+        navbar.style.transition =
+          "transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+
+        const heroProgress = Math.min(
+          1,
+          (scrollTop - 200) / (experienceTop - 400)
+        );
         const hideAmount = -navbarHeight * 0.85 * heroProgress;
         navbar.style.transform = `translateY(${hideAmount}px)`;
-        
+
         setTimeout(() => {
           isAnimating = false;
           navbar.style.transition = "";
