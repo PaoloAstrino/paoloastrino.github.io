@@ -1088,9 +1088,8 @@ html[data-theme="light"] .switch-handle {
   .experience-education-section {
     padding: 4rem 0;
   }
-
   .scroll-to-top {
-    right: 1rem;
+    right: 16px; /* Align with center of social buttons */
     bottom: 1.5rem;
     width: 45px;
     height: 45px;
@@ -1121,9 +1120,8 @@ html[data-theme="light"] .switch-handle {
   }
 
   /* block-title and position-title are now responsive via clamp() */
-
   .scroll-to-top {
-    right: 0.5rem;
+    right: 21px; /* Align with center of social buttons: (80px - 40px) / 2 = 20px, rounded to 21px */
     bottom: 1rem;
     width: 40px;
     height: 40px;
@@ -1629,49 +1627,58 @@ html[data-theme="light"] .switch-handle {
   flex-direction: column;
 }
 
-/* Contact Form Wrapper - 40% less wide */
+/* Contact Form Wrapper - Responsive with clamp() */
 .contact-form-wrapper {
-  width: 60%; /* 40% reduction from full width */
-  max-width: 600px; /* Reasonable maximum width */
+  width: clamp(60%, 15vw + 50%, 90%); /* Fluid scaling from 60% to 90% */
+  max-width: clamp(
+    500px,
+    50vw,
+    800px
+  ); /* Responsive max-width using golden ratio */
   margin: 0 auto; /* Center the form */
 }
 
-/* Responsive adjustments for contact form wrapper */
-@media (max-width: 768px) {
-  .contact-form-wrapper {
-    width: 80%; /* Less reduction on tablets */
-  }
-}
-
-@media (max-width: 480px) {
-  .contact-form-wrapper {
-    width: 95%; /* Almost full width on mobile for usability */
-  }
-}
-
 .contact-form {
+  background: hsl(
+    var(--background)
+  ); /* Match page background like other cards */
+  border: 2px solid hsl(var(--border) / 0.2); /* Subtle border like experience/project cards */
+  border-radius: 8px; /* Slight rounded corners to match other cards */
+  padding: clamp(1.5rem, 3vw, 2.5rem); /* Responsive padding using clamp() */
+  box-shadow: 0 4px 16px hsl(var(--foreground) / 0.08); /* Subtle shadow like other cards */
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 0.75rem; /* Further reduced from 1rem */
+  gap: clamp(0.75rem, 1.5vw, 1.25rem); /* Responsive gap using clamp() */
+  transition: all 0.3s ease;
+  position: relative; /* For spotlight effect */
+  overflow: hidden; /* For spotlight effect */
+}
+
+.contact-form:hover {
+  box-shadow: 0 8px 32px hsl(var(--foreground) / 0.12); /* Enhanced shadow on hover like other cards */
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.5rem; /* Further reduced from 0.75rem */
+  gap: clamp(0.5rem, 1vw, 1rem); /* Responsive gap using clamp() */
 }
 
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  padding: 0.6rem; /* Further reduced from 0.75rem */
-  border: 1px solid hsl(var(--primary) / 0.3); /* Subtle blue border */
-  border-radius: 0; /* Sharp, squared edges */
+  padding: clamp(0.6rem, 1.2vw, 1rem); /* Responsive padding using clamp() */
+  border: 1px solid hsl(var(--border) / 0.3); /* Match the subtle border style of other cards */
+  border-radius: 4px; /* Slight border radius for modern look */
   background: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-size: 1rem;
+  font-size: clamp(
+    0.9rem,
+    1.8vw,
+    1rem
+  ); /* Responsive font size using clamp() */
   transition: all 0.3s ease;
   font-family: inherit;
 }
@@ -1686,7 +1693,11 @@ html[data-theme="light"] .switch-handle {
 
 .contact-form textarea {
   resize: vertical;
-  min-height: 80px; /* Further reduced from 100px */
+  min-height: clamp(
+    80px,
+    15vw,
+    120px
+  ); /* Responsive min-height using clamp() */
 }
 
 /* Placeholder styling for better readability */
@@ -1709,23 +1720,27 @@ html[data-theme="light"] .switch-handle {
   align-items: center;
   gap: 0.5rem;
   width: 100%;
-  padding: 0.75rem 1.5rem;
+  padding: clamp(0.75rem, 1.5vw, 1rem) clamp(1.5rem, 3vw, 2rem); /* Responsive padding using clamp() */
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
   border: none;
-  border-radius: 0; /* Sharp, squared edges */
+  border-radius: 4px; /* Slight border radius to match input fields */
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: clamp(
+    0.9rem,
+    1.8vw,
+    1rem
+  ); /* Responsive font size using clamp() */
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 0.5rem;
+  margin-top: auto; /* Push to bottom */
+  box-shadow: 0 2px 8px hsl(var(--primary) / 0.3); /* Subtle shadow like other buttons */
   font-family: inherit;
 }
 
 .send-message-btn:hover {
   background: hsl(var(--primary) / 0.9);
-  /* Removed transform: translateY(-2px); */
-  box-shadow: 0 10px 25px hsl(var(--primary) / 0.2);
+  box-shadow: 0 4px 16px hsl(var(--primary) / 0.4); /* Enhanced shadow on hover */
 }
 
 .send-message-btn:disabled {
@@ -1735,7 +1750,11 @@ html[data-theme="light"] .switch-handle {
 }
 
 .send-message-btn i {
-  font-size: 0.875rem;
+  font-size: clamp(
+    0.8rem,
+    1.6vw,
+    0.9rem
+  ); /* Responsive icon size using clamp() */
 }
 
 /* Footer */
@@ -1763,10 +1782,9 @@ html[data-theme="light"] .switch-handle {
 .footer p {
   color: hsl(var(--foreground) / 0.8);
   margin-bottom: 0;
-  font-size: 1rem;
+  font-size: clamp(var(--button-text-min), 1.5vw, var(--button-text-max));
 }
-
-.social-links {
+j .social-links {
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
@@ -1795,7 +1813,7 @@ html[data-theme="light"] .switch-handle {
 }
 
 .footer-logo {
-  font-size: 1.5rem;
+  font-size: clamp(var(--nav-logo-min), 2vw, var(--nav-logo-max));
   font-weight: 700;
   color: hsl(var(--foreground));
 }
@@ -1804,14 +1822,14 @@ html[data-theme="light"] .switch-handle {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 1rem;
+  font-size: clamp(var(--button-text-min), 1.5vw, var(--button-text-max));
   color: hsl(var(--primary));
   font-weight: 500;
 }
 
 .privacy-commitment i {
   color: hsl(var(--primary));
-  font-size: 1rem;
+  font-size: clamp(var(--icon-size-min), 1.5vw, var(--icon-size-max));
 }
 
 .footer-right {
@@ -1831,7 +1849,7 @@ html[data-theme="light"] .switch-handle {
 .legal-link {
   color: hsl(var(--foreground) / 0.8);
   text-decoration: none;
-  font-size: 1rem;
+  font-size: clamp(var(--nav-link-min), 1.5vw, var(--nav-link-max));
   font-weight: 500;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -1844,7 +1862,7 @@ html[data-theme="light"] .switch-handle {
 
 .legal-separator {
   color: hsl(var(--foreground) / 0.6);
-  font-size: 1rem;
+  font-size: clamp(var(--button-text-min), 1.5vw, var(--button-text-max));
 }
 
 /* Fixed Elements - Social Buttons, Theme Toggle, Scroll to Top */
@@ -1919,8 +1937,8 @@ html[data-theme="light"] .scroll-progress {
 
 .scroll-to-top {
   position: fixed;
-  bottom: min(2rem, 4vh);
-  right: min(2rem, 3vw);
+  bottom: 2rem;
+  right: 16px; /* Align with center of 80px social buttons container: (80px - 48px) / 2 = 16px */
   width: 48px;
   height: 48px;
   background: hsl(var(--primary));
@@ -2130,15 +2148,14 @@ html[data-theme="light"] .scroll-progress {
     flex-direction: column;
     gap: 0.5rem;
     align-items: center;
-  }
-  /* Improve mobile text readability for legal links */
+  } /* Improve mobile text readability for legal links */
   .legal-link {
-    font-size: clamp(var(--nav-link-min), 1.8vw, var(--nav-link-max));
+    font-size: clamp(var(--nav-link-min), 2vw, var(--nav-link-max));
     color: hsl(var(--foreground) / 0.85);
   }
 
   .footer p {
-    font-size: clamp(var(--button-text-min), 1.8vw, var(--button-text-max));
+    font-size: clamp(var(--button-text-min), 2vw, var(--button-text-max));
     color: hsl(var(--foreground) / 0.85);
   }
 
@@ -2468,7 +2485,7 @@ html[data-theme="light"] .scroll-progress {
     font-size: 1rem;
   }
   .scroll-to-top {
-    right: 1rem;
+    right: 19px; /* Align with center of social buttons: (80px - 42px) / 2 = 19px */
     bottom: 1.5rem;
     width: 45px;
     height: 45px;
@@ -2686,7 +2703,7 @@ html[data-theme="light"] .scroll-progress {
   }
 
   .scroll-to-top {
-    right: 0.5rem;
+    right: 21px; /* Align with center of social buttons: (80px - 38px) / 2 = 21px */
     bottom: 1rem;
     width: 40px;
     height: 40px;

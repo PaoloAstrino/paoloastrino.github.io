@@ -64,21 +64,25 @@ function initNavigation() {
   let lastScrollTop = 0;
   let isMouseNearTop = false;
   let navbarHeight = 0;
-
   const debouncedScroll = debounce(() => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const heroSection = document.querySelector(".hero");
+    const experienceSection = document.querySelector("#experience");
     const heroHeight = heroSection
       ? heroSection.offsetHeight
       : window.innerHeight;
+    const experienceTop = experienceSection
+      ? experienceSection.offsetTop
+      : heroHeight;
 
     // Get navbar height for calculations
     if (navbarHeight === 0) {
       navbarHeight = navbar.offsetHeight;
     }
 
-    // Only show navbar after scrolling past hero section
-    if (scrollTop < heroHeight * 0.9) {
+    // Show navbar after scrolling past hero section OR when reaching the experience section
+    // Always keep navbar visible from the second section onwards
+    if (scrollTop < heroHeight * 0.9 && scrollTop < experienceTop - 100) {
       navbar.style.transform = "translateY(-100%)";
       return;
     }
@@ -91,11 +95,15 @@ function initNavigation() {
       navbar.style.background = "hsla(var(--background), 0.9)";
       navbar.style.backdropFilter = "blur(10px)";
       navbar.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
-    }
-
-    // Smooth navbar hiding based on scroll direction and position
-    if (scrollTop > lastScrollTop && scrollTop > 200 && !isMouseNearTop) {
-      // Scrolling down - gradually hide navbar
+    } // Smooth navbar hiding based on scroll direction and position
+    // Never hide navbar completely when we're at or past the experience section
+    if (
+      scrollTop > lastScrollTop &&
+      scrollTop > 200 &&
+      !isMouseNearTop &&
+      scrollTop < experienceTop - 50
+    ) {
+      // Scrolling down - gradually hide navbar (only in hero section area)
       const scrollDiff = scrollTop - lastScrollTop;
       const hideDistance = Math.min(scrollDiff * 2, navbarHeight); // Multiply by 2 for faster hiding
       const currentTransform = parseFloat(
@@ -107,8 +115,8 @@ function initNavigation() {
         currentTransform - hideDistance
       );
       navbar.style.transform = `translateY(${newTransform}px)`;
-    } else if (scrollTop <= lastScrollTop || isMouseNearTop) {
-      // Scrolling up or mouse near top - gradually show navbar
+    } else {
+      // Scrolling up, mouse near top, or in/past experience section - always show navbar
       const scrollDiff = lastScrollTop - scrollTop;
       const showDistance = Math.min(scrollDiff * 3, navbarHeight); // Multiply by 3 for faster showing
       const currentTransform = parseFloat(
@@ -117,21 +125,29 @@ function initNavigation() {
       );
       const newTransform = Math.min(0, currentTransform + showDistance);
       navbar.style.transform = `translateY(${newTransform}px)`;
+
+      // Ensure navbar is fully visible when at or past experience section
+      if (scrollTop >= experienceTop - 100) {
+        navbar.style.transform = "translateY(0)";
+      }
     }
     lastScrollTop = scrollTop;
-  }, 10);
-  // Mouse movement detection for navbar reveal
+  }, 10); // Mouse movement detection for navbar reveal
   const handleMouseMove = debounce((e) => {
     const mouseY = e.clientY;
     const topThreshold = 80; // Show navbar when mouse is within 80px from top
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const heroSection = document.querySelector(".hero");
+    const experienceSection = document.querySelector("#experience");
     const heroHeight = heroSection
       ? heroSection.offsetHeight
       : window.innerHeight;
+    const experienceTop = experienceSection
+      ? experienceSection.offsetTop
+      : heroHeight;
 
-    // Don't show navbar on mouse movement if still in hero section
-    if (scrollTop < heroHeight * 0.9) {
+    // Don't show navbar on mouse movement if still in hero section and before experience section
+    if (scrollTop < heroHeight * 0.9 && scrollTop < experienceTop - 100) {
       isMouseNearTop = false;
       return;
     }
@@ -141,8 +157,12 @@ function initNavigation() {
       navbar.style.transform = "translateY(0)";
     } else {
       isMouseNearTop = false;
-      // Re-trigger scroll logic to potentially hide navbar
-      if (scrollTop > lastScrollTop && scrollTop > 200) {
+      // Re-trigger scroll logic to potentially hide navbar, but not if we're at/past experience section
+      if (
+        scrollTop > lastScrollTop &&
+        scrollTop > 200 &&
+        scrollTop < experienceTop - 50
+      ) {
         navbar.style.transform = "translateY(-100%)";
       }
     }
@@ -662,6 +682,7 @@ function initSpotlightEffect() {
     ".experience-card",
     ".education-card",
     ".certification-card",
+    ".contact-form", // Add contact form to spotlight effect
   ];
 
   const regularCards = document.querySelectorAll(
@@ -680,9 +701,7 @@ function initSpotlightEffect() {
 
       // Use pixel values for more reliable positioning
       card.style.setProperty("--mouse-x", `${x}px`);
-      card.style.setProperty("--mouse-y", `${y}px`);
-
-      // Set spotlight color based on card type
+      card.style.setProperty("--mouse-y", `${y}px`); // Set spotlight color based on card type
       let spotlightColor = "rgba(255, 255, 255, 0.25)"; // Default
       if (card.classList.contains("project-card")) {
         spotlightColor = "rgba(79, 70, 229, 0.2)"; // Primary color
@@ -692,6 +711,8 @@ function initSpotlightEffect() {
         spotlightColor = "rgba(16, 185, 129, 0.18)"; // Secondary color
       } else if (card.classList.contains("certification-card")) {
         spotlightColor = "rgba(79, 70, 229, 0.22)"; // Primary color
+      } else if (card.classList.contains("contact-form")) {
+        spotlightColor = "rgba(79, 70, 229, 0.18)"; // Primary color for contact form
       }
       card.style.setProperty("--spotlight-color", spotlightColor);
     });
