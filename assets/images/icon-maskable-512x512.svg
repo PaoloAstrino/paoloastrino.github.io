@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <style>
+      .circle-outline { fill: none; stroke: hsl(220, 100%, 55%); stroke-width: 12; }
+      .letter-p { fill: hsl(220, 100%, 55%); font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 700; font-size: 200px; }
+    </style>
+  </defs>
+  
+  <!-- Safe area background for maskable (transparent) -->
+  <rect x="0" y="0" width="512" height="512" fill="transparent"/>
+    <!-- Circle outline with safe area padding -->
+  <circle cx="256" cy="256" r="200" class="circle-outline"/>
+  
+  <!-- Letter P - visually centered in safe area -->
+  <text x="260" y="204.8" text-anchor="middle" dominant-baseline="central" class="letter-p">P</text>
+</svg>

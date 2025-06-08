@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PNG Favicon Generator</title>
+    <style>
+        .container { padding: 20px; font-family: Arial, sans-serif; }
+        canvas { border: 1px solid #ccc; margin: 10px; display: block; }
+        .size-label { margin: 10px 0 5px 0; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>PNG Favicon Generator for Paolo's Portfolio</h2>
+        
+        <div class="size-label">16x16 PNG:</div>
+        <canvas id="canvas16" width="16" height="16"></canvas>
+        
+        <div class="size-label">32x32 PNG:</div>
+        <canvas id="canvas32" width="32" height="32"></canvas>
+        
+        <div class="size-label">48x48 PNG:</div>
+        <canvas id="canvas48" width="48" height="48"></canvas>
+        
+        <div class="size-label">180x180 PNG (Apple Touch Icon):</div>
+        <canvas id="canvas180" width="180" height="180"></canvas>
+        
+        <div class="size-label">192x192 PNG:</div>
+        <canvas id="canvas192" width="192" height="192"></canvas>
+        
+        <button onclick="downloadAllPNGs()">Download All PNGs</button>
+    </div>
+
+    <script>
+        function createFaviconSVG(size) {
+            const strokeWidth = Math.max(1, size / 16);
+            const fontSize = Math.floor(size * 0.6);
+            const center = size / 2;
+            const radius = center - strokeWidth;
+            const textY = center - (size * 0.1); // 20% up from center
+            
+            return `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}">
+                    <circle cx="${center}" cy="${center}" r="${radius}" fill="none" stroke="#4f9cff" stroke-width="${strokeWidth}"/>
+                    <text x="${center + strokeWidth/2}" y="${textY}" text-anchor="middle" dominant-baseline="central" 
+                          font-family="Arial, sans-serif" font-weight="bold" font-size="${fontSize}" fill="#4f9cff">P</text>
+                </svg>
+            `;
+        }
+
+        function drawFavicon(canvasId, size) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            
+            // Clear canvas
+            ctx.fillStyle = 'transparent';
+            ctx.clearRect(0, 0, size, size);
+            
+            // Create image from SVG
+            const img = new Image();
+            const svgContent = createFaviconSVG(size);
+            const svgBlob = new Blob([svgContent], {type: 'image/svg+xml'});
+            const url = URL.createObjectURL(svgBlob);
+            
+            img.onload = function() {
+                ctx.drawImage(img, 0, 0, size, size);
+                URL.revokeObjectURL(url);
+            };
+            
+            img.src = url;
+        }
+
+        function downloadCanvas(canvas, filename) {
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        function downloadAllPNGs() {
+            setTimeout(() => downloadCanvas(document.getElementById('canvas16'), 'favicon-16x16.png'), 100);
+            setTimeout(() => downloadCanvas(document.getElementById('canvas32'), 'favicon-32x32.png'), 200);
+            setTimeout(() => downloadCanvas(document.getElementById('canvas48'), 'favicon-48x48.png'), 300);
+            setTimeout(() => downloadCanvas(document.getElementById('canvas180'), 'apple-touch-icon.png'), 400);
+            setTimeout(() => downloadCanvas(document.getElementById('canvas192'), 'icon-192x192.png'), 500);
+        }
+
+        // Draw favicons on load
+        window.onload = function() {
+            setTimeout(() => drawFavicon('canvas16', 16), 100);
+            setTimeout(() => drawFavicon('canvas32', 32), 200);
+            setTimeout(() => drawFavicon('canvas48', 48), 300);
+            setTimeout(() => drawFavicon('canvas180', 180), 400);
+            setTimeout(() => drawFavicon('canvas192', 192), 500);
+        };
+    </script>
+</body>
+</html>

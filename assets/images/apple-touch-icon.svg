@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <defs>
+    <style>
+      .circle-outline { fill: none; stroke: hsl(220, 100%, 55%); stroke-width: 8; }
+      .letter-p { fill: hsl(220, 100%, 55%); font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 700; font-size: 100px; }
+    </style>
+  </defs>
+    <!-- Circle outline -->
+  <circle cx="90" cy="90" r="86" class="circle-outline"/>
+  
+  <!-- Letter P - visually centered -->
+  <text x="92" y="72" text-anchor="middle" dominant-baseline="central" class="letter-p">P</text>
+</svg>

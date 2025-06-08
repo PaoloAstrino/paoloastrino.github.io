@@ -1760,8 +1760,8 @@ html[data-theme="light"] .switch-handle {
 /* Footer */
 .footer {
   background: hsl(var(--background));
-  border-top: none; /* Clean, no border */
-  padding: 2rem 0;
+  border-top: 1px solid hsl(var(--border) / 0.1); /* Subtle separator */
+  padding: 1.5rem 0; /* Reduced padding */
 }
 
 .footer-content {
@@ -1769,22 +1769,26 @@ html[data-theme="light"] .switch-handle {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  gap: 1rem; /* Add gap for better spacing */
 }
 
 .footer-left {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem; /* Reduced gap */
   flex-wrap: wrap;
+  flex: 1; /* Allow to take available space */
+  min-width: 0; /* Prevent overflow */
 }
 
 .footer p {
   color: hsl(var(--foreground) / 0.8);
   margin-bottom: 0;
-  font-size: clamp(var(--button-text-min), 1.5vw, var(--button-text-max));
+  font-size: clamp(0.8rem, 1.2vw, 0.9rem); /* Smaller, more responsive text */
 }
-j .social-links {
+
+.social-links {
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
@@ -1821,15 +1825,24 @@ j .social-links {
 .privacy-commitment {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: clamp(var(--button-text-min), 1.5vw, var(--button-text-max));
+  gap: 0.4rem; /* Reduced gap */
+  font-size: clamp(0.75rem, 1.1vw, 0.85rem); /* Smaller, more responsive text */
   color: hsl(var(--primary));
   font-weight: 500;
+  white-space: nowrap; /* Prevent wrapping within this element */
+  max-width: fit-content; /* Optimize width */
+}
+
+.privacy-commitment span {
+  /* Allow text to break at natural points on very small screens */
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .privacy-commitment i {
   color: hsl(var(--primary));
-  font-size: clamp(var(--icon-size-min), 1.5vw, var(--icon-size-max));
+  font-size: clamp(0.8rem, 1.2vw, 0.9rem); /* Smaller, more responsive icon */
+  flex-shrink: 0; /* Prevent icon shrinking */
 }
 
 .footer-right {
@@ -1837,22 +1850,25 @@ j .social-links {
   flex-direction: column;
   align-items: flex-end;
   gap: 0.5rem;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 /* Footer Legal Links */
 .footer-legal-links {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem; /* Reduced gap */
+  flex-wrap: nowrap; /* Prevent wrapping within legal links */
 }
 
 .legal-link {
   color: hsl(var(--foreground) / 0.8);
   text-decoration: none;
-  font-size: clamp(var(--nav-link-min), 1.5vw, var(--nav-link-max));
+  font-size: clamp(0.8rem, 1.2vw, 0.9rem); /* Smaller, more responsive text */
   font-weight: 500;
   transition: all 0.3s ease;
   cursor: pointer;
+  white-space: nowrap; /* Prevent individual link wrapping */
 }
 
 .legal-link:hover {
@@ -1862,7 +1878,39 @@ j .social-links {
 
 .legal-separator {
   color: hsl(var(--foreground) / 0.6);
-  font-size: clamp(var(--button-text-min), 1.5vw, var(--button-text-max));
+  font-size: clamp(0.8rem, 1.2vw, 0.9rem); /* Smaller, more responsive text */  margin: 0 0.1rem; /* Small margin for better spacing */
+}
+
+/* Footer Responsive Design */
+@media (max-width: 1024px) {
+  .footer-content {
+    gap: 0.8rem;
+  }
+
+  .footer-left {
+    gap: 1.2rem;
+  }
+
+  .privacy-commitment {
+    font-size: clamp(0.72rem, 1.3vw, 0.82rem);
+    gap: 0.35rem;
+  }
+
+  .privacy-commitment i {
+    font-size: clamp(0.78rem, 1.4vw, 0.88rem);
+  }
+
+  .legal-link {
+    font-size: clamp(0.78rem, 1.3vw, 0.88rem);
+  }
+
+  .footer p {
+    font-size: clamp(0.78rem, 1.3vw, 0.88rem);
+  }
+
+  .legal-separator {
+    font-size: clamp(0.78rem, 1.3vw, 0.88rem);
+  }
 }
 
 /* Fixed Elements - Social Buttons, Theme Toggle, Scroll to Top */
@@ -2127,40 +2175,133 @@ html[data-theme="light"] .scroll-progress {
   }
 }
 
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: row; /* Keep row layout on tablet */
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .footer-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    flex: 1;
+  }
+
+  .footer-right {
+    align-items: flex-end;
+    flex-shrink: 0;
+  }
+
+  .privacy-commitment {
+    font-size: clamp(0.7rem, 2vw, 0.8rem); /* Even smaller on tablet */
+  }
+
+  .privacy-commitment i {
+    font-size: clamp(0.75rem, 2.2vw, 0.85rem);
+  }
+
+  .legal-link {
+    font-size: clamp(0.75rem, 2vw, 0.85rem);
+  }
+
+  .footer p {
+    font-size: clamp(0.75rem, 2vw, 0.85rem);
+  }
+
+  .legal-separator {
+    font-size: clamp(0.75rem, 2vw, 0.85rem);
+  }
+}
+
 @media (max-width: 480px) {
   .footer-content {
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     text-align: center;
+    align-items: center;
   }
 
   .footer-left {
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 0.8rem;
+    width: 100%;
   }
 
   .footer-right {
     align-items: center;
+    width: 100%;
   }
 
   .footer-legal-links {
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: center;
-  } /* Improve mobile text readability for legal links */
+    flex-direction: row; /* Keep links in row even on mobile */
+    gap: 0.4rem;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping if absolutely necessary */
+  }
+
+  .privacy-commitment {
+    text-align: center;
+    font-size: clamp(0.65rem, 3vw, 0.75rem); /* Smaller on mobile */
+  }
+
+  .privacy-commitment span {
+    /* Break the privacy text into multiple lines on mobile if needed */
+    line-height: 1.4;
+  }
+
+  .privacy-commitment i {
+    font-size: clamp(0.7rem, 3.2vw, 0.8rem);
+  }
+
   .legal-link {
-    font-size: clamp(var(--nav-link-min), 2vw, var(--nav-link-max));
+    font-size: clamp(0.7rem, 3vw, 0.8rem);
     color: hsl(var(--foreground) / 0.85);
+  }
+  .footer p {
+    font-size: clamp(0.7rem, 3vw, 0.8rem);
+    color: hsl(var(--foreground) / 0.85);
+    text-align: center;
+    line-height: 1.4; /* Better line height for readability */
+    word-break: break-word; /* Allow breaking on very small screens */
+  }
+@media (max-width: 320px) {
+  /* Extra small mobile devices */
+  .footer {
+    padding: 1rem 0;
+  }
+
+  .footer-content {
+    gap: 0.8rem;
+  }
+
+  .footer-left {
+    gap: 0.6rem;
+  }
+
+  .privacy-commitment {
+    font-size: clamp(0.6rem, 4vw, 0.7rem);
+    gap: 0.3rem;
+    flex-direction: column; /* Stack icon and text on very small screens */
+    text-align: center;
+  }
+
+  .privacy-commitment i {
+    font-size: clamp(0.65rem, 4.2vw, 0.75rem);
+  }
+
+  .legal-link {
+    font-size: clamp(0.65rem, 4vw, 0.75rem);
   }
 
   .footer p {
-    font-size: clamp(var(--button-text-min), 2vw, var(--button-text-max));
-    color: hsl(var(--foreground) / 0.85);
+    font-size: clamp(0.65rem, 4vw, 0.75rem);
   }
 
   .legal-separator {
-    display: none;
+    font-size: clamp(0.65rem, 4vw, 0.75rem);
   }
 }
 

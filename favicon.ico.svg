@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <style>
+      .circle-outline { fill: none; stroke: #4f9cff; stroke-width: 3; }
+      .letter-p { fill: #4f9cff; font-family: Arial, sans-serif; font-weight: bold; font-size: 28px; }
+    </style>
+  </defs>
+    <!-- Circle outline -->
+  <circle cx="24" cy="24" r="22" class="circle-outline"/>
+  
+  <!-- Letter P - visually centered -->
+  <text x="25" y="19.2" text-anchor="middle" dominant-baseline="central" class="letter-p">P</text>
+</svg>
