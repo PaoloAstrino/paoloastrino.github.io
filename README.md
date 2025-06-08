@@ -67,6 +67,7 @@ A professional, modern portfolio website showcasing Paolo Astrino's expertise in
 #### 🎨 Advanced CSS Techniques
 
 **Modern Responsive Typography:**
+
 ```css
 /* Hero Title - Scales from 3rem to 6rem based on viewport */
 font-size: clamp(3rem, 8vw, 6rem);
@@ -79,6 +80,7 @@ font-size: clamp(0.875rem, 1.4vw, 0.95rem);
 ```
 
 **DataLoud Card Implementation:**
+
 - **Aspect Ratio**: 9:16 (mobile-like vertical design)
 - **Width**: Exactly 2x the "Data Analyst & ML Enthusiast" badge width
 - **Responsive**: `clamp(320px, 45vw, 100vw)` for perfect scaling

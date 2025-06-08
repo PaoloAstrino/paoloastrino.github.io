@@ -305,7 +305,7 @@ function initScrollAnimations() {
   statNumbers.forEach((stat) => statsObserver.observe(stat));
 }
 
-// BlurText effect for hero title (adapted from React component)
+// BlurText effect - Faithful vanilla JS implementation of React/Framer Motion component
 function initBlurTextEffect() {
   const heroTitle = document.querySelector(".hero-title .text-gradient");
   if (!heroTitle) {
@@ -313,83 +313,197 @@ function initBlurTextEffect() {
     return;
   }
 
-  const text = heroTitle.textContent;
-  const words = text.split(" ");
-  const delay = 150; // milliseconds
-  const stepDuration = 0.35; // seconds per animation step
+  // Configuration matching React component props
+  const config = {
+    text: heroTitle.textContent,
+    delay: 200, // ms between elements
+    animateBy: "words", // 'words' or 'chars'
+    direction: "top", // 'top' or 'bottom'
+    threshold: 0.1,
+    rootMargin: "0px",
+    stepDuration: 0.35, // seconds per animation step
+    onAnimationComplete: () => {
+      console.log("BlurText animation completed!");
+      heroTitle.style.filter =
+        "drop-shadow(0 4px 20px hsl(220, 100%, 50%, 0.3))";
+    },
+  };
+
+  // Split text based on animateBy setting
+  const elements =
+    config.animateBy === "words"
+      ? config.text.split(" ")
+      : config.text.split("");
 
   console.log(
-    `BlurText: Initializing with text "${text}" (${words.length} words)`
+    `BlurText: Initializing with ${elements.length} ${config.animateBy}`
   );
 
-  // Add blur-text-active class for enhanced styling
-  heroTitle.classList.add("blur-text-active");
+  // Default animation states matching React component
+  const defaultFrom =
+    config.direction === "top"
+      ? { filter: "blur(10px)", opacity: 0, y: -50 }
+      : { filter: "blur(10px)", opacity: 0, y: 50 };
 
-  // Create container for word animation
+  const defaultTo = [
+    {
+      filter: "blur(5px)",
+      opacity: 0.5,
+      y: config.direction === "top" ? 5 : -5,
+    },
+    { filter: "blur(0px)", opacity: 1, y: 0 },
+  ];
+
+  // Build keyframes like React component
+  const buildKeyframes = (from, steps) => {
+    const keys = new Set([
+      ...Object.keys(from),
+      ...steps.flatMap((s) => Object.keys(s)),
+    ]);
+
+    const keyframes = {};
+    keys.forEach((k) => {
+      keyframes[k] = [from[k], ...steps.map((s) => s[k])];
+    });
+    return keyframes;
+  };
+
+  const animateKeyframes = buildKeyframes(defaultFrom, defaultTo);
+  const stepCount = defaultTo.length + 1;
+  const totalDuration = config.stepDuration * (stepCount - 1);
+
+  // Add styling classes
+  heroTitle.classList.add("blur-text-active");
   heroTitle.innerHTML = "";
   heroTitle.classList.add("blur-text-container");
 
-  // Create span elements for each word
-  const wordElements = words.map((word, index) => {
+  // Create span elements matching React component structure
+  const spanElements = elements.map((segment, index) => {
     const span = document.createElement("span");
     span.className = "blur-text-word";
-    span.textContent = word;
-    span.style.transitionDelay = `${(index * delay) / 1000}s`;
+    span.style.display = "inline-block";
+    span.style.willChange = "transform, filter, opacity";
+
+    // Handle spaces and content like React component
+    if (segment === " ") {
+      span.innerHTML = "\u00A0";
+    } else {
+      span.textContent = segment;
+      if (config.animateBy === "words" && index < elements.length - 1) {
+        span.innerHTML += "\u00A0";
+      }
+    }
+
+    // Set initial state
+    span.style.filter = defaultFrom.filter;
+    span.style.opacity = defaultFrom.opacity;
+    span.style.transform = `translateY(${defaultFrom.y}px)`;
+
     heroTitle.appendChild(span);
     return span;
   });
 
-  console.log(`BlurText: Created ${wordElements.length} word elements`);
+  console.log(`BlurText: Created ${spanElements.length} span elements`);
 
-  // Animation completion callback
-  const handleAnimationComplete = () => {
-    console.log("BlurText animation completed!");
-    // Optional: Add additional effects after completion
-    heroTitle.style.filter = "drop-shadow(0 4px 20px hsl(220, 100%, 50%, 0.4))";
-  };
+  // Animation state tracking
+  let inView = false;
 
-  // Use Intersection Observer to trigger animation when in view
+  // Intersection Observer matching React component
   const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          console.log("BlurText: Starting animation sequence");
-
-          // Start animation sequence
-          setTimeout(() => {
-            wordElements.forEach((span, index) => {
-              // First animation step (blur reduction, partial opacity)
-              setTimeout(() => {
-                span.classList.add("animate-in-step-1");
-                console.log(
-                  `BlurText: Step 1 for word ${index + 1}/${words.length}`
-                );
-              }, index * delay);
-
-              // Second animation step (complete reveal)
-              setTimeout(() => {
-                span.classList.remove("animate-in-step-1");
-                span.classList.add("animate-in-step-2");
-                console.log(
-                  `BlurText: Step 2 for word ${index + 1}/${words.length}`
-                );
-
-                // Call completion callback on last word
-                if (index === wordElements.length - 1) {
-                  setTimeout(handleAnimationComplete, stepDuration * 1000);
-                }
-              }, index * delay + stepDuration * 500);
-            });
-          }, 500); // Initial delay before starting animation
-
-          observer.unobserve(entry.target);
-        }
-      });
+    ([entry]) => {
+      if (entry.isIntersecting && !inView) {
+        inView = true;
+        console.log("BlurText: Starting animation sequence");
+        startAnimation();
+        observer.unobserve(entry.target);
+      }
     },
-    { threshold: 0.1, rootMargin: "0px" }
+    { threshold: config.threshold, rootMargin: config.rootMargin }
   );
 
   observer.observe(heroTitle);
+
+  // Animation function that replicates Framer Motion behavior
+  function startAnimation() {
+    spanElements.forEach((span, index) => {
+      const spanDelay = (index * config.delay) / 1000; // Convert to seconds
+
+      // Animate through each keyframe step
+      animateElement(
+        span,
+        animateKeyframes,
+        totalDuration,
+        spanDelay,
+        index === spanElements.length - 1
+      );
+    });
+  }
+
+  // Element animation function matching Framer Motion's behavior
+  function animateElement(element, keyframes, duration, delay, isLast) {
+    const startTime = performance.now() + delay * 1000;
+
+    function animate(currentTime) {
+      if (currentTime < startTime) {
+        requestAnimationFrame(animate);
+        return;
+      }
+
+      const elapsed = (currentTime - startTime) / 1000; // Convert to seconds
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Apply easing (default linear, matching React component default)
+      const easedProgress = progress;
+
+      // Interpolate between keyframes
+      const currentStep = easedProgress * (stepCount - 1);
+      const stepIndex = Math.floor(currentStep);
+      const stepProgress = currentStep - stepIndex;
+
+      // Get current values for each property
+      Object.keys(keyframes).forEach((property) => {
+        const values = keyframes[property];
+        let currentValue;
+
+        if (stepIndex >= values.length - 1) {
+          currentValue = values[values.length - 1];
+        } else {
+          const startValue = values[stepIndex];
+          const endValue = values[stepIndex + 1];
+
+          if (property === "y") {
+            currentValue = startValue + (endValue - startValue) * stepProgress;
+            element.style.transform = `translateY(${currentValue}px)`;
+          } else if (property === "filter") {
+            // Extract blur value and interpolate
+            const startBlur = parseFloat(
+              startValue.match(/blur\((\d+(?:\.\d+)?)px\)/)?.[1] || 0
+            );
+            const endBlur = parseFloat(
+              endValue.match(/blur\((\d+(?:\.\d+)?)px\)/)?.[1] || 0
+            );
+            const currentBlur =
+              startBlur + (endBlur - startBlur) * stepProgress;
+            element.style.filter = `blur(${currentBlur}px)`;
+          } else if (property === "opacity") {
+            currentValue = startValue + (endValue - startValue) * stepProgress;
+            element.style.opacity = currentValue;
+          }
+        }
+      });
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        // Animation complete for this element
+        if (isLast && config.onAnimationComplete) {
+          config.onAnimationComplete();
+        }
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }
 }
 
 // Floating cards animation
