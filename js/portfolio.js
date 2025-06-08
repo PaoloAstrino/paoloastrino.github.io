@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initThemeToggle();
   initScrollToTop();
   initScrollAnimations();
-  initBlurTextEffect();
+  initDecryptedTextEffect();
   initFloatingCards();
   initSpotlightEffect();
   initContactForm();
@@ -305,205 +305,151 @@ function initScrollAnimations() {
   statNumbers.forEach((stat) => statsObserver.observe(stat));
 }
 
-// BlurText effect - Faithful vanilla JS implementation of React/Framer Motion component
-function initBlurTextEffect() {
+// DecryptedText effect - Vanilla JS implementation of text decryption animation
+function initDecryptedTextEffect() {
   const heroTitle = document.querySelector(".hero-title .text-gradient");
-  if (!heroTitle) {
-    console.log("BlurText: Hero title element not found");
-    return;
-  }
+  const heroDescription = document.querySelector(".hero-description");
 
-  // Configuration matching React component props
+  if (!heroTitle) {
+    console.log("DecryptedText: Hero title element not found");
+    return;
+  } // Configuration for the decryption animation
   const config = {
-    text: heroTitle.textContent,
-    delay: 200, // ms between elements
-    animateBy: "words", // 'words' or 'chars'
-    direction: "top", // 'top' or 'bottom'
+    chars:
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?~`",
+    speed: 50, // ms between character changes
+    revealDelay: 70, // ms between revealing each character
+    iterations: 6, // number of scramble iterations per character
     threshold: 0.1,
     rootMargin: "0px",
-    stepDuration: 0.35, // seconds per animation step
-    onAnimationComplete: () => {
-      console.log("BlurText animation completed!");
-      heroTitle.style.filter =
-        "drop-shadow(0 4px 20px hsl(220, 100%, 50%, 0.3))";
-    },
+    titleDelay: 300, // delay before starting title animation
+    descriptionDelay: 1500, // delay before starting description animation
   };
 
-  // Split text based on animateBy setting
-  const elements =
-    config.animateBy === "words"
-      ? config.text.split(" ")
-      : config.text.split("");
+  // Store original texts
+  const originalTitle = heroTitle.textContent.trim();
+  const originalDescription = heroDescription.textContent.trim();
+  // Function to get random character from charset
+  function getRandomChar() {
+    return config.chars[Math.floor(Math.random() * config.chars.length)];
+  }
 
-  console.log(
-    `BlurText: Initializing with ${elements.length} ${config.animateBy}`
-  );
+  // Function to get weighted random character (more likely to pick similar characters)
+  function getWeightedRandomChar(targetChar) {
+    // 30% chance to return a character similar to the target
+    if (Math.random() < 0.3 && targetChar !== " ") {
+      const similar = getSimilarChar(targetChar);
+      if (similar) return similar;
+    }
+    return getRandomChar();
+  }
 
-  // Default animation states matching React component
-  const defaultFrom =
-    config.direction === "top"
-      ? { filter: "blur(10px)", opacity: 0, y: -50 }
-      : { filter: "blur(10px)", opacity: 0, y: 50 };
+  // Function to get character similar to target (same case, similar ASCII value)
+  function getSimilarChar(char) {
+    const charCode = char.charCodeAt(0);
+    const isUpperCase = char >= "A" && char <= "Z";
+    const isLowerCase = char >= "a" && char <= "z";
+    const isDigit = char >= "0" && char <= "9";
 
-  const defaultTo = [
-    {
-      filter: "blur(5px)",
-      opacity: 0.5,
-      y: config.direction === "top" ? 5 : -5,
-    },
-    { filter: "blur(0px)", opacity: 1, y: 0 },
-  ];
-
-  // Build keyframes like React component
-  const buildKeyframes = (from, steps) => {
-    const keys = new Set([
-      ...Object.keys(from),
-      ...steps.flatMap((s) => Object.keys(s)),
-    ]);
-
-    const keyframes = {};
-    keys.forEach((k) => {
-      keyframes[k] = [from[k], ...steps.map((s) => s[k])];
-    });
-    return keyframes;
-  };
-
-  const animateKeyframes = buildKeyframes(defaultFrom, defaultTo);
-  const stepCount = defaultTo.length + 1;
-  const totalDuration = config.stepDuration * (stepCount - 1);
-
-  // Add styling classes
-  heroTitle.classList.add("blur-text-active");
-  heroTitle.innerHTML = "";
-  heroTitle.classList.add("blur-text-container");
-
-  // Create span elements matching React component structure
-  const spanElements = elements.map((segment, index) => {
-    const span = document.createElement("span");
-    span.className = "blur-text-word";
-    span.style.display = "inline-block";
-    span.style.willChange = "transform, filter, opacity";
-
-    // Handle spaces and content like React component
-    if (segment === " ") {
-      span.innerHTML = "\u00A0";
-    } else {
-      span.textContent = segment;
-      if (config.animateBy === "words" && index < elements.length - 1) {
-        span.innerHTML += "\u00A0";
-      }
+    if (isUpperCase) {
+      // Return random uppercase letter
+      return String.fromCharCode(65 + Math.floor(Math.random() * 26));
+    } else if (isLowerCase) {
+      // Return random lowercase letter
+      return String.fromCharCode(97 + Math.floor(Math.random() * 26));
+    } else if (isDigit) {
+      // Return random digit
+      return String.fromCharCode(48 + Math.floor(Math.random() * 10));
     }
 
-    // Set initial state
-    span.style.filter = defaultFrom.filter;
-    span.style.opacity = defaultFrom.opacity;
-    span.style.transform = `translateY(${defaultFrom.y}px)`;
+    return null;
+  }
+  // Function to animate text decryption
+  function decryptText(element, originalText, delay = 0) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        // Add decrypting class for CSS effects
+        element.classList.add("decrypting");
 
-    heroTitle.appendChild(span);
-    return span;
-  });
+        const textArray = originalText.split("");
+        const workingArray = textArray.map((char) =>
+          getWeightedRandomChar(char)
+        );
+        let revealedCount = 0;
 
-  console.log(`BlurText: Created ${spanElements.length} span elements`);
+        // Create intervals for each character position
+        const intervals = textArray.map((char, index) => {
+          let iterationCount = 0;
 
-  // Animation state tracking
-  let inView = false;
+          return setTimeout(() => {
+            const charInterval = setInterval(() => {
+              if (char === " ") {
+                workingArray[index] = " ";
+                clearInterval(charInterval);
+                revealedCount++;
+                if (revealedCount === textArray.length) {
+                  // Remove decrypting class when animation completes
+                  element.classList.remove("decrypting");
+                  resolve();
+                }
+                return;
+              }
+              if (iterationCount < config.iterations) {
+                workingArray[index] = getWeightedRandomChar(char);
+                iterationCount++;
+              } else {
+                workingArray[index] = char;
+                clearInterval(charInterval);
+                revealedCount++;
+                if (revealedCount === textArray.length) {
+                  // Remove decrypting class when animation completes
+                  element.classList.remove("decrypting");
+                  resolve();
+                }
+              }
 
-  // Intersection Observer matching React component
+              // Update element text
+              element.textContent = workingArray.join("");
+            }, config.speed);
+          }, index * config.revealDelay);
+        });
+
+        // Store intervals for cleanup if needed
+        element._decryptIntervals = intervals;
+      }, delay);
+    });
+  }
+  // Intersection Observer to trigger animation
+  let titleAnimated = false;
+  let descriptionAnimated = false;
+
   const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting && !inView) {
-        inView = true;
-        console.log("BlurText: Starting animation sequence");
-        startAnimation();
-        observer.unobserve(entry.target);
-      }
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (entry.target === heroTitle && !titleAnimated) {
+            titleAnimated = true;
+            console.log("DecryptedText: Starting title animation");
+            decryptText(heroTitle, originalTitle, config.titleDelay);
+          } else if (entry.target === heroDescription && !descriptionAnimated) {
+            descriptionAnimated = true;
+            console.log("DecryptedText: Starting description animation");
+            decryptText(
+              heroDescription,
+              originalDescription,
+              config.descriptionDelay
+            );
+          }
+        }
+      });
     },
     { threshold: config.threshold, rootMargin: config.rootMargin }
   );
 
+  // Observe both elements
   observer.observe(heroTitle);
-
-  // Animation function that replicates Framer Motion behavior
-  function startAnimation() {
-    spanElements.forEach((span, index) => {
-      const spanDelay = (index * config.delay) / 1000; // Convert to seconds
-
-      // Animate through each keyframe step
-      animateElement(
-        span,
-        animateKeyframes,
-        totalDuration,
-        spanDelay,
-        index === spanElements.length - 1
-      );
-    });
-  }
-
-  // Element animation function matching Framer Motion's behavior
-  function animateElement(element, keyframes, duration, delay, isLast) {
-    const startTime = performance.now() + delay * 1000;
-
-    function animate(currentTime) {
-      if (currentTime < startTime) {
-        requestAnimationFrame(animate);
-        return;
-      }
-
-      const elapsed = (currentTime - startTime) / 1000; // Convert to seconds
-      const progress = Math.min(elapsed / duration, 1);
-
-      // Apply easing (default linear, matching React component default)
-      const easedProgress = progress;
-
-      // Interpolate between keyframes
-      const currentStep = easedProgress * (stepCount - 1);
-      const stepIndex = Math.floor(currentStep);
-      const stepProgress = currentStep - stepIndex;
-
-      // Get current values for each property
-      Object.keys(keyframes).forEach((property) => {
-        const values = keyframes[property];
-        let currentValue;
-
-        if (stepIndex >= values.length - 1) {
-          currentValue = values[values.length - 1];
-        } else {
-          const startValue = values[stepIndex];
-          const endValue = values[stepIndex + 1];
-
-          if (property === "y") {
-            currentValue = startValue + (endValue - startValue) * stepProgress;
-            element.style.transform = `translateY(${currentValue}px)`;
-          } else if (property === "filter") {
-            // Extract blur value and interpolate
-            const startBlur = parseFloat(
-              startValue.match(/blur\((\d+(?:\.\d+)?)px\)/)?.[1] || 0
-            );
-            const endBlur = parseFloat(
-              endValue.match(/blur\((\d+(?:\.\d+)?)px\)/)?.[1] || 0
-            );
-            const currentBlur =
-              startBlur + (endBlur - startBlur) * stepProgress;
-            element.style.filter = `blur(${currentBlur}px)`;
-          } else if (property === "opacity") {
-            currentValue = startValue + (endValue - startValue) * stepProgress;
-            element.style.opacity = currentValue;
-          }
-        }
-      });
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      } else {
-        // Animation complete for this element
-        if (isLast && config.onAnimationComplete) {
-          config.onAnimationComplete();
-        }
-      }
-    }
-
-    requestAnimationFrame(animate);
-  }
+  observer.observe(heroDescription);
+  console.log("DecryptedText: Initialized for hero title and description");
 }
 
 // Floating cards animation
