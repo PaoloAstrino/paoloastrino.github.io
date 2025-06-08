@@ -130,7 +130,6 @@ html[data-theme="light"] .text-gradient {
 
 .apple-button:hover {
   background: hsl(var(--primary) / 0.9);
-  transform: translateY(-2px);
   box-shadow: 0 10px 25px hsl(var(--primary) / 0.2);
 }
 
@@ -573,7 +572,6 @@ html[data-theme="light"] .switch-handle {
 }
 
 .dataloud-glass-card:hover {
-  transform: translateY(clamp(-10px, -1.25vw, -20px)) scale(1.05);
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(59, 130, 246, 0.3);
   box-shadow: 0 clamp(20px, 2.5vw, 40px) clamp(60px, 7.5vw, 120px)

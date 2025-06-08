@@ -9,10 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
   initScrollToTop();
   initScrollAnimations();
   initDecryptedTextEffect();
-  
+
   // Add a small delay for DecryptedText examples to ensure DOM is fully ready
   setTimeout(initDecryptedTextExamples, 100);
-  
+
   initFloatingCards();
   initSpotlightEffect();
   initContactForm();
@@ -315,15 +315,16 @@ function DecryptedText(element, options = {}) {
   // React component defaults - matching exactly
   const defaults = {
     text: element.textContent.trim(),
-    speed: 50,                    // Default speed from React component
-    maxIterations: 6,             // Default iterations from React component  
-    characters: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?~`",
+    speed: 50, // Default speed from React component
+    maxIterations: 6, // Default iterations from React component
+    characters:
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?~`",
     className: "revealed",
-    parentClassName: "all-letters", 
+    parentClassName: "all-letters",
     encryptedClassName: "encrypted",
-    animateOn: "hover",           // Default trigger
-    revealDirection: "left",      // Default reveal direction
-    revealDelay: 30,              // Delay between revealing each character (faster like React)
+    animateOn: "hover", // Default trigger
+    revealDirection: "left", // Default reveal direction
+    revealDelay: 30, // Delay between revealing each character (faster like React)
     threshold: 0.1,
     rootMargin: "0px",
     delay: 0,
@@ -338,7 +339,9 @@ function DecryptedText(element, options = {}) {
 
   // Simple character randomizer - no weighted selection for React-like behavior
   function getRandomChar() {
-    return config.characters[Math.floor(Math.random() * config.characters.length)];
+    return config.characters[
+      Math.floor(Math.random() * config.characters.length)
+    ];
   }
 
   // Main animation function - simplified to match React behavior exactly
@@ -356,7 +359,7 @@ function DecryptedText(element, options = {}) {
 
     const textArray = originalText.split("");
     let workingArray = textArray.map(() => getRandomChar());
-    
+
     // Get reveal order based on direction
     let revealOrder = [];
     switch (config.revealDirection) {
@@ -372,7 +375,9 @@ function DecryptedText(element, options = {}) {
         revealOrder = textArray.map((_, i) => textArray.length - 1 - i);
         break;
       case "random":
-        revealOrder = textArray.map((_, i) => i).sort(() => Math.random() - 0.5);
+        revealOrder = textArray
+          .map((_, i) => i)
+          .sort(() => Math.random() - 0.5);
         break;
       case "left":
       default:
@@ -445,14 +450,17 @@ function DecryptedText(element, options = {}) {
     element.addEventListener("mouseenter", animate);
     element.addEventListener("mouseleave", reset);
   } else if (config.animateOn === "view") {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !hasAnimated) {
-          animate();
-          observer.unobserve(element);
-        }
-      });
-    }, { threshold: config.threshold, rootMargin: config.rootMargin });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            animate();
+            observer.unobserve(element);
+          }
+        });
+      },
+      { threshold: config.threshold, rootMargin: config.rootMargin }
+    );
     observer.observe(element);
   } else if (config.animateOn === "load") {
     window.addEventListener("load", () => {
@@ -461,13 +469,13 @@ function DecryptedText(element, options = {}) {
   }
 
   // Return public API
-  return { 
-    animate, 
-    reset, 
+  return {
+    animate,
+    reset,
     isAnimating: () => isAnimating,
     hasAnimated: () => hasAnimated,
-    element, 
-    config 
+    element,
+    config,
   };
 }
 
@@ -571,50 +579,17 @@ function initDecryptedTextEffect() {
   console.log("DecryptedText: Initialized for hero elements");
 }
 
-// Initialize DecryptedText examples
+// Initialize DecryptedText for hero badge
 function initDecryptedTextExamples() {
-  console.log("DecryptedText: Initializing examples with React-like behavior");
-  
-  // Example 1: Default hover behavior (matches React component defaults)
-  createHoverDecryptText(".hover-decrypt-text");
+  console.log("DecryptedText: Initializing hero badge animation");
 
-  // Example 2: Custom settings (matches React component with custom props)
-  createCustomDecryptText(".custom-decrypt-text", {
-    speed: 100,
-    maxIterations: 20,
-    characters: "ABCD1234!?",
-  });
-
-  // Example 3: Animate on view with center reveal (matches React component)
-  createViewDecryptText(".view-decrypt-text", {
+  // Animate the hero badge text on view with center reveal
+  createViewDecryptText(".hero-badge-text", {
     revealDirection: "center",
+    speed: 60,
+    maxIterations: 8,
+    delay: 500, // Small delay after page load
   });
-
-  // Example 4: Right-to-left reveal on hover (React component style)
-  createDecryptedText(".right-decrypt-text", {
-    animateOn: "hover",
-    revealDirection: "right",
-  });
-
-  // Example 5: Random reveal on view (React component style)
-  createDecryptedText(".random-decrypt-text", {
-    animateOn: "view",
-    revealDirection: "random",
-  });
-
-  // Example 6: Manual trigger (React component style)
-  window.manualDecryptInstance = createDecryptedText(".manual-decrypt-text", {
-    animateOn: "manual",
-    revealDirection: "center",
-  });
-}
-
-// Function to trigger manual animation (called by button)
-function triggerManualAnimation() {
-  if (window.manualDecryptInstance) {
-    window.manualDecryptInstance.reset();
-    window.manualDecryptInstance.animate();
-  }
 }
 
 // Floating cards animation

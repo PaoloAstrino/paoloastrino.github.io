@@ -73,9 +73,8 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span>Data Analyst & ML Enthusiast</span>
+            <div class="hero-content">                <div class="hero-badge">
+                    <span class="hero-badge-text">Data Analyst & ML Enthusiast</span>
                 </div>
                 <h1 class="hero-title">
                     <span class="text-gradient">Paolo Astrino</span>
@@ -586,89 +585,7 @@
                     <p>For questions regarding these terms, please contact us at paoloastrino01@gmail.com</p>
                 </div>
             </div>
-        </div>
-    </div> <!-- DecryptedText Examples Section -->
-    <section id="decrypted-text-examples" class="examples-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Interactive Text Animations</h2>
-                <p class="section-subtitle">Experience the DecryptedText effect with different configurations and
-                    triggers</p>
-            </div>
-
-            <div class="examples-grid">
-                <!-- Example 1: Hover to decrypt -->
-                <div class="example-card">
-                    <h3>Hover Effect</h3>
-                    <p class="hover-decrypt-text">Paolo Astrino</p>
-                    <small>Move your cursor over the text to trigger the decryption animation</small>
-                </div>
-
-                <!-- Example 2: Customized settings -->
-                <div class="example-card">
-                    <h3>Custom Characters</h3>
-                    <p class="custom-decrypt-text">Data Analyst</p>
-                    <small>Custom character set with faster animation speed</small>
-                </div>
-
-                <!-- Example 3: Animate on view -->
-                <div class="example-card">
-                    <h3>Scroll Animation</h3>
-                    <p class="view-decrypt-text">Machine Learning</p>
-                    <small>Animates automatically when scrolled into view</small>
-                </div>
-
-                <!-- Example 4: Different reveal directions -->
-                <div class="example-card">
-                    <h3>Right-to-Left</h3>
-                    <p class="right-decrypt-text">Python Developer</p>
-                    <small>Characters reveal from right to left direction</small>
-                </div>
-
-                <!-- Example 5: Random reveal -->
-                <div class="example-card">
-                    <h3>Random Reveal</h3>
-                    <p class="random-decrypt-text">AI Enthusiast</p>
-                    <small>Characters appear in completely random order</small>
-                </div>
-
-                <!-- Example 6: Manual trigger -->
-                <div class="example-card">
-                    <h3>Manual Control</h3>
-                    <p class="manual-decrypt-text">Innovation</p>
-                    <button class="apple-button" onclick="triggerManualAnimation()">
-                        <i class="fas fa-play"></i> Animate
-                    </button>
-                    <small>Click the button to manually trigger the animation</small>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Simple test script for debugging -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            console.log('DOM loaded - testing hover detection');
-
-            const testElement = document.querySelector('.hover-decrypt-text');
-            if (testElement) {
-                console.log('Found test element:', testElement.textContent);
-
-                testElement.style.border = '1px solid red'; // Visual indicator
-
-                testElement.addEventListener('mouseenter', function () {
-                    console.log('HOVER DETECTED on test element!');
-                    this.style.backgroundColor = 'rgba(255,0,0,0.1)';
-                });
-
-                testElement.addEventListener('mouseleave', function () {
-                    this.style.backgroundColor = 'transparent';
-                });
-            } else {
-                console.log('Test element NOT found');
-            }
-        });
-    </script>
+        </div>    </div>
 
     <script src="js/portfolio.js"></script>
 </body>
