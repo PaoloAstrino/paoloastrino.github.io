@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initScrollToTop();
   initScrollAnimations();
   initDecryptedTextEffect();
+  initDecryptedTextExamples();
   initFloatingCards();
   initSpotlightEffect();
   initContactForm();
@@ -305,38 +306,44 @@ function initScrollAnimations() {
   statNumbers.forEach((stat) => statsObserver.observe(stat));
 }
 
-// DecryptedText effect - Vanilla JS implementation of text decryption animation
-function initDecryptedTextEffect() {
-  const heroTitle = document.querySelector(".hero-title .text-gradient");
-  const heroDescription = document.querySelector(".hero-description");
-
-  if (!heroTitle) {
-    console.log("DecryptedText: Hero title element not found");
-    return;
-  } // Configuration for the decryption animation
-  const config = {
-    chars:
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?~`",
+// DecryptedText - Flexible vanilla JS implementation of text decryption animation
+// Usage: DecryptedText(element, options)
+function DecryptedText(element, options = {}) {
+  // Default configuration
+  const defaults = {
+    text: element.textContent.trim(), // Text to animate
     speed: 50, // ms between character changes
+    maxIterations: 6, // number of scramble iterations per character
+    characters:
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?~`",
+    className: "revealed", // class added when animation completes
+    parentClassName: "all-letters", // class added to parent during animation
+    encryptedClassName: "encrypted", // class added during encryption
+    animateOn: "hover", // "hover", "view", "load", or "manual"
+    revealDirection: "left", // "left", "right", "center", "random"
     revealDelay: 70, // ms between revealing each character
-    iterations: 6, // number of scramble iterations per character
-    threshold: 0.1,
-    rootMargin: "0px",
-    titleDelay: 300, // delay before starting title animation
-    descriptionDelay: 1500, // delay before starting description animation
+    threshold: 0.1, // intersection observer threshold
+    rootMargin: "0px", // intersection observer root margin
+    delay: 0, // delay before starting animation
+    onComplete: null, // callback when animation completes
+    onStart: null, // callback when animation starts
   };
 
-  // Store original texts
-  const originalTitle = heroTitle.textContent.trim();
-  const originalDescription = heroDescription.textContent.trim();
+  const config = { ...defaults, ...options };
+  const originalText = config.text;
+  let isAnimating = false;
+  let hasAnimated = false;
+
+  // Store original classes
+  const originalClasses = element.className;
+
   // Function to get random character from charset
-  function getRandomChar() {
-    return config.chars[Math.floor(Math.random() * config.chars.length)];
+  function getRandomChar(chars = config.characters) {
+    return chars[Math.floor(Math.random() * chars.length)];
   }
 
   // Function to get weighted random character (more likely to pick similar characters)
   function getWeightedRandomChar(targetChar) {
-    // 30% chance to return a character similar to the target
     if (Math.random() < 0.3 && targetChar !== " ") {
       const similar = getSimilarChar(targetChar);
       if (similar) return similar;
@@ -344,112 +351,356 @@ function initDecryptedTextEffect() {
     return getRandomChar();
   }
 
-  // Function to get character similar to target (same case, similar ASCII value)
+  // Function to get character similar to target
   function getSimilarChar(char) {
-    const charCode = char.charCodeAt(0);
     const isUpperCase = char >= "A" && char <= "Z";
     const isLowerCase = char >= "a" && char <= "z";
     const isDigit = char >= "0" && char <= "9";
 
     if (isUpperCase) {
-      // Return random uppercase letter
       return String.fromCharCode(65 + Math.floor(Math.random() * 26));
     } else if (isLowerCase) {
-      // Return random lowercase letter
       return String.fromCharCode(97 + Math.floor(Math.random() * 26));
     } else if (isDigit) {
-      // Return random digit
       return String.fromCharCode(48 + Math.floor(Math.random() * 10));
     }
-
-    return null;
+    return getRandomChar();
   }
-  // Function to animate text decryption
-  function decryptText(element, originalText, delay = 0) {
+
+  // Function to get reveal order based on direction
+  function getRevealOrder(textLength) {
+    const indices = Array.from({ length: textLength }, (_, i) => i);
+
+    switch (config.revealDirection) {
+      case "right":
+        return indices.reverse();
+      case "center":
+        const center = Math.floor(textLength / 2);
+        const order = [center];
+        for (let i = 1; i <= center; i++) {
+          if (center - i >= 0) order.push(center - i);
+          if (center + i < textLength) order.push(center + i);
+        }
+        return order;
+      case "random":
+        return indices.sort(() => Math.random() - 0.5);
+      case "left":
+      default:
+        return indices;
+    }
+  }
+
+  // Main animation function
+  function animate(startDelay = 0) {
+    if (isAnimating) return;
+
     return new Promise((resolve) => {
       setTimeout(() => {
-        // Add decrypting class for CSS effects
-        element.classList.add("decrypting");
+        if (config.onStart) config.onStart(element);
+
+        isAnimating = true;
+        hasAnimated = true;
+
+        // Add CSS classes
+        element.classList.add(config.encryptedClassName);
+        if (config.parentClassName && element.parentElement) {
+          element.parentElement.classList.add(config.parentClassName);
+        }
 
         const textArray = originalText.split("");
-        const workingArray = textArray.map((char) =>
-          getWeightedRandomChar(char)
-        );
+        const workingArray = textArray.map(() => getRandomChar());
+        const revealOrder = getRevealOrder(textArray.length);
         let revealedCount = 0;
 
-        // Create intervals for each character position
-        const intervals = textArray.map((char, index) => {
+        // Start with scrambled text
+        element.textContent = workingArray.join("");
+
+        // Reveal characters based on direction
+        revealOrder.forEach((charIndex, orderIndex) => {
+          const char = textArray[charIndex];
           let iterationCount = 0;
 
-          return setTimeout(() => {
+          setTimeout(() => {
             const charInterval = setInterval(() => {
               if (char === " ") {
-                workingArray[index] = " ";
+                workingArray[charIndex] = " ";
                 clearInterval(charInterval);
                 revealedCount++;
+
                 if (revealedCount === textArray.length) {
-                  // Remove decrypting class when animation completes
-                  element.classList.remove("decrypting");
-                  resolve();
+                  finishAnimation(resolve);
                 }
                 return;
               }
-              if (iterationCount < config.iterations) {
-                workingArray[index] = getWeightedRandomChar(char);
+
+              if (iterationCount < config.maxIterations) {
+                workingArray[charIndex] = getWeightedRandomChar(char);
                 iterationCount++;
               } else {
-                workingArray[index] = char;
+                workingArray[charIndex] = char;
                 clearInterval(charInterval);
                 revealedCount++;
+
                 if (revealedCount === textArray.length) {
-                  // Remove decrypting class when animation completes
-                  element.classList.remove("decrypting");
-                  resolve();
+                  finishAnimation(resolve);
                 }
               }
 
-              // Update element text
               element.textContent = workingArray.join("");
             }, config.speed);
-          }, index * config.revealDelay);
+          }, orderIndex * config.revealDelay);
         });
-
-        // Store intervals for cleanup if needed
-        element._decryptIntervals = intervals;
-      }, delay);
+      }, startDelay);
     });
   }
-  // Intersection Observer to trigger animation
-  let titleAnimated = false;
-  let descriptionAnimated = false;
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (entry.target === heroTitle && !titleAnimated) {
-            titleAnimated = true;
-            console.log("DecryptedText: Starting title animation");
-            decryptText(heroTitle, originalTitle, config.titleDelay);
-          } else if (entry.target === heroDescription && !descriptionAnimated) {
-            descriptionAnimated = true;
-            console.log("DecryptedText: Starting description animation");
-            decryptText(
-              heroDescription,
-              originalDescription,
-              config.descriptionDelay
-            );
+  // Function to finish animation
+  function finishAnimation(resolve) {
+    isAnimating = false;
+
+    // Remove encrypted class and add revealed class
+    element.classList.remove(config.encryptedClassName);
+    element.classList.add(config.className);
+
+    if (config.parentClassName && element.parentElement) {
+      element.parentElement.classList.remove(config.parentClassName);
+    }
+
+    if (config.onComplete) config.onComplete(element);
+    if (resolve) resolve();
+  }
+
+  // Function to reset animation
+  function reset() {
+    isAnimating = false;
+    hasAnimated = false;
+    element.className = originalClasses;
+    element.textContent = originalText;
+
+    if (config.parentClassName && element.parentElement) {
+      element.parentElement.classList.remove(config.parentClassName);
+    }
+  }
+
+  // Setup event listeners based on animateOn option
+  function setupTriggers() {
+    switch (config.animateOn) {
+      case "hover":
+        element.addEventListener("mouseenter", () => {
+          if (!hasAnimated || config.animateOn === "hover") {
+            animate(config.delay);
           }
-        }
-      });
-    },
-    { threshold: config.threshold, rootMargin: config.rootMargin }
-  );
+        });
 
-  // Observe both elements
-  observer.observe(heroTitle);
-  observer.observe(heroDescription);
-  console.log("DecryptedText: Initialized for hero title and description");
+        element.addEventListener("mouseleave", () => {
+          if (config.animateOn === "hover") {
+            reset();
+          }
+        });
+        break;
+
+      case "view":
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting && !hasAnimated) {
+                animate(config.delay);
+                observer.unobserve(element);
+              }
+            });
+          },
+          { threshold: config.threshold, rootMargin: config.rootMargin }
+        );
+        observer.observe(element);
+        break;
+
+      case "load":
+        window.addEventListener("load", () => {
+          animate(config.delay);
+        });
+        break;
+
+      case "manual":
+        // Do nothing, will be triggered manually
+        break;
+    }
+  }
+
+  // Initialize
+  setupTriggers();
+
+  // Return public API
+  return {
+    animate: (delay = config.delay) => animate(delay),
+    reset,
+    isAnimating: () => isAnimating,
+    hasAnimated: () => hasAnimated,
+    element,
+    config,
+  };
+}
+
+// Utility functions for DecryptedText
+function createDecryptedText(selector, options = {}) {
+  const elements =
+    typeof selector === "string"
+      ? document.querySelectorAll(selector)
+      : [selector];
+  const instances = [];
+
+  elements.forEach((element) => {
+    if (element) {
+      const instance = DecryptedText(element, options);
+      instances.push(instance);
+    }
+  });
+
+  return instances.length === 1 ? instances[0] : instances;
+}
+
+// Example usage functions (you can call these from console or other scripts)
+function createHoverDecryptText(selector, customOptions = {}) {
+  return createDecryptedText(selector, {
+    animateOn: "hover",
+    speed: 100,
+    maxIterations: 20,
+    characters: "ABCD1234!?",
+    className: "revealed",
+    parentClassName: "all-letters",
+    encryptedClassName: "encrypted",
+    ...customOptions,
+  });
+}
+
+function createViewDecryptText(selector, customOptions = {}) {
+  return createDecryptedText(selector, {
+    animateOn: "view",
+    revealDirection: "center",
+    speed: 80,
+    maxIterations: 15,
+    className: "revealed",
+    encryptedClassName: "encrypted",
+    ...customOptions,
+  });
+}
+
+function createCustomDecryptText(selector, customOptions = {}) {
+  return createDecryptedText(selector, {
+    speed: 100,
+    maxIterations: 20,
+    characters: "ABCD1234!?",
+    className: "revealed",
+    parentClassName: "all-letters",
+    encryptedClassName: "encrypted",
+    animateOn: "hover",
+    ...customOptions,
+  });
+}
+
+// Global DecryptedText API for easy access
+window.DecryptedText = {
+  create: createDecryptedText,
+  hover: createHoverDecryptText,
+  view: createViewDecryptText,
+  custom: createCustomDecryptText,
+  // Direct access to the main function
+  init: DecryptedText,
+};
+
+// Initialize DecryptedText for hero elements
+function initDecryptedTextEffect() {
+  const heroTitle = document.querySelector(".hero-title .text-gradient");
+  const heroDescription = document.querySelector(".hero-description");
+
+  if (!heroTitle) {
+    console.log("DecryptedText: Hero title element not found");
+    return;
+  }
+
+  // Initialize hero title with "view" animation
+  const titleDecrypt = DecryptedText(heroTitle, {
+    animateOn: "view",
+    speed: 50,
+    maxIterations: 6,
+    revealDirection: "left",
+    className: "revealed",
+    encryptedClassName: "decrypting",
+    delay: 300,
+    onStart: () => console.log("DecryptedText: Starting title animation"),
+    onComplete: () => console.log("DecryptedText: Title animation complete"),
+  });
+
+  // Initialize hero description with "view" animation
+  if (heroDescription) {
+    const descriptionDecrypt = DecryptedText(heroDescription, {
+      animateOn: "view",
+      speed: 50,
+      maxIterations: 6,
+      revealDirection: "left",
+      className: "revealed",
+      encryptedClassName: "decrypting",
+      delay: 1500,
+      onStart: () =>
+        console.log("DecryptedText: Starting description animation"),
+      onComplete: () =>
+        console.log("DecryptedText: Description animation complete"),
+    });
+  }
+
+  console.log("DecryptedText: Initialized for hero elements");
+}
+
+// Initialize DecryptedText examples
+function initDecryptedTextExamples() {
+  // Example 1: Hover to decrypt (default behavior)
+  createHoverDecryptText(".hover-decrypt-text");
+
+  // Example 2: Customized settings
+  createCustomDecryptText(".custom-decrypt-text", {
+    speed: 100,
+    maxIterations: 20,
+    characters: "ABCD1234!?",
+    animateOn: "hover",
+  });
+
+  // Example 3: Animate on view with center reveal
+  createViewDecryptText(".view-decrypt-text", {
+    revealDirection: "center",
+    speed: 80,
+    maxIterations: 15,
+  });
+
+  // Example 4: Right-to-left reveal on hover
+  createDecryptedText(".right-decrypt-text", {
+    animateOn: "hover",
+    revealDirection: "right",
+    speed: 60,
+    maxIterations: 10,
+  });
+
+  // Example 5: Random reveal on view
+  createDecryptedText(".random-decrypt-text", {
+    animateOn: "view",
+    revealDirection: "random",
+    speed: 70,
+    maxIterations: 12,
+  });
+
+  // Example 6: Manual trigger
+  window.manualDecryptInstance = createDecryptedText(".manual-decrypt-text", {
+    animateOn: "manual",
+    speed: 50,
+    maxIterations: 8,
+    revealDirection: "center",
+  });
+}
+
+// Function to trigger manual animation (called by button)
+function triggerManualAnimation() {
+  if (window.manualDecryptInstance) {
+    window.manualDecryptInstance.reset();
+    window.manualDecryptInstance.animate();
+  }
 }
 
 // Floating cards animation
