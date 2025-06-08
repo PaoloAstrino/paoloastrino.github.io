@@ -174,17 +174,9 @@ function initThemeToggle() {
       "data-theme",
       isDark ? "dark" : "light"
     );
-
     localStorage.setItem("theme", isDark ? "dark" : "light");
 
-    // Add animation effect to the switch
-    const switchElement = this.querySelector(".switch");
-    if (switchElement) {
-      switchElement.style.transform = "scale(0.95)";
-      setTimeout(() => {
-        switchElement.style.transform = "scale(1)";
-      }, 150);
-    }
+    // Removed animation effect to the switch - no more transform scaling
   });
 }
 
@@ -203,7 +195,6 @@ function initScrollToTop() {
       scrollToTopBtn.classList.remove("visible");
     }
   }, 100);
-
   // Smooth scroll to top
   const scrollToTop = () => {
     window.scrollTo({
@@ -211,28 +202,19 @@ function initScrollToTop() {
       behavior: "smooth",
     });
 
-    // Add click animation
-    scrollToTopBtn.style.transform = "translateY(-5px) scale(0.95)";
-    setTimeout(() => {
-      scrollToTopBtn.style.transform = "translateY(0) scale(1)";
-    }, 150);
+    // Removed click animation transform effects
   };
 
   // Event listeners
   window.addEventListener("scroll", toggleScrollButton);
   scrollToTopBtn.addEventListener("click", scrollToTop);
-
-  // Hover effects
+  // Hover effects - removed transform animations
   scrollToTopBtn.addEventListener("mouseenter", () => {
-    if (scrollToTopBtn.classList.contains("visible")) {
-      scrollToTopBtn.style.transform = "translateY(-5px) scale(1.1)";
-    }
+    // Removed hover transform effects
   });
 
   scrollToTopBtn.addEventListener("mouseleave", () => {
-    if (scrollToTopBtn.classList.contains("visible")) {
-      scrollToTopBtn.style.transform = "translateY(0) scale(1)";
-    }
+    // Removed hover transform effects
   });
 }
 
@@ -615,18 +597,15 @@ function initFloatingCards() {
     const randomDuration = 4000 + Math.random() * 2000;
 
     card.style.animationDelay = randomDelay + "ms";
-    card.style.animationDuration = randomDuration + "ms";
-
-    // Enhanced hover interactions that don't interfere with base positioning
+    card.style.animationDuration = randomDuration + "ms"; // Removed hover interactions that used transform animations
     card.addEventListener("mouseenter", function () {
-      this.style.transform = "translateY(-15px) scale(1.05)";
+      // Removed transform effects - no more movement on hover
       this.style.boxShadow = "none"; // Remove shadow
       this.style.zIndex = "10";
     });
 
     card.addEventListener("mouseleave", function () {
       // Reset to allow CSS animations to take over
-      this.style.transform = "";
       this.style.boxShadow = "none"; // Remove shadow
       this.style.zIndex = "1";
     });
@@ -1061,27 +1040,16 @@ function getNotificationColor(type) {
 }
 
 // Add CSS animations dynamically
-const additionalStyles = `
-  @keyframes blink {
+const additionalStyles = `  @keyframes blink {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
   }
-    @keyframes float {
-    0% { transform: translateY(0px); }
-    25% { transform: translateY(-5px) translateX(2px); }
-    50% { transform: translateY(-8px) translateX(-2px); }
-    75% { transform: translateY(-3px) translateX(-4px); }
-    100% { transform: translateY(0px); }
-  }
-    @keyframes bounce {
-    0%, 20%, 60%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-5px); }
-    80% { transform: translateY(-2px); }
-  }
+  
+  /* Removed float keyframe animation - no more movement effects */
   
   .floating-card {
-    animation: float 6s ease-in-out infinite;
-    will-change: transform;
+    /* Removed animation: float 6s ease-in-out infinite; */
+    will-change: auto; /* Reset will-change */
     transform-origin: center;
   }
   
@@ -1089,10 +1057,9 @@ const additionalStyles = `
   .floating-cards {
     transform: none !important;
   }
-  
     .skill-tag:hover,
   .tech-tag:hover {
-    animation: bounce 0.5s ease;
+    /* Removed bounce animation: bounce 0.5s ease; */
   }
   
   .loading-overlay.hidden {
