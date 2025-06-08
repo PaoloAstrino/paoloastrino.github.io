@@ -60,9 +60,10 @@ function initNavigation() {
         hamburger.classList.remove("active");
       });
     });
-  } // Navbar scroll effect with debouncing
+  }  // Navbar scroll effect with debouncing
   let lastScrollTop = 0;
   let isMouseNearTop = false;
+  let navbarHeight = 0;
 
   const debouncedScroll = debounce(() => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -70,6 +71,11 @@ function initNavigation() {
     const heroHeight = heroSection
       ? heroSection.offsetHeight
       : window.innerHeight;
+
+    // Get navbar height for calculations
+    if (navbarHeight === 0) {
+      navbarHeight = navbar.offsetHeight;
+    }
 
     // Only show navbar after scrolling past hero section
     if (scrollTop < heroHeight * 0.9) {
@@ -87,11 +93,21 @@ function initNavigation() {
       navbar.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
     }
 
-    // Auto-hide navbar on scroll down, show on scroll up or when mouse is near top
+    // Smooth navbar hiding based on scroll direction and position
     if (scrollTop > lastScrollTop && scrollTop > 200 && !isMouseNearTop) {
-      navbar.style.transform = "translateY(-100%)";
-    } else {
-      navbar.style.transform = "translateY(0)";
+      // Scrolling down - gradually hide navbar
+      const scrollDiff = scrollTop - lastScrollTop;
+      const hideDistance = Math.min(scrollDiff * 2, navbarHeight); // Multiply by 2 for faster hiding
+      const currentTransform = parseFloat(navbar.style.transform.replace(/translateY\((-?\d*\.?\d*)px\)/, '$1') || '0');
+      const newTransform = Math.max(-navbarHeight, currentTransform - hideDistance);
+      navbar.style.transform = `translateY(${newTransform}px)`;
+    } else if (scrollTop <= lastScrollTop || isMouseNearTop) {
+      // Scrolling up or mouse near top - gradually show navbar
+      const scrollDiff = lastScrollTop - scrollTop;
+      const showDistance = Math.min(scrollDiff * 3, navbarHeight); // Multiply by 3 for faster showing
+      const currentTransform = parseFloat(navbar.style.transform.replace(/translateY\((-?\d*\.?\d*)px\)/, '$1') || '0');
+      const newTransform = Math.min(0, currentTransform + showDistance);
+      navbar.style.transform = `translateY(${newTransform}px)`;
     }
     lastScrollTop = scrollTop;
   }, 10);
@@ -647,50 +663,57 @@ function initSpotlightEffect() {
   // Handle regular cards with our spotlight effect
   regularCards.forEach((card) => {
     // Add spotlight-card class to enable the CSS
-    card.classList.add("spotlight-card");
-
-    // Track mouse movement over the card
+    card.classList.add("spotlight-card");    // Track mouse movement over the card
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      // Convert to percentage for CSS custom properties
-      const xPercent = (x / rect.width) * 100;
-      const yPercent = (y / rect.height) * 100;
-
-      // Set CSS custom properties for the spotlight position
-      card.style.setProperty("--mouse-x", `${xPercent}%`);
-      card.style.setProperty("--mouse-y", `${yPercent}%`);
+      // Use pixel values for more reliable positioning
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+      
+      // Set spotlight color based on card type
+      let spotlightColor = "rgba(255, 255, 255, 0.25)"; // Default
+      if (card.classList.contains("project-card")) {
+        spotlightColor = "rgba(79, 70, 229, 0.2)"; // Primary color
+      } else if (card.classList.contains("experience-card")) {
+        spotlightColor = "rgba(79, 70, 229, 0.15)"; // Primary color
+      } else if (card.classList.contains("education-card")) {
+        spotlightColor = "rgba(16, 185, 129, 0.18)"; // Secondary color
+      } else if (card.classList.contains("certification-card")) {
+        spotlightColor = "rgba(79, 70, 229, 0.22)"; // Primary color
+      }
+      card.style.setProperty("--spotlight-color", spotlightColor);
     });
 
     // Reset spotlight position when mouse leaves
     card.addEventListener("mouseleave", () => {
-      card.style.setProperty("--mouse-x", "50%");
-      card.style.setProperty("--mouse-y", "50%");
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty("--mouse-x", `${rect.width / 2}px`);
+      card.style.setProperty("--mouse-y", `${rect.height / 2}px`);
     });
   });
 
   // Handle DataLoud glass card with its existing spotlight system
-  if (glassCard) {
-    glassCard.addEventListener("mousemove", (e) => {
+  if (glassCard) {    glassCard.addEventListener("mousemove", (e) => {
       const rect = glassCard.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      // Convert to percentage for CSS custom properties
-      const xPercent = (x / rect.width) * 100;
-      const yPercent = (y / rect.height) * 100;
-
-      // Set CSS custom properties for the existing spotlight position
-      glassCard.style.setProperty("--mouse-x", `${xPercent}%`);
-      glassCard.style.setProperty("--mouse-y", `${yPercent}%`);
+      // Use pixel values for more reliable positioning
+      glassCard.style.setProperty("--mouse-x", `${x}px`);
+      glassCard.style.setProperty("--mouse-y", `${y}px`);
+      
+      // Keep the existing blue spotlight color for glass card
+      glassCard.style.setProperty("--spotlight-color", "rgba(59, 130, 246, 0.15)");
     });
 
     // Reset spotlight position when mouse leaves
     glassCard.addEventListener("mouseleave", () => {
-      glassCard.style.setProperty("--mouse-x", "50%");
-      glassCard.style.setProperty("--mouse-y", "50%");
+      const rect = glassCard.getBoundingClientRect();
+      glassCard.style.setProperty("--mouse-x", `${rect.width / 2}px`);
+      glassCard.style.setProperty("--mouse-y", `${rect.height / 2}px`);
     });
   }
 }

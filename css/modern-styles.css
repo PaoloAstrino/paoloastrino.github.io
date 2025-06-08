@@ -1,5 +1,21 @@
 /* Modern Portfolio CSS - Based on Creative Agency Design */
 
+/* Golden Ratio Typography System Implementation
+ * 
+ * This system uses the mathematical golden ratio (φ ≈ 1.618) to create 
+ * harmonious font size relationships throughout the home screen.
+ * 
+ * Benefits:
+ * - Natural visual hierarchy based on mathematical proportions
+ * - Pleasing aesthetic relationships between text elements
+ * - Maintains responsiveness across all device sizes
+ * - Follows classical design principles for optimal readability
+ * 
+ * The system creates font scales from --font-xs to --font-3xl using 
+ * powers of the golden ratio, then applies them to key home screen elements
+ * like hero titles, descriptions, section headers, and statistics.
+ */
+
 /* CSS Variables for consistent theming */
 :root {
   --background: 0 0% 4%;
@@ -16,6 +32,53 @@
   --accent-foreground: 0 0% 95%;
   --border: 0 0% 20%;
   --radius: 0rem; /* Minimal radius for clean edges */
+
+  /* Golden Ratio Typography System (φ ≈ 1.618) */
+  --golden-ratio: 1.618;
+  
+  /* Base font size for calculations (16px = 1rem) */
+  --base-font-size: 1rem;
+  
+  /* Golden ratio scale for home screen typography */
+  --font-xs: calc(var(--base-font-size) / var(--golden-ratio) / var(--golden-ratio)); /* ≈ 0.382rem */
+  --font-sm: calc(var(--base-font-size) / var(--golden-ratio)); /* ≈ 0.618rem */
+  --font-base: var(--base-font-size); /* 1rem */
+  --font-lg: calc(var(--base-font-size) * var(--golden-ratio)); /* ≈ 1.618rem */
+  --font-xl: calc(var(--base-font-size) * var(--golden-ratio) * var(--golden-ratio)); /* ≈ 2.618rem */
+  --font-2xl: calc(var(--base-font-size) * var(--golden-ratio) * var(--golden-ratio) * var(--golden-ratio)); /* ≈ 4.236rem */
+  --font-3xl: calc(var(--base-font-size) * var(--golden-ratio) * var(--golden-ratio) * var(--golden-ratio) * var(--golden-ratio)); /* ≈ 6.854rem */
+    /* Responsive clamp values using golden ratio proportions */
+  --hero-title-min: calc(var(--font-xl) * 1.2); /* ≈ 1.94rem minimum */
+  --hero-title-max: var(--font-3xl); /* ≈ 6.854rem maximum */
+  --hero-greeting-min: calc(var(--font-xl) * 1.2); /* ≈ 1.94rem minimum */
+  --hero-greeting-max: var(--font-3xl); /* ≈ 6.854rem maximum */
+  --hero-description-min: calc(var(--font-base) * 1.1); /* ≈ 1.1rem minimum */
+  --hero-description-max: calc(var(--font-lg) * 0.8); /* ≈ 1.29rem maximum */
+  --hero-badge-min: calc(var(--font-sm) * 1.4); /* ≈ 0.865rem minimum */
+  --hero-badge-max: var(--font-base); /* 1rem maximum */
+  --section-title-min: calc(var(--font-lg) * 1.2); /* ≈ 1.94rem minimum */
+  --section-title-max: calc(var(--font-xl) * 1.15); /* ≈ 3.01rem maximum */
+  --section-subtitle-min: calc(var(--font-base) * 1.1); /* ≈ 1.1rem minimum */
+  --section-subtitle-max: calc(var(--font-lg) * 0.74); /* ≈ 1.2rem maximum */
+  --stat-number-min: calc(var(--font-lg) * 1.1); /* ≈ 1.78rem minimum */
+  --stat-number-max: calc(var(--font-xl) * 0.95); /* ≈ 2.49rem maximum */  --stat-label-min: var(--font-base); /* 1rem minimum */
+  --stat-label-max: calc(var(--font-lg) * 0.68); /* ≈ 1.1rem maximum */
+  --nav-logo-min: calc(var(--font-lg) * 0.74); /* ≈ 1.2rem minimum */
+  --nav-logo-max: calc(var(--font-lg) * 1.11); /* ≈ 1.8rem maximum */  --nav-link-min: var(--font-base); /* 1rem minimum */
+  --nav-link-max: calc(var(--font-lg) * 0.68); /* ≈ 1.1rem maximum */
+    /* Extended golden ratio variables for other elements */
+  --card-text-min: calc(var(--font-sm) * 1.4); /* ≈ 0.865rem minimum */
+  --card-text-max: var(--font-base); /* 1rem maximum */
+  --small-text-min: calc(var(--font-xs) * 1.8); /* ≈ 0.688rem minimum */
+  --small-text-max: calc(var(--font-sm) * 1.2); /* ≈ 0.742rem maximum */
+  --icon-size-min: calc(var(--font-lg) * 0.74); /* ≈ 1.2rem minimum */
+  --icon-size-max: calc(var(--font-lg) * 1.11); /* ≈ 1.8rem maximum */
+  --button-text-min: var(--font-base); /* 1rem minimum */
+  --button-text-max: calc(var(--font-lg) * 0.68); /* ≈ 1.1rem maximum */
+  --project-icon-min: calc(var(--font-xl) * 1.15); /* ≈ 3.01rem minimum */
+  --project-icon-max: calc(var(--font-2xl) * 0.83); /* ≈ 3.52rem maximum */
+  --large-icon-min: calc(var(--font-2xl) * 0.94); /* ≈ 3.98rem minimum */
+  --large-icon-max: calc(var(--font-3xl) * 0.73); /* ≈ 5.00rem maximum */
 }
 
 html[data-theme="light"] {
@@ -92,8 +155,7 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  /* Ensure the gradient text is visible */
-  -webkit-text-stroke: 0.5px hsl(220, 100%, 70%);
+  /* Removed text stroke to eliminate outline */
 }
 
 /* Light mode gradient with better contrast */
@@ -160,14 +222,14 @@ html[data-theme="light"] .text-gradient {
 }
 
 .section-title {
-  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-size: clamp(var(--section-title-min), 4.5vw, var(--section-title-max));
   font-weight: 800;
   margin-bottom: 1rem;
   color: hsl(var(--foreground));
 }
 
 .section-subtitle {
-  font-size: clamp(1.1rem, 1.8vw, 1.2rem);
+  font-size: clamp(var(--section-subtitle-min), 1.8vw, var(--section-subtitle-max));
   color: hsl(var(--foreground) / 0.8);
   max-width: 600px;
   margin: 0 auto;
@@ -182,7 +244,7 @@ html[data-theme="light"] .text-gradient {
   backdrop-filter: blur(10px);
   border: none; /* Clean, no border */
   z-index: 1000;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
   transform: translateY(-100%); /* Initially hidden */
 }
 
@@ -197,7 +259,7 @@ html[data-theme="light"] .text-gradient {
 }
 
 .nav-logo {
-  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-size: clamp(var(--nav-logo-min), 2.5vw, var(--nav-logo-max));
   font-weight: 700;
   color: hsl(var(--foreground));
   text-decoration: none;
@@ -220,7 +282,7 @@ html[data-theme="light"] .text-gradient {
   color: hsl(var(--foreground) / 0.8);
   text-decoration: none;
   font-weight: 500;
-  font-size: clamp(1rem, 1.8vw, 1.1rem);
+  font-size: clamp(var(--nav-link-min), 1.8vw, var(--nav-link-max));
   transition: all 0.3s ease;
   position: relative;
 }
@@ -360,7 +422,7 @@ html[data-theme="light"] .switch-handle {
   background: linear-gradient(135deg, hsl(220, 100%, 50%), hsl(200, 100%, 40%));
   color: hsl(var(--primary-foreground));
   border-radius: 0; /* Clean rectangular shape */
-  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  font-size: clamp(var(--hero-badge-min), 1.5vw, var(--hero-badge-max));
   font-weight: 500;
   margin-bottom: 1.5rem;
   border: none; /* No border for clean look */
@@ -368,7 +430,7 @@ html[data-theme="light"] .switch-handle {
 }
 
 .hero-title {
-  font-size: clamp(2.2rem, 7vw, 6rem);
+  font-size: clamp(var(--hero-title-min), 7vw, var(--hero-title-max));
   font-weight: 900;
   line-height: 1.1;
   margin-bottom: 1.5rem;
@@ -377,7 +439,7 @@ html[data-theme="light"] .switch-handle {
 .hero-greeting {
   display: block;
   color: hsl(var(--foreground));
-  font-size: clamp(2.2rem, 7vw, 6rem);
+  font-size: clamp(var(--hero-greeting-min), 7vw, var(--hero-greeting-max));
   font-weight: 900;
   margin-bottom: 0.5rem;
   font-family: "Poppins", sans-serif;
@@ -393,7 +455,7 @@ html[data-theme="light"] .switch-handle {
 }
 
 .hero-description {
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  font-size: clamp(var(--hero-description-min), 2vw, var(--hero-description-max));
   color: hsl(var(--foreground) / 0.8);
   margin-bottom: 2rem;
   line-height: 1.7;
@@ -424,12 +486,20 @@ html[data-theme="light"] .switch-handle {
 
 /* Responsive hero title adjustments to prevent wrapping */
 @media (max-width: 768px) {
+  :root {
+    /* Adjust golden ratio scale for tablet */
+    --hero-title-min: calc(var(--font-lg) * 1.1); /* ≈ 1.78rem minimum */
+    --hero-title-max: calc(var(--font-2xl) * 1.5); /* ≈ 6.35rem maximum */
+    --hero-greeting-min: calc(var(--font-lg) * 1.1); /* ≈ 1.78rem minimum */
+    --hero-greeting-max: calc(var(--font-2xl) * 1.5); /* ≈ 6.35rem maximum */
+  }
+
   .hero-title {
-    font-size: clamp(2rem, 6.5vw, 4rem);
+    font-size: clamp(var(--hero-title-min), 6.5vw, var(--hero-title-max));
   }
 
   .hero-greeting {
-    font-size: clamp(2rem, 6.5vw, 4rem);
+    font-size: clamp(var(--hero-greeting-min), 6.5vw, var(--hero-greeting-max));
   }
 
   .hero-title .text-gradient {
@@ -441,12 +511,20 @@ html[data-theme="light"] .switch-handle {
 }
 
 @media (max-width: 480px) {
+  :root {
+    /* Adjust golden ratio scale for mobile */
+    --hero-title-min: calc(var(--font-lg) * 1.0); /* ≈ 1.618rem minimum */
+    --hero-title-max: calc(var(--font-2xl) * 0.7); /* ≈ 2.97rem maximum */
+    --hero-greeting-min: calc(var(--font-lg) * 1.0); /* ≈ 1.618rem minimum */
+    --hero-greeting-max: calc(var(--font-2xl) * 0.7); /* ≈ 2.97rem maximum */
+  }
+
   .hero-title {
-    font-size: clamp(1.8rem, 6vw, 3rem);
+    font-size: clamp(var(--hero-title-min), 6vw, var(--hero-title-max));
   }
 
   .hero-greeting {
-    font-size: clamp(1.8rem, 6vw, 3rem);
+    font-size: clamp(var(--hero-greeting-min), 6vw, var(--hero-greeting-max));
   }
 
   .hero-title .text-gradient {
@@ -458,12 +536,20 @@ html[data-theme="light"] .switch-handle {
 }
 
 @media (max-width: 360px) {
+  :root {
+    /* Adjust golden ratio scale for very small mobile */
+    --hero-title-min: calc(var(--font-base) * 1.4); /* ≈ 1.4rem minimum */
+    --hero-title-max: calc(var(--font-xl) * 0.95); /* ≈ 2.49rem maximum */
+    --hero-greeting-min: calc(var(--font-base) * 1.4); /* ≈ 1.4rem minimum */
+    --hero-greeting-max: calc(var(--font-xl) * 0.95); /* ≈ 2.49rem maximum */
+  }
+
   .hero-title {
-    font-size: clamp(1.6rem, 5.5vw, 2.5rem);
+    font-size: clamp(var(--hero-title-min), 5.5vw, var(--hero-title-max));
   }
 
   .hero-greeting {
-    font-size: clamp(1.6rem, 5.5vw, 2.5rem);
+    font-size: clamp(var(--hero-greeting-min), 5.5vw, var(--hero-greeting-max));
   }
 
   .hero-title .text-gradient {
@@ -493,13 +579,13 @@ html[data-theme="light"] .switch-handle {
 }
 
 .stat-number {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-size: clamp(var(--stat-number-min), 4vw, var(--stat-number-max));
   font-weight: 700;
   color: hsl(var(--primary));
 }
 
 .stat-label {
-  font-size: clamp(1rem, 1.5vw, 1.1rem);
+  font-size: clamp(var(--stat-label-min), 1.5vw, var(--stat-label-max));
   color: hsl(var(--foreground) / 0.8);
   font-weight: 500;
 }
@@ -567,9 +653,8 @@ html[data-theme="light"] .switch-handle {
     0 clamp(20px, 2.5vw, 40px) clamp(60px, 7.5vw, 120px)
       rgba(59, 130, 246, 0.15),
     inset 0 clamp(1px, 0.125vw, 2px) 0 rgba(255, 255, 255, 0.2);
-  overflow: hidden;
-  position: relative;
-  /* Spotlight effect variables */
+  overflow: hidden;  position: relative;
+  /* Spotlight effect variables - will be updated by JavaScript */
   --mouse-x: 50%;
   --mouse-y: 50%;
   --spotlight-color: rgba(59, 130, 246, 0.15);
@@ -821,14 +906,14 @@ html[data-theme="light"] .switch-handle {
   padding: 0.5rem 1rem;
   border-radius: 0;
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: clamp(var(--card-text-min), 1.5vw, var(--card-text-max));
   box-shadow: 0 2px 8px hsl(var(--primary) / 0.3);
 }
 
 .type-indicator {
   padding: 0.25rem 0.75rem;
   border-radius: 0;
-  font-size: 0.75rem;
+  font-size: clamp(var(--small-text-min), 1.2vw, var(--small-text-max));
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -876,7 +961,7 @@ html[data-theme="light"] .switch-handle {
   color: hsl(var(--foreground) / 0.8);
   line-height: 1.6;
   margin-bottom: 1.5rem;
-  font-size: 1rem;
+  font-size: clamp(var(--button-text-min), 1.8vw, var(--button-text-max));
 }
 
 /* Skills Tags */
@@ -1091,10 +1176,10 @@ html[data-theme="light"] .switch-handle {
 
 .skill-category i {
   color: hsl(var(--primary));
-  font-size: 1.5rem;
+  font-size: clamp(var(--icon-size-min), 2vw, var(--icon-size-max));
   flex-shrink: 0; /* Prevent icon from shrinking */
-  width: 1.5rem; /* Fixed width for consistent alignment */
-  height: 1.5rem; /* Fixed height for consistent alignment */
+  width: clamp(var(--icon-size-min), 2vw, var(--icon-size-max)); /* Responsive width */
+  height: clamp(var(--icon-size-min), 2vw, var(--icon-size-max)); /* Responsive height */
   display: flex;
   align-items: center; /* Perfect vertical centering */
   justify-content: center; /* Perfect horizontal centering */
@@ -1120,7 +1205,7 @@ html[data-theme="light"] .switch-handle {
   color: hsl(var(--foreground));
   padding: 0.5rem 1rem;
   border-radius: 20px; /* Rounded pill shape */
-  font-size: 0.875rem;
+  font-size: clamp(var(--card-text-min), 1.5vw, var(--card-text-max));
   font-weight: 500;
   border: 1px solid hsl(var(--border) / 0.3); /* Subtle border */
   transition: all 0.3s ease;
@@ -1191,7 +1276,7 @@ html[data-theme="light"] .switch-handle {
 .project-image i,
 .project-visual i,
 .project-icon i {
-  font-size: clamp(2.5rem, 5vw, 3rem);
+  font-size: clamp(var(--project-icon-min), 5vw, var(--project-icon-max));
   color: hsl(var(--primary-foreground));
   opacity: 0.8;
 }
@@ -1449,7 +1534,7 @@ html[data-theme="light"] .switch-handle {
 }
 
 .project-icon {
-  font-size: clamp(3rem, 6vw, 3.5rem);
+  font-size: clamp(var(--large-icon-min), 6vw, var(--large-icon-max));
   color: hsl(var(--primary-foreground));
   opacity: 0.8;
 }
@@ -1977,16 +2062,15 @@ html[data-theme="light"] .scroll-progress {
     padding: 1.5rem;
     font-size: 1rem; /* Ensure readable text on mobile */
   }
-
   .legal-document p {
-    font-size: 1rem !important;
-    line-height: 1.7 !important;
-    color: hsl(var(--foreground) / 0.85) !important;
+    font-size: clamp(var(--button-text-min), 1.8vw, var(--button-text-max));
+    line-height: 1.7;
+    color: hsl(var(--foreground) / 0.85);
   }
 
   .legal-document h3 {
-    font-size: 1.2rem !important;
-    color: hsl(var(--foreground)) !important;
+    font-size: clamp(var(--nav-logo-min), 2.5vw, var(--nav-logo-max));
+    color: hsl(var(--foreground));
   }
 
   .close-overlay {
@@ -2018,16 +2102,15 @@ html[data-theme="light"] .scroll-progress {
     gap: 0.5rem;
     align-items: center;
   }
-
   /* Improve mobile text readability for legal links */
   .legal-link {
-    font-size: 1.1rem !important;
-    color: hsl(var(--foreground) / 0.85) !important;
+    font-size: clamp(var(--nav-link-min), 1.8vw, var(--nav-link-max));
+    color: hsl(var(--foreground) / 0.85);
   }
 
   .footer p {
-    font-size: 1rem !important;
-    color: hsl(var(--foreground) / 0.85) !important;
+    font-size: clamp(var(--button-text-min), 1.8vw, var(--button-text-max));
+    color: hsl(var(--foreground) / 0.85);
   }
 
   .legal-separator {
@@ -2672,7 +2755,7 @@ html[data-theme="light"] .scroll-progress {
   bottom: 0;
   background: radial-gradient(
     600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    hsl(var(--primary) / 0.15),
+    var(--spotlight-color, rgba(255, 255, 255, 0.25)),
     transparent 40%
   );
   opacity: 0;
@@ -2690,43 +2773,15 @@ html[data-theme="light"] .scroll-progress {
   z-index: 2;
 }
 
-/* Enhanced spotlight effect for project cards */
-.project-card.spotlight-card::before {
-  background: radial-gradient(
-    800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    hsl(var(--primary) / 0.12),
-    hsl(var(--accent) / 0.08) 30%,
-    transparent 50%
-  );
-}
-
-/* Enhanced spotlight effect for experience cards */
-.experience-card.spotlight-card::before {
-  background: radial-gradient(
-    700px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    hsl(var(--primary) / 0.1),
-    hsl(var(--secondary) / 0.06) 35%,
-    transparent 45%
-  );
-}
-
-/* Enhanced spotlight effect for education cards */
-.education-card.spotlight-card::before {
-  background: radial-gradient(
-    650px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    hsl(var(--secondary) / 0.12),
-    hsl(var(--accent) / 0.06) 30%,
-    transparent 45%
-  );
-}
-
-/* Enhanced spotlight effect for certification cards */
+/* Enhanced spotlight effect for different card types - now using dynamic --spotlight-color */
+.project-card.spotlight-card::before,
+.experience-card.spotlight-card::before,
+.education-card.spotlight-card::before,
 .certification-card.spotlight-card::before {
   background: radial-gradient(
-    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    hsl(var(--primary) / 0.14),
-    hsl(var(--accent) / 0.08) 25%,
-    transparent 40%
+    800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    var(--spotlight-color, rgba(255, 255, 255, 0.25)),
+    transparent 50%
   );
 }
 
