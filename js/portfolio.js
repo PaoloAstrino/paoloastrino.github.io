@@ -60,7 +60,7 @@ function initNavigation() {
         hamburger.classList.remove("active");
       });
     });
-  }  // Navbar scroll effect with debouncing
+  } // Navbar scroll effect with debouncing
   let lastScrollTop = 0;
   let isMouseNearTop = false;
   let navbarHeight = 0;
@@ -98,14 +98,23 @@ function initNavigation() {
       // Scrolling down - gradually hide navbar
       const scrollDiff = scrollTop - lastScrollTop;
       const hideDistance = Math.min(scrollDiff * 2, navbarHeight); // Multiply by 2 for faster hiding
-      const currentTransform = parseFloat(navbar.style.transform.replace(/translateY\((-?\d*\.?\d*)px\)/, '$1') || '0');
-      const newTransform = Math.max(-navbarHeight, currentTransform - hideDistance);
+      const currentTransform = parseFloat(
+        navbar.style.transform.replace(/translateY\((-?\d*\.?\d*)px\)/, "$1") ||
+          "0"
+      );
+      const newTransform = Math.max(
+        -navbarHeight,
+        currentTransform - hideDistance
+      );
       navbar.style.transform = `translateY(${newTransform}px)`;
     } else if (scrollTop <= lastScrollTop || isMouseNearTop) {
       // Scrolling up or mouse near top - gradually show navbar
       const scrollDiff = lastScrollTop - scrollTop;
       const showDistance = Math.min(scrollDiff * 3, navbarHeight); // Multiply by 3 for faster showing
-      const currentTransform = parseFloat(navbar.style.transform.replace(/translateY\((-?\d*\.?\d*)px\)/, '$1') || '0');
+      const currentTransform = parseFloat(
+        navbar.style.transform.replace(/translateY\((-?\d*\.?\d*)px\)/, "$1") ||
+          "0"
+      );
       const newTransform = Math.min(0, currentTransform + showDistance);
       navbar.style.transform = `translateY(${newTransform}px)`;
     }
@@ -663,7 +672,7 @@ function initSpotlightEffect() {
   // Handle regular cards with our spotlight effect
   regularCards.forEach((card) => {
     // Add spotlight-card class to enable the CSS
-    card.classList.add("spotlight-card");    // Track mouse movement over the card
+    card.classList.add("spotlight-card"); // Track mouse movement over the card
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -672,7 +681,7 @@ function initSpotlightEffect() {
       // Use pixel values for more reliable positioning
       card.style.setProperty("--mouse-x", `${x}px`);
       card.style.setProperty("--mouse-y", `${y}px`);
-      
+
       // Set spotlight color based on card type
       let spotlightColor = "rgba(255, 255, 255, 0.25)"; // Default
       if (card.classList.contains("project-card")) {
@@ -696,7 +705,8 @@ function initSpotlightEffect() {
   });
 
   // Handle DataLoud glass card with its existing spotlight system
-  if (glassCard) {    glassCard.addEventListener("mousemove", (e) => {
+  if (glassCard) {
+    glassCard.addEventListener("mousemove", (e) => {
       const rect = glassCard.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
@@ -704,9 +714,12 @@ function initSpotlightEffect() {
       // Use pixel values for more reliable positioning
       glassCard.style.setProperty("--mouse-x", `${x}px`);
       glassCard.style.setProperty("--mouse-y", `${y}px`);
-      
+
       // Keep the existing blue spotlight color for glass card
-      glassCard.style.setProperty("--spotlight-color", "rgba(59, 130, 246, 0.15)");
+      glassCard.style.setProperty(
+        "--spotlight-color",
+        "rgba(59, 130, 246, 0.15)"
+      );
     });
 
     // Reset spotlight position when mouse leaves
