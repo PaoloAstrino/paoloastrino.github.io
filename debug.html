@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DecryptedText Debug</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #0a0a0a;
+            color: white;
+            padding: 2rem;
+        }
+        .test-text {
+            font-size: 2rem;
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 1px solid #333;
+            cursor: pointer;
+        }
+        .test-text:hover {
+            background: #111;
+        }
+    </style>
+</head>
+<body>
+    <h1>DecryptedText Debug Test</h1>
+    
+    <div class="test-text hover-decrypt-test">Hover to decrypt this text</div>
+    <div class="test-text view-decrypt-test">This text animates on view</div>
+    
+    <script>
+        // Copy the DecryptedText function here for testing
+        function DecryptedText(element, options = {}) {
+            console.log('DecryptedText called with:', element, options);
+            
+            const defaults = {
+                text: element.textContent.trim(),
+                speed: 50,
+                maxIterations: 6,
+                characters: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?~`",
+                className: "revealed",
+                parentClassName: "all-letters",
+                encryptedClassName: "encrypted",
+                animateOn: "hover",
+                revealDirection: "left",
+                revealDelay: 70,
+                threshold: 0.1,
+                rootMargin: "0px",
+                delay: 0,
+                onComplete: null,
+                onStart: null,
+            };
+
+            const config = { ...defaults, ...options };
+            const originalText = config.text;
+            console.log('Animation config:', config);
+            
+            let isAnimating = false;
+            let hasAnimated = false;
+
+            function getRandomChar(chars = config.characters) {
+                return chars[Math.floor(Math.random() * chars.length)];
+            }
+
+            function animateText() {
+                console.log('Starting animation for:', originalText);
+                if (isAnimating) return;
+                isAnimating = true;
+
+                if (config.onStart) config.onStart();
+
+                element.classList.add(config.encryptedClassName);
+                element.classList.add(config.parentClassName);
+
+                let iteration = 0;
+                const interval = setInterval(() => {
+                    let scrambled = '';
+                    for (let i = 0; i < originalText.length; i++) {
+                        if (originalText[i] === ' ') {
+                            scrambled += ' ';
+                        } else if (iteration > config.maxIterations) {
+                            scrambled += originalText[i];
+                        } else {
+                            scrambled += getRandomChar();
+                        }
+                    }
+                    
+                    element.textContent = scrambled;
+                    iteration++;
+
+                    if (iteration > config.maxIterations + originalText.length) {
+                        clearInterval(interval);
+                        element.textContent = originalText;
+                        element.classList.remove(config.encryptedClassName);
+                        element.classList.add(config.className);
+                        isAnimating = false;
+                        hasAnimated = true;
+                        console.log('Animation completed');
+                        if (config.onComplete) config.onComplete();
+                    }
+                }, config.speed);
+            }
+
+            // Set up event listeners
+            if (config.animateOn === 'hover') {
+                console.log('Setting up hover listeners');
+                element.addEventListener('mouseenter', animateText);
+            } else if (config.animateOn === 'view') {
+                console.log('Setting up intersection observer');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !hasAnimated) {
+                            animateText();
+                        }
+                    });
+                }, { threshold: config.threshold, rootMargin: config.rootMargin });
+                
+                observer.observe(element);
+            }
+
+            return {
+                animate: animateText,
+                reset: () => {
+                    hasAnimated = false;
+                    element.classList.remove(config.className, config.encryptedClassName, config.parentClassName);
+                    element.textContent = originalText;
+                }
+            };
+        }
+
+        // Test initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing tests...');
+            
+            // Test hover
+            const hoverElement = document.querySelector('.hover-decrypt-test');
+            if (hoverElement) {
+                console.log('Found hover element:', hoverElement);
+                DecryptedText(hoverElement, { animateOn: 'hover' });
+            } else {
+                console.error('Hover element not found');
+            }
+            
+            // Test view
+            const viewElement = document.querySelector('.view-decrypt-test');
+            if (viewElement) {
+                console.log('Found view element:', viewElement);
+                DecryptedText(viewElement, { animateOn: 'view' });
+            } else {
+                console.error('View element not found');
+            }
+        });
+    </script>
+</body>
+</html>

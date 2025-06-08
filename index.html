@@ -580,8 +580,32 @@
                     <small>Click the button to manually trigger the animation</small>
                 </div>
             </div>
-        </div>
-    </section>
+        </div>    </section>
+
+    <!-- Simple test script for debugging -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded - testing hover detection');
+            
+            const testElement = document.querySelector('.hover-decrypt-text');
+            if (testElement) {
+                console.log('Found test element:', testElement.textContent);
+                
+                testElement.style.border = '1px solid red'; // Visual indicator
+                
+                testElement.addEventListener('mouseenter', function() {
+                    console.log('HOVER DETECTED on test element!');
+                    this.style.backgroundColor = 'rgba(255,0,0,0.1)';
+                });
+                
+                testElement.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = 'transparent';
+                });
+            } else {
+                console.log('Test element NOT found');
+            }
+        });
+    </script>
 
     <script src="js/portfolio.js"></script>
 </body>

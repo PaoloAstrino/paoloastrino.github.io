@@ -9,7 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
   initScrollToTop();
   initScrollAnimations();
   initDecryptedTextEffect();
-  initDecryptedTextExamples();
+  
+  // Add a small delay for DecryptedText examples to ensure DOM is fully ready
+  setTimeout(initDecryptedTextExamples, 100);
+  
   initFloatingCards();
   initSpotlightEffect();
   initContactForm();
@@ -306,27 +309,26 @@ function initScrollAnimations() {
   statNumbers.forEach((stat) => statsObserver.observe(stat));
 }
 
-// DecryptedText - Flexible vanilla JS implementation of text decryption animation
+// DecryptedText - React-like implementation matching exact behavior and performance
 // Usage: DecryptedText(element, options)
 function DecryptedText(element, options = {}) {
-  // Default configuration
+  // React component defaults - matching exactly
   const defaults = {
-    text: element.textContent.trim(), // Text to animate
-    speed: 50, // ms between character changes
-    maxIterations: 6, // number of scramble iterations per character
-    characters:
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?~`",
-    className: "revealed", // class added when animation completes
-    parentClassName: "all-letters", // class added to parent during animation
-    encryptedClassName: "encrypted", // class added during encryption
-    animateOn: "hover", // "hover", "view", "load", or "manual"
-    revealDirection: "left", // "left", "right", "center", "random"
-    revealDelay: 70, // ms between revealing each character
-    threshold: 0.1, // intersection observer threshold
-    rootMargin: "0px", // intersection observer root margin
-    delay: 0, // delay before starting animation
-    onComplete: null, // callback when animation completes
-    onStart: null, // callback when animation starts
+    text: element.textContent.trim(),
+    speed: 50,                    // Default speed from React component
+    maxIterations: 6,             // Default iterations from React component  
+    characters: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?~`",
+    className: "revealed",
+    parentClassName: "all-letters", 
+    encryptedClassName: "encrypted",
+    animateOn: "hover",           // Default trigger
+    revealDirection: "left",      // Default reveal direction
+    revealDelay: 30,              // Delay between revealing each character (faster like React)
+    threshold: 0.1,
+    rootMargin: "0px",
+    delay: 0,
+    onComplete: null,
+    onStart: null,
   };
 
   const config = { ...defaults, ...options };
@@ -334,209 +336,138 @@ function DecryptedText(element, options = {}) {
   let isAnimating = false;
   let hasAnimated = false;
 
-  // Store original classes
-  const originalClasses = element.className;
-
-  // Function to get random character from charset
-  function getRandomChar(chars = config.characters) {
-    return chars[Math.floor(Math.random() * chars.length)];
+  // Simple character randomizer - no weighted selection for React-like behavior
+  function getRandomChar() {
+    return config.characters[Math.floor(Math.random() * config.characters.length)];
   }
 
-  // Function to get weighted random character (more likely to pick similar characters)
-  function getWeightedRandomChar(targetChar) {
-    if (Math.random() < 0.3 && targetChar !== " ") {
-      const similar = getSimilarChar(targetChar);
-      if (similar) return similar;
+  // Main animation function - simplified to match React behavior exactly
+  function animate() {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    if (config.onStart) config.onStart(element);
+
+    // Add CSS classes
+    element.classList.add(config.encryptedClassName);
+    if (config.parentClassName && element.parentElement) {
+      element.parentElement.classList.add(config.parentClassName);
     }
-    return getRandomChar();
-  }
 
-  // Function to get character similar to target
-  function getSimilarChar(char) {
-    const isUpperCase = char >= "A" && char <= "Z";
-    const isLowerCase = char >= "a" && char <= "z";
-    const isDigit = char >= "0" && char <= "9";
-
-    if (isUpperCase) {
-      return String.fromCharCode(65 + Math.floor(Math.random() * 26));
-    } else if (isLowerCase) {
-      return String.fromCharCode(97 + Math.floor(Math.random() * 26));
-    } else if (isDigit) {
-      return String.fromCharCode(48 + Math.floor(Math.random() * 10));
-    }
-    return getRandomChar();
-  }
-
-  // Function to get reveal order based on direction
-  function getRevealOrder(textLength) {
-    const indices = Array.from({ length: textLength }, (_, i) => i);
-
+    const textArray = originalText.split("");
+    let workingArray = textArray.map(() => getRandomChar());
+    
+    // Get reveal order based on direction
+    let revealOrder = [];
     switch (config.revealDirection) {
-      case "right":
-        return indices.reverse();
       case "center":
-        const center = Math.floor(textLength / 2);
-        const order = [center];
+        const center = Math.floor(textArray.length / 2);
+        revealOrder = [center];
         for (let i = 1; i <= center; i++) {
-          if (center - i >= 0) order.push(center - i);
-          if (center + i < textLength) order.push(center + i);
+          if (center - i >= 0) revealOrder.push(center - i);
+          if (center + i < textArray.length) revealOrder.push(center + i);
         }
-        return order;
+        break;
+      case "right":
+        revealOrder = textArray.map((_, i) => textArray.length - 1 - i);
+        break;
       case "random":
-        return indices.sort(() => Math.random() - 0.5);
+        revealOrder = textArray.map((_, i) => i).sort(() => Math.random() - 0.5);
+        break;
       case "left":
       default:
-        return indices;
+        revealOrder = textArray.map((_, i) => i);
+        break;
+    }
+
+    let revealedCount = 0;
+
+    // Start with scrambled text
+    element.textContent = workingArray.join("");
+
+    // Reveal characters one by one
+    revealOrder.forEach((charIndex, orderIndex) => {
+      const char = textArray[charIndex];
+      let iterationCount = 0;
+
+      setTimeout(() => {
+        const charInterval = setInterval(() => {
+          if (char === " ") {
+            workingArray[charIndex] = " ";
+            clearInterval(charInterval);
+            revealedCount++;
+            checkComplete();
+            return;
+          }
+
+          if (iterationCount < config.maxIterations) {
+            workingArray[charIndex] = getRandomChar();
+            iterationCount++;
+          } else {
+            workingArray[charIndex] = char;
+            clearInterval(charInterval);
+            revealedCount++;
+            checkComplete();
+          }
+
+          element.textContent = workingArray.join("");
+        }, config.speed);
+      }, orderIndex * config.revealDelay);
+    });
+
+    function checkComplete() {
+      if (revealedCount === textArray.length) {
+        element.classList.remove(config.encryptedClassName);
+        element.classList.add(config.className);
+        if (config.parentClassName && element.parentElement) {
+          element.parentElement.classList.remove(config.parentClassName);
+        }
+        isAnimating = false;
+        hasAnimated = true;
+        if (config.onComplete) config.onComplete(element);
+      }
     }
   }
 
-  // Main animation function
-  function animate(startDelay = 0) {
-    if (isAnimating) return;
+  // Reset function
+  function reset() {
+    hasAnimated = false;
+    isAnimating = false;
+    element.classList.remove(config.className, config.encryptedClassName);
+    if (config.parentClassName && element.parentElement) {
+      element.parentElement.classList.remove(config.parentClassName);
+    }
+    element.textContent = originalText;
+  }
 
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        if (config.onStart) config.onStart(element);
-
-        isAnimating = true;
-        hasAnimated = true;
-
-        // Add CSS classes
-        element.classList.add(config.encryptedClassName);
-        if (config.parentClassName && element.parentElement) {
-          element.parentElement.classList.add(config.parentClassName);
+  // Setup triggers based on animateOn option
+  if (config.animateOn === "hover") {
+    element.addEventListener("mouseenter", animate);
+    element.addEventListener("mouseleave", reset);
+  } else if (config.animateOn === "view") {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasAnimated) {
+          animate();
+          observer.unobserve(element);
         }
-
-        const textArray = originalText.split("");
-        const workingArray = textArray.map(() => getRandomChar());
-        const revealOrder = getRevealOrder(textArray.length);
-        let revealedCount = 0;
-
-        // Start with scrambled text
-        element.textContent = workingArray.join("");
-
-        // Reveal characters based on direction
-        revealOrder.forEach((charIndex, orderIndex) => {
-          const char = textArray[charIndex];
-          let iterationCount = 0;
-
-          setTimeout(() => {
-            const charInterval = setInterval(() => {
-              if (char === " ") {
-                workingArray[charIndex] = " ";
-                clearInterval(charInterval);
-                revealedCount++;
-
-                if (revealedCount === textArray.length) {
-                  finishAnimation(resolve);
-                }
-                return;
-              }
-
-              if (iterationCount < config.maxIterations) {
-                workingArray[charIndex] = getWeightedRandomChar(char);
-                iterationCount++;
-              } else {
-                workingArray[charIndex] = char;
-                clearInterval(charInterval);
-                revealedCount++;
-
-                if (revealedCount === textArray.length) {
-                  finishAnimation(resolve);
-                }
-              }
-
-              element.textContent = workingArray.join("");
-            }, config.speed);
-          }, orderIndex * config.revealDelay);
-        });
-      }, startDelay);
+      });
+    }, { threshold: config.threshold, rootMargin: config.rootMargin });
+    observer.observe(element);
+  } else if (config.animateOn === "load") {
+    window.addEventListener("load", () => {
+      animate();
     });
   }
 
-  // Function to finish animation
-  function finishAnimation(resolve) {
-    isAnimating = false;
-
-    // Remove encrypted class and add revealed class
-    element.classList.remove(config.encryptedClassName);
-    element.classList.add(config.className);
-
-    if (config.parentClassName && element.parentElement) {
-      element.parentElement.classList.remove(config.parentClassName);
-    }
-
-    if (config.onComplete) config.onComplete(element);
-    if (resolve) resolve();
-  }
-
-  // Function to reset animation
-  function reset() {
-    isAnimating = false;
-    hasAnimated = false;
-    element.className = originalClasses;
-    element.textContent = originalText;
-
-    if (config.parentClassName && element.parentElement) {
-      element.parentElement.classList.remove(config.parentClassName);
-    }
-  }
-
-  // Setup event listeners based on animateOn option
-  function setupTriggers() {
-    switch (config.animateOn) {
-      case "hover":
-        element.addEventListener("mouseenter", () => {
-          if (!hasAnimated || config.animateOn === "hover") {
-            animate(config.delay);
-          }
-        });
-
-        element.addEventListener("mouseleave", () => {
-          if (config.animateOn === "hover") {
-            reset();
-          }
-        });
-        break;
-
-      case "view":
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting && !hasAnimated) {
-                animate(config.delay);
-                observer.unobserve(element);
-              }
-            });
-          },
-          { threshold: config.threshold, rootMargin: config.rootMargin }
-        );
-        observer.observe(element);
-        break;
-
-      case "load":
-        window.addEventListener("load", () => {
-          animate(config.delay);
-        });
-        break;
-
-      case "manual":
-        // Do nothing, will be triggered manually
-        break;
-    }
-  }
-
-  // Initialize
-  setupTriggers();
-
   // Return public API
-  return {
-    animate: (delay = config.delay) => animate(delay),
-    reset,
+  return { 
+    animate, 
+    reset, 
     isAnimating: () => isAnimating,
     hasAnimated: () => hasAnimated,
-    element,
-    config,
+    element, 
+    config 
   };
 }
 
@@ -558,16 +489,11 @@ function createDecryptedText(selector, options = {}) {
   return instances.length === 1 ? instances[0] : instances;
 }
 
-// Example usage functions (you can call these from console or other scripts)
+// Example usage functions using React component defaults
 function createHoverDecryptText(selector, customOptions = {}) {
   return createDecryptedText(selector, {
     animateOn: "hover",
-    speed: 100,
-    maxIterations: 20,
-    characters: "ABCD1234!?",
-    className: "revealed",
-    parentClassName: "all-letters",
-    encryptedClassName: "encrypted",
+    // Using React defaults: speed: 50, maxIterations: 6
     ...customOptions,
   });
 }
@@ -576,23 +502,18 @@ function createViewDecryptText(selector, customOptions = {}) {
   return createDecryptedText(selector, {
     animateOn: "view",
     revealDirection: "center",
-    speed: 80,
-    maxIterations: 15,
-    className: "revealed",
-    encryptedClassName: "encrypted",
+    // Using React defaults: speed: 50, maxIterations: 6
     ...customOptions,
   });
 }
 
 function createCustomDecryptText(selector, customOptions = {}) {
   return createDecryptedText(selector, {
+    animateOn: "hover",
+    // Custom settings that override React defaults
     speed: 100,
     maxIterations: 20,
     characters: "ABCD1234!?",
-    className: "revealed",
-    parentClassName: "all-letters",
-    encryptedClassName: "encrypted",
-    animateOn: "hover",
     ...customOptions,
   });
 }
@@ -652,45 +573,38 @@ function initDecryptedTextEffect() {
 
 // Initialize DecryptedText examples
 function initDecryptedTextExamples() {
-  // Example 1: Hover to decrypt (default behavior)
+  console.log("DecryptedText: Initializing examples with React-like behavior");
+  
+  // Example 1: Default hover behavior (matches React component defaults)
   createHoverDecryptText(".hover-decrypt-text");
 
-  // Example 2: Customized settings
+  // Example 2: Custom settings (matches React component with custom props)
   createCustomDecryptText(".custom-decrypt-text", {
     speed: 100,
     maxIterations: 20,
     characters: "ABCD1234!?",
-    animateOn: "hover",
   });
 
-  // Example 3: Animate on view with center reveal
+  // Example 3: Animate on view with center reveal (matches React component)
   createViewDecryptText(".view-decrypt-text", {
     revealDirection: "center",
-    speed: 80,
-    maxIterations: 15,
   });
 
-  // Example 4: Right-to-left reveal on hover
+  // Example 4: Right-to-left reveal on hover (React component style)
   createDecryptedText(".right-decrypt-text", {
     animateOn: "hover",
     revealDirection: "right",
-    speed: 60,
-    maxIterations: 10,
   });
 
-  // Example 5: Random reveal on view
+  // Example 5: Random reveal on view (React component style)
   createDecryptedText(".random-decrypt-text", {
     animateOn: "view",
     revealDirection: "random",
-    speed: 70,
-    maxIterations: 12,
   });
 
-  // Example 6: Manual trigger
+  // Example 6: Manual trigger (React component style)
   window.manualDecryptInstance = createDecryptedText(".manual-decrypt-text", {
     animateOn: "manual",
-    speed: 50,
-    maxIterations: 8,
     revealDirection: "center",
   });
 }
