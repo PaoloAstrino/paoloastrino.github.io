@@ -1712,6 +1712,36 @@ html[data-theme="light"] .switch-handle {
 }
 
 /* Fixed Elements - Social Buttons, Theme Toggle, Scroll to Top */
+
+/* Scroll Progress Bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--primary)),
+    hsl(220, 100%, 65%),
+    hsl(200, 100%, 55%)
+  );
+  z-index: 1001;
+  transition: width 0.1s ease-out;
+  box-shadow: 0 2px 8px hsl(var(--primary) / 0.3);
+}
+
+/* Light mode progress bar adjustment */
+html[data-theme="light"] .scroll-progress {
+  background: linear-gradient(
+    90deg,
+    hsl(220, 100%, 50%),
+    hsl(220, 100%, 45%),
+    hsl(200, 100%, 40%)
+  );
+  box-shadow: 0 2px 8px hsl(220, 100%, 50% / 0.2);
+}
+
 .social-buttons {
   position: fixed;
   right: min(2rem, 3vw);
@@ -2522,9 +2552,8 @@ html[data-theme="light"] .switch-handle {
     width: 40px;
     height: 40px;
     font-size: 0.9rem;
-  }
-  .scroll-progress {
-    height: 2px;
+  }  .scroll-progress {
+    height: 3px;
   }
   .contact-section {
     padding: 2rem 0; /* Further reduced from 3rem */
