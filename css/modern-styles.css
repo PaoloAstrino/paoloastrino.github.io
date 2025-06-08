@@ -2216,7 +2216,7 @@ html[data-theme="light"] .scroll-progress {
   .hamburger {
     display: flex;
   }
- .nav-right {
+  .nav-right {
     position: relative;
     flex-direction: row;
     justify-content: flex-end;
@@ -2657,117 +2657,77 @@ html[data-theme="light"] .scroll-progress {
   }
 }
 
-/* DecryptedText Examples Section Styling */
-.examples-section {
-  padding: 4rem 0;
-  background: hsl(var(--background));
-  border-top: 1px solid hsl(var(--border) / 0.3);
-}
-
-.examples-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
-}
-
-.example-card {
-  background: hsl(var(--background));
-  border: none;
-  border-radius: 0;
+/* Spotlight Card Animation Effect */
+.spotlight-card {
+  position: relative;
   overflow: hidden;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 32px hsl(var(--foreground) / 0.08);
-  border-left: 4px solid hsl(var(--primary));
 }
 
-.example-card:hover {
-  /* Removed transform: translateY(-8px); */
-  box-shadow: 0 16px 48px hsl(var(--foreground) / 0.12);
-  border-left-color: hsl(var(--primary));
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    hsl(var(--primary) / 0.15),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
 }
 
-.example-card h3 {
-  color: hsl(var(--foreground));
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  letter-spacing: -0.02em;
+.spotlight-card:hover::before {
+  opacity: 1;
 }
 
-.example-card p {
-  font-size: clamp(1rem, 1.8vw, 1.125rem);
-  color: hsl(var(--foreground));
-  font-weight: 600;
-  margin: 2rem 0;
-  min-height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Poppins", sans-serif;
-  letter-spacing: 0.01em;
-  line-height: 1.4;
+.spotlight-card > * {
+  position: relative;
+  z-index: 2;
 }
 
-.example-card small {
-  color: hsl(var(--muted-foreground));
-  font-size: clamp(0.8rem, 1.4vw, 0.9rem);
-  line-height: 1.5;
-  display: block;
-  margin-top: 1.5rem;
-  font-weight: 500;
+/* Enhanced spotlight effect for project cards */
+.project-card.spotlight-card::before {
+  background: radial-gradient(
+    800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    hsl(var(--primary) / 0.12),
+    hsl(var(--accent) / 0.08) 30%,
+    transparent 50%
+  );
 }
 
-.example-card .apple-button {
-  margin-top: 1.5rem;
-  padding: 0.75rem 1.5rem;
-  font-size: clamp(0.85rem, 1.5vw, 0.95rem);
-  font-weight: 600;
-  border: none;
-  border-radius: 0;
-  box-shadow: 0 4px 20px hsl(var(--primary) / 0.3);
+/* Enhanced spotlight effect for experience cards */
+.experience-card.spotlight-card::before {
+  background: radial-gradient(
+    700px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    hsl(var(--primary) / 0.1),
+    hsl(var(--secondary) / 0.06) 35%,
+    transparent 45%
+  );
 }
 
-/* Mobile responsive */
-@media (max-width: 768px) {
-  .examples-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .example-card {
-    padding: 1.5rem;
-  }
-
-  .examples-section {
-    padding: 3rem 0;
-  }
+/* Enhanced spotlight effect for education cards */
+.education-card.spotlight-card::before {
+  background: radial-gradient(
+    650px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    hsl(var(--secondary) / 0.12),
+    hsl(var(--accent) / 0.06) 30%,
+    transparent 45%
+  );
 }
 
-/* General DecryptedText styling for font consistency */
-.encrypted,
-.revealed,
-.all-letters {
-  font-family: inherit;
+/* Enhanced spotlight effect for certification cards */
+.certification-card.spotlight-card::before {
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    hsl(var(--primary) / 0.14),
+    hsl(var(--accent) / 0.08) 25%,
+    transparent 40%
+  );
 }
 
-/* Override any specific DecryptedText elements to use the main font */
-[data-decrypted-text] {
-  font-family: "Poppins", sans-serif;
-}
-
-/* Ensure encrypted characters don't break the font flow */
-.encrypted {
-  font-family: "Poppins", sans-serif;
-  letter-spacing: inherit;
-}
-
-.revealed {
-  font-family: "Poppins", sans-serif;
-  letter-spacing: inherit;
-}
-
-/* Animation state consistency */
-.decrypting {
-  font-family: "Poppins", sans-serif;
-}
+/* Enhanced spotlight effect for the DataLoud glass card - already implemented above */

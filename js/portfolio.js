@@ -60,14 +60,16 @@ function initNavigation() {
         hamburger.classList.remove("active");
       });
     });
-  }  // Navbar scroll effect with debouncing
+  } // Navbar scroll effect with debouncing
   let lastScrollTop = 0;
   let isMouseNearTop = false;
 
   const debouncedScroll = debounce(() => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const heroSection = document.querySelector('.hero');
-    const heroHeight = heroSection ? heroSection.offsetHeight : window.innerHeight;
+    const heroSection = document.querySelector(".hero");
+    const heroHeight = heroSection
+      ? heroSection.offsetHeight
+      : window.innerHeight;
 
     // Only show navbar after scrolling past hero section
     if (scrollTop < heroHeight * 0.9) {
@@ -98,8 +100,10 @@ function initNavigation() {
     const mouseY = e.clientY;
     const topThreshold = 80; // Show navbar when mouse is within 80px from top
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const heroSection = document.querySelector('.hero');
-    const heroHeight = heroSection ? heroSection.offsetHeight : window.innerHeight;
+    const heroSection = document.querySelector(".hero");
+    const heroHeight = heroSection
+      ? heroSection.offsetHeight
+      : window.innerHeight;
 
     // Don't show navbar on mouse movement if still in hero section
     if (scrollTop < heroHeight * 0.9) {
@@ -623,6 +627,72 @@ function initFloatingCards() {
       this.style.zIndex = "1";
     });
   });
+}
+
+// Spotlight Effect for Cards
+function initSpotlightEffect() {
+  // Select all card elements that should have the spotlight effect
+  const regularCardSelectors = [
+    ".project-card",
+    ".experience-card",
+    ".education-card",
+    ".certification-card",
+  ];
+
+  const regularCards = document.querySelectorAll(
+    regularCardSelectors.join(", ")
+  );
+  const glassCard = document.querySelector(".dataloud-glass-card");
+
+  // Handle regular cards with our spotlight effect
+  regularCards.forEach((card) => {
+    // Add spotlight-card class to enable the CSS
+    card.classList.add("spotlight-card");
+
+    // Track mouse movement over the card
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Convert to percentage for CSS custom properties
+      const xPercent = (x / rect.width) * 100;
+      const yPercent = (y / rect.height) * 100;
+
+      // Set CSS custom properties for the spotlight position
+      card.style.setProperty("--mouse-x", `${xPercent}%`);
+      card.style.setProperty("--mouse-y", `${yPercent}%`);
+    });
+
+    // Reset spotlight position when mouse leaves
+    card.addEventListener("mouseleave", () => {
+      card.style.setProperty("--mouse-x", "50%");
+      card.style.setProperty("--mouse-y", "50%");
+    });
+  });
+
+  // Handle DataLoud glass card with its existing spotlight system
+  if (glassCard) {
+    glassCard.addEventListener("mousemove", (e) => {
+      const rect = glassCard.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Convert to percentage for CSS custom properties
+      const xPercent = (x / rect.width) * 100;
+      const yPercent = (y / rect.height) * 100;
+
+      // Set CSS custom properties for the existing spotlight position
+      glassCard.style.setProperty("--mouse-x", `${xPercent}%`);
+      glassCard.style.setProperty("--mouse-y", `${yPercent}%`);
+    });
+
+    // Reset spotlight position when mouse leaves
+    glassCard.addEventListener("mouseleave", () => {
+      glassCard.style.setProperty("--mouse-x", "50%");
+      glassCard.style.setProperty("--mouse-y", "50%");
+    });
+  }
 }
 
 // Contact form functionality
