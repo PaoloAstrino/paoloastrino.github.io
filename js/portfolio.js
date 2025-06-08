@@ -60,13 +60,20 @@ function initNavigation() {
         hamburger.classList.remove("active");
       });
     });
-  }
-  // Navbar scroll effect with debouncing
+  }  // Navbar scroll effect with debouncing
   let lastScrollTop = 0;
   let isMouseNearTop = false;
 
   const debouncedScroll = debounce(() => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const heroSection = document.querySelector('.hero');
+    const heroHeight = heroSection ? heroSection.offsetHeight : window.innerHeight;
+
+    // Only show navbar after scrolling past hero section
+    if (scrollTop < heroHeight * 0.9) {
+      navbar.style.transform = "translateY(-100%)";
+      return;
+    }
 
     if (scrollTop > 100) {
       navbar.style.background = "hsla(var(--background), 0.95)";
@@ -86,11 +93,19 @@ function initNavigation() {
     }
     lastScrollTop = scrollTop;
   }, 10);
-
   // Mouse movement detection for navbar reveal
   const handleMouseMove = debounce((e) => {
     const mouseY = e.clientY;
     const topThreshold = 80; // Show navbar when mouse is within 80px from top
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const heroSection = document.querySelector('.hero');
+    const heroHeight = heroSection ? heroSection.offsetHeight : window.innerHeight;
+
+    // Don't show navbar on mouse movement if still in hero section
+    if (scrollTop < heroHeight * 0.9) {
+      isMouseNearTop = false;
+      return;
+    }
 
     if (mouseY <= topThreshold) {
       isMouseNearTop = true;
@@ -98,8 +113,6 @@ function initNavigation() {
     } else {
       isMouseNearTop = false;
       // Re-trigger scroll logic to potentially hide navbar
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
       if (scrollTop > lastScrollTop && scrollTop > 200) {
         navbar.style.transform = "translateY(-100%)";
       }

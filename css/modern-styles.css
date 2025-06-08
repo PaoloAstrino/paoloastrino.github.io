@@ -183,6 +183,7 @@ html[data-theme="light"] .text-gradient {
   border: none; /* Clean, no border */
   z-index: 1000;
   transition: all 0.3s ease;
+  transform: translateY(-100%); /* Initially hidden */
 }
 
 .nav-container {
@@ -1514,6 +1515,26 @@ html[data-theme="light"] .switch-handle {
   flex-direction: column;
 }
 
+/* Contact Form Wrapper - 40% less wide */
+.contact-form-wrapper {
+  width: 60%; /* 40% reduction from full width */
+  max-width: 600px; /* Reasonable maximum width */
+  margin: 0 auto; /* Center the form */
+}
+
+/* Responsive adjustments for contact form wrapper */
+@media (max-width: 768px) {
+  .contact-form-wrapper {
+    width: 80%; /* Less reduction on tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form-wrapper {
+    width: 95%; /* Almost full width on mobile for usability */
+  }
+}
+
 .contact-form {
   height: 100%;
   display: flex;
@@ -1745,13 +1766,18 @@ html[data-theme="light"] .scroll-progress {
 
 .social-buttons {
   position: fixed;
-  right: min(2rem, 3vw);
-  top: 50%;
-  transform: translateY(-50%);
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  background: transparent;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
   z-index: 100;
+  padding: 2rem 0;
 }
 
 .social-btn {
@@ -2190,7 +2216,7 @@ html[data-theme="light"] .scroll-progress {
   .hamburger {
     display: flex;
   }
-  .nav-right {
+ .nav-right {
     position: relative;
     flex-direction: row;
     justify-content: flex-end;
