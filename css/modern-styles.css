@@ -410,7 +410,7 @@ html[data-theme="dark"] .switch {
 }
 
 html[data-theme="dark"] .switch-handle {
-  left: 26px;
+  left: 14px;
   background: hsl(var(--primary-foreground));
 }
 
@@ -1742,8 +1742,9 @@ html[data-theme="light"] .switch-handle {
 .send-message-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  width: 100%;
+  width: auto;
   padding: clamp(0.75rem, 1.5vw, 1rem) clamp(1.5rem, 3vw, 2rem); /* Responsive padding using clamp() */
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
@@ -1757,7 +1758,7 @@ html[data-theme="light"] .switch-handle {
   ); /* Responsive font size using clamp() */
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: auto; /* Push to bottom */
+  margin: 1rem auto 0; /* Center the button and add top margin */
   box-shadow: 0 2px 8px hsl(var(--primary) / 0.3); /* Subtle shadow like other buttons */
   font-family: inherit;
 }
