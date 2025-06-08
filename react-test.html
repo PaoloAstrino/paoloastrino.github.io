@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,16 +13,19 @@
             padding: 2rem;
             line-height: 1.6;
         }
+
         .test-container {
             max-width: 800px;
             margin: 0 auto;
         }
+
         .test-section {
             margin: 3rem 0;
             padding: 2rem;
             border: 1px solid #333;
             border-radius: 8px;
         }
+
         .test-text {
             font-size: 1.5rem;
             margin: 1rem 0;
@@ -31,35 +35,39 @@
             cursor: pointer;
             transition: background 0.3s ease;
         }
+
         .test-text:hover {
             background: #222;
         }
+
         h2 {
             color: #4f46e5;
             margin-bottom: 1rem;
         }
+
         p {
             color: #888;
             margin-bottom: 1rem;
         }
     </style>
 </head>
+
 <body>
     <div class="test-container">
         <h1>React-like DecryptedText Animation Test</h1>
-        
+
         <div class="test-section">
             <h2>Example 1: Defaults (hover to decrypt)</h2>
             <p>Should match: &lt;DecryptedText text="Hover me!" /&gt;</p>
             <div class="test-text hover-default">Hover me!</div>
         </div>
-        
+
         <div class="test-section">
             <h2>Example 2: Customized speed and characters</h2>
             <p>Should match React component with speed={100}, maxIterations={20}, characters="ABCD1234!?"</p>
             <div class="test-text hover-custom">Customize me</div>
         </div>
-        
+
         <div class="test-section">
             <h2>Example 3: Animate on view (center reveal)</h2>
             <p>Should match React component with animateOn="view", revealDirection="center"</p>
@@ -77,7 +85,7 @@
                 maxIterations: 6,             // Default iterations from React component  
                 characters: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?~`",
                 className: "revealed",
-                parentClassName: "all-letters", 
+                parentClassName: "all-letters",
                 encryptedClassName: "encrypted",
                 animateOn: "hover",           // Default trigger
                 revealDirection: "left",      // Default reveal direction
@@ -114,7 +122,7 @@
 
                 const textArray = originalText.split("");
                 let workingArray = textArray.map(() => getRandomChar());
-                
+
                 // For center reveal
                 let revealOrder = [];
                 if (config.revealDirection === "center") {
@@ -209,7 +217,7 @@
         }
 
         // Initialize when DOM is ready
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Example 1: Default settings (React component defaults)
             DecryptedText(document.querySelector('.hover-default'));
 
@@ -228,4 +236,5 @@
         });
     </script>
 </body>
+
 </html>
