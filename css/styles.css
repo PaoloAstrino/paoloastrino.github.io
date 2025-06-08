@@ -247,7 +247,8 @@ body {
 }
 
 .stat {
-  text-align: center;  padding: 1.5rem;
+  text-align: center;
+  padding: 1.5rem;
   background: white;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -422,7 +423,8 @@ body {
   gap: 2rem;
 }
 
-.project-card {  background: white;
+.project-card {
+  background: white;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -527,7 +529,8 @@ body {
 }
 
 .skill-category {
-  background: white;  padding: 2rem;
+  background: white;
+  padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
@@ -557,7 +560,8 @@ body {
   padding: 0.5rem 1rem;
   border-radius: 20px;
   font-size: 0.9rem;
-  font-weight: 500;  transition: background-color 0.3s ease;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
 }
 
 .skill-item:hover {
@@ -595,7 +599,8 @@ body {
   gap: 2rem;
 }
 
-.certification-card {  background: #f8f9fa;
+.certification-card {
+  background: #f8f9fa;
   padding: 2rem;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -764,7 +769,8 @@ body {
   gap: 1rem;
 }
 
-.social-link {  color: #bdc3c7;
+.social-link {
+  color: #bdc3c7;
   font-size: 1.2rem;
   transition: color 0.3s ease;
   padding: 0.5rem;
