@@ -892,6 +892,8 @@ function initPageLoadAnimation() {
 
 // Legal Document Overlay Functionality
 function initLegalOverlays() {
+  console.log("Initializing legal overlays...");
+
   const privacyLink = document.getElementById("privacy-link");
   const termsLink = document.getElementById("terms-link");
   const privacyOverlay = document.getElementById("privacy-overlay");
@@ -899,18 +901,25 @@ function initLegalOverlays() {
   const closePrivacy = document.getElementById("close-privacy");
   const closeTerms = document.getElementById("close-terms");
 
+  console.log("Privacy link:", privacyLink);
+  console.log("Privacy overlay:", privacyOverlay);
+
   // Open overlays
   if (privacyLink && privacyOverlay) {
     privacyLink.addEventListener("click", (e) => {
       e.preventDefault();
+      console.log("Privacy policy clicked, opening overlay...");
       privacyOverlay.classList.add("active");
       document.body.style.overflow = "hidden"; // Prevent background scrolling
     });
+  } else {
+    console.warn("Privacy link or overlay not found");
   }
 
   if (termsLink && termsOverlay) {
     termsLink.addEventListener("click", (e) => {
       e.preventDefault();
+      console.log("Terms clicked, opening overlay...");
       termsOverlay.classList.add("active");
       document.body.style.overflow = "hidden"; // Prevent background scrolling
     });
@@ -919,6 +928,7 @@ function initLegalOverlays() {
   // Close overlays
   if (closePrivacy && privacyOverlay) {
     closePrivacy.addEventListener("click", () => {
+      console.log("Closing privacy overlay...");
       privacyOverlay.classList.remove("active");
       document.body.style.overflow = ""; // Restore scrolling
     });
@@ -926,6 +936,7 @@ function initLegalOverlays() {
 
   if (closeTerms && termsOverlay) {
     closeTerms.addEventListener("click", () => {
+      console.log("Closing terms overlay...");
       termsOverlay.classList.remove("active");
       document.body.style.overflow = ""; // Restore scrolling
     });
@@ -936,6 +947,7 @@ function initLegalOverlays() {
     if (overlay) {
       overlay.addEventListener("click", (e) => {
         if (e.target === overlay) {
+          console.log("Clicked outside overlay, closing...");
           overlay.classList.remove("active");
           document.body.style.overflow = ""; // Restore scrolling
         }
@@ -946,6 +958,7 @@ function initLegalOverlays() {
   // Close overlays with Escape key
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
+      console.log("Escape key pressed, closing overlays...");
       [privacyOverlay, termsOverlay].forEach((overlay) => {
         if (overlay && overlay.classList.contains("active")) {
           overlay.classList.remove("active");

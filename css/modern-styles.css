@@ -125,7 +125,7 @@ html[data-theme="light"] .text-gradient {
   transition: all 0.3s ease;
   border: none;
   cursor: pointer;
-  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
 }
 
 .apple-button:hover {
@@ -140,7 +140,7 @@ html[data-theme="light"] .text-gradient {
   color: hsl(var(--foreground));
   text-decoration: none;
   font-weight: 600;
-  font-size: clamp(0.8rem, 1.3vw, 0.875rem);
+  font-size: clamp(0.95rem, 1.3vw, 1rem);
   transition: all 0.3s ease;
 }
 
@@ -168,8 +168,8 @@ html[data-theme="light"] .text-gradient {
 }
 
 .section-subtitle {
-  font-size: clamp(1rem, 1.8vw, 1.125rem);
-  color: hsl(var(--muted-foreground));
+  font-size: clamp(1.1rem, 1.8vw, 1.2rem);
+  color: hsl(var(--foreground) / 0.8);
   max-width: 600px;
   margin: 0 auto;
 }
@@ -217,7 +217,7 @@ html[data-theme="light"] .text-gradient {
 }
 
 .nav-link {
-  color: hsl(var(--muted-foreground));
+  color: hsl(var(--foreground) / 0.8);
   text-decoration: none;
   font-weight: 500;
   font-size: clamp(1rem, 1.8vw, 1.1rem);
@@ -367,47 +367,30 @@ html[data-theme="light"] .switch-handle {
 }
 
 .hero-title {
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(2.2rem, 7vw, 6rem);
   font-weight: 900;
   line-height: 1.1;
   margin-bottom: 1.5rem;
 }
 
+.hero-title .text-gradient {
+  display: inline-block;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.02em;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
 .hero-description {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: hsl(var(--muted-foreground));
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  color: hsl(var(--foreground) / 0.8);
   margin-bottom: 2rem;
   line-height: 1.7;
   max-width: 500px;
-  font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Fira Code",
-    "Courier New", monospace;
-  letter-spacing: 0.03em;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.01em;
   transition: all 0.3s ease;
   position: relative;
-}
-
-/* DecryptedText Animation Styles */
-.hero-title .text-gradient {
-  font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Fira Code",
-    "Courier New", monospace;
-  letter-spacing: 0.08em;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-/* Add a subtle cursor effect during animation */
-.hero-title .text-gradient::after,
-.hero-description::after {
-  content: "_";
-  color: hsl(var(--primary));
-  animation: blink 1s infinite;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.hero-title .text-gradient.decrypting::after,
-.hero-description.decrypting::after {
-  opacity: 1;
 }
 
 /* Enhanced text shadow during decryption for better visibility */
@@ -420,28 +403,51 @@ html[data-theme="light"] .switch-handle {
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
 
-@keyframes blink {
-  0%,
-  50% {
-    opacity: 1;
-  }
-  51%,
-  100% {
-    opacity: 0;
-  }
-}
-
 /* Ensure DecryptedText works with reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-  .hero-title .text-gradient::after,
-  .hero-description::after {
-    animation: none;
-    opacity: 0 !important;
-  }
-
   .hero-title .text-gradient.decrypting,
   .hero-description.decrypting {
     text-shadow: none;
+  }
+}
+
+/* Responsive hero title adjustments to prevent wrapping */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: clamp(2rem, 6.5vw, 4rem);
+  }
+
+  .hero-title .text-gradient {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: clamp(1.8rem, 6vw, 3rem);
+  }
+
+  .hero-title .text-gradient {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 85vw;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: clamp(1.6rem, 5.5vw, 2.5rem);
+  }
+
+  .hero-title .text-gradient {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80vw;
   }
 }
 
@@ -470,8 +476,8 @@ html[data-theme="light"] .switch-handle {
 }
 
 .stat-label {
-  font-size: clamp(0.875rem, 1.5vw, 1rem);
-  color: hsl(var(--muted-foreground));
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
+  color: hsl(var(--foreground) / 0.8);
   font-weight: 500;
 }
 
@@ -653,11 +659,11 @@ html[data-theme="light"] .switch-handle {
 
 .dataloud-glass-card p {
   font-size: clamp(
-    0.6545rem,
+    0.75rem,
     1.155vw,
     1.309rem
-  ); /* 0.595rem-1.19rem increased by 10% */
-  color: hsl(var(--muted-foreground));
+  ); /* Increased minimum from 0.6545rem */
+  color: hsl(var(--foreground) / 0.8);
   margin: 0;
   opacity: 0.9;
 }
@@ -858,10 +864,10 @@ html[data-theme="light"] .switch-handle {
 }
 
 .description {
-  color: hsl(var(--muted-foreground));
+  color: hsl(var(--foreground) / 0.8);
   line-height: 1.6;
   margin-bottom: 1.5rem;
-  font-size: clamp(0.875rem, 1.4vw, 0.95rem);
+  font-size: 1rem;
 }
 
 /* Skills Tags */
@@ -1285,7 +1291,7 @@ html[data-theme="light"] .switch-handle {
 }
 
 .contact-info p {
-  color: hsl(var(--muted-foreground));
+  color: hsl(var(--foreground) / 0.8);
   line-height: 1.6;
   margin-bottom: 2rem;
 }
@@ -1407,7 +1413,7 @@ html[data-theme="light"] .switch-handle {
 
 /* Notification Styles */
 .notification {
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .notification-content {
@@ -1486,7 +1492,7 @@ html[data-theme="light"] .switch-handle {
 }
 
 .contact-card p {
-  color: hsl(var(--muted-foreground));
+  color: hsl(var(--foreground) / 0.8);
 }
 
 /* Contact Form Container */
@@ -1613,7 +1619,7 @@ html[data-theme="light"] .switch-handle {
 }
 
 .footer p {
-  color: hsl(var(--muted-foreground));
+  color: hsl(var(--foreground) / 0.8);
   margin-bottom: 0;
   font-size: 1rem;
 }
@@ -1681,7 +1687,7 @@ html[data-theme="light"] .switch-handle {
 }
 
 .legal-link {
-  color: hsl(var(--muted-foreground));
+  color: hsl(var(--foreground) / 0.8);
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
@@ -1695,7 +1701,7 @@ html[data-theme="light"] .switch-handle {
 }
 
 .legal-separator {
-  color: hsl(var(--muted-foreground));
+  color: hsl(var(--foreground) / 0.6);
   font-size: 1rem;
 }
 
@@ -1781,7 +1787,7 @@ html[data-theme="light"] .switch-handle {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 99999; /* Increased z-index to ensure it's on top */
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
@@ -1868,7 +1874,7 @@ html[data-theme="light"] .switch-handle {
 
 .legal-document .last-updated {
   font-style: italic;
-  color: hsl(var(--muted-foreground));
+  color: hsl(var(--foreground) / 0.7);
   margin-bottom: 2rem;
   font-size: 0.875rem;
 }
@@ -1886,16 +1892,21 @@ html[data-theme="light"] .switch-handle {
 }
 
 .legal-document p {
-  color: hsl(var(--muted-foreground));
+  color: hsl(var(--foreground) / 0.8);
   line-height: 1.7;
   margin-bottom: 1rem;
 }
 
 /* Responsive overlay styles */
 @media (max-width: 768px) {
+  .overlay {
+    padding: 1rem; /* Add padding on mobile */
+  }
+
   .overlay-content {
     width: 95vw;
     max-height: 85vh;
+    margin: 0; /* Ensure centered */
   }
 
   .overlay-header {
@@ -1908,6 +1919,18 @@ html[data-theme="light"] .switch-handle {
 
   .overlay-body {
     padding: 1.5rem;
+    font-size: 1rem; /* Ensure readable text on mobile */
+  }
+
+  .legal-document p {
+    font-size: 1rem !important;
+    line-height: 1.7 !important;
+    color: hsl(var(--foreground) / 0.85) !important;
+  }
+
+  .legal-document h3 {
+    font-size: 1.2rem !important;
+    color: hsl(var(--foreground)) !important;
   }
 
   .close-overlay {
@@ -1938,6 +1961,17 @@ html[data-theme="light"] .switch-handle {
     flex-direction: column;
     gap: 0.5rem;
     align-items: center;
+  }
+
+  /* Improve mobile text readability for legal links */
+  .legal-link {
+    font-size: 1.1rem !important;
+    color: hsl(var(--foreground) / 0.85) !important;
+  }
+
+  .footer p {
+    font-size: 1rem !important;
+    color: hsl(var(--foreground) / 0.85) !important;
   }
 
   .legal-separator {
@@ -2102,6 +2136,27 @@ html[data-theme="light"] .switch-handle {
 }
 
 @media (max-width: 768px) {
+  /* Improve mobile text readability */
+  body {
+    font-size: 16px; /* Ensure minimum font size on mobile */
+  }
+
+  .section-subtitle {
+    font-size: clamp(1.2rem, 2.5vw, 1.4rem) !important;
+    color: hsl(var(--foreground) / 0.9) !important;
+  }
+
+  .description {
+    font-size: 1rem !important;
+    color: hsl(var(--foreground) / 0.8) !important;
+    line-height: 1.7 !important;
+  }
+
+  .dataloud-glass-card p {
+    font-size: clamp(0.9rem, 3vw, 1.1rem) !important;
+    color: hsl(var(--foreground) / 0.85) !important;
+  }
+
   .hamburger {
     display: flex;
   }
@@ -2378,6 +2433,40 @@ html[data-theme="light"] .switch-handle {
 }
 
 @media (max-width: 480px) {
+  /* Enhanced mobile text readability */
+  body {
+    font-size: 16px; /* Ensure minimum font size */
+    line-height: 1.7; /* Improve line spacing */
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 6vw, 2.5rem) !important;
+    line-height: 1.2 !important;
+  }
+
+  .section-subtitle {
+    font-size: clamp(1.1rem, 4vw, 1.3rem) !important;
+    color: hsl(var(--foreground) / 0.9) !important;
+    line-height: 1.6 !important;
+  }
+
+  .hero-description {
+    font-size: clamp(1.1rem, 4vw, 1.25rem) !important;
+    color: hsl(var(--foreground) / 0.9) !important;
+    line-height: 1.7 !important;
+  }
+
+  .description {
+    font-size: 1.05rem !important;
+    color: hsl(var(--foreground) / 0.85) !important;
+    line-height: 1.8 !important;
+  }
+
+  .nav-link {
+    font-size: clamp(1.1rem, 4vw, 1.2rem) !important;
+    color: hsl(var(--foreground) / 0.9) !important;
+  }
+
   .container {
     padding: 0 1rem;
   }
