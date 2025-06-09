@@ -2310,6 +2310,8 @@ html[data-theme="light"] .scroll-progress {
     line-height: 1.4; /* Better line height for readability */
     word-break: break-word; /* Allow breaking on very small screens */
   }
+}
+
 @media (max-width: 320px) {
   /* Extra small mobile devices */
   .footer {
@@ -3014,5 +3016,3 @@ html[data-theme="light"] .scroll-progress {
     transparent 50%
   );
 }
-
-/* Enhanced spotlight effect for the DataLoud glass card - already implemented above */
