@@ -223,6 +223,24 @@ html[data-theme="light"] .text-gradient {
   transform: translateY(-2px); /* Subtle lift effect */
 }
 
+/* Light theme button styling for better readability */
+html[data-theme="light"] .apple-button,
+html[data-theme="light"] .secondary-link {
+  background: hsl(0 0% 0% / 0.05); /* Very subtle dark background */
+  border: 1px solid hsl(0 0% 20% / 0.15); /* Subtle dark border */
+  color: hsl(0 0% 25%); /* Much darker text for better readability */
+}
+
+html[data-theme="light"] .apple-button:hover,
+html[data-theme="light"] .secondary-link:hover {
+  background: hsl(0 0% 10% / 0.08); /* Slightly darker on hover */
+  border-color: hsl(0 0% 30% / 0.25);
+  color: hsl(0 0% 15%); /* Even darker text on hover */
+  box-shadow: 
+    0 8px 32px hsl(0 0% 0% / 0.1),
+    0 0 0 1px hsl(0 0% 20% / 0.05);
+}
+
 /* Add a subtle shine effect on hover */
 .apple-button::before,
 .secondary-link::before {
