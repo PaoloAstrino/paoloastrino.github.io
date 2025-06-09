@@ -20,6 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
   initParallaxEffects();
   initPerformanceOptimizations();
   initLegalOverlays();
+  
+  // Initialize dithered waves animation
+  initDitheredWaves();
+  
   // Desktop-only features
   // if (window.innerWidth > 768) {
   //   initCursorTrail();
@@ -1344,6 +1348,21 @@ const additionalStyles = `  @keyframes blink {
 const styleSheet = document.createElement("style");
 styleSheet.textContent = additionalStyles;
 document.head.appendChild(styleSheet);
+
+// Dithered Waves Animation
+function initDitheredWaves() {
+  const container = document.getElementById('dithered-waves-container');
+  if (container && typeof DitheredWaves !== 'undefined') {
+    try {
+      const waves = new DitheredWaves(container);
+      console.log('Dithered waves animation initialized successfully');
+    } catch (error) {
+      console.warn('Failed to initialize dithered waves:', error);
+    }
+  } else {
+    console.warn('Dithered waves container not found or DitheredWaves class not loaded');
+  }
+}
 
 // ===== PRIVACY COMMITMENT =====
 // Paolo Astrino Portfolio - Privacy-First Design

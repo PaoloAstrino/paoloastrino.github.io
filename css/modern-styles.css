@@ -479,7 +479,7 @@ html[data-theme="light"] .switch-handle {
   background: hsl(var(--background));
 }
 
-/* Hero section blue background for homepage only */
+/* Hero section dithered waves background for homepage only */
 body.homepage .hero::after {
   content: "";
   position: absolute;
@@ -487,19 +487,31 @@ body.homepage .hero::after {
   left: 57.14%;
   width: 42.86%;
   height: 80vh;
-  background: linear-gradient(
-    135deg,
-    hsl(220, 100%, 60%) 0%,
-    hsl(210, 100%, 55%) 25%,
-    hsl(200, 100%, 50%) 50%,
-    hsl(190, 100%, 45%) 75%,
-    hsl(180, 100%, 40%) 100%
-  );
   border-radius: 2rem 0 0 2rem;
   border: 2px solid hsl(220, 100%, 35%);
   z-index: 5;
-  opacity: 0.3;
+  opacity: 0.8;
   pointer-events: none;
+  overflow: hidden;
+}
+
+/* Container for the dithered waves animation */
+#dithered-waves-container {
+  position: absolute;
+  top: 10vh;
+  left: 57.14%;
+  width: 42.86%;
+  height: 80vh;
+  border-radius: 2rem 0 0 2rem;
+  overflow: hidden;
+  z-index: 6;
+  pointer-events: auto;
+}
+
+#dithered-waves-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 2rem 0 0 2rem;
 }
 
 .hero-container {
