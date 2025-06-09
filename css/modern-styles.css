@@ -3138,15 +3138,15 @@ html[data-theme="light"] .scroll-progress {
   );
   border-radius: 2rem 0 0 2rem;
   border: 2px solid hsl(220, 100%, 35%);
-  z-index: -1;
-  opacity: 0.1;
+  z-index: 1;
+  opacity: 0.3;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .homepage-background-section {
     width: 60%;
-    opacity: 0.08;
+    opacity: 0.25;
     border-radius: 1.5rem 0 0 1.5rem;
     border-width: 1.5px;
   }
@@ -3155,7 +3155,7 @@ html[data-theme="light"] .scroll-progress {
 @media (max-width: 480px) {
   .homepage-background-section {
     width: 70%;
-    opacity: 0.06;
+    opacity: 0.2;
     border-radius: 1rem 0 0 1rem;
     border-width: 1px;
   }
