@@ -217,9 +217,7 @@ html[data-theme="light"] .text-gradient {
   -webkit-backdrop-filter: blur(20px);
   border-color: hsl(0 0% 40% / 0.4);
   color: hsl(0 0% 95%); /* Brighter grey text on hover */
-  box-shadow: 
-    0 8px 32px hsl(0 0% 20% / 0.25),
-    0 0 0 1px hsl(0 0% 30% / 0.1);
+  box-shadow: 0 8px 32px hsl(0 0% 20% / 0.25), 0 0 0 1px hsl(0 0% 30% / 0.1);
   transform: translateY(-2px); /* Subtle lift effect */
 }
 
@@ -236,15 +234,13 @@ html[data-theme="light"] .secondary-link:hover {
   background: hsl(0 0% 10% / 0.08); /* Slightly darker on hover */
   border-color: hsl(0 0% 30% / 0.25);
   color: hsl(0 0% 15%); /* Even darker text on hover */
-  box-shadow: 
-    0 8px 32px hsl(0 0% 0% / 0.1),
-    0 0 0 1px hsl(0 0% 20% / 0.05);
+  box-shadow: 0 8px 32px hsl(0 0% 0% / 0.1), 0 0 0 1px hsl(0 0% 20% / 0.05);
 }
 
 /* Add a subtle shine effect on hover */
 .apple-button::before,
 .secondary-link::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -1939,7 +1935,8 @@ html[data-theme="light"] .switch-handle {
 
 .legal-separator {
   color: hsl(var(--foreground) / 0.6);
-  font-size: clamp(0.8rem, 1.2vw, 0.9rem); /* Smaller, more responsive text */  margin: 0 0.1rem; /* Small margin for better spacing */
+  font-size: clamp(0.8rem, 1.2vw, 0.9rem); /* Smaller, more responsive text */
+  margin: 0 0.1rem; /* Small margin for better spacing */
 }
 
 /* Footer Responsive Design */

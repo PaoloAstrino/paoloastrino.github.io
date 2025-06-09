@@ -326,11 +326,9 @@ function initThemeToggle() {
   const themeToggle = document.getElementById("theme-toggle");
   if (!themeToggle) return;
 
-  // Check for saved theme
+  // Always start with dark theme - ignore saved preferences and system preferences
   const savedTheme = localStorage.getItem("theme");
-  const isDarkMode =
-    savedTheme === "dark" ||
-    (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  const isDarkMode = savedTheme !== "light"; // Only use light theme if explicitly saved as light
 
   if (isDarkMode) {
     document.body.classList.add("dark");
