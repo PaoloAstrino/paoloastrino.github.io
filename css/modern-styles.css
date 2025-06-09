@@ -472,8 +472,8 @@ html[data-theme="light"] .switch-handle {
 .hero {
   min-height: 100vh;
   display: flex;
-  align-items: flex-start;
-  padding: 10vh 0 10vh 0;
+  align-items: center;
+  padding: 6rem 0;
   position: relative;
   overflow: hidden;
   background: hsl(var(--background));
@@ -509,26 +509,14 @@ body.homepage .hero::after {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: flex-start;
+  align-items: center;
   position: relative;
   z-index: 1;
-  height: 80vh;
 }
 
 .hero-content {
   /* Removed animation: fadeInUp 0.8s ease; */
   position: relative; /* Keep the rule for structural purposes */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-
-/* Group the top content (badge, title, description) */
-.hero-top-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
 }
 
 .hero-badge {
