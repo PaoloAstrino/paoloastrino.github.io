@@ -250,41 +250,48 @@ function initNavigation() {
   }, 50);
 
   window.addEventListener("scroll", debouncedScroll);
-  window.addEventListener("mousemove", handleMouseMove);
-  // Active nav link highlighting
+  window.addEventListener("mousemove", handleMouseMove); // Active nav link highlighting
   const sections = document.querySelectorAll("section[id]");
   const highlightActiveLink = debounce(() => {
     const scrollPos = window.scrollY + 100;
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
 
-    // Check if we're near the bottom of the page (for contact section)
-    const isNearBottom = scrollPos + windowHeight >= documentHeight - 100;
+    // Check if we're near the bottom of the page
+    const isNearBottom = scrollPos + windowHeight >= documentHeight - 300;
 
     let activeSection = null;
 
-    sections.forEach((section) => {
+    // Process sections in reverse order to prioritize later sections
+    const sectionsArray = Array.from(sections).reverse();
+
+    sectionsArray.forEach((section) => {
       const sectionTop = section.offsetTop;
       const sectionHeight = section.offsetHeight;
       const sectionId = section.getAttribute("id");
 
-      // For the contact section (last section), activate if near bottom or within section bounds
-      if (
-        sectionId === "contact" &&
-        (isNearBottom ||
-          (scrollPos >= sectionTop - 200 &&
-            scrollPos < sectionTop + sectionHeight))
-      ) {
-        activeSection = sectionId;
+      // For contact section (last section), be more generous
+      if (sectionId === "contact") {
+        if (isNearBottom || scrollPos >= sectionTop - 400) {
+          activeSection = sectionId;
+        }
       }
-      // For other sections, use normal detection with slightly more generous bounds
-      else if (
-        scrollPos >= sectionTop - 150 &&
-        scrollPos < sectionTop + sectionHeight
-      ) {
-        activeSection = sectionId;
+      // For all other sections
+      else {
+        if (
+          scrollPos >= sectionTop - 150 &&
+          scrollPos < sectionTop + sectionHeight &&
+          !activeSection // Only set if no section is already active
+        ) {
+          activeSection = sectionId;
+        }
       }
     });
+
+    // If no section is active and we're at the top, set home as active
+    if (!activeSection && scrollPos < 300) {
+      activeSection = "home";
+    }
 
     // Update active link
     navLinks.forEach((link) => {
