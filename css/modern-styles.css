@@ -823,9 +823,9 @@ html[data-theme="light"] .switch-handle {
 
 .dataloud-glass-card h3 {
   font-size: clamp(
-    var(--section-subtitle-min),
-    2.31vw,
-    var(--section-subtitle-max)
+    var(--section-title-min),
+    4.5vw,
+    var(--section-title-max)
   );
   font-weight: 700;
   color: hsl(var(--foreground));
@@ -838,13 +838,15 @@ html[data-theme="light"] .switch-handle {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  line-height: 1.2;
 }
 
 .dataloud-glass-card p {
-  font-size: clamp(var(--button-text-min), 1.155vw, var(--button-text-max));
+  font-size: clamp(var(--hero-description-min), 1.8vw, var(--hero-description-max));
   color: hsl(var(--foreground) / 0.8);
   margin: 0;
   opacity: 0.9;
+  line-height: 1.4;
 }
 
 .tech-stack {
@@ -2552,20 +2554,19 @@ html[data-theme="light"] .scroll-progress {
   .project-icon-wrapper i {
     font-size: clamp(3.3rem, 5.5vw, 4.62rem); /* 3rem-4.2rem increased by 10% */
   }
-
   .dataloud-glass-card h3 {
     font-size: clamp(
-      1.32rem,
-      2.42vw,
-      1.716rem
-    ); /* 1.2rem-1.56rem increased by 10% */
+      var(--section-title-min),
+      4vw,
+      var(--section-title-max)
+    ); /* Using section title sizing for better hierarchy */
   }
   .dataloud-glass-card p {
     font-size: clamp(
-      0.88rem,
-      1.54vw,
-      1.122rem
-    ); /* 0.8rem-1.02rem increased by 10% */
+      var(--hero-description-min),
+      1.6vw,
+      var(--hero-description-max)
+    ); /* Using hero description sizing for consistency */
   }
 
   .tech-pill {
@@ -2816,21 +2817,20 @@ html[data-theme="light"] .scroll-progress {
       3.85rem
     ); /* 2.5rem-3.5rem increased by 10% */
   }
-
   .dataloud-glass-card h3 {
     font-size: clamp(
-      1.32rem,
-      4.4vw,
-      1.98rem
-    ); /* 1.2rem-1.8rem increased by 10% */
+      var(--section-title-min),
+      3.8vw,
+      var(--section-title-max)
+    ); /* Using section title sizing for mobile */
   }
 
   .dataloud-glass-card p {
     font-size: clamp(
-      0.935rem,
-      2.75vw,
-      1.1rem
-    ); /* 0.85rem-1rem increased by 10% */
+      var(--hero-description-min),
+      2.2vw,
+      var(--hero-description-max)
+    ); /* Using hero description sizing for mobile */
   }
   .tech-pill {
     font-size: clamp(
