@@ -1445,8 +1445,12 @@ html[data-theme="light"] .switch-handle {
 
 /* Contact Section */
 .contact-section {
-  padding: 3rem 0; /* Further reduced from 4rem */
+  padding: 6rem 0; /* Increased from 3rem for better vertical spacing */
   background: hsl(var(--background));
+  min-height: 80vh; /* Ensure adequate height for proper centering */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
 }
 
 .contact-content {
@@ -2708,7 +2712,8 @@ html[data-theme="light"] .scroll-progress {
     gap: 1.5rem;
   }
   .contact-section {
-    padding: 2.5rem 0; /* Further reduced from 3rem */
+    padding: 4rem 0; /* Increased from 2.5rem for better mobile spacing */
+    min-height: 70vh; /* Adequate height for mobile centering */
   }
 
   .contact-form-container {
@@ -2929,7 +2934,8 @@ html[data-theme="light"] .scroll-progress {
     height: 3px;
   }
   .contact-section {
-    padding: 2rem 0; /* Further reduced from 3rem */
+    padding: 3rem 0; /* Increased from 2rem for better small mobile spacing */
+    min-height: 65vh; /* Adequate height for small mobile centering */
   }
 
   .contact-form-container {
