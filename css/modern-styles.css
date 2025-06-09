@@ -2330,26 +2330,10 @@ html[data-theme="light"] .scroll-progress {
   .overlay-header h2 {
     font-size: 1.25rem;
   }
+
   .overlay-body {
     padding: 1.5rem;
     font-size: 1rem; /* Ensure readable text on mobile */
-  }
-
-  .legal-document p {
-    font-size: clamp(var(--button-text-min), 1.8vw, var(--button-text-max));
-    line-height: 1.7;
-    color: hsl(var(--foreground) / 0.85);
-  }
-
-  .legal-document h3 {
-    font-size: clamp(var(--nav-logo-min), 2.5vw, var(--nav-logo-max));
-    color: hsl(var(--foreground));
-  }
-
-  .close-overlay {
-    width: 35px;
-    height: 35px;
-    font-size: 1.5rem;
   }
 }
 
