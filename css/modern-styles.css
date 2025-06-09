@@ -87,6 +87,13 @@
   --icon-size-max: calc(var(--font-lg) * 1.11); /* ≈ 1.8rem maximum */
   --button-text-min: var(--font-base); /* 1rem minimum */
   --button-text-max: calc(var(--font-lg) * 0.68); /* ≈ 1.1rem maximum */
+  /* DataLoud card golden ratio typography (title = description * 1.618) */
+  --dataloud-title-min: calc(
+    var(--button-text-min) * var(--golden-ratio)
+  ); /* ≈ 1.618rem minimum */
+  --dataloud-title-max: calc(
+    var(--button-text-max) * var(--golden-ratio)
+  ); /* ≈ 1.78rem maximum */
   --project-icon-min: calc(var(--font-xl) * 1.15); /* ≈ 3.01rem minimum */
   --project-icon-max: calc(var(--font-2xl) * 0.83); /* ≈ 3.52rem maximum */
   --large-icon-min: calc(var(--font-2xl) * 0.94); /* ≈ 3.98rem minimum */
@@ -852,9 +859,9 @@ body.homepage .hero::after {
 
 .dataloud-glass-card h3 {
   font-size: clamp(
-    var(--section-subtitle-min),
-    2.31vw,
-    var(--section-subtitle-max)
+    var(--dataloud-title-min),
+    calc(1.155vw * var(--golden-ratio)),
+    var(--dataloud-title-max)
   );
   font-weight: 700;
   color: hsl(var(--foreground));
@@ -2581,13 +2588,12 @@ html[data-theme="light"] .scroll-progress {
   .project-icon-wrapper i {
     font-size: clamp(3.3rem, 5.5vw, 4.62rem); /* 3rem-4.2rem increased by 10% */
   }
-
   .dataloud-glass-card h3 {
     font-size: clamp(
-      1.32rem,
-      2.42vw,
-      1.716rem
-    ); /* 1.2rem-1.56rem increased by 10% */
+      calc(0.88rem * var(--golden-ratio)),
+      calc(1.54vw * var(--golden-ratio)),
+      calc(1.122rem * var(--golden-ratio))
+    ); /* Golden ratio: title = description * 1.618 */
   }
   .dataloud-glass-card p {
     font-size: clamp(
@@ -2649,10 +2655,17 @@ html[data-theme="light"] .scroll-progress {
     color: hsl(var(--foreground) / 0.8) !important;
     line-height: 1.7 !important;
   }
-
   .dataloud-glass-card p {
     font-size: clamp(0.9rem, 3vw, 1.1rem) !important;
     color: hsl(var(--foreground) / 0.85) !important;
+  }
+
+  .dataloud-glass-card h3 {
+    font-size: clamp(
+      calc(0.9rem * var(--golden-ratio)),
+      calc(3vw * var(--golden-ratio)),
+      calc(1.1rem * var(--golden-ratio))
+    ) !important; /* Golden ratio: title = description * 1.618 */
   }
 
   .hamburger {
@@ -2845,13 +2858,12 @@ html[data-theme="light"] .scroll-progress {
       3.85rem
     ); /* 2.5rem-3.5rem increased by 10% */
   }
-
   .dataloud-glass-card h3 {
     font-size: clamp(
-      1.32rem,
-      4.4vw,
-      1.98rem
-    ); /* 1.2rem-1.8rem increased by 10% */
+      calc(0.935rem * var(--golden-ratio)),
+      calc(2.75vw * var(--golden-ratio)),
+      calc(1.1rem * var(--golden-ratio))
+    ); /* Golden ratio: title = description * 1.618 */
   }
 
   .dataloud-glass-card p {
