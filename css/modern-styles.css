@@ -472,8 +472,8 @@ html[data-theme="light"] .switch-handle {
 .hero {
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  padding: 6rem 0;
+  align-items: flex-start;
+  padding: 10vh 0 10vh 0;
   position: relative;
   overflow: hidden;
   background: hsl(var(--background));
@@ -509,14 +509,26 @@ body.homepage .hero::after {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
   z-index: 1;
+  height: 80vh;
 }
 
 .hero-content {
   /* Removed animation: fadeInUp 0.8s ease; */
   position: relative; /* Keep the rule for structural purposes */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Group the top content (badge, title, description) */
+.hero-top-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .hero-badge {
@@ -670,8 +682,9 @@ body.homepage .hero::after {
 .hero-buttons {
   display: flex;
   gap: 1.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 0;
   align-items: center;
+  margin-top: auto;
 }
 
 .hero-stats {
@@ -1899,9 +1912,7 @@ body.homepage .hero::after {
   ); /* Responsive font size using clamp() */
   cursor: pointer;
   transition: all 0.3s ease;
-  margin: 1rem auto 0; /* Center the button and add top margin */
-  box-shadow: 0 2px 8px hsl(var(--primary) / 0.3); /* Subtle shadow like other buttons */
-  font-family: inherit;
+  margin-top: auto; /* Push to bottom */
 }
 
 .send-message-btn:hover {
@@ -2319,11 +2330,11 @@ html[data-theme="light"] .scroll-progress {
   .overlay-header h2 {
     font-size: 1.25rem;
   }
-
   .overlay-body {
     padding: 1.5rem;
     font-size: 1rem; /* Ensure readable text on mobile */
   }
+
   .legal-document p {
     font-size: clamp(var(--button-text-min), 1.8vw, var(--button-text-max));
     line-height: 1.7;
@@ -2635,7 +2646,7 @@ html[data-theme="light"] .scroll-progress {
   }
 
   .glass-content {
-    gap: clamp(1.32rem, 2.42vw, 1.98rem); /* 1.2rem-1.8rem increased by 10% */
+    gap: clamp(1.32rem, 2.42vw, 1.98rem); /* 1.2rem-2.1rem increased by 10% */
   }
 }
 
@@ -2822,12 +2833,12 @@ html[data-theme="light"] .scroll-progress {
     gap: 1.5rem;
   }
   .contact-section {
-    padding: 4rem 0; /* Increased from 2.5rem for better mobile spacing */
-    min-height: 70vh; /* Adequate height for mobile centering */
+    padding: 4rem 0; /* Increased from 2.5rem for better small mobile spacing */
+    min-height: 70vh; /* Adequate height for small mobile centering */
   }
 
   .contact-form-container {
-    padding: 1rem; /* Further reduced */
+    padding: 0.75rem; /* Further reduced */
   }
   .form-row {
     grid-template-columns: 1fr;
