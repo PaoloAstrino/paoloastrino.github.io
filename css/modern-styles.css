@@ -477,8 +477,8 @@ body.homepage .hero::after {
   content: "";
   position: absolute;
   top: 10vh;
-  right: 0;
-  width: 50%;
+  left: 57.14%;
+  width: 42.86%;
   height: 80vh;
   background: linear-gradient(
     135deg,
@@ -699,7 +699,7 @@ body.homepage .hero::after {
   justify-content: center;
   padding-right: 0;
   /* Position the container to align with the blue background section */
-  padding-left: 50%;
+  padding-left: 57.14%;
 }
 
 /* DataLoud Glass Card - Fully Responsive */
@@ -3153,7 +3153,8 @@ html[data-theme="light"] .scroll-progress {
 /* Responsive adjustments for hero blue background */
 @media (max-width: 768px) {
   body.homepage .hero::after {
-    width: 60%;
+    left: 54.29%;
+    width: 45.71%;
     opacity: 0.25;
     border-radius: 1.5rem 0 0 1.5rem;
     border-width: 1.5px;
@@ -3162,7 +3163,8 @@ html[data-theme="light"] .scroll-progress {
 
 @media (max-width: 480px) {
   body.homepage .hero::after {
-    width: 70%;
+    left: 51.43%;
+    width: 48.57%;
     opacity: 0.2;
     border-radius: 1rem 0 0 1rem;
     border-width: 1px;
