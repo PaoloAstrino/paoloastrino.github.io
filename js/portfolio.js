@@ -20,10 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
   initParallaxEffects();
   initPerformanceOptimizations();
   initLegalOverlays();
-  
+
   // Initialize dithered waves animation
   initDitheredWaves();
-  
+
   // Desktop-only features
   // if (window.innerWidth > 768) {
   //   initCursorTrail();
@@ -1351,16 +1351,29 @@ document.head.appendChild(styleSheet);
 
 // Dithered Waves Animation
 function initDitheredWaves() {
-  const container = document.getElementById('dithered-waves-container');
-  if (container && typeof DitheredWaves !== 'undefined') {
+  const container = document.getElementById("dithered-waves-container");
+  if (container && typeof DitheredWaves !== "undefined") {
     try {
-      const waves = new DitheredWaves(container);
-      console.log('Dithered waves animation initialized successfully');
+      // Settings matching React component parameters
+      const waves = new DitheredWaves("dithered-waves-container", {
+        waveColor: [0.5, 0.5, 0.5], // Gray color
+        disableAnimation: false, // Animation enabled
+        enableMouseInteraction: true, // Mouse interaction enabled
+        mouseRadius: 0.3, // Mouse interaction radius
+        colorNum: 4, // 4 color gradations
+        waveAmplitude: 0.3, // Wave amplitude
+        waveFrequency: 3, // Wave frequency
+        waveSpeed: 0.05, // Wave speed
+        pixelSize: 1.5, // Pixel size for dithering
+      });
+      console.log("Dithered waves animation initialized successfully");
     } catch (error) {
-      console.warn('Failed to initialize dithered waves:', error);
+      console.warn("Failed to initialize dithered waves:", error);
     }
   } else {
-    console.warn('Dithered waves container not found or DitheredWaves class not loaded');
+    console.warn(
+      "Dithered waves container not found or DitheredWaves class not loaded"
+    );
   }
 }
 

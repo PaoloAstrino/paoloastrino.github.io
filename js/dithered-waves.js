@@ -5,23 +5,31 @@
 
 class DitheredWaves {
   constructor(containerId, options = {}) {
-    this.container = document.getElementById(containerId);
+    // Handle both string ID and element object
+    if (typeof containerId === "string") {
+      this.container = document.getElementById(containerId);
+    } else if (containerId && containerId.nodeType === Node.ELEMENT_NODE) {
+      this.container = containerId;
+    } else {
+      this.container = null;
+    }
+
     if (!this.container) {
-      console.error(`Container with id '${containerId}' not found`);
+      console.error(`Container not found or invalid:`, containerId);
       return;
     }
 
-    // Configuration options
+    // Configuration options with enhanced defaults
     this.options = {
-      waveSpeed: options.waveSpeed || 0.05,
-      waveFrequency: options.waveFrequency || 3,
-      waveAmplitude: options.waveAmplitude || 0.3,
-      waveColor: options.waveColor || [0.3, 0.5, 0.8], // Blue-ish color
-      colorNum: options.colorNum || 4,
-      pixelSize: options.pixelSize || 2,
+      waveSpeed: options.waveSpeed || 0.1,
+      waveFrequency: options.waveFrequency || 4,
+      waveAmplitude: options.waveAmplitude || 0.6,
+      waveColor: options.waveColor || [0.2, 0.4, 0.9], // More vibrant blue
+      colorNum: options.colorNum || 6,
+      pixelSize: options.pixelSize || 1.5,
       disableAnimation: options.disableAnimation || false,
-      enableMouseInteraction: options.enableMouseInteraction || true,
-      mouseRadius: options.mouseRadius || 0.3
+      enableMouseInteraction: options.enableMouseInteraction !== false, // Default true
+      mouseRadius: options.mouseRadius || 0.4,
     };
 
     this.mouse = { x: 0, y: 0 };
@@ -32,19 +40,22 @@ class DitheredWaves {
     // Create scene, camera, renderer
     this.scene = new THREE.Scene();
     this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-    
-    this.renderer = new THREE.WebGLRenderer({ 
-      antialias: true, 
+
+    this.renderer = new THREE.WebGLRenderer({
+      antialias: true,
       alpha: true,
-      preserveDrawingBuffer: true 
+      preserveDrawingBuffer: true,
     });
-    this.renderer.setSize(this.container.offsetWidth, this.container.offsetHeight);
+    this.renderer.setSize(
+      this.container.offsetWidth,
+      this.container.offsetHeight
+    );
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.container.appendChild(this.renderer.domElement);
 
     // Create wave material
     this.createWaveMaterial();
-    
+
     // Create geometry and mesh
     this.geometry = new THREE.PlaneGeometry(2, 2);
     this.mesh = new THREE.Mesh(this.geometry, this.waveMaterial);
@@ -127,11 +138,16 @@ class DitheredWaves {
           amp *= waveAmplitude;
         }
         return value;
-      }
-
-      float pattern(vec2 p) {
+      }      float pattern(vec2 p) {
         vec2 p2 = p - time * waveSpeed;
-        return fbm(p - fbm(p + fbm(p2)));
+        vec2 p3 = p + time * waveSpeed * 0.5;
+        
+        // Layer multiple noise patterns for complexity
+        float n1 = fbm(p2);
+        float n2 = fbm(p3 * 1.5) * 0.7;
+        float n3 = fbm(p * 2.0 + time * waveSpeed * 0.3) * 0.4;
+        
+        return n1 + n2 + n3;
       }
 
       // Bayer matrix for dithering
@@ -162,24 +178,27 @@ class DitheredWaves {
         float bias = 0.2;
         color = clamp(color - bias, 0.0, 1.0);
         return floor(color * (colorNum - 1.0) + 0.5) / (colorNum - 1.0);
-      }
-
-      void main() {
+      }      void main() {
         vec2 uv = vUv - 0.5;
         uv.x *= resolution.x / resolution.y;
         
-        float f = pattern(uv);
+        float f = pattern(uv * 2.0); // Scale up for more detail
         
-        // Mouse interaction
+        // Mouse interaction with enhanced effect
         if (enableMouseInteraction == 1) {
           vec2 mouseNDC = (mousePos / resolution - 0.5) * vec2(1.0, -1.0);
           mouseNDC.x *= resolution.x / resolution.y;
           float dist = length(uv - mouseNDC);
           float effect = 1.0 - smoothstep(0.0, mouseRadius, dist);
-          f -= 0.5 * effect;
+          f += 0.8 * effect * sin(time * 3.0); // Pulsing mouse effect
         }
         
-        vec3 col = mix(vec3(0.0), waveColor, f);
+        // Create more dynamic color variations
+        vec3 col1 = waveColor * 0.8;
+        vec3 col2 = waveColor * 1.2;
+        vec3 col3 = waveColor * 0.4;
+        
+        vec3 col = mix(col3, mix(col1, col2, smoothstep(0.3, 0.8, f)), f);
         
         // Apply dithering
         col = dither(vUv, col);
@@ -193,43 +212,47 @@ class DitheredWaves {
       fragmentShader: waveFragmentShader,
       uniforms: {
         time: { value: 0 },
-        resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+        resolution: {
+          value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+        },
         waveSpeed: { value: this.options.waveSpeed },
         waveFrequency: { value: this.options.waveFrequency },
         waveAmplitude: { value: this.options.waveAmplitude },
         waveColor: { value: new THREE.Vector3(...this.options.waveColor) },
         mousePos: { value: new THREE.Vector2(0, 0) },
-        enableMouseInteraction: { value: this.options.enableMouseInteraction ? 1 : 0 },
+        enableMouseInteraction: {
+          value: this.options.enableMouseInteraction ? 1 : 0,
+        },
         mouseRadius: { value: this.options.mouseRadius },
         colorNum: { value: this.options.colorNum },
-        pixelSize: { value: this.options.pixelSize }
-      }
+        pixelSize: { value: this.options.pixelSize },
+      },
     });
   }
 
   setupEventListeners() {
     // Mouse movement
-    this.container.addEventListener('mousemove', (event) => {
+    this.container.addEventListener("mousemove", (event) => {
       if (!this.options.enableMouseInteraction) return;
-      
+
       const rect = this.container.getBoundingClientRect();
       const x = (event.clientX - rect.left) * window.devicePixelRatio;
       const y = (event.clientY - rect.top) * window.devicePixelRatio;
-      
+
       this.mouse.x = x;
       this.mouse.y = y;
-      
+
       this.waveMaterial.uniforms.mousePos.value.set(x, y);
     });
 
     // Window resize
-    window.addEventListener('resize', () => this.onResize());
+    window.addEventListener("resize", () => this.onResize());
   }
 
   onResize() {
     const width = this.container.offsetWidth;
     const height = this.container.offsetHeight;
-    
+
     this.renderer.setSize(width, height);
     this.waveMaterial.uniforms.resolution.value.set(
       width * window.devicePixelRatio,
@@ -241,7 +264,7 @@ class DitheredWaves {
     if (!this.options.disableAnimation) {
       this.waveMaterial.uniforms.time.value = performance.now() * 0.001;
     }
-    
+
     this.renderer.render(this.scene, this.camera);
     requestAnimationFrame(() => this.animate());
   }
@@ -249,13 +272,18 @@ class DitheredWaves {
   // Method to update options dynamically
   updateOptions(newOptions) {
     Object.assign(this.options, newOptions);
-    
+
     if (this.waveMaterial) {
       this.waveMaterial.uniforms.waveSpeed.value = this.options.waveSpeed;
-      this.waveMaterial.uniforms.waveFrequency.value = this.options.waveFrequency;
-      this.waveMaterial.uniforms.waveAmplitude.value = this.options.waveAmplitude;
+      this.waveMaterial.uniforms.waveFrequency.value =
+        this.options.waveFrequency;
+      this.waveMaterial.uniforms.waveAmplitude.value =
+        this.options.waveAmplitude;
       this.waveMaterial.uniforms.waveColor.value.set(...this.options.waveColor);
-      this.waveMaterial.uniforms.enableMouseInteraction.value = this.options.enableMouseInteraction ? 1 : 0;
+      this.waveMaterial.uniforms.enableMouseInteraction.value = this.options
+        .enableMouseInteraction
+        ? 1
+        : 0;
       this.waveMaterial.uniforms.mouseRadius.value = this.options.mouseRadius;
       this.waveMaterial.uniforms.colorNum.value = this.options.colorNum;
       this.waveMaterial.uniforms.pixelSize.value = this.options.pixelSize;
