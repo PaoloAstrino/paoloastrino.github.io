@@ -5,9 +5,9 @@
       .letter-p { fill: hsl(220, 100%, 55%); font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 700; font-size: 280px; }
     </style>
   </defs>
-    <!-- Circle outline -->
+  <!-- Circle outline -->
   <circle cx="256" cy="256" r="248" class="circle-outline"/>
   
-  <!-- Letter P - visually centered -->
-  <text x="260" y="204.8" text-anchor="middle" dominant-baseline="central" class="letter-p">P</text>
+  <!-- Letter P - perfectly centered -->
+  <text x="256" y="256" text-anchor="middle" dominant-baseline="central" class="letter-p">P</text>
 </svg>
