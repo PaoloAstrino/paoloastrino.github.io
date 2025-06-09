@@ -472,6 +472,29 @@ html[data-theme="light"] .switch-handle {
   background: hsl(var(--background));
 }
 
+/* Hero section blue background for homepage only */
+body.homepage .hero::after {
+  content: "";
+  position: absolute;
+  top: 10vh;
+  right: 0;
+  width: 50%;
+  height: 80vh;
+  background: linear-gradient(
+    135deg,
+    hsl(220, 100%, 60%) 0%,
+    hsl(210, 100%, 55%) 25%,
+    hsl(200, 100%, 50%) 50%,
+    hsl(190, 100%, 45%) 75%,
+    hsl(180, 100%, 40%) 100%
+  );
+  border-radius: 2rem 0 0 2rem;
+  border: 2px solid hsl(220, 100%, 35%);
+  z-index: 5;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
 .hero-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -3127,31 +3150,9 @@ html[data-theme="light"] .scroll-progress {
   );
 }
 
-/* Homepage Background Section - Only visible on homepage */
-body.homepage .homepage-background-section {
-  position: fixed;
-  top: 10vh;
-  right: 0;
-  width: 50%;
-  height: 80vh;
-  background: linear-gradient(
-    135deg,
-    hsl(220, 100%, 60%) 0%,
-    hsl(210, 100%, 55%) 25%,
-    hsl(200, 100%, 50%) 50%,
-    hsl(190, 100%, 45%) 75%,
-    hsl(180, 100%, 40%) 100%
-  );
-  border-radius: 2rem 0 0 2rem;
-  border: 2px solid hsl(220, 100%, 35%);
-  z-index: 0;
-  opacity: 0.3;
-  pointer-events: none; /* Ensure it doesn't interfere with interactions */
-}
-
-/* Responsive adjustments */
+/* Responsive adjustments for hero blue background */
 @media (max-width: 768px) {
-  body.homepage .homepage-background-section {
+  body.homepage .hero::after {
     width: 60%;
     opacity: 0.25;
     border-radius: 1.5rem 0 0 1.5rem;
@@ -3160,7 +3161,7 @@ body.homepage .homepage-background-section {
 }
 
 @media (max-width: 480px) {
-  body.homepage .homepage-background-section {
+  body.homepage .hero::after {
     width: 70%;
     opacity: 0.2;
     border-radius: 1rem 0 0 1rem;
