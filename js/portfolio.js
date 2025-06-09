@@ -1196,6 +1196,19 @@ function initLegalOverlays() {
   });
 }
 
+// Work in Progress Effect
+function showWorkInProgress(element) {
+  const glassCard = element.querySelector(".dataloud-glass-card");
+  if (glassCard) {
+    glassCard.classList.add("blurred");
+
+    // Remove the effect after 3 seconds
+    setTimeout(() => {
+      glassCard.classList.remove("blurred");
+    }, 3000);
+  }
+}
+
 // Utility function: Debounce
 function debounce(func, wait) {
   let timeout;
