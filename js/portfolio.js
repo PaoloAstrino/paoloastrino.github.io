@@ -251,24 +251,46 @@ function initNavigation() {
 
   window.addEventListener("scroll", debouncedScroll);
   window.addEventListener("mousemove", handleMouseMove);
-
   // Active nav link highlighting
   const sections = document.querySelectorAll("section[id]");
   const highlightActiveLink = debounce(() => {
     const scrollPos = window.scrollY + 100;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    // Check if we're near the bottom of the page (for contact section)
+    const isNearBottom = scrollPos + windowHeight >= documentHeight - 100;
+
+    let activeSection = null;
 
     sections.forEach((section) => {
       const sectionTop = section.offsetTop;
       const sectionHeight = section.offsetHeight;
       const sectionId = section.getAttribute("id");
 
-      if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-        navLinks.forEach((link) => {
-          link.classList.remove("active");
-          if (link.getAttribute("href") === `#${sectionId}`) {
-            link.classList.add("active");
-          }
-        });
+      // For the contact section (last section), activate if near bottom or within section bounds
+      if (
+        sectionId === "contact" &&
+        (isNearBottom ||
+          (scrollPos >= sectionTop - 200 &&
+            scrollPos < sectionTop + sectionHeight))
+      ) {
+        activeSection = sectionId;
+      }
+      // For other sections, use normal detection with slightly more generous bounds
+      else if (
+        scrollPos >= sectionTop - 150 &&
+        scrollPos < sectionTop + sectionHeight
+      ) {
+        activeSection = sectionId;
+      }
+    });
+
+    // Update active link
+    navLinks.forEach((link) => {
+      link.classList.remove("active");
+      if (activeSection && link.getAttribute("href") === `#${activeSection}`) {
+        link.classList.add("active");
       }
     });
   }, 50);
