@@ -495,6 +495,16 @@ body.homepage .hero::after {
   overflow: hidden;
 }
 
+@media (max-width: 900px) {
+  body.homepage .hero::after {
+    left: 0;
+    width: 100%;
+    border-radius: 2rem;
+    top: 10%;
+    height: 80%;
+  }
+}
+
 .hero-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -3101,8 +3111,8 @@ html[data-theme="light"] .scroll-progress {
   height: 80%;
   border-radius: 2rem 0 0 2rem;
   overflow: hidden;
-  z-index: 6;
-  pointer-events: auto;
+  z-index: -2;
+  pointer-events: none;
 }
 
 /* Liquid Chrome WebGL Canvas styling */
@@ -3134,25 +3144,12 @@ html[data-theme="light"] .scroll-progress {
 }
 
 /* Responsive adjustments for liquid chrome */
-@media (max-width: 1200px) {
+@media (max-width: 900px) {
   #liquid-chrome-container {
-    left: 55%;
-    width: 45%;
-  }
-}
-
-@media (max-width: 768px) {
-  #liquid-chrome-container {
-    position: relative;
-    top: 0;
     left: 0;
     width: 100%;
-    height: 40vh;
-    border-radius: 1rem;
-    margin-top: 2rem;
-  }
-
-  #liquid-chrome-container canvas {
-    border-radius: 1rem;
+    border-radius: 2rem;
+    top: 10%;
+    height: 80%;
   }
 }
