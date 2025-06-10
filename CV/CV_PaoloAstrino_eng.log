@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.25)  1 JUN 2025 21:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.25)  10 JUN 2025 19:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -350,17 +350,52 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
+<fototessera.JPG, id=3, 1413.28pt x 1466.47874pt>
+File: fototessera.JPG Graphic file (type jpg)
+<use fototessera.JPG>
+Package pdftex.def Info: fototessera.JPG  used on input line 31.
+(pdftex.def)             Requested size: 99.58464pt x 103.31291pt.
 
-LaTeX Warning: File `fototessera.JPG' not found on input line 40.
+Overfull \hbox (15.0pt too wide) in paragraph at lines 34--45
+[][] 
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 55.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 55.
 
 
-! Package pdftex.def Error: File `fototessera.JPG' not found: using draft setti
-ng.
+[1
 
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.40 ...hics[width=0.8\linewidth]{fototessera.JPG}
-                                                  
-? 
+{C:/Users/paolo/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./fototesser
+a.JPG>]
+
+[2] (CV_PaoloAstrino_eng.aux)
+ ***********
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-03-26>
+ ***********
+Package rerunfilecheck Info: File `CV_PaoloAstrino_eng.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+ ) 
+Here is how much of TeX's memory you used:
+ 9684 strings out of 469959
+ 152819 string characters out of 5469834
+ 556912 words of memory out of 5000000
+ 36387 multiletter control sequences out of 15000+600000
+ 628652 words of font info for 46 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 75i,6n,79p,268b,566s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/paolo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmbx10.pfb><C:/Users/paolo/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmbx12.pfb><C:/Users/paolo/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmbx9.pfb><C:/Users/paolo/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/paolo/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on CV_PaoloAstrino_eng.pdf (2 pages, 372929 bytes).
+PDF statistics:
+ 44 PDF objects out of 1000 (max. 8388607)
+ 3 named destinations out of 1000 (max. 500000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+
