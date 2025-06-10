@@ -1,0 +1,126 @@
+/**
+ * MagnetLines Animation Mechanics CSS
+ * Separate stylesheet for the interactive line animation
+ */
+
+/* Container positioning and layout */
+#magnet-lines-container {
+  position: absolute;
+  top: 10vh;
+  left: 57.14%;
+  width: 42.86%;
+  height: 80vh;
+  border-radius: 2rem 0 0 2rem;
+  overflow: hidden;
+  z-index: 6;
+  pointer-events: auto;
+}
+
+/* Inner animation container styling */
+#magnet-lines-container .magnetLines-container {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 2rem 0 0 2rem;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+/* Individual line elements */
+.magnetLines-container span {
+  display: block;
+  transform-origin: center;
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+  pointer-events: none;
+}
+
+/* CSS Custom Properties for dynamic rotation */
+.magnetLines-container span {
+  transform: rotate(var(--rotate, 0deg));
+}
+
+/* Animation performance optimizations */
+.magnetLines-container {
+  transform: translateZ(0); /* Force hardware acceleration */
+  backface-visibility: hidden;
+}
+
+.magnetLines-container span {
+  transform: rotate(var(--rotate, 0deg)) translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  #magnet-lines-container {
+    left: 55%;
+    width: 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  #magnet-lines-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40vh;
+    border-radius: 1rem;
+    margin-top: 2rem;
+  }
+}
+
+/* Debug styles (can be removed in production) */
+.magnetLines-debug #magnet-lines-container {
+  border: 2px solid rgba(0, 255, 0, 0.5);
+  background: rgba(0, 255, 0, 0.1);
+}
+
+.magnetLines-debug .magnetLines-container span {
+  border: 1px solid rgba(255, 0, 0, 0.5);
+  background: rgba(255, 0, 0, 0.2);
+}
+
+/* Animation states */
+.magnetLines-container.loading span {
+  opacity: 0;
+  animation: magnetLinesFadeIn 0.3s ease-out forwards;
+  animation-delay: calc(var(--line-index, 0) * 0.05s);
+}
+
+@keyframes magnetLinesFadeIn {
+  from {
+    opacity: 0;
+    transform: rotate(var(--rotate, 0deg)) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(var(--rotate, 0deg)) scale(1);
+  }
+}
+
+/* Hover effects for container */
+#magnet-lines-container:hover .magnetLines-container span {
+  transition: transform 0.05s ease-out;
+}
+
+/* Performance mode - reduced animations for low-end devices */
+@media (prefers-reduced-motion: reduce) {
+  .magnetLines-container span {
+    transition: none;
+    will-change: auto;
+  }
+
+  .magnetLines-container.loading span {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* High contrast mode adjustments */
+@media (prefers-contrast: high) {
+  .magnetLines-container span {
+    filter: contrast(1.5);
+  }
+}

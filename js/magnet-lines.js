@@ -58,8 +58,9 @@ class MagnetLines {
     this.magnetContainer.style.height = this.options.containerSize;
     this.magnetContainer.style.justifyItems = "center";
     this.magnetContainer.style.alignItems = "center";
-    this.magnetContainer.style.zIndex = "100";
-    this.magnetContainer.style.position = "relative"; // Add to the main container
+
+    // Add loading class for fade-in animation
+    this.magnetContainer.classList.add("loading"); // Add to the main container
     this.container.appendChild(this.magnetContainer);
 
     console.log("MagnetLines: Container created with styles:", {
@@ -77,10 +78,11 @@ class MagnetLines {
     const total = this.options.rows * this.options.columns;
 
     for (let i = 0; i < total; i++) {
-      const span = document.createElement("span");
+      const span = document.createElement("span"); // Set the CSS custom property for rotation
+      span.style.setProperty("--rotate", `${this.options.baseAngle}deg`);
+      span.style.setProperty("--line-index", i);
 
-      // Set the CSS custom property for rotation
-      span.style.setProperty("--rotate", `${this.options.baseAngle}deg`); // Set the line styles
+      // Set the line styles
       span.style.backgroundColor = this.options.lineColor;
       span.style.width = this.options.lineWidth;
       span.style.height = this.options.lineHeight;
@@ -88,8 +90,7 @@ class MagnetLines {
       span.style.transformOrigin = "center";
       span.style.willChange = "transform";
       span.style.transform = "rotate(var(--rotate))";
-      span.style.zIndex = "101";
-      span.style.position = "relative";
+
       this.magnetContainer.appendChild(span);
       this.items.push(span);
     }

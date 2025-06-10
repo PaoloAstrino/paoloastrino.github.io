@@ -495,25 +495,6 @@ body.homepage .hero::after {
   overflow: hidden;
 }
 
-/* Container for the dithered waves animation */
-#magnet-lines-container {
-  position: absolute;
-  top: 10vh;
-  left: 57.14%;
-  width: 42.86%;
-  height: 80vh;
-  border-radius: 2rem 0 0 2rem;
-  overflow: hidden;
-  z-index: 100;
-  pointer-events: auto;
-}
-
-#magnet-lines-container .magnetLines-container {
-  width: 100% !important;
-  height: 100% !important;
-  border-radius: 2rem 0 0 2rem;
-}
-
 .hero-container {
   max-width: 1200px;
   margin: 0 auto;
