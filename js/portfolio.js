@@ -701,7 +701,7 @@ function initDecryptedTextEffect() {
   }
 
   // Initialize hero title with "view" animation
-  const titleDecrypt = DecryptedText(heroTitle, {
+  const titleDecrypt = window.DecryptedText.init(heroTitle, {
     animateOn: "view",
     speed: 50,
     maxIterations: 6,
@@ -715,7 +715,7 @@ function initDecryptedTextEffect() {
 
   // Initialize hero description with "view" animation
   if (heroDescription) {
-    const descriptionDecrypt = DecryptedText(heroDescription, {
+    const descriptionDecrypt = window.DecryptedText.init(heroDescription, {
       animateOn: "view",
       speed: 50,
       maxIterations: 6,
