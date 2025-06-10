@@ -50,9 +50,9 @@ class LiquidChrome {
       }
 
       this.renderer = new OGL.Renderer({
-        canvas: this.canvas,
-        width: this.containerEl.offsetWidth,
-        height: this.containerEl.offsetHeight,
+        canvas: this.canvas, // This should likely be this.container.appendChild(this.gl.canvas) later
+        width: this.container.offsetWidth,
+        height: this.container.offsetHeight,
         dpr: Math.min(window.devicePixelRatio, 2),
         antialias: true,
         powerPreference: "high-performance",
@@ -67,7 +67,7 @@ class LiquidChrome {
       this.update(); // Start animation loop
 
       // Fade in animation
-      this.containerEl.classList.add("loaded");
+      this.container.classList.add("loaded");
       console.log("LiquidChrome: WebGL animation initialized successfully");
     } catch (error) {
       console.error("LiquidChrome: Initialization failed:", error);
@@ -79,16 +79,16 @@ class LiquidChrome {
     console.log(
       "LiquidChrome: OGL failed to load. Falling back to solid blue background."
     );
-    if (this.containerEl) {
+    if (this.container) {
       // Clear any existing canvas or other elements
-      while (this.containerEl.firstChild) {
-        this.containerEl.removeChild(this.containerEl.firstChild);
+      while (this.container.firstChild) {
+        this.container.removeChild(this.container.firstChild);
       }
       // Set solid blue background
-      this.containerEl.style.backgroundColor = "hsl(221, 83%, 53%)"; // Using your primary blue color
-      this.containerEl.style.width = "100%";
-      this.containerEl.style.height = "100%";
-      this.containerEl.classList.add("loaded"); // Ensure it's visible if loading class handles opacity
+      this.container.style.backgroundColor = "hsl(221, 83%, 53%)"; // Using your primary blue color
+      this.container.style.width = "100%";
+      this.container.style.height = "100%";
+      this.container.classList.add("loaded"); // Ensure it's visible if loading class handles opacity
     }
     // Stop any animation loop if it somehow started
     if (this.rafId) {
