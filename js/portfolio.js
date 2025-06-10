@@ -1367,25 +1367,35 @@ function initMagnetLines() {
   });
 
   console.log("MagnetLines available:", typeof MagnetLines !== "undefined");
-
   if (container && typeof MagnetLines !== "undefined") {
     try {
       console.log("Attempting to create MagnetLines instance...");
-      // Settings matching React component defaults exactly
-      const magnetLines = new MagnetLines("magnet-lines-container", {
-        rows: 9,
-        columns: 9,
-        containerSize: "80vmin",
-        lineColor: "#efefef",
-        lineWidth: "1vmin",
-        lineHeight: "6vmin",
-        baseAngle: -10,
-        className: "",
-      });
-      console.log(
-        "Magnet lines animation initialized successfully:",
-        magnetLines
-      );
+      
+      // Add a small delay to ensure container has proper dimensions
+      setTimeout(() => {
+        console.log("Container dimensions after delay:", {
+          offsetWidth: container.offsetWidth,
+          offsetHeight: container.offsetHeight,
+          clientWidth: container.clientWidth,
+          clientHeight: container.clientHeight,
+          rect: container.getBoundingClientRect()
+        });
+          // Settings matching React component defaults exactly
+        const magnetLines = new MagnetLines("magnet-lines-container", {
+          rows: 9,
+          columns: 9,
+          containerSize: "100%",
+          lineColor: "#efefef",
+          lineWidth: "1vmin",
+          lineHeight: "6vmin",
+          baseAngle: -10,
+          className: "",
+        });
+        console.log(
+          "Magnet lines animation initialized successfully:",
+          magnetLines
+        );
+      }, 100);
     } catch (error) {
       console.error("Failed to initialize magnet lines:", error);
       console.error("Error stack:", error.stack);
