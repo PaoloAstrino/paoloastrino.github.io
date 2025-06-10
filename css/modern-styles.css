@@ -1054,19 +1054,58 @@ body.homepage .hero::after {
 .certification-card {
   background: hsl(var(--background));
   border: none;
-  border-radius: 0;
+  border-radius: clamp(
+    12.32px,
+    1.54vw,
+    24.64px
+  ); /* Match DataLoud card border-radius */
   overflow: hidden;
   transition: all 0.3s ease;
   box-shadow: 0 8px 32px hsl(var(--foreground) / 0.08);
   /* border-left: 4px solid hsl(var(--primary)); */ /* Removed blue line */
+  position: relative;
+  /* Spotlight effect variables - will be updated by JavaScript */
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  --spotlight-color: rgba(79, 70, 229, 0.15);
+}
+
+/* Spotlight effect overlay for cards */
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at var(--mouse-x) var(--mouse-y),
+    var(--spotlight-color),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Activate spotlight on hover */
+.spotlight-card:hover::before {
+  opacity: 0.8;
+}
+
+/* Ensure content stays above spotlight */
+.spotlight-card > * {
+  position: relative;
+  z-index: 2;
 }
 
 .experience-card:hover,
 .education-card:hover,
 .certification-card:hover {
-  /* Removed transform: translateY(-8px); */
+  transform: translateY(-8px);
   box-shadow: 0 16px 48px hsl(var(--foreground) / 0.12);
-  /* border-left-color: hsl(var(--primary)); */ /* Removed blue line hover effect */
+  /* Removed static blue background - spotlight will handle this */
 }
 
 /* Card Header */
@@ -1075,8 +1114,10 @@ body.homepage .hero::after {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 2rem 0.5rem 2rem;
-  background: hsl(var(--background));
-  border-bottom: 1px solid hsl(var(--border) / 0.3);
+  background: transparent; /* Changed from hsl(var(--background)) to allow spotlight to show through */
+  /* border-bottom: 1px solid hsl(var(--border) / 0.3); */ /* Removed separator line */
+  position: relative; /* Ensure it's above the spotlight but allows light to show through */
+  z-index: 2;
 }
 
 .date-badge {
@@ -1116,6 +1157,8 @@ body.homepage .hero::after {
 /* Card Content */
 .card-content {
   padding: 1.5rem 2rem 2rem 2rem;
+  position: relative; /* Ensure it's above the spotlight */
+  z-index: 2;
 }
 
 .position-title,
@@ -1169,7 +1212,7 @@ body.homepage .hero::after {
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
   border-color: hsl(var(--primary));
-  /* Removed transform: translateY(-2px); */
+  transform: translateY(-2px);
 }
 
 /* Certification Links */
@@ -1197,7 +1240,7 @@ body.homepage .hero::after {
 .verify-link:hover {
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
-  /* Removed transform: translateY(-2px); */
+  transform: translateY(-2px);
   box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
 }
 
@@ -1333,13 +1376,17 @@ body.homepage .hero::after {
   position: relative;
   /* border-top: 4px solid hsl(var(--primary) / 0.6); */ /* Removed blue line */
   overflow: hidden; /* Prevent content overflow */
+  /* Spotlight effect variables - will be updated by JavaScript */
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  --spotlight-color: rgba(79, 70, 229, 0.15);
 }
 
 .skill-category:hover {
-  /* Removed transform: translateY(-5px); */
+  transform: translateY(-5px);
   box-shadow: 0 8px 32px hsl(var(--foreground) / 0.15); /* Enhanced shadow on hover */
   border-color: hsl(var(--primary) / 0.3); /* Highlight border on hover */
-  /* border-top-color: hsl(var(--primary)); */ /* Removed blue line hover effect */
+  /* Removed static blue background - spotlight will handle this */
 }
 
 .skill-category h3 {
@@ -1415,7 +1462,7 @@ body.homepage .hero::after {
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
   border-color: hsl(var(--primary)); /* Match border to background */
-  /* Removed transform: translateY(-2px); */
+  transform: translateY(-2px);
 }
 
 /* Projects Section */
@@ -1443,12 +1490,17 @@ body.homepage .hero::after {
   display: flex;
   flex-direction: column;
   min-height: 400px; /* Minimum height to prevent cards from being too small */
+  position: relative;
+  /* Spotlight effect variables - will be updated by JavaScript */
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  --spotlight-color: rgba(79, 70, 229, 0.2);
 }
 
 .project-card:hover {
-  /* Removed transform: translateY(-8px); */
+  transform: translateY(-8px);
   box-shadow: 0 16px 48px hsl(var(--foreground) / 0.12);
-  /* border-color: hsl(var(--primary) / 0.3); */ /* Removed border hover effect */
+  /* Removed static blue background - spotlight will handle this */
 }
 
 /* Project visual/image section */
@@ -1752,11 +1804,18 @@ body.homepage .hero::after {
   text-align: center;
   margin-bottom: 1.5rem;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  /* Spotlight effect variables - will be updated by JavaScript */
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  --spotlight-color: rgba(79, 70, 229, 0.18);
 }
 
 .contact-card:hover {
-  /* Removed transform: translateY(-5px); */
+  transform: translateY(-5px);
   box-shadow: 0 10px 25px hsl(var(--foreground) / 0.1);
+  /* Removed static blue background - spotlight will handle this */
 }
 
 .contact-icon {
@@ -1979,7 +2038,7 @@ body.homepage .hero::after {
 .social-link:hover {
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
-  /* Removed transform: translateY(-3px); */
+  transform: translateY(-3px);
   box-shadow: 0 5px 15px hsl(var(--primary) / 0.3);
 }
 

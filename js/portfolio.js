@@ -618,6 +618,8 @@ function initSpotlightEffect() {
     ".education-card",
     ".certification-card",
     ".contact-form", // Add contact form to spotlight effect
+    ".skill-category", // Add skill categories to spotlight effect
+    ".contact-card", // Add contact cards to spotlight effect
   ];
 
   const regularCards = document.querySelectorAll(
@@ -636,18 +638,21 @@ function initSpotlightEffect() {
 
       // Use pixel values for more reliable positioning
       card.style.setProperty("--mouse-x", `${x}px`);
-      card.style.setProperty("--mouse-y", `${y}px`); // Set spotlight color based on card type
-      let spotlightColor = "rgba(255, 255, 255, 0.25)"; // Default
+      card.style.setProperty("--mouse-y", `${y}px`); // Set spotlight color based on card type      let spotlightColor = "rgba(255, 255, 255, 0.25)"; // Default
       if (card.classList.contains("project-card")) {
         spotlightColor = "rgba(79, 70, 229, 0.2)"; // Primary color
       } else if (card.classList.contains("experience-card")) {
         spotlightColor = "rgba(79, 70, 229, 0.15)"; // Primary color
       } else if (card.classList.contains("education-card")) {
-        spotlightColor = "rgba(16, 185, 129, 0.18)"; // Secondary color
+        spotlightColor = "rgba(79, 70, 229, 0.18)"; // Primary color (changed from green)
       } else if (card.classList.contains("certification-card")) {
         spotlightColor = "rgba(79, 70, 229, 0.22)"; // Primary color
       } else if (card.classList.contains("contact-form")) {
         spotlightColor = "rgba(79, 70, 229, 0.18)"; // Primary color for contact form
+      } else if (card.classList.contains("skill-category")) {
+        spotlightColor = "rgba(79, 70, 229, 0.15)"; // Primary color for skill categories
+      } else if (card.classList.contains("contact-card")) {
+        spotlightColor = "rgba(79, 70, 229, 0.18)"; // Primary color for contact cards
       }
       card.style.setProperty("--spotlight-color", spotlightColor);
     });
