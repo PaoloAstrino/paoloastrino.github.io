@@ -42,14 +42,57 @@ class LiquidChrome {
     console.log("LiquidChrome: Starting initialization...");
 
     try {
-      await this.loadOGL();
-      this.createRenderer();
-      this.createShaders();
-      this.setupEventListeners();
-      this.startAnimation();
-      console.log("LiquidChrome: Initialization complete");
+      await this.loadOGL(); // Wait for OGL to load
+
+      // If OGL is loaded, proceed with WebGL setup
+      if (typeof OGL === "undefined" || !OGL.Renderer) {
+        throw new Error("OGL library not fully available after load attempt.");
+      }
+
+      this.renderer = new OGL.Renderer({
+        canvas: this.canvas,
+        width: this.containerEl.offsetWidth,
+        height: this.containerEl.offsetHeight,
+        dpr: Math.min(window.devicePixelRatio, 2),
+        antialias: true,
+        powerPreference: "high-performance",
+      });
+
+      this.gl = this.renderer.gl;
+      this.gl.clearColor(0, 0, 0, 0); // Transparent background for the canvas
+
+      this.createMesh();
+      this.resize(); // Initial resize
+      this.addEventListeners();
+      this.update(); // Start animation loop
+
+      // Fade in animation
+      this.containerEl.classList.add("loaded");
+      console.log("LiquidChrome: WebGL animation initialized successfully");
     } catch (error) {
       console.error("LiquidChrome: Initialization failed:", error);
+      this.fallbackToBlue(); // Call fallback if initialization fails
+    }
+  }
+
+  fallbackToBlue() {
+    console.log(
+      "LiquidChrome: OGL failed to load. Falling back to solid blue background."
+    );
+    if (this.containerEl) {
+      // Clear any existing canvas or other elements
+      while (this.containerEl.firstChild) {
+        this.containerEl.removeChild(this.containerEl.firstChild);
+      }
+      // Set solid blue background
+      this.containerEl.style.backgroundColor = "hsl(221, 83%, 53%)"; // Using your primary blue color
+      this.containerEl.style.width = "100%";
+      this.containerEl.style.height = "100%";
+      this.containerEl.classList.add("loaded"); // Ensure it's visible if loading class handles opacity
+    }
+    // Stop any animation loop if it somehow started
+    if (this.rafId) {
+      cancelAnimationFrame(this.rafId);
     }
   }
 
