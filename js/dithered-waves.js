@@ -35,37 +35,61 @@ class DitheredWaves {
     this.mouse = { x: 0, y: 0 };
     this.init();
   }
-
   init() {
-    // Create scene, camera, renderer
-    this.scene = new THREE.Scene();
-    this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    console.log("DitheredWaves init() called");
 
-    this.renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true,
-      preserveDrawingBuffer: true,
-    });
-    this.renderer.setSize(
-      this.container.offsetWidth,
-      this.container.offsetHeight
-    );
-    this.renderer.setPixelRatio(window.devicePixelRatio);
-    this.container.appendChild(this.renderer.domElement);
+    // Check WebGL support
+    if (!window.WebGLRenderingContext) {
+      console.error("WebGL is not supported in this browser");
+      return;
+    }
 
-    // Create wave material
-    this.createWaveMaterial();
+    try {
+      // Create scene, camera, renderer
+      console.log("Creating THREE.js scene...");
+      this.scene = new THREE.Scene();
+      this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
-    // Create geometry and mesh
-    this.geometry = new THREE.PlaneGeometry(2, 2);
-    this.mesh = new THREE.Mesh(this.geometry, this.waveMaterial);
-    this.scene.add(this.mesh);
+      console.log("Creating WebGL renderer...");
+      this.renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+        preserveDrawingBuffer: true,
+      });
 
-    // Setup event listeners
-    this.setupEventListeners();
+      console.log("Setting renderer size...");
+      this.renderer.setSize(
+        this.container.offsetWidth,
+        this.container.offsetHeight
+      );
+      this.renderer.setPixelRatio(window.devicePixelRatio);
 
-    // Start animation
-    this.animate();
+      console.log("Appending canvas to container...");
+      this.container.appendChild(this.renderer.domElement);
+
+      // Create wave material
+      console.log("Creating wave material...");
+      this.createWaveMaterial();
+
+      // Create geometry and mesh
+      console.log("Creating geometry and mesh...");
+      this.geometry = new THREE.PlaneGeometry(2, 2);
+      this.mesh = new THREE.Mesh(this.geometry, this.waveMaterial);
+      this.scene.add(this.mesh);
+
+      // Setup event listeners
+      console.log("Setting up event listeners...");
+      this.setupEventListeners();
+
+      // Start animation
+      console.log("Starting animation...");
+      this.animate();
+
+      console.log("DitheredWaves initialization complete!");
+    } catch (error) {
+      console.error("Error during DitheredWaves initialization:", error);
+      console.error("Error stack:", error.stack);
+    }
   }
 
   createWaveMaterial() {

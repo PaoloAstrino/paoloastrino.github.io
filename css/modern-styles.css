@@ -496,7 +496,7 @@ body.homepage .hero::after {
 }
 
 /* Container for the dithered waves animation */
-#dithered-waves-container {
+#magnet-lines-container {
   position: absolute;
   top: 10vh;
   left: 57.14%;
@@ -508,7 +508,7 @@ body.homepage .hero::after {
   pointer-events: auto;
 }
 
-#dithered-waves-container canvas {
+#magnet-lines-container .magnetLines-container {
   width: 100% !important;
   height: 100% !important;
   border-radius: 2rem 0 0 2rem;

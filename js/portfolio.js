@@ -20,9 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
   initParallaxEffects();
   initPerformanceOptimizations();
   initLegalOverlays();
-
-  // Initialize dithered waves animation
-  initDitheredWaves();
+  // Initialize magnet lines animation
+  initMagnetLines();
 
   // Desktop-only features
   // if (window.innerWidth > 768) {
@@ -1349,31 +1348,54 @@ const styleSheet = document.createElement("style");
 styleSheet.textContent = additionalStyles;
 document.head.appendChild(styleSheet);
 
-// Dithered Waves Animation
-function initDitheredWaves() {
-  const container = document.getElementById("dithered-waves-container");
-  if (container && typeof DitheredWaves !== "undefined") {
+// Magnet Lines Animation
+function initMagnetLines() {
+  console.log("Starting initMagnetLines...");
+
+  const container = document.getElementById("magnet-lines-container");
+  console.log("Container found:", container);
+
+  if (!container) {
+    console.error("Magnet lines container not found!");
+    return;
+  }
+
+  console.log("Container dimensions:", {
+    width: container.offsetWidth,
+    height: container.offsetHeight,
+    position: container.getBoundingClientRect(),
+  });
+
+  console.log("MagnetLines available:", typeof MagnetLines !== "undefined");
+
+  if (container && typeof MagnetLines !== "undefined") {
     try {
-      // Settings matching React component parameters
-      const waves = new DitheredWaves("dithered-waves-container", {
-        waveColor: [0.5, 0.5, 0.5], // Gray color
-        disableAnimation: false, // Animation enabled
-        enableMouseInteraction: true, // Mouse interaction enabled
-        mouseRadius: 0.3, // Mouse interaction radius
-        colorNum: 4, // 4 color gradations
-        waveAmplitude: 0.3, // Wave amplitude
-        waveFrequency: 3, // Wave frequency
-        waveSpeed: 0.05, // Wave speed
-        pixelSize: 1.5, // Pixel size for dithering
+      console.log("Attempting to create MagnetLines instance...");
+      // Settings matching React component defaults exactly
+      const magnetLines = new MagnetLines("magnet-lines-container", {
+        rows: 9,
+        columns: 9,
+        containerSize: "80vmin",
+        lineColor: "#efefef",
+        lineWidth: "1vmin",
+        lineHeight: "6vmin",
+        baseAngle: -10,
+        className: "",
       });
-      console.log("Dithered waves animation initialized successfully");
+      console.log(
+        "Magnet lines animation initialized successfully:",
+        magnetLines
+      );
     } catch (error) {
-      console.warn("Failed to initialize dithered waves:", error);
+      console.error("Failed to initialize magnet lines:", error);
+      console.error("Error stack:", error.stack);
     }
   } else {
     console.warn(
-      "Dithered waves container not found or DitheredWaves class not loaded"
+      "Magnet lines container not found or MagnetLines class not loaded"
     );
+    console.warn("Container:", container);
+    console.warn("MagnetLines type:", typeof MagnetLines);
   }
 }
 
