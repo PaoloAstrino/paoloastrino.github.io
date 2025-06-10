@@ -50,7 +50,7 @@ class MagnetLines {
   createContainer() {
     // Create the main container div
     this.magnetContainer = document.createElement("div");
-    this.magnetContainer.className = `magnetLines-container ${this.options.className}`;    // Set the grid styles
+    this.magnetContainer.className = `magnetLines-container ${this.options.className}`; // Set the grid styles
     this.magnetContainer.style.display = "grid";
     this.magnetContainer.style.gridTemplateColumns = `repeat(${this.options.columns}, 1fr)`;
     this.magnetContainer.style.gridTemplateRows = `repeat(${this.options.rows}, 1fr)`;
@@ -59,7 +59,7 @@ class MagnetLines {
     this.magnetContainer.style.justifyItems = "center";
     this.magnetContainer.style.alignItems = "center";
     this.magnetContainer.style.zIndex = "100";
-    this.magnetContainer.style.position = "relative";// Add to the main container
+    this.magnetContainer.style.position = "relative"; // Add to the main container
     this.container.appendChild(this.magnetContainer);
 
     console.log("MagnetLines: Container created with styles:", {
@@ -80,7 +80,7 @@ class MagnetLines {
       const span = document.createElement("span");
 
       // Set the CSS custom property for rotation
-      span.style.setProperty("--rotate", `${this.options.baseAngle}deg`);      // Set the line styles
+      span.style.setProperty("--rotate", `${this.options.baseAngle}deg`); // Set the line styles
       span.style.backgroundColor = this.options.lineColor;
       span.style.width = this.options.lineWidth;
       span.style.height = this.options.lineHeight;

@@ -1379,10 +1379,10 @@ function initMagnetLines() {
           clientWidth: container.clientWidth,
           clientHeight: container.clientHeight,
           rect: container.getBoundingClientRect(),
-        });        // Settings with enhanced visibility for debugging
+        }); // Settings with enhanced visibility for debugging
         const magnetLines = new MagnetLines("magnet-lines-container", {
           rows: 5, // Fewer rows for easier visibility
-          columns: 5, // Fewer columns for easier visibility  
+          columns: 5, // Fewer columns for easier visibility
           containerSize: "100%",
           lineColor: "#ff6b6b", // Bright red for high visibility
           lineWidth: "3px", // Larger width
