@@ -1048,7 +1048,7 @@ body.homepage .hero::after {
   overflow: hidden;
   transition: all 0.3s ease;
   box-shadow: 0 8px 32px hsl(var(--foreground) / 0.08);
-  border-left: 4px solid hsl(var(--primary));
+  /* border-left: 4px solid hsl(var(--primary)); */ /* Removed blue line */
 }
 
 .experience-card:hover,
@@ -1056,7 +1056,7 @@ body.homepage .hero::after {
 .certification-card:hover {
   /* Removed transform: translateY(-8px); */
   box-shadow: 0 16px 48px hsl(var(--foreground) / 0.12);
-  border-left-color: hsl(var(--primary));
+  /* border-left-color: hsl(var(--primary)); */ /* Removed blue line hover effect */
 }
 
 /* Card Header */
@@ -1321,7 +1321,7 @@ body.homepage .hero::after {
   display: flex;
   flex-direction: column;
   position: relative;
-  border-top: 4px solid hsl(var(--primary) / 0.6); /* Accent border on top */
+  /* border-top: 4px solid hsl(var(--primary) / 0.6); */ /* Removed blue line */
   overflow: hidden; /* Prevent content overflow */
 }
 
@@ -1329,7 +1329,7 @@ body.homepage .hero::after {
   /* Removed transform: translateY(-5px); */
   box-shadow: 0 8px 32px hsl(var(--foreground) / 0.15); /* Enhanced shadow on hover */
   border-color: hsl(var(--primary) / 0.3); /* Highlight border on hover */
-  border-top-color: hsl(var(--primary)); /* Enhanced accent border on hover */
+  /* border-top-color: hsl(var(--primary)); */ /* Removed blue line hover effect */
 }
 
 .skill-category h3 {
@@ -1406,7 +1406,6 @@ body.homepage .hero::after {
   color: hsl(var(--primary-foreground));
   border-color: hsl(var(--primary)); /* Match border to background */
   /* Removed transform: translateY(-2px); */
-  box-shadow: 0 4px 12px hsl(var(--primary) / 0.3); /* Add shadow on hover */
 }
 
 /* Projects Section */
@@ -1425,7 +1424,7 @@ body.homepage .hero::after {
 
 .project-card {
   background: hsl(var(--background)); /* Match page background */
-  border: 2px solid hsl(var(--border) / 0.2); /* Subtle border for card-like appearance */
+  /* border: 2px solid hsl(var(--border) / 0.2); */ /* Removed border to eliminate all lines */
   border-radius: 8px; /* Slight rounded corners like skill cards */
   overflow: hidden;
   box-shadow: 0 4px 16px hsl(var(--foreground) / 0.08); /* Subtle shadow like skill cards */
@@ -1439,7 +1438,7 @@ body.homepage .hero::after {
 .project-card:hover {
   /* Removed transform: translateY(-8px); */
   box-shadow: 0 16px 48px hsl(var(--foreground) / 0.12);
-  border-color: hsl(var(--primary) / 0.3);
+  /* border-color: hsl(var(--primary) / 0.3); */ /* Removed border hover effect */
 }
 
 /* Project visual/image section */
@@ -2788,7 +2787,7 @@ html[data-theme="light"] .scroll-progress {
   }
   .scroll-to-top {
     right: 19px; /* Align with center of social buttons: (80px - 42px) / 2 = 19px */
-    bottom: 1.5rem;
+    bottom: 1rem;
     width: 45px;
     height: 45px;
     font-size: 1rem;
@@ -3019,8 +3018,8 @@ html[data-theme="light"] .scroll-progress {
     height: 3px;
   }
   .contact-section {
-    padding: 3rem 0; /* Increased from 2rem for better small mobile spacing */
-    min-height: 65vh; /* Adequate height for small mobile centering */
+    padding: 3rem 0; /* Increased from 2rem for better vertical spacing */
+    min-height: 65vh; /* Ensure adequate height for proper centering */
   }
 
   .contact-form-container {
