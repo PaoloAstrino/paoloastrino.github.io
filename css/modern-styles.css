@@ -489,7 +489,7 @@ body.homepage .hero::after {
   height: 80vh;
   border-radius: 2rem 0 0 2rem;
   border: 2px solid hsl(220, 100%, 35%);
-  z-index: 5;
+  z-index: -1; /* Changed z-index */
   opacity: 0.8;
   pointer-events: none;
   overflow: hidden;
