@@ -95,13 +95,12 @@ class LiquidChrome {
       cancelAnimationFrame(this.rafId);
     }
   }
-
   async loadOGL() {
     // Load OGL library from CDN
     if (typeof OGL === "undefined") {
       return new Promise((resolve, reject) => {
         const script = document.createElement("script");
-        script.src = "https://cdn.jsdelivr.net/npm/ogl@0.0.82/dist/ogl.umd.js";
+        script.src = "https://unpkg.com/ogl@0.0.82/dist/ogl.umd.js";
         script.onload = () => {
           console.log("OGL library loaded successfully");
           resolve();

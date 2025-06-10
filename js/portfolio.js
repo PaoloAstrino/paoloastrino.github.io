@@ -1351,7 +1351,7 @@ document.head.appendChild(styleSheet);
 function initLiquidChrome() {
   console.log("Starting initLiquidChrome...");
 
-  const container = document.getElementById("magnet-lines-container");
+  const container = document.getElementById("liquid-chrome-container");
   console.log("Container found:", container);
 
   if (!container) {
@@ -1381,7 +1381,7 @@ function initLiquidChrome() {
         });
 
         // Settings optimized for liquid chrome animation
-        const liquidChrome = new LiquidChrome("magnet-lines-container", {
+        const liquidChrome = new LiquidChrome("liquid-chrome-container", {
           baseColor: [0.2, 0.3, 0.8], // Blue chrome color
           speed: 0.3,
           amplitude: 0.4,

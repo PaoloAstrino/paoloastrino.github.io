@@ -3092,68 +3092,67 @@ html[data-theme="light"] .scroll-progress {
   }
 }
 
-/* Spotlight Card Animation Effect */
-.spotlight-card {
-  position: relative;
-  overflow: hidden;
-}
-
-.spotlight-card::before {
-  content: "";
+/* Liquid Chrome Animation Container */
+#liquid-chrome-container {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(
-    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    var(--spotlight-color, rgba(255, 255, 255, 0.25)),
-    transparent 40%
-  );
+  top: 10vh;
+  left: 57.14%;
+  width: 42.86%;
+  height: 80vh;
+  border-radius: 2rem 0 0 2rem;
+  overflow: hidden;
+  z-index: 6;
+  pointer-events: auto;
+}
+
+/* Liquid Chrome WebGL Canvas styling */
+#liquid-chrome-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 2rem 0 0 2rem;
+  display: block;
+  object-fit: cover;
+  transform: translateZ(0); /* Force hardware acceleration */
+  backface-visibility: hidden;
+}
+
+/* Loading state for liquid chrome */
+#liquid-chrome-container.loading {
   opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  z-index: 1;
+  animation: liquidChromeFadeIn 1s ease-out forwards;
 }
 
-.spotlight-card:hover::before {
-  opacity: 1;
-}
-
-.spotlight-card > * {
-  position: relative;
-  z-index: 2;
-}
-
-/* Enhanced spotlight effect for different card types - now using dynamic --spotlight-color */
-.project-card.spotlight-card::before,
-.experience-card.spotlight-card::before,
-.education-card.spotlight-card::before,
-.certification-card.spotlight-card::before {
-  background: radial-gradient(
-    800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    var(--spotlight-color, rgba(255, 255, 255, 0.25)),
-    transparent 50%
-  );
-}
-
-/* Responsive adjustments for hero blue background */
-@media (max-width: 768px) {
-  body.homepage .hero::after {
-    left: 54.29%;
-    width: 45.71%;
-    opacity: 0.25;
-    border-radius: 1.5rem 0 0 1.5rem;
-    border-width: 1.5px;
+@keyframes liquidChromeFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
-@media (max-width: 480px) {
-  body.homepage .hero::after {
-    left: 51.43%;
-    width: 48.57%;
-    opacity: 0.2;
-    border-radius: 1rem 0 0 1rem;
-    border-width: 1px;
+/* Responsive adjustments for liquid chrome */
+@media (max-width: 1200px) {
+  #liquid-chrome-container {
+    left: 55%;
+    width: 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  #liquid-chrome-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40vh;
+    border-radius: 1rem;
+    margin-top: 2rem;
+  }
+
+  #liquid-chrome-container canvas {
+    border-radius: 1rem;
   }
 }
