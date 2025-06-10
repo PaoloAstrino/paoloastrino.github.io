@@ -1,164 +1,259 @@
 /**
- * Vanilla JavaScript MagnetLines Animation
- * Based on the React MagnetLines component
+ * Vanilla JavaScript Liquid Chrome Animation
+ * Based on the React LiquidChrome component using OGL
  */
 
-class MagnetLines {
+class LiquidChrome {
   constructor(containerId, options = {}) {
-    console.log("MagnetLines: Initializing...");
+    console.log("LiquidChrome: Initializing...");
 
     this.container = document.getElementById(containerId);
     if (!this.container) {
-      console.error("MagnetLines: Container not found:", containerId);
+      console.error("LiquidChrome: Container not found:", containerId);
       return;
     }
 
     // Default options matching React component
     this.options = {
-      rows: options.rows || 9,
-      columns: options.columns || 9,
-      containerSize: options.containerSize || "100%",
-      lineColor: options.lineColor || "#efefef",
-      lineWidth: options.lineWidth || "1vmin",
-      lineHeight: options.lineHeight || "6vmin",
-      baseAngle: options.baseAngle || -10,
-      className: options.className || "",
+      baseColor: options.baseColor || [0.1, 0.1, 0.1],
+      speed: options.speed || 0.2,
+      amplitude: options.amplitude || 0.3,
+      frequencyX: options.frequencyX || 3,
+      frequencyY: options.frequencyY || 3,
+      interactive: options.interactive !== false,
       ...options,
     };
 
-    console.log("MagnetLines: Options:", this.options);
+    console.log("LiquidChrome: Options:", this.options);
 
-    this.magnetContainer = null;
-    this.items = [];
-    this.boundPointerMove = this.onPointerMove.bind(this);
+    this.renderer = null;
+    this.gl = null;
+    this.program = null;
+    this.mesh = null;
+    this.animationId = null;
+    this.boundResize = this.resize.bind(this);
+    this.boundMouseMove = this.handleMouseMove.bind(this);
+    this.boundTouchMove = this.handleTouchMove.bind(this);
 
     this.init();
   }
 
-  init() {
-    console.log("MagnetLines: Starting initialization...");
+  async init() {
+    console.log("LiquidChrome: Starting initialization...");
 
-    // Create the magnet lines container
-    this.createContainer();
-    this.createLines();
-    this.setupEventListeners();
-    this.initializePosition();
-
-    console.log("MagnetLines: Initialization complete");
-  }
-
-  createContainer() {
-    // Create the main container div
-    this.magnetContainer = document.createElement("div");
-    this.magnetContainer.className = `magnetLines-container ${this.options.className}`; // Set the grid styles
-    this.magnetContainer.style.display = "grid";
-    this.magnetContainer.style.gridTemplateColumns = `repeat(${this.options.columns}, 1fr)`;
-    this.magnetContainer.style.gridTemplateRows = `repeat(${this.options.rows}, 1fr)`;
-    this.magnetContainer.style.width = this.options.containerSize;
-    this.magnetContainer.style.height = this.options.containerSize;
-    this.magnetContainer.style.justifyItems = "center";
-    this.magnetContainer.style.alignItems = "center";
-
-    // Add loading class for fade-in animation
-    this.magnetContainer.classList.add("loading"); // Add to the main container
-    this.container.appendChild(this.magnetContainer);
-
-    console.log("MagnetLines: Container created with styles:", {
-      display: this.magnetContainer.style.display,
-      gridTemplateColumns: this.magnetContainer.style.gridTemplateColumns,
-      gridTemplateRows: this.magnetContainer.style.gridTemplateRows,
-      width: this.magnetContainer.style.width,
-      height: this.magnetContainer.style.height,
-      containerRect: this.container.getBoundingClientRect(),
-      magnetRect: this.magnetContainer.getBoundingClientRect(),
-    });
-  }
-
-  createLines() {
-    const total = this.options.rows * this.options.columns;
-
-    for (let i = 0; i < total; i++) {
-      const span = document.createElement("span"); // Set the CSS custom property for rotation
-      span.style.setProperty("--rotate", `${this.options.baseAngle}deg`);
-      span.style.setProperty("--line-index", i);
-
-      // Set the line styles
-      span.style.backgroundColor = this.options.lineColor;
-      span.style.width = this.options.lineWidth;
-      span.style.height = this.options.lineHeight;
-      span.style.display = "block";
-      span.style.transformOrigin = "center";
-      span.style.willChange = "transform";
-      span.style.transform = "rotate(var(--rotate))";
-
-      this.magnetContainer.appendChild(span);
-      this.items.push(span);
+    try {
+      await this.loadOGL();
+      this.createRenderer();
+      this.createShaders();
+      this.setupEventListeners();
+      this.startAnimation();
+      console.log("LiquidChrome: Initialization complete");
+    } catch (error) {
+      console.error("LiquidChrome: Initialization failed:", error);
     }
+  }
 
-    console.log("MagnetLines: Created", total, "lines with styles:", {
-      backgroundColor: this.options.lineColor,
-      width: this.options.lineWidth,
-      height: this.options.lineHeight,
-      firstItemRect: this.items[0]
-        ? this.items[0].getBoundingClientRect()
-        : null,
+  async loadOGL() {
+    // Load OGL library from CDN
+    if (typeof OGL === "undefined") {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/npm/ogl@0.0.82/dist/ogl.umd.js";
+        script.onload = () => {
+          console.log("OGL library loaded successfully");
+          resolve();
+        };
+        script.onerror = () => reject(new Error("Failed to load OGL library"));
+        document.head.appendChild(script);
+      });
+    }
+  }
+
+  createRenderer() {
+    const { Renderer } = OGL;
+    this.renderer = new Renderer({ antialias: true });
+    this.gl = this.renderer.gl;
+    this.gl.clearColor(1, 1, 1, 1);
+
+    this.container.appendChild(this.gl.canvas);
+    this.resize();
+  }
+
+  createShaders() {
+    const { Program, Mesh, Triangle } = OGL;
+
+    const vertexShader = `
+      attribute vec2 position;
+      attribute vec2 uv;
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = vec4(position, 0.0, 1.0);
+      }
+    `;
+
+    const fragmentShader = `
+      precision highp float;
+      uniform float uTime;
+      uniform vec3 uResolution;
+      uniform vec3 uBaseColor;
+      uniform float uAmplitude;
+      uniform float uFrequencyX;
+      uniform float uFrequencyY;
+      uniform vec2 uMouse;
+      varying vec2 vUv;
+
+      vec4 renderImage(vec2 uvCoord) {
+          vec2 fragCoord = uvCoord * uResolution.xy;
+          vec2 uv = (2.0 * fragCoord - uResolution.xy) / min(uResolution.x, uResolution.y);
+
+          for (float i = 1.0; i < 10.0; i++){
+              uv.x += uAmplitude / i * cos(i * uFrequencyX * uv.y + uTime + uMouse.x * 3.14159);
+              uv.y += uAmplitude / i * cos(i * uFrequencyY * uv.x + uTime + uMouse.y * 3.14159);
+          }
+
+          vec2 diff = (uvCoord - uMouse);
+          float dist = length(diff);
+          float falloff = exp(-dist * 20.0);
+          float ripple = sin(10.0 * dist - uTime * 2.0) * 0.03;
+          uv += (diff / (dist + 0.0001)) * ripple * falloff;
+
+          vec3 color = uBaseColor / abs(sin(uTime - uv.y - uv.x));
+          return vec4(color, 1.0);
+      }
+
+      void main() {
+          vec4 col = vec4(0.0);
+          int samples = 0;
+          for (int i = -1; i <= 1; i++){
+              for (int j = -1; j <= 1; j++){
+                  vec2 offset = vec2(float(i), float(j)) * (1.0 / min(uResolution.x, uResolution.y));
+                  col += renderImage(vUv + offset);
+                  samples++;
+              }
+          }
+          gl_FragColor = col / float(samples);
+      }
+    `;
+
+    const geometry = new Triangle(this.gl);
+    this.program = new Program(this.gl, {
+      vertex: vertexShader,
+      fragment: fragmentShader,
+      uniforms: {
+        uTime: { value: 0 },
+        uResolution: {
+          value: new Float32Array([
+            this.gl.canvas.width,
+            this.gl.canvas.height,
+            this.gl.canvas.width / this.gl.canvas.height,
+          ]),
+        },
+        uBaseColor: { value: new Float32Array(this.options.baseColor) },
+        uAmplitude: { value: this.options.amplitude },
+        uFrequencyX: { value: this.options.frequencyX },
+        uFrequencyY: { value: this.options.frequencyY },
+        uMouse: { value: new Float32Array([0, 0]) },
+      },
     });
+    this.mesh = new Mesh(this.gl, { geometry, program: this.program });
+  }
+
+  resize() {
+    const scale = 1;
+    this.renderer.setSize(
+      this.container.offsetWidth * scale,
+      this.container.offsetHeight * scale
+    );
+
+    if (this.program) {
+      const resUniform = this.program.uniforms.uResolution.value;
+      resUniform[0] = this.gl.canvas.width;
+      resUniform[1] = this.gl.canvas.height;
+      resUniform[2] = this.gl.canvas.width / this.gl.canvas.height;
+    }
+  }
+
+  handleMouseMove(event) {
+    if (!this.program) return;
+
+    const rect = this.container.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width;
+    const y = 1 - (event.clientY - rect.top) / rect.height;
+    const mouseUniform = this.program.uniforms.uMouse.value;
+    mouseUniform[0] = x;
+    mouseUniform[1] = y;
+  }
+
+  handleTouchMove(event) {
+    if (!this.program || event.touches.length === 0) return;
+
+    const touch = event.touches[0];
+    const rect = this.container.getBoundingClientRect();
+    const x = (touch.clientX - rect.left) / rect.width;
+    const y = 1 - (touch.clientY - rect.top) / rect.height;
+    const mouseUniform = this.program.uniforms.uMouse.value;
+    mouseUniform[0] = x;
+    mouseUniform[1] = y;
   }
 
   setupEventListeners() {
-    console.log("MagnetLines: Setting up event listeners...");
+    window.addEventListener("resize", this.boundResize);
 
-    // Add pointer move listener to window
-    window.addEventListener("pointermove", this.boundPointerMove);
-
-    console.log("MagnetLines: Event listeners setup complete");
-  }
-
-  onPointerMove(pointer) {
-    this.items.forEach((item) => {
-      const rect = item.getBoundingClientRect();
-      const centerX = rect.x + rect.width / 2;
-      const centerY = rect.y + rect.height / 2;
-
-      const b = pointer.x - centerX;
-      const a = pointer.y - centerY;
-      const c = Math.sqrt(a * a + b * b) || 1;
-      const r =
-        ((Math.acos(b / c) * 180) / Math.PI) * (pointer.y > centerY ? 1 : -1);
-
-      item.style.setProperty("--rotate", `${r}deg`);
-    });
-  }
-
-  initializePosition() {
-    // Initialize with middle position like in React component
-    if (this.items.length) {
-      const middleIndex = Math.floor(this.items.length / 2);
-      const rect = this.items[middleIndex].getBoundingClientRect();
-      this.onPointerMove({ x: rect.x, y: rect.y });
+    if (this.options.interactive) {
+      this.container.addEventListener("mousemove", this.boundMouseMove);
+      this.container.addEventListener("touchmove", this.boundTouchMove);
     }
+  }
+
+  startAnimation() {
+    const update = (t) => {
+      this.animationId = requestAnimationFrame(update);
+      if (this.program) {
+        this.program.uniforms.uTime.value = t * 0.001 * this.options.speed;
+        this.renderer.render({ scene: this.mesh });
+      }
+    };
+    this.animationId = requestAnimationFrame(update);
   }
 
   destroy() {
-    console.log("MagnetLines: Destroying...");
+    console.log("LiquidChrome: Destroying...");
+
+    // Cancel animation
+    if (this.animationId) {
+      cancelAnimationFrame(this.animationId);
+    }
 
     // Remove event listeners
-    window.removeEventListener("pointermove", this.boundPointerMove);
+    window.removeEventListener("resize", this.boundResize);
+    if (this.options.interactive) {
+      this.container.removeEventListener("mousemove", this.boundMouseMove);
+      this.container.removeEventListener("touchmove", this.boundTouchMove);
+    }
 
     // Remove DOM elements
-    if (this.magnetContainer && this.magnetContainer.parentNode) {
-      this.magnetContainer.parentNode.removeChild(this.magnetContainer);
+    if (this.gl && this.gl.canvas && this.gl.canvas.parentElement) {
+      this.gl.canvas.parentElement.removeChild(this.gl.canvas);
+    }
+
+    // Lose WebGL context
+    if (this.gl) {
+      const ext = this.gl.getExtension("WEBGL_lose_context");
+      if (ext) ext.loseContext();
     }
 
     // Clear references
-    this.items = [];
-    this.magnetContainer = null;
+    this.renderer = null;
+    this.gl = null;
+    this.program = null;
+    this.mesh = null;
   }
 
   // Method to update options
   updateOptions(newOptions) {
     this.options = { ...this.options, ...newOptions };
-    console.log("MagnetLines: Options updated:", this.options);
+    console.log("LiquidChrome: Options updated:", this.options);
 
     // Recreate with new options
     this.destroy();
@@ -167,4 +262,4 @@ class MagnetLines {
 }
 
 // Export for use
-window.MagnetLines = MagnetLines;
+window.LiquidChrome = LiquidChrome;

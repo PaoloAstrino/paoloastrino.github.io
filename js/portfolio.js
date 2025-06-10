@@ -19,9 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
   initSmoothScrolling();
   initParallaxEffects();
   initPerformanceOptimizations();
-  initLegalOverlays();
-  // Initialize magnet lines animation
-  initMagnetLines();
+  initLegalOverlays(); // Initialize liquid chrome animation
+  initLiquidChrome();
 
   // Desktop-only features
   // if (window.innerWidth > 768) {
@@ -1349,14 +1348,14 @@ styleSheet.textContent = additionalStyles;
 document.head.appendChild(styleSheet);
 
 // Magnet Lines Animation
-function initMagnetLines() {
-  console.log("Starting initMagnetLines...");
+function initLiquidChrome() {
+  console.log("Starting initLiquidChrome...");
 
   const container = document.getElementById("magnet-lines-container");
   console.log("Container found:", container);
 
   if (!container) {
-    console.error("Magnet lines container not found!");
+    console.error("Liquid chrome container not found!");
     return;
   }
 
@@ -1366,10 +1365,10 @@ function initMagnetLines() {
     position: container.getBoundingClientRect(),
   });
 
-  console.log("MagnetLines available:", typeof MagnetLines !== "undefined");
-  if (container && typeof MagnetLines !== "undefined") {
+  console.log("LiquidChrome available:", typeof LiquidChrome !== "undefined");
+  if (container && typeof LiquidChrome !== "undefined") {
     try {
-      console.log("Attempting to create MagnetLines instance...");
+      console.log("Attempting to create LiquidChrome instance...");
 
       // Add a small delay to ensure container has proper dimensions
       setTimeout(() => {
@@ -1379,32 +1378,33 @@ function initMagnetLines() {
           clientWidth: container.clientWidth,
           clientHeight: container.clientHeight,
           rect: container.getBoundingClientRect(),
-        }); // Settings with enhanced visibility for debugging
-        const magnetLines = new MagnetLines("magnet-lines-container", {
-          rows: 5, // Fewer rows for easier visibility
-          columns: 5, // Fewer columns for easier visibility
-          containerSize: "100%",
-          lineColor: "#ff6b6b", // Bright red for high visibility
-          lineWidth: "3px", // Larger width
-          lineHeight: "40px", // Larger height
-          baseAngle: -10,
-          className: "",
         });
+
+        // Settings optimized for liquid chrome animation
+        const liquidChrome = new LiquidChrome("magnet-lines-container", {
+          baseColor: [0.2, 0.3, 0.8], // Blue chrome color
+          speed: 0.3,
+          amplitude: 0.4,
+          frequencyX: 2,
+          frequencyY: 2,
+          interactive: true,
+        });
+
         console.log(
-          "Magnet lines animation initialized successfully:",
-          magnetLines
+          "Liquid chrome animation initialized successfully:",
+          liquidChrome
         );
       }, 100);
     } catch (error) {
-      console.error("Failed to initialize magnet lines:", error);
+      console.error("Failed to initialize liquid chrome:", error);
       console.error("Error stack:", error.stack);
     }
   } else {
     console.warn(
-      "Magnet lines container not found or MagnetLines class not loaded"
+      "Liquid chrome container not found or LiquidChrome class not loaded"
     );
     console.warn("Container:", container);
-    console.warn("MagnetLines type:", typeof MagnetLines);
+    console.warn("LiquidChrome type:", typeof LiquidChrome);
   }
 }
 
