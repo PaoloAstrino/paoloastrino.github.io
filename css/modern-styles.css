@@ -483,10 +483,10 @@ html[data-theme="light"] .switch-handle {
 body.homepage .hero::after {
   content: "";
   position: absolute;
-  top: 10vh;
+  top: 10%;
   left: 57.14%;
   width: 42.86%;
-  height: 80vh;
+  height: 80%;
   border-radius: 2rem 0 0 2rem;
   border: 2px solid hsl(220, 100%, 35%);
   z-index: -1; /* Changed z-index */
@@ -3095,10 +3095,10 @@ html[data-theme="light"] .scroll-progress {
 /* Liquid Chrome Animation Container */
 #liquid-chrome-container {
   position: absolute;
-  top: 10vh;
+  top: 10%;
   left: 57.14%;
   width: 42.86%;
-  height: 80vh;
+  height: 80%;
   border-radius: 2rem 0 0 2rem;
   overflow: hidden;
   z-index: 6;
