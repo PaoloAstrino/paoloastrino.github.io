@@ -7,7 +7,8 @@ class MagnetLines {
   constructor(containerId, options = {}) {
     console.log("MagnetLines: Initializing...");
 
-    this.container = document.getElementById(containerId);    if (!this.container) {
+    this.container = document.getElementById(containerId);
+    if (!this.container) {
       console.error("MagnetLines: Container not found:", containerId);
       return;
     }
@@ -56,7 +57,9 @@ class MagnetLines {
     this.magnetContainer.style.width = this.options.containerSize;
     this.magnetContainer.style.height = this.options.containerSize;
     this.magnetContainer.style.justifyItems = "center";
-    this.magnetContainer.style.alignItems = "center";// Add to the main container
+    this.magnetContainer.style.alignItems = "center";
+    this.magnetContainer.style.zIndex = "100";
+    this.magnetContainer.style.position = "relative";// Add to the main container
     this.container.appendChild(this.magnetContainer);
 
     console.log("MagnetLines: Container created with styles:", {
@@ -66,7 +69,7 @@ class MagnetLines {
       width: this.magnetContainer.style.width,
       height: this.magnetContainer.style.height,
       containerRect: this.container.getBoundingClientRect(),
-      magnetRect: this.magnetContainer.getBoundingClientRect()
+      magnetRect: this.magnetContainer.getBoundingClientRect(),
     });
   }
 
@@ -84,7 +87,10 @@ class MagnetLines {
       span.style.display = "block";
       span.style.transformOrigin = "center";
       span.style.willChange = "transform";
-      span.style.transform = "rotate(var(--rotate))";this.magnetContainer.appendChild(span);
+      span.style.transform = "rotate(var(--rotate))";
+      span.style.zIndex = "101";
+      span.style.position = "relative";
+      this.magnetContainer.appendChild(span);
       this.items.push(span);
     }
 
@@ -92,7 +98,9 @@ class MagnetLines {
       backgroundColor: this.options.lineColor,
       width: this.options.lineWidth,
       height: this.options.lineHeight,
-      firstItemRect: this.items[0] ? this.items[0].getBoundingClientRect() : null
+      firstItemRect: this.items[0]
+        ? this.items[0].getBoundingClientRect()
+        : null,
     });
   }
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MagnetLines Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #000;
+            color: white;
+        }
+        #test-container {
+            width: 400px;
+            height: 400px;
+            border: 2px solid white;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <h1>MagnetLines Test</h1>
+    <div id="test-container"></div>
+    
+    <script src="js/magnet-lines.js"></script>
+    <script>
+        console.log("Test page loaded");
+        console.log("MagnetLines available:", typeof MagnetLines);
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM loaded, creating MagnetLines");
+            
+            try {
+                const magnetLines = new MagnetLines("test-container", {
+                    rows: 5,
+                    columns: 5,
+                    containerSize: "100%",
+                    lineColor: "#ff0000",
+                    lineWidth: "2px",
+                    lineHeight: "20px",
+                    baseAngle: 0
+                });
+                console.log("MagnetLines created successfully:", magnetLines);
+            } catch (error) {
+                console.error("Error creating MagnetLines:", error);
+            }
+        });
+    </script>
+</body>
+</html>

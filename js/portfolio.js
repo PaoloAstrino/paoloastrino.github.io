@@ -1370,7 +1370,7 @@ function initMagnetLines() {
   if (container && typeof MagnetLines !== "undefined") {
     try {
       console.log("Attempting to create MagnetLines instance...");
-      
+
       // Add a small delay to ensure container has proper dimensions
       setTimeout(() => {
         console.log("Container dimensions after delay:", {
@@ -1378,16 +1378,15 @@ function initMagnetLines() {
           offsetHeight: container.offsetHeight,
           clientWidth: container.clientWidth,
           clientHeight: container.clientHeight,
-          rect: container.getBoundingClientRect()
-        });
-          // Settings matching React component defaults exactly
+          rect: container.getBoundingClientRect(),
+        });        // Settings with enhanced visibility for debugging
         const magnetLines = new MagnetLines("magnet-lines-container", {
-          rows: 9,
-          columns: 9,
+          rows: 5, // Fewer rows for easier visibility
+          columns: 5, // Fewer columns for easier visibility  
           containerSize: "100%",
-          lineColor: "#efefef",
-          lineWidth: "1vmin",
-          lineHeight: "6vmin",
+          lineColor: "#ff6b6b", // Bright red for high visibility
+          lineWidth: "3px", // Larger width
+          lineHeight: "40px", // Larger height
           baseAngle: -10,
           className: "",
         });

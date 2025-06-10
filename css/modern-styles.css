@@ -504,7 +504,7 @@ body.homepage .hero::after {
   height: 80vh;
   border-radius: 2rem 0 0 2rem;
   overflow: hidden;
-  z-index: 6;
+  z-index: 100;
   pointer-events: auto;
 }
 
