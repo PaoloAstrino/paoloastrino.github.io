@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initThemeToggle();
   initScrollToTop();
   initScrollAnimations();
-  initDecryptedTextEffect();
+  // initDecryptedTextEffect(); // Disabled text decryption for hero section
 
   // Add a small delay for DecryptedText examples to ensure DOM is fully ready
   setTimeout(initDecryptedTextExamples, 100);
