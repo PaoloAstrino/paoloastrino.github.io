@@ -335,7 +335,6 @@ function initThemeToggle() {
     document.body.classList.remove("dark");
     document.documentElement.setAttribute("data-theme", "light");
   }
-
   themeToggle.addEventListener("click", function () {
     const isDark = document.body.classList.toggle("dark");
     document.documentElement.setAttribute(
@@ -344,7 +343,15 @@ function initThemeToggle() {
     );
     localStorage.setItem("theme", isDark ? "dark" : "light");
 
-    // Removed animation effect to the switch - no more transform scaling
+    // Force a reflow to ensure proper CSS state transition
+    themeToggle.style.transition = 'none';
+    themeToggle.offsetHeight; // Trigger reflow
+    themeToggle.style.transition = '';
+    
+    // Remove any stuck hover states by temporarily removing and re-adding the element
+    setTimeout(() => {
+      themeToggle.blur(); // Remove focus to reset any pseudo-states
+    }, 100);
   });
 }
 

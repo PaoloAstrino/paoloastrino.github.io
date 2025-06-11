@@ -409,6 +409,11 @@ html[data-theme="light"] .secondary-link:hover {
   box-shadow: 0 8px 20px hsl(var(--primary) / 0.3);
 }
 
+.theme-toggle:focus {
+  outline: none;
+  box-shadow: 0 8px 20px hsl(var(--primary) / 0.3), 0 0 0 3px hsl(var(--primary) / 0.2);
+}
+
 .toggle-switch {
   display: inline-block;
   width: 28px;
@@ -466,6 +471,19 @@ html[data-theme="light"] .switch-handle {
 
 .toggle-switch:hover .switch {
   box-shadow: 0 0 0 3px hsl(var(--primary) / 0.2);
+}
+
+/* Ensure theme toggle button returns to normal state after theme switching */
+.theme-toggle:not(:hover) {
+  transition: all 0.3s ease 0.1s; /* Add slight delay to allow theme transition to complete */
+}
+
+/* Override any stuck hover states after theme change */
+html[data-theme="dark"] .theme-toggle:not(:hover),
+html[data-theme="light"] .theme-toggle:not(:hover) {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  box-shadow: 0 4px 12px hsl(var(--foreground) / 0.1);
 }
 
 /* Hero Section */
@@ -1215,10 +1233,21 @@ body.homepage .hero::after {
 }
 
 .skills-tags .skill-tag:hover {
-  background: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
-  border-color: hsl(var(--primary));
-  transform: translateY(-2px);
+  background: hsl(0 0% 25% / 0.15); /* Gray background like apple-button */
+  backdrop-filter: blur(20px); /* Enhanced blur effect */
+  -webkit-backdrop-filter: blur(20px);
+  border-color: hsl(0 0% 40% / 0.4);
+  color: hsl(0 0% 95%); /* Brighter gray text */
+  box-shadow: 0 8px 32px hsl(0 0% 20% / 0.25), 0 0 0 1px hsl(0 0% 30% / 0.1);
+  /* Removed transform: translateY(-2px); - no movement */
+}
+
+/* Light theme skills tags hover styling */
+html[data-theme="light"] .skills-tags .skill-tag:hover {
+  background: hsl(0 0% 10% / 0.08); /* Slightly darker on hover */
+  border-color: hsl(0 0% 30% / 0.25);
+  color: hsl(0 0% 15%); /* Even darker text on hover */
+  box-shadow: 0 8px 32px hsl(0 0% 0% / 0.1), 0 0 0 1px hsl(0 0% 20% / 0.05);
 }
 
 /* Certification Links */
@@ -1460,15 +1489,25 @@ body.homepage .hero::after {
   box-sizing: border-box; /* Include padding and border in width calculation */
   overflow: hidden; /* Prevent text overflow */
   text-overflow: ellipsis; /* Add ellipsis if text is too long */
-  flex-shrink: 1; /* Allow tags to shrink if needed */
-  min-width: 0; /* Allow tags to shrink below their content size if needed */
+  flex-shrink: 1; /* Allow tags to shrink if needed */  min-width: 0; /* Allow tags to shrink below their content size if needed */
 }
 
 .skill-tag:hover {
-  background: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
-  border-color: hsl(var(--primary)); /* Match border to background */
-  transform: translateY(-2px);
+  background: hsl(0 0% 25% / 0.15); /* Gray background like apple-button */
+  backdrop-filter: blur(20px); /* Enhanced blur effect */
+  -webkit-backdrop-filter: blur(20px);
+  border-color: hsl(0 0% 40% / 0.4);
+  color: hsl(0 0% 95%); /* Brighter gray text */
+  box-shadow: 0 8px 32px hsl(0 0% 20% / 0.25), 0 0 0 1px hsl(0 0% 30% / 0.1);
+  /* Removed transform: translateY(-2px); - no movement */
+}
+
+/* Light theme skill tag hover styling */
+html[data-theme="light"] .skill-tag:hover {
+  background: hsl(0 0% 10% / 0.08); /* Slightly darker on hover */
+  border-color: hsl(0 0% 30% / 0.25);
+  color: hsl(0 0% 15%); /* Even darker text on hover */
+  box-shadow: 0 8px 32px hsl(0 0% 0% / 0.1), 0 0 0 1px hsl(0 0% 20% / 0.05);
 }
 
 /* Projects Section */
