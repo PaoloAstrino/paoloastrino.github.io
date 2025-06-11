@@ -503,7 +503,7 @@ body.homepage .hero::after {
   content: "";
   position: absolute;
   top: 10%;
-  /* Ultra-fluid adaptive positioning using CSS custom properties */
+  /* Adaptive positioning using CSS custom properties */
   left: clamp(
     0%,
     calc(
@@ -531,7 +531,7 @@ body.homepage .hero::after {
     hsl(220, 100%, 50% / 0.7),
     hsl(200, 100%, 55% / 0.6)
   );
-  z-index: 0;
+  z-index: -999; /* Set to lowest possible z-index */
   opacity: 1;
   pointer-events: none;
   overflow: hidden;
@@ -904,28 +904,34 @@ body.homepage .hero::after {
 }
 
 .dataloud-glass-card {
-  /* Calculate width as 2x the hero-badge computed width - reduced by 30%, then increased by 10% */
+  /* Calculate width as 2x the hero-badge computed width - reduced by 30% */
   --badge-font-size: clamp(0.875rem, 1.5vw, 1rem);
-  --badge-padding: 1.848rem; /* 1.68rem * 1.1 = 1.848rem (30% reduction + 10% increase) */
+  --badge-padding: calc(1.68rem * 0.7); /* 1.176rem (30% reduction) */
   --badge-base-width: calc(
-    var(--badge-font-size) * 13.09
-  ); /* 11.9 * 1.1 = 13.09 (30% reduction + 10% increase) */
+    var(--badge-font-size) * calc(11.9 * 0.7)
+  ); /* 8.33 (30% reduction) */
   --card-width: calc(
-    (var(--badge-base-width) + var(--badge-padding)) * 1.54
-  ); /* 1.4 * 1.1 = 1.54 (30% reduction + 10% increase) */
+    (var(--badge-base-width) + var(--badge-padding)) * calc(1.4 * 0.7)
+  ); /* 0.98 (30% reduction) */
   /* Fallback dimensions for browsers that don't support CSS custom properties - golden ratio (1:1.618) */
-  width: 308px; /* Base width */
-  height: 498.544px; /* 308px * 1.618 = 498.544px (golden ratio) */
+  width: calc(308px * 0.7); /* 215.6px - 30% smaller */
+  height: calc(498.544px * 0.7); /* 348.98px - 30% smaller */
   /* Modern responsive dimensions with golden ratio (1:1.618) */
   /* Smooth scaling using clamp for proportional golden ratio resizing */
   width: clamp(
-    calc(280px / 1.618),
-    /* Minimum width following golden ratio */ calc(30vw + 10rem),
-    /* Fluid scaling based on viewport */ calc(500px / 1.618)
-      /* Maximum width following golden ratio */
+    calc(calc(280px / 1.618) * 0.7),
+    /* Minimum width following golden ratio - 30% smaller */
+      calc(calc(30vw + 10rem) * 0.7),
+    /* Fluid scaling based on viewport - 30% smaller */
+      calc(calc(500px / 1.618) * 0.7)
+      /* Maximum width following golden ratio - 30% smaller */
   );
   height: calc(
-    clamp(calc(280px / 1.618), calc(30vw + 10rem), calc(500px / 1.618)) * 1.618
+    clamp(
+        calc(calc(280px / 1.618) * 0.7),
+        calc(calc(30vw + 10rem) * 0.7),
+        calc(calc(500px / 1.618) * 0.7)
+      ) * 1.618
   ); /* Golden ratio: height = width * φ */
 
   /* Additional fallback for calc() support */
@@ -940,10 +946,10 @@ body.homepage .hero::after {
     20px
   ); /* Proportional border radius */
   padding: clamp(
-    1.2rem,
-    calc(2vw + 1rem),
-    3.5rem
-  ); /* Proportional padding that scales with viewport */
+    calc(1.2rem * 0.7),
+    calc(calc(2vw + 1rem) * 0.7),
+    calc(3.5rem * 0.7)
+  ); /* Proportional padding that scales with viewport - 30% smaller */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1960,7 +1966,6 @@ html[data-theme="light"] .skill-tag:hover {
 /* Optimize transitions for better performance */
 .hero-visual,
 .dataloud-hero-card,
-#liquid-chrome-container,
 body.homepage .hero::after {
   /* Enable hardware acceleration for smooth animations */
   transform: translateZ(0);
@@ -1973,7 +1978,6 @@ body.homepage .hero::after {
 @media (prefers-reduced-motion: no-preference) {
   .hero-visual,
   .dataloud-hero-card,
-  #liquid-chrome-container,
   body.homepage .hero::after {
     /* Add subtle scale animation on scroll for enhanced fluidity */
     animation: breathe 8s ease-in-out infinite;
@@ -1994,7 +1998,6 @@ body.homepage .hero::after {
 @media (prefers-reduced-motion: reduce) {
   .hero-visual,
   .dataloud-hero-card,
-  #liquid-chrome-container,
   body.homepage .hero::after {
     /* Disable animations for users who prefer reduced motion */
     animation: none;
@@ -2013,8 +2016,7 @@ body.homepage .hero::after {
 /* Advanced viewport optimizations for ultra-wide screens */
 @media (min-width: 2560px) {
   body.homepage .hero::after,
-  .hero-visual,
-  #liquid-chrome-container {
+  .hero-visual {
     /* Optimize for ultra-wide displays */
     transition-duration: 0.6s;
     transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
@@ -2062,46 +2064,45 @@ body.homepage .hero::after {
 /* Fullscreen Desktop Optimization - Refined 1.3x Scaling */
 @media (min-width: 1600px) {
   .dataloud-glass-card {
-    /* More moderate 1.3x scaling while maintaining golden ratio (1:1.618) on fullscreen desktop */
+    /* 30% smaller with maintained 1.3x scaling for fullscreen desktop */
     width: min(
       calc(var(--card-width) * 1.3),
-      57vw,
-      1144px
-    ); /* Refined scaling: 44vw → 57vw, 880px → 1144px */
+      calc(57vw * 0.7),
+      calc(1144px * 0.7)
+    ); /* 30% smaller: 39.9vw, 800.8px */
     height: calc(
-      min(calc(var(--card-width) * 1.3), 57vw, 1144px) * 1.618
+      min(calc(var(--card-width) * 1.3), calc(57vw * 0.7), calc(1144px * 0.7)) *
+        1.618
     ); /* Golden ratio maintained */
     padding: clamp(
-      calc(1.2rem * 1.3),
-      calc(2vw * 1.3 + 1rem * 1.3),
-      calc(3.5rem * 1.3)
-    ); /* 1.3x padding scaling */
-  }
-  /* Scale internal elements proportionally */
+      calc(calc(1.2rem * 1.3) * 0.7),
+      calc(calc(2vw * 1.3 + 1rem * 1.3) * 0.7),
+      calc(calc(3.5rem * 1.3) * 0.7)
+    ); /* 1.3x padding scaling then 30% smaller */
+  } /* Scale internal elements proportionally */
   .dataloud-glass-card .project-icon-wrapper {
     width: clamp(
-      calc(60px * 1.3),
-      calc(8vw * 1.3 + 2rem * 1.3),
-      calc(140px * 1.3)
-    ); /* 1.3x icon wrapper scaling */
+      calc(calc(60px * 1.3) * 0.7),
+      calc(calc(8vw * 1.3 + 2rem * 1.3) * 0.7),
+      calc(calc(140px * 1.3) * 0.7)
+    ); /* 1.3x icon wrapper scaling then 30% smaller */
     height: clamp(
-      calc(60px * 1.3),
-      calc(8vw * 1.3 + 2rem * 1.3),
-      calc(140px * 1.3)
+      calc(calc(60px * 1.3) * 0.7),
+      calc(calc(8vw * 1.3 + 2rem * 1.3) * 0.7),
+      calc(calc(140px * 1.3) * 0.7)
     );
     margin-bottom: clamp(
-      calc(0.5rem * 1.3),
-      calc(1vw * 1.3 + 0.3rem * 1.3),
-      calc(1.5rem * 1.3)
-    ); /* 1.3x margin */
+      calc(calc(0.5rem * 1.3) * 0.7),
+      calc(calc(1vw * 1.3 + 0.3rem * 1.3) * 0.7),
+      calc(calc(1.5rem * 1.3) * 0.7)
+    ); /* 1.3x margin then 30% smaller */
   }
-
   .dataloud-glass-card .project-icon-wrapper i {
     font-size: clamp(
-      calc(1.8rem * 1.3),
-      calc(4vw * 1.3 + 1rem * 1.3),
-      calc(3.5rem * 1.3)
-    ); /* 1.3x icon scaling */
+      calc(calc(1.8rem * 1.3) * 0.7),
+      calc(calc(4vw * 1.3 + 1rem * 1.3) * 0.7),
+      calc(calc(3.5rem * 1.3) * 0.7)
+    ); /* 1.3x icon scaling then 30% smaller */
   }
 
   .dataloud-glass-card h3 {
@@ -2199,28 +2200,28 @@ body.homepage .hero::after {
 /* Large Screen Optimization */
 @media (min-width: 1920px) {
   .dataloud-glass-card {
-    /* Maintain 2x badge width and golden ratio (1:1.618) on large screens */
+    /* Maintain 2x badge width and golden ratio (1:1.618) on large screens - 30% smaller */
     width: min(
       var(--card-width),
-      44vw,
-      880px
-    ); /* 40vw and 800px increased by 10% */
+      calc(44vw * 0.7),
+      calc(880px * 0.7)
+    ); /* 30.8vw and 616px */
     height: calc(
-      min(var(--card-width), 44vw, 880px) * 1.618
+      min(var(--card-width), calc(44vw * 0.7), calc(880px * 0.7)) * 1.618
     ); /* Golden ratio */
   }
 }
 
 @media (min-width: 2560px) {
   .dataloud-glass-card {
-    /* Maintain 2x badge width and golden ratio (1:1.618) on extra large screens */
+    /* Maintain 2x badge width and golden ratio (1:1.618) on extra large screens - 30% smaller */
     width: min(
       var(--card-width),
-      38.5vw,
-      990px
-    ); /* 35vw and 900px increased by 10% */
+      calc(38.5vw * 0.7),
+      calc(990px * 0.7)
+    ); /* 26.95vw and 693px */
     height: calc(
-      min(var(--card-width), 38.5vw, 990px) * 1.618
+      min(var(--card-width), calc(38.5vw * 0.7), calc(990px * 0.7)) * 1.618
     ); /* Golden ratio */
   }
 }
@@ -2228,28 +2229,28 @@ body.homepage .hero::after {
 /* Responsive Design */
 @media (max-width: 1440px) {
   .dataloud-glass-card {
-    /* Maintain 2x badge width and golden ratio (1:1.618) */
+    /* Maintain 2x badge width and golden ratio (1:1.618) - 30% smaller */
     width: min(
       var(--card-width),
-      46.2vw,
-      715px
-    ); /* 42vw and 650px increased by 10% */
+      calc(46.2vw * 0.7),
+      calc(715px * 0.7)
+    ); /* 32.34vw and 500.5px */
     height: calc(
-      min(var(--card-width), 46.2vw, 715px) * 1.618
+      min(var(--card-width), calc(46.2vw * 0.7), calc(715px * 0.7)) * 1.618
     ); /* Golden ratio */
   }
 }
 
 @media (max-width: 1200px) {
   .dataloud-glass-card {
-    /* Maintain 2x badge width and golden ratio (1:1.618) */
+    /* Maintain 2x badge width and golden ratio (1:1.618) - 30% smaller */
     width: min(
       var(--card-width),
-      52.8vw,
-      638px
-    ); /* 48vw and 580px increased by 10% */
+      calc(52.8vw * 0.7),
+      calc(638px * 0.7)
+    ); /* 36.96vw and 446.6px */
     height: calc(
-      min(var(--card-width), 52.8vw, 638px) * 1.618
+      min(var(--card-width), calc(52.8vw * 0.7), calc(638px * 0.7)) * 1.618
     ); /* Golden ratio */
   }
 }
@@ -2280,16 +2281,20 @@ body.homepage .hero::after {
     padding: 0.4rem 0.8rem;
   } /* DataLoud Card Responsive - Tablet */
   .dataloud-glass-card {
-    /* Maintain 2x badge width and golden ratio (1:1.618) */
+    /* Maintain 2x badge width and golden ratio (1:1.618) - 30% smaller */
     width: min(
       var(--card-width),
-      55vw,
-      594px
-    ); /* 50vw and 540px increased by 10% */
+      calc(55vw * 0.7),
+      calc(594px * 0.7)
+    ); /* 38.5vw and 415.8px */
     height: calc(
-      min(var(--card-width), 55vw, 594px) * 1.618
+      min(var(--card-width), calc(55vw * 0.7), calc(594px * 0.7)) * 1.618
     ); /* Golden ratio */
-    padding: clamp(2.2rem, 3.85vw, 3.96rem); /* 2rem-3.6rem increased by 10% */
+    padding: clamp(
+      calc(2.2rem * 0.7),
+      calc(3.85vw * 0.7),
+      calc(3.96rem * 0.7)
+    ); /* 30% smaller padding */
   }
 
   .project-icon-wrapper {
@@ -2973,119 +2978,5 @@ body.homepage .hero::after {
   }
 }
 
-/* Liquid Chrome Animation Container - Ultra-Fluid Positioning */
-#liquid-chrome-container {
-  position: absolute;
-  top: 10%;
-  /* Ultra-fluid adaptive positioning synchronized with blue background */
-  left: clamp(0%, calc(57.14vw - (100vw - 768px) * 0.074), 57.14%);
-  width: clamp(100%, calc(42.86vw + (100vw - 768px) * 0.074), 42.86%);
-  height: 80%;
-  /* Adaptive border radius that smoothly scales with viewport */
-  border-radius: clamp(1rem, calc(2vw + (100vw - 768px) * 0.001), 2rem)
-    clamp(0rem, calc(0.5vw - (100vw - 768px) * 0.0005), 0rem)
-    clamp(0rem, calc(0.5vw - (100vw - 768px) * 0.0005), 0rem)
-    clamp(1rem, calc(2vw + (100vw - 768px) * 0.001), 2rem);
-  overflow: hidden;
-  z-index: -2;
-  pointer-events: none;
-  /* Enhanced smooth transition with sophisticated easing */
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  /* Add transform-origin for smooth scaling */
-  transform-origin: center;
-  /* Improve performance */
-  will-change: left, width, border-radius;
-}
-
-/* Synchronized responsive adjustments for liquid chrome container */
-@media (max-width: 1440px) {
-  #liquid-chrome-container {
-    left: clamp(0%, calc(57.14vw - (1440px - 100vw) * 0.02), 57.14%);
-    width: clamp(100%, calc(42.86vw + (1440px - 100vw) * 0.02), 42.86%);
-  }
-}
-
-@media (max-width: 1200px) {
-  #liquid-chrome-container {
-    left: clamp(0%, calc(50vw - (1200px - 100vw) * 0.025), 50%);
-    width: clamp(100%, calc(50vw + (1200px - 100vw) * 0.025), 50%);
-  }
-}
-
-@media (max-width: 900px) {
-  #liquid-chrome-container {
-    left: clamp(0%, calc(25vw - (900px - 100vw) * 0.035), 25%);
-    width: clamp(100%, calc(75vw + (900px - 100vw) * 0.035), 75%);
-    border-radius: clamp(1rem, calc(3vw + (100vw - 768px) * 0.002), 2rem);
-  }
-}
-
-@media (max-width: 768px) {
-  #liquid-chrome-container {
-    left: 0;
-    width: 100%;
-    border-radius: clamp(1rem, 4vw, 2rem);
-    /* Enhanced transition timing for mobile */
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-}
-
-/* Liquid Chrome WebGL Canvas styling - Enhanced Fluidity */
-#liquid-chrome-container canvas {
-  width: 100% !important;
-  height: 100% !important;
-  /* Adaptive border radius that matches container */
-  border-radius: clamp(1rem, calc(2vw + (100vw - 768px) * 0.001), 2rem)
-    clamp(0rem, calc(0.5vw - (100vw - 768px) * 0.0005), 0rem)
-    clamp(0rem, calc(0.5vw - (100vw - 768px) * 0.0005), 0rem)
-    clamp(1rem, calc(2vw + (100vw - 768px) * 0.001), 2rem);
-  display: block;
-  object-fit: cover;
-  transform: translateZ(0); /* Force hardware acceleration */
-  backface-visibility: hidden;
-  /* Enhanced smooth transition */
-  transition: border-radius 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  /* Improve performance */
-  will-change: border-radius;
-}
-
-/* Synchronized responsive adjustments for canvas */
-@media (max-width: 900px) {
-  #liquid-chrome-container canvas {
-    border-radius: clamp(1rem, calc(3vw + (100vw - 768px) * 0.002), 2rem);
-  }
-}
-
-@media (max-width: 768px) {
-  #liquid-chrome-container canvas {
-    border-radius: clamp(1rem, 4vw, 2rem);
-    /* Enhanced transition timing for mobile */
-    transition: border-radius 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-}
-
-/* Loading state for liquid chrome */
-#liquid-chrome-container.loading {
-  opacity: 0;
-  animation: liquidChromeFadeIn 1s ease-out forwards;
-}
-
-@keyframes liquidChromeFadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Responsive adjustments for liquid chrome - enhanced fluidity */
-@media (max-width: 1200px) {
-  /* Handled by the main #liquid-chrome-container fluid rules above */
-}
-
-@media (max-width: 768px) {
-  /* Handled by the main #liquid-chrome-container fluid rules above */
-}
+/* Liquid Chrome Animation Sections - REMOVED */
+/* All liquid animation CSS has been removed as requested */
