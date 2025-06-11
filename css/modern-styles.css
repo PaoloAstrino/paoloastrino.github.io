@@ -2588,96 +2588,166 @@ html[data-theme="light"] .scroll-progress {
 
   .privacy-commitment i {
     font-size: clamp(0.65rem, 4.2vw, 0.75rem);
+    .legal-link {
+      font-size: clamp(0.65rem, 4vw, 0.75rem);
+    }
+
+    .footer p {
+      font-size: clamp(0.65rem, 4vw, 0.75rem);
+    }
+
+    .legal-separator {
+      font-size: clamp(0.65rem, 4vw, 0.75rem);
+    }
   }
 
-  .legal-link {
-    font-size: clamp(0.65rem, 4vw, 0.75rem);
+  /* Fullscreen Desktop Optimization - 1.5x Scaling */
+  @media (min-width: 1600px) {
+    .dataloud-glass-card {
+      /* 1.5x scaling while maintaining golden ratio (1:1.618) on fullscreen desktop */
+      width: min(
+        calc(var(--card-width) * 1.5),
+        66vw,
+        1320px
+      ); /* 1.5x scaling: 44vw → 66vw, 880px → 1320px */
+      height: calc(
+        min(calc(var(--card-width) * 1.5), 66vw, 1320px) * 1.618
+      ); /* Golden ratio maintained */
+      padding: clamp(
+        calc(1.2rem * 1.5),
+        calc(2vw * 1.5 + 1rem * 1.5),
+        calc(3.5rem * 1.5)
+      ); /* 1.5x padding scaling */
+    }
+
+    /* Scale internal elements proportionally */
+    .dataloud-glass-card .project-icon-wrapper {
+      width: clamp(
+        calc(60px * 1.5),
+        calc(8vw * 1.5 + 2rem * 1.5),
+        calc(140px * 1.5)
+      ); /* 1.5x icon wrapper scaling */
+      height: clamp(
+        calc(60px * 1.5),
+        calc(8vw * 1.5 + 2rem * 1.5),
+        calc(140px * 1.5)
+      );
+      margin-bottom: clamp(
+        calc(0.5rem * 1.5),
+        calc(1vw * 1.5 + 0.3rem * 1.5),
+        calc(1.5rem * 1.5)
+      );
+    }
+
+    .dataloud-glass-card .project-icon-wrapper i {
+      font-size: clamp(
+        calc(1.8rem * 1.5),
+        calc(4vw * 1.5 + 1rem * 1.5),
+        calc(3.5rem * 1.5)
+      ); /* 1.5x icon scaling */
+    }
+
+    .dataloud-glass-card h3 {
+      font-size: clamp(
+        calc(1rem * 1.5),
+        calc(1.5vw * 1.5 + 0.5rem * 1.5),
+        calc(2rem * 1.5)
+      ); /* 1.5x title scaling */
+    }
+
+    .dataloud-glass-card p {
+      font-size: clamp(
+        calc(0.8rem * 1.5),
+        calc(1vw * 1.5 + 0.3rem * 1.5),
+        calc(1.2rem * 1.5)
+      ); /* 1.5x description scaling */
+    }
+
+    .dataloud-glass-card .tech-pill {
+      font-size: clamp(
+        calc(0.7rem * 1.5),
+        calc(0.8vw * 1.5 + 0.4rem * 1.5),
+        calc(1rem * 1.5)
+      ); /* 1.5x tech pill text scaling */
+      padding: clamp(
+          calc(0.15rem * 1.5),
+          calc(0.3vw * 1.5 + 0.1rem * 1.5),
+          calc(0.35rem * 1.5)
+        )
+        clamp(
+          calc(0.5rem * 1.5),
+          calc(0.8vw * 1.5 + 0.3rem * 1.5),
+          calc(1rem * 1.5)
+        ); /* 1.5x padding */
+      border-radius: clamp(
+        calc(15px * 1.5),
+        calc(2vw * 1.5 + 10px * 1.5),
+        calc(35px * 1.5)
+      ); /* 1.5x border radius */
+    }
+
+    .dataloud-glass-card .explore-btn {
+      font-size: clamp(
+        calc(0.8rem * 1.5),
+        calc(1vw * 1.5 + 0.3rem * 1.5),
+        calc(1.2rem * 1.5)
+      ); /* 1.5x button text scaling */
+      gap: clamp(
+        calc(0.3rem * 1.5),
+        calc(0.5vw * 1.5 + 0.2rem * 1.5),
+        calc(0.7rem * 1.5)
+      ); /* 1.5x gap */
+      margin-top: clamp(
+        calc(0.2rem * 1.5),
+        calc(0.4vw * 1.5 + 0.1rem * 1.5),
+        calc(0.5rem * 1.5)
+      ); /* 1.5x margin */
+    }
+
+    .dataloud-glass-card .explore-btn i {
+      font-size: clamp(
+        calc(0.7rem * 1.5),
+        calc(0.9vw * 1.5 + 0.3rem * 1.5),
+        calc(1.1rem * 1.5)
+      ); /* 1.5x button icon scaling */
+    }
+
+    .dataloud-glass-card .glass-content {
+      gap: clamp(
+        calc(0.8rem * 1.5),
+        calc(1.5vw * 1.5 + 0.5rem * 1.5),
+        calc(2rem * 1.5)
+      ); /* 1.5x content gap */
+    }
+
+    .dataloud-glass-card .tech-stack {
+      gap: clamp(
+        calc(0.3rem * 1.5),
+        calc(0.5vw * 1.5 + 0.2rem * 1.5),
+        calc(0.7rem * 1.5)
+      ); /* 1.5x tech stack gap */
+      margin: clamp(
+          calc(0.2rem * 1.5),
+          calc(0.4vw * 1.5 + 0.1rem * 1.5),
+          calc(0.5rem * 1.5)
+        )
+        0; /* 1.5x margin */
+    }
   }
 
-  .footer p {
-    font-size: clamp(0.65rem, 4vw, 0.75rem);
-  }
-
-  .legal-separator {
-    font-size: clamp(0.65rem, 4vw, 0.75rem);
-  }
-}
-
-/* Large Screen Optimization */
-@media (min-width: 1920px) {
-  .dataloud-glass-card {
-    /* Maintain 2x badge width and golden ratio (1:1.618) on large screens */
-    width: min(
-      var(--card-width),
-      44vw,
-      880px
-    ); /* 40vw and 800px increased by 10% */
-    height: calc(
-      min(var(--card-width), 44vw, 880px) * 1.618
-    ); /* Golden ratio */
-  }
-}
-
-/* Fullscreen Desktop Optimization - 1.5x Scaling */
-@media (min-width: 1920px) and (min-height: 1080px) {
-  .dataloud-glass-card {
-    /* 1.5x scaling while maintaining golden ratio (1:1.618) on fullscreen desktop */
-    width: min(
-      calc(var(--card-width) * 1.5),
-      66vw,
-      1320px
-    ); /* 1.5x scaling: 44vw → 66vw, 880px → 1320px */
-    height: calc(
-      min(calc(var(--card-width) * 1.5), 66vw, 1320px) * 1.618
-    ); /* Golden ratio maintained */
-    padding: clamp(
-      calc(1.2rem * 1.5),
-      calc(2vw * 1.5 + 1rem * 1.5),
-      calc(3.5rem * 1.5)
-    ); /* 1.5x padding scaling */
-  }
-
-  /* Scale internal elements proportionally */
-  .dataloud-glass-card .project-icon-wrapper {
-    width: clamp(
-      calc(60px * 1.5),
-      calc(8vw * 1.5 + 2rem * 1.5),
-      calc(140px * 1.5)
-    ); /* 1.5x icon wrapper scaling */
-    height: clamp(
-      calc(60px * 1.5),
-      calc(8vw * 1.5 + 2rem * 1.5),
-      calc(140px * 1.5)
-    );
-    margin-bottom: clamp(
-      calc(0.5rem * 1.5),
-      calc(1vw * 1.5 + 0.3rem * 1.5),
-      calc(1.5rem * 1.5)
-    );
-  }
-
-  .dataloud-glass-card .project-icon-wrapper i {
-    font-size: clamp(
-      calc(1.8rem * 1.5),
-      calc(4vw * 1.5 + 1rem * 1.5),
-      calc(3.5rem * 1.5)
-    ); /* 1.5x icon scaling */
-  }
-
-  .dataloud-glass-card h3 {
-    font-size: clamp(
-      calc(1rem * 1.5),
-      calc(1.5vw * 1.5 + 0.5rem * 1.5),
-      calc(2rem * 1.5)
-    ); /* 1.5x title scaling */
-  }
-
-  .dataloud-glass-card p {
-    font-size: clamp(
-      calc(0.8rem * 1.5),
-      calc(1vw * 1.5 + 0.3rem * 1.5),
-      calc(1.2rem * 1.5)
-    ); /* 1.5x description scaling */
+  /* Large Screen Optimization */
+  @media (min-width: 1920px) {
+    .dataloud-glass-card {
+      /* Maintain 2x badge width and golden ratio (1:1.618) on large screens */
+      width: min(
+        var(--card-width),
+        44vw,
+        880px
+      ); /* 40vw and 800px increased by 10% */
+      height: calc(
+        min(var(--card-width), 44vw, 880px) * 1.618
+      ); /* Golden ratio */
+    }
   }
 
   .dataloud-glass-card .tech-pill {
