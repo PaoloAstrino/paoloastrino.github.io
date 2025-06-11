@@ -344,10 +344,10 @@ function initThemeToggle() {
     localStorage.setItem("theme", isDark ? "dark" : "light");
 
     // Force a reflow to ensure proper CSS state transition
-    themeToggle.style.transition = 'none';
+    themeToggle.style.transition = "none";
     themeToggle.offsetHeight; // Trigger reflow
-    themeToggle.style.transition = '';
-    
+    themeToggle.style.transition = "";
+
     // Remove any stuck hover states by temporarily removing and re-adding the element
     setTimeout(() => {
       themeToggle.blur(); // Remove focus to reset any pseudo-states
