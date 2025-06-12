@@ -2611,24 +2611,23 @@ html[data-theme="light"] .scroll-progress {
       font-size: clamp(0.65rem, 4vw, 0.75rem);
     }
   }
-
-  /* Fullscreen Desktop Optimization - 1.5x Scaling */
+  /* Fullscreen Desktop Optimization - 1.65x Scaling (10% bigger) */
   @media (min-width: 1600px) {
     .dataloud-glass-card {
-      /* 1.5x scaling while maintaining golden ratio (1:1.618) on fullscreen desktop */
+      /* 1.65x scaling while maintaining golden ratio (1:1.618) on fullscreen desktop */
       width: min(
-        calc(var(--card-width) * 1.5),
-        66vw,
-        1320px
-      ); /* 1.5x scaling: 44vw → 66vw, 880px → 1320px */
+        calc(var(--card-width) * 1.65),
+        72.6vw,
+        1452px
+      ); /* 1.65x scaling: 44vw → 72.6vw, 880px → 1452px */
       height: calc(
-        min(calc(var(--card-width) * 1.5), 66vw, 1320px) * 1.618
+        min(calc(var(--card-width) * 1.65), 72.6vw, 1452px) * 1.618
       ); /* Golden ratio maintained */
       padding: clamp(
-        calc(1.2rem * 1.5),
-        calc(2vw * 1.5 + 1rem * 1.5),
-        calc(3.5rem * 1.5)
-      ); /* 1.5x padding scaling */
+        calc(1.2rem * 1.65),
+        calc(2vw * 1.65 + 1rem * 1.65),
+        calc(3.5rem * 1.65)
+      ); /* 1.65x padding scaling */
     }
 
     /* Scale internal elements proportionally */
