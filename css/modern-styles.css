@@ -2610,138 +2610,134 @@ html[data-theme="light"] .scroll-progress {
     .legal-separator {
       font-size: clamp(0.65rem, 4vw, 0.75rem);
     }
-  }
-  /* Fullscreen Desktop Optimization - 1.65x Scaling (10% bigger) */
+  } /* Fullscreen Desktop Optimization - 1.73x Scaling (15% bigger) */
   @media (min-width: 1600px) {
     .dataloud-glass-card {
-      /* 1.65x scaling while maintaining golden ratio (1:1.618) on fullscreen desktop */
+      /* 1.73x scaling while maintaining golden ratio (1:1.618) on fullscreen desktop */
       width: min(
-        calc(var(--card-width) * 1.65),
-        72.6vw,
-        1452px
-      ); /* 1.65x scaling: 44vw → 72.6vw, 880px → 1452px */
+        calc(var(--card-width) * 1.73),
+        76.12vw,
+        1522px
+      ); /* 1.73x scaling: 44vw → 76.12vw, 880px → 1522px */
       height: calc(
-        min(calc(var(--card-width) * 1.65), 72.6vw, 1452px) * 1.618
+        min(calc(var(--card-width) * 1.73), 76.12vw, 1522px) * 1.618
       ); /* Golden ratio maintained */
       padding: clamp(
-        calc(1.2rem * 1.65),
-        calc(2vw * 1.65 + 1rem * 1.65),
-        calc(3.5rem * 1.65)
-      ); /* 1.65x padding scaling */
-    }
-
-    /* Scale internal elements proportionally */
+        calc(1.2rem * 1.73),
+        calc(2vw * 1.73 + 1rem * 1.73),
+        calc(3.5rem * 1.73)
+      ); /* 1.73x padding scaling */
+    } /* Scale internal elements proportionally */
     .dataloud-glass-card .project-icon-wrapper {
       width: clamp(
-        calc(60px * 1.5),
-        calc(8vw * 1.5 + 2rem * 1.5),
-        calc(140px * 1.5)
-      ); /* 1.5x icon wrapper scaling */
+        calc(60px * 1.73),
+        calc(8vw * 1.73 + 2rem * 1.73),
+        calc(140px * 1.73)
+      ); /* 1.73x icon wrapper scaling */
       height: clamp(
-        calc(60px * 1.5),
-        calc(8vw * 1.5 + 2rem * 1.5),
-        calc(140px * 1.5)
+        calc(60px * 1.73),
+        calc(8vw * 1.73 + 2rem * 1.73),
+        calc(140px * 1.73)
       );
       margin-bottom: clamp(
-        calc(0.5rem * 1.5),
-        calc(1vw * 1.5 + 0.3rem * 1.5),
-        calc(1.5rem * 1.5)
+        calc(0.5rem * 1.73),
+        calc(1vw * 1.73 + 0.3rem * 1.73),
+        calc(1.5rem * 1.73)
       );
     }
 
     .dataloud-glass-card .project-icon-wrapper i {
       font-size: clamp(
-        calc(1.8rem * 1.5),
-        calc(4vw * 1.5 + 1rem * 1.5),
-        calc(3.5rem * 1.5)
-      ); /* 1.5x icon scaling */
+        calc(1.8rem * 1.73),
+        calc(4vw * 1.73 + 1rem * 1.73),
+        calc(3.5rem * 1.73)
+      ); /* 1.73x icon scaling */
     }
 
     .dataloud-glass-card h3 {
       font-size: clamp(
-        calc(1rem * 1.5),
-        calc(1.5vw * 1.5 + 0.5rem * 1.5),
-        calc(2rem * 1.5)
-      ); /* 1.5x title scaling */
+        calc(1rem * 1.73),
+        calc(1.5vw * 1.73 + 0.5rem * 1.73),
+        calc(2rem * 1.73)
+      ); /* 1.73x title scaling */
     }
 
     .dataloud-glass-card p {
       font-size: clamp(
-        calc(0.8rem * 1.5),
-        calc(1vw * 1.5 + 0.3rem * 1.5),
-        calc(1.2rem * 1.5)
-      ); /* 1.5x description scaling */
+        calc(0.8rem * 1.73),
+        calc(1vw * 1.73 + 0.3rem * 1.73),
+        calc(1.2rem * 1.73)
+      ); /* 1.73x description scaling */
     }
-
     .dataloud-glass-card .tech-pill {
       font-size: clamp(
-        calc(0.7rem * 1.5),
-        calc(0.8vw * 1.5 + 0.4rem * 1.5),
-        calc(1rem * 1.5)
-      ); /* 1.5x tech pill text scaling */
+        calc(0.7rem * 1.73),
+        calc(0.8vw * 1.73 + 0.4rem * 1.73),
+        calc(1rem * 1.73)
+      ); /* 1.73x tech pill text scaling */
       padding: clamp(
-          calc(0.15rem * 1.5),
-          calc(0.3vw * 1.5 + 0.1rem * 1.5),
-          calc(0.35rem * 1.5)
+          calc(0.15rem * 1.73),
+          calc(0.3vw * 1.73 + 0.1rem * 1.73),
+          calc(0.35rem * 1.73)
         )
         clamp(
-          calc(0.5rem * 1.5),
-          calc(0.8vw * 1.5 + 0.3rem * 1.5),
-          calc(1rem * 1.5)
-        ); /* 1.5x padding */
+          calc(0.5rem * 1.73),
+          calc(0.8vw * 1.73 + 0.3rem * 1.73),
+          calc(1rem * 1.73)
+        ); /* 1.73x padding */
       border-radius: clamp(
-        calc(15px * 1.5),
-        calc(2vw * 1.5 + 10px * 1.5),
-        calc(35px * 1.5)
-      ); /* 1.5x border radius */
+        calc(15px * 1.73),
+        calc(2vw * 1.73 + 10px * 1.73),
+        calc(35px * 1.73)
+      ); /* 1.73x border radius */
     }
 
     .dataloud-glass-card .explore-btn {
       font-size: clamp(
-        calc(0.8rem * 1.5),
-        calc(1vw * 1.5 + 0.3rem * 1.5),
-        calc(1.2rem * 1.5)
-      ); /* 1.5x button text scaling */
+        calc(0.8rem * 1.73),
+        calc(1vw * 1.73 + 0.3rem * 1.73),
+        calc(1.2rem * 1.73)
+      ); /* 1.73x button text scaling */
       gap: clamp(
-        calc(0.3rem * 1.5),
-        calc(0.5vw * 1.5 + 0.2rem * 1.5),
-        calc(0.7rem * 1.5)
-      ); /* 1.5x gap */
+        calc(0.3rem * 1.73),
+        calc(0.5vw * 1.73 + 0.2rem * 1.73),
+        calc(0.7rem * 1.73)
+      ); /* 1.73x gap */
       margin-top: clamp(
-        calc(0.2rem * 1.5),
-        calc(0.4vw * 1.5 + 0.1rem * 1.5),
-        calc(0.5rem * 1.5)
-      ); /* 1.5x margin */
+        calc(0.2rem * 1.73),
+        calc(0.4vw * 1.73 + 0.1rem * 1.73),
+        calc(0.5rem * 1.73)
+      ); /* 1.73x margin */
     }
 
     .dataloud-glass-card .explore-btn i {
       font-size: clamp(
-        calc(0.7rem * 1.5),
-        calc(0.9vw * 1.5 + 0.3rem * 1.5),
-        calc(1.1rem * 1.5)
-      ); /* 1.5x button icon scaling */
+        calc(0.7rem * 1.73),
+        calc(0.9vw * 1.73 + 0.3rem * 1.73),
+        calc(1.1rem * 1.73)
+      ); /* 1.73x button icon scaling */
     }
 
     .dataloud-glass-card .glass-content {
       gap: clamp(
-        calc(0.8rem * 1.5),
-        calc(1.5vw * 1.5 + 0.5rem * 1.5),
-        calc(2rem * 1.5)
-      ); /* 1.5x content gap */
+        calc(0.8rem * 1.73),
+        calc(1.5vw * 1.73 + 0.5rem * 1.73),
+        calc(2rem * 1.73)
+      ); /* 1.73x content gap */
     }
 
     .dataloud-glass-card .tech-stack {
       gap: clamp(
-        calc(0.3rem * 1.5),
-        calc(0.5vw * 1.5 + 0.2rem * 1.5),
-        calc(0.7rem * 1.5)
-      ); /* 1.5x tech stack gap */
+        calc(0.3rem * 1.73),
+        calc(0.5vw * 1.73 + 0.2rem * 1.73),
+        calc(0.7rem * 1.73)
+      ); /* 1.73x tech stack gap */
       margin: clamp(
-          calc(0.2rem * 1.5),
-          calc(0.4vw * 1.5 + 0.1rem * 1.5),
-          calc(0.5rem * 1.5)
+          calc(0.2rem * 1.73),
+          calc(0.4vw * 1.73 + 0.1rem * 1.73),
+          calc(0.5rem * 1.73)
         )
-        0; /* 1.5x margin */
+        0; /* 1.73x margin */
     }
   }
 
@@ -2758,77 +2754,6 @@ html[data-theme="light"] .scroll-progress {
         min(var(--card-width), 44vw, 880px) * 1.618
       ); /* Golden ratio */
     }
-  }
-
-  .dataloud-glass-card .tech-pill {
-    font-size: clamp(
-      calc(0.7rem * 1.5),
-      calc(0.8vw * 1.5 + 0.4rem * 1.5),
-      calc(1rem * 1.5)
-    ); /* 1.5x tech pill text scaling */
-    padding: clamp(
-        calc(0.15rem * 1.5),
-        calc(0.3vw * 1.5 + 0.1rem * 1.5),
-        calc(0.35rem * 1.5)
-      )
-      clamp(
-        calc(0.5rem * 1.5),
-        calc(0.8vw * 1.5 + 0.3rem * 1.5),
-        calc(1rem * 1.5)
-      ); /* 1.5x padding */
-    border-radius: clamp(
-      calc(15px * 1.5),
-      calc(2vw * 1.5 + 10px * 1.5),
-      calc(35px * 1.5)
-    ); /* 1.5x border radius */
-  }
-
-  .dataloud-glass-card .explore-btn {
-    font-size: clamp(
-      calc(0.8rem * 1.5),
-      calc(1vw * 1.5 + 0.3rem * 1.5),
-      calc(1.2rem * 1.5)
-    ); /* 1.5x button text scaling */
-    gap: clamp(
-      calc(0.3rem * 1.5),
-      calc(0.5vw * 1.5 + 0.2rem * 1.5),
-      calc(0.7rem * 1.5)
-    ); /* 1.5x gap */
-    margin-top: clamp(
-      calc(0.2rem * 1.5),
-      calc(0.4vw * 1.5 + 0.1rem * 1.5),
-      calc(0.5rem * 1.5)
-    ); /* 1.5x margin */
-  }
-
-  .dataloud-glass-card .explore-btn i {
-    font-size: clamp(
-      calc(0.7rem * 1.5),
-      calc(0.9vw * 1.5 + 0.3rem * 1.5),
-      calc(1.1rem * 1.5)
-    ); /* 1.5x button icon scaling */
-  }
-
-  .dataloud-glass-card .glass-content {
-    gap: clamp(
-      calc(0.8rem * 1.5),
-      calc(1.5vw * 1.5 + 0.5rem * 1.5),
-      calc(2rem * 1.5)
-    ); /* 1.5x content gap */
-  }
-
-  .dataloud-glass-card .tech-stack {
-    gap: clamp(
-      calc(0.3rem * 1.5),
-      calc(0.5vw * 1.5 + 0.2rem * 1.5),
-      calc(0.7rem * 1.5)
-    ); /* 1.5x tech stack gap */
-    margin: clamp(
-        calc(0.2rem * 1.5),
-        calc(0.4vw * 1.5 + 0.1rem * 1.5),
-        calc(0.5rem * 1.5)
-      )
-      0; /* 1.5x margin */
   }
 }
 
