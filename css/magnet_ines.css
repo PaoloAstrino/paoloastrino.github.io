@@ -35,9 +35,13 @@
   ); /* Responsive in rem/vw like other elements */
   height: clamp(20rem, 30vw, 35rem); /* Same value to maintain square */
   aspect-ratio: 1 !important; /* FORCE SQUARE - non-negotiable */
-  pointer-events: auto;
-  /* Responsive positioning and spacing */
+  pointer-events: auto;  /* Responsive positioning and spacing */
   margin: clamp(1rem, 4vw, 3rem) auto;
+  margin-left: calc(50% - 2vw); /* Proportional 2vw left shift from center */
+  transform: translateX(-50%); /* Center the container properly */
+  margin-left: calc(auto - 20px); /* Move 20px left on desktop only */
+  /* Move container 20px to the left */
+  transform: translateX(-20px);
   /* Pure positional box - no visual effects */
   background: transparent;
   border: none;
@@ -106,7 +110,10 @@ body.light .magnet-lines-hero-container .magnetLines-container span {
     width: clamp(15rem, 50vw, 25rem); /* Mobile responsive in rem/vw */
     height: clamp(15rem, 50vw, 25rem); /* Same value to maintain square */
     aspect-ratio: 1 !important; /* FORCE SQUARE on mobile too */
-    margin: clamp(1rem, 4vw, 2rem) auto;
+    margin: clamp(1rem, 4vw, 2rem) auto; /* Reset to center on mobile */
+    margin-left: auto; /* Override desktop offset - stay centered on mobile */
+    margin-right: auto; /* Ensure centered on mobile */
+    transform: none; /* Remove desktop transform on mobile */
     /* Pure positional box on mobile too */
     background: transparent;
     border: none;

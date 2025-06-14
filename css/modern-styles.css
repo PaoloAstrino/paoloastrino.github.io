@@ -2983,11 +2983,12 @@ html[data-theme="light"] .scroll-progress {
   }
 
   /* hero-title is now responsive via clamp() */
-
   .hero-buttons {
-    flex-direction: column;
+    flex-direction: row; /* Keep buttons side by side on mobile */
     align-items: center;
-    gap: 1rem;
+    gap: 0.8rem; /* Slightly smaller gap for mobile */
+    flex-wrap: wrap; /* Allow wrapping if needed on very small screens */
+    justify-content: center; /* Center the buttons horizontally */
   }
 
   .hero-stats {
