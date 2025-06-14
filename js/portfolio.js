@@ -15,8 +15,9 @@ document.addEventListener("DOMContentLoaded", function () {
   initSmoothScrolling();
   initParallaxEffects();
   initPerformanceOptimizations();
-  initLegalOverlays(); // Initialize liquid chrome animation
+  initLegalOverlays();
   initLiquidChrome();
+  initHeroMagnetLines(); // Initialize hero magnet lines animation
 
   // Desktop-only features
   // if (window.innerWidth > 768) {
@@ -1242,6 +1243,29 @@ function initLiquidChrome() {
     );
     console.warn("Container:", container);
     console.warn("LiquidChrome type:", typeof LiquidChrome);
+  }
+}
+
+// Magnet Lines Animation Initialization
+function initHeroMagnetLines() {
+  try {
+    const heroMagnetContainer = document.getElementById("heroMagnetLines");
+    if (heroMagnetContainer && typeof MagnetLines !== "undefined") {
+      new MagnetLines("#heroMagnetLines", {
+        rows: 8,
+        columns: 8,
+        containerSize: "50vmin",
+        lineColor: "rgba(255, 255, 255, 0.8)",
+        lineWidth: "0.2vmin",
+        lineHeight: "4vmin",
+        baseAngle: 0,
+        className: "hero-magnet-lines",
+      });
+
+      console.log("✨ Hero Magnet Lines initialized successfully");
+    }
+  } catch (error) {
+    console.error("❌ Error initializing Hero Magnet Lines:", error);
   }
 }
 

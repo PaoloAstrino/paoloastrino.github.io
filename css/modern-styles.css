@@ -391,8 +391,10 @@ html[data-theme="light"] .secondary-link:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  /* Responsive sizing that matches nav links proportionally */
+  width: clamp(2.5rem, 4vw, 3rem);
+  height: clamp(2.5rem, 4vw, 3rem);
+  font-size: clamp(var(--nav-link-min), 1.8vw, var(--nav-link-max));
   background: hsl(var(--accent));
   color: hsl(var(--accent-foreground));
   border-radius: 50%;
@@ -2611,12 +2613,12 @@ html[data-theme="light"] .scroll-progress {
       font-size: clamp(0.65rem, 4vw, 0.75rem);
     }
   } /* Fullscreen Desktop Optimization - 1.73x Scaling (15% bigger) */
-    @media (min-width: 1600px) {
+  @media (min-width: 1600px) {
     .dataloud-glass-card {
       /* Remove var(--card-width) constraint and use direct viewport scaling */
       width: min(
-        76.12vw,    /* Direct viewport width */
-        1522px      /* Maximum pixel width */
+        76.12vw,
+        /* Direct viewport width */ 1522px /* Maximum pixel width */
       );
       height: calc(min(76.12vw, 1522px) * 1.618); /* Golden ratio maintained */
       padding: clamp(
@@ -2968,10 +2970,10 @@ html[data-theme="light"] .scroll-progress {
     position: static;
     order: 1;
   }
-
   .theme-toggle {
     position: static;
     order: 2;
+    /* Responsive sizing now handled by main .theme-toggle rule */
   }
 
   .hero-container {
