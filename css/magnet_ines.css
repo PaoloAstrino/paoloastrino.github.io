@@ -35,13 +35,10 @@
   ); /* Responsive in rem/vw like other elements */
   height: clamp(20rem, 30vw, 35rem); /* Same value to maintain square */
   aspect-ratio: 1 !important; /* FORCE SQUARE - non-negotiable */
-  pointer-events: auto;  /* Responsive positioning and spacing */
+  pointer-events: auto; /* Responsive positioning and spacing */
   margin: clamp(1rem, 4vw, 3rem) auto;
-  margin-left: calc(50% - 2vw); /* Proportional 2vw left shift from center */
+  margin-left: calc(50% - 8vw); /* Proportional 8vw left shift from center */
   transform: translateX(-50%); /* Center the container properly */
-  margin-left: calc(auto - 20px); /* Move 20px left on desktop only */
-  /* Move container 20px to the left */
-  transform: translateX(-20px);
   /* Pure positional box - no visual effects */
   background: transparent;
   border: none;
@@ -60,15 +57,26 @@
   /* Ensure grid cells are perfectly square */
   min-width: 0;
   min-height: 0;
+  /* Add responsive spacing between grid items */
+  gap: clamp(0.2rem, 1vw, 0.8rem); /* Responsive gap between bars */
+  column-gap: clamp(0.3rem, 1.5vw, 1rem); /* Extra space between columns */
 }
 
 .magnet-lines-hero-container .magnetLines-container span {
   /* Default: black bars for light theme */
-  background-color: rgba(0, 0, 0, 0.8) !important;
-  /* SCREEN RESPONSIVE bar sizing - like other UI elements */
-  width: clamp(0.1rem, 0.5vw, 0.3rem) !important; /* Responsive thickness */
-  height: clamp(2rem, 4vw, 3rem) !important; /* Responsive length */
-  border-radius: clamp(0.05rem, 0.1vw, 0.1rem); /* Responsive rounding */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.8
+  ) !important; /* PROPORTIONAL RESPONSIVE bar sizing - maintains square grid appearance */
+  width: clamp(0.05rem, 0.8vw, 0.2rem) !important; /* Proportional thickness */
+  height: clamp(
+    1.27rem,
+    5.06vw,
+    2.53rem
+  ) !important; /* Proportional length - increased by 15% more */
+  border-radius: clamp(0.025rem, 0.1vw, 0.05rem); /* Proportional rounding */
   /* Smooth transition for gradient effect only - NOT for rotation */
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
@@ -120,18 +128,14 @@ body.light .magnet-lines-hero-container .magnetLines-container span {
     box-shadow: none;
     border-radius: 0;
   }
-
   .magnet-lines-hero-container .magnetLines-container span {
-    /* Mobile responsive bar sizing - consistent with mobile UI patterns */
-    width: clamp(
-      0.15rem,
-      0.8vw,
-      0.4rem
-    ) !important; /* Slightly thicker on mobile */
+    /* Mobile: proportional sizing - maintains square grid appearance */
+    width: clamp(0.06rem, 1vw, 0.25rem) !important; /* Proportional thickness */
     height: clamp(
-      2.5rem,
-      5vw,
-      4rem
-    ) !important; /* Longer for touch interaction */
+      1.52rem,
+      5.06vw,
+      2.53rem
+    ) !important; /* Proportional length - increased by 15% more */
+    border-radius: clamp(0.03rem, 0.1vw, 0.06rem); /* Proportional rounding */
   }
 }

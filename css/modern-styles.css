@@ -649,19 +649,19 @@ body.homepage .hero::after {
 
 @media (max-width: 480px) {
   :root {
-    /* Adjust golden ratio scale for mobile */
-    --hero-title-min: calc(var(--font-lg) * 1); /* ≈ 1.618rem minimum */
-    --hero-title-max: calc(var(--font-2xl) * 0.7); /* ≈ 2.97rem maximum */
-    --hero-greeting-min: calc(var(--font-lg) * 1); /* ≈ 1.618rem minimum */
-    --hero-greeting-max: calc(var(--font-2xl) * 0.7); /* ≈ 2.97rem maximum */
+    /* Increase golden ratio scale for mobile - larger hero titles */
+    --hero-title-min: calc(var(--font-xl) * 1.2); /* ≈ 3.14rem minimum */
+    --hero-title-max: calc(var(--font-2xl) * 1.1); /* ≈ 4.66rem maximum */
+    --hero-greeting-min: calc(var(--font-xl) * 1.2); /* ≈ 3.14rem minimum */
+    --hero-greeting-max: calc(var(--font-2xl) * 1.1); /* ≈ 4.66rem maximum */
   }
 
   .hero-title {
-    font-size: clamp(var(--hero-title-min), 6vw, var(--hero-title-max));
+    font-size: clamp(var(--hero-title-min), 8vw, var(--hero-title-max));
   }
 
   .hero-greeting {
-    font-size: clamp(var(--hero-greeting-min), 6vw, var(--hero-greeting-max));
+    font-size: clamp(var(--hero-greeting-min), 8vw, var(--hero-greeting-max));
   }
 
   .hero-title .text-gradient {
