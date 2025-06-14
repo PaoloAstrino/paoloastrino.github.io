@@ -6,8 +6,8 @@
   justify-items: center;
   align-items: center;
 
-  width: 120vmin;
-  height: 120vmin;
+  width: 200vmin;
+  height: 200vmin;
 }
 
 .magnetLines-container span {
@@ -32,8 +32,8 @@
 }
 
 .magnet-lines-hero-container .magnetLines-container {
-  width: 120vmin;
-  height: 120vmin;
+  width: 200vmin;
+  height: 200vmin;
   opacity: 1;
 }
 

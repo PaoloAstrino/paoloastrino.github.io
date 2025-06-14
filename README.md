@@ -48,19 +48,18 @@ A professional, modern portfolio website showcasing Paolo Astrino's expertise in
 
 ### ⚡ Interactive Elements
 
+- **Magnet Lines Animation** - Interactive magnetic field visualization in hero section
 - **Scroll progress bar** showing page navigation
-- **Theme toggle** (dark/light mode)
-- **Typing animation** for hero title
-- **Floating skill cards** in hero section
+- **Theme toggle** (dark/light mode) with responsive sizing
 - **Smooth scrolling** navigation
 - **Contact form** with validation
-- **Cursor trail effect** (desktop only)
+- **Floating skill cards** in hero section
 
 ### 📱 Responsive Design Features
 
 - **Revolutionary Viewport Scaling** - Zero hardcoded pixel values
 - **Advanced Typography System** - Fluid text scaling with `clamp()` functions
-- **Adaptive DataLoud Card** - Scales perfectly from mobile to desktop
+- **Magnet Lines Animation** - Responsive interactive visualization that scales with viewport
 - **Viewport-Based Dimensions** - Everything scales proportionally
 - **Touch-Friendly Interactions** - Enhanced mobile experience
 
@@ -79,15 +78,28 @@ font-size: clamp(2rem, 4.5vw, 3rem);
 font-size: clamp(0.875rem, 1.4vw, 0.95rem);
 ```
 
-**DataLoud Card Implementation:**
+**Magnet Lines Animation Implementation:**
 
-- **Aspect Ratio**: 9:16 (mobile-like vertical design)
-- **Width**: Exactly 2x the "Data Analyst & ML Enthusiast" badge width
-- **Responsive**: `clamp(320px, 45vw, 100vw)` for perfect scaling
+```css
+/* Responsive container that scales with viewport */
+.magnetLines-container {
+  width: 120vmin;  /* Scales proportionally */
+  height: 120vmin;
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+}
+
+/* Individual lines with responsive dimensions */
+.magnetLines-container span {
+  width: 1.5vmin;   /* Line thickness */
+  height: 15vmin;   /* Line length */
+  transform: rotate(var(--rotate)); /* Dynamic rotation */
+}
+```
 
 ### 📊 Professional Sections
 
-1. **Hero Section** - Introduction with animated statistics
+1. **Hero Section** - Introduction with interactive magnet lines animation
 2. **About** - Professional background and achievements
 3. **Experience & Education** - Interactive timeline
 4. **Projects** - Featured data analytics work
@@ -124,10 +136,11 @@ paoloastrino.github.io/
 ├── index.html                  # Main portfolio (modern black theme)
 ├── manifest.json               # PWA manifest for installable app
 ├── css/
-│   ├── styles.css             # Legacy styles
-│   └── modern-styles.css      # Modern theme styles
+│   ├── modern-styles.css      # Modern theme styles with responsive design
+│   └── magnet_ines.css        # Magnet lines animation styles
 ├── js/
-│   └── portfolio.js           # Interactive functionality
+│   ├── portfolio.js           # Interactive functionality
+│   └── magnet_lines_animation.js # Magnet lines animation logic
 ├── assets/
 │   └── images/                # Favicon and brand assets
 │       ├── favicon.svg        # Main favicon (32x32)
@@ -178,13 +191,15 @@ paoloastrino.github.io/
 ### Advanced Features
 
 - **Intersection Observer API**: Scroll animations
-- **CSS Custom Properties**: Theme system
+- **CSS Custom Properties**: Theme system  
 - **LocalStorage**: Theme persistence
 - **Responsive Images**: Performance optimization
 - **Progressive Enhancement**: Accessibility support
 - **CSS clamp() Functions**: Advanced responsive typography
 - **Viewport Units**: Fluid scaling system
 - **Modern CSS Grid**: Flexible layout system
+- **Interactive Animations**: Mouse-tracking magnet lines visualization
+- **Vanilla JavaScript**: No dependencies, pure performance
 
 ### 🎨 Brand Identity & Favicon
 
@@ -265,12 +280,13 @@ The portfolio is automatically deployed via **GitHub Pages**:
 ## 🎯 Key Achievements
 
 - ✅ **Modern Black Theme**: Professional design with blue accents
+- ✅ **Interactive Magnet Lines**: Custom mouse-tracking animation system
 - ✅ **Custom Favicon**: Personalized "P" logo with brand consistency
 - ✅ **PWA Ready**: Web app manifest for installable experience
 - ✅ **Zero White Flash**: Immediate black loading experience
 - ✅ **Fully Responsive**: Complete viewport-based scaling system
 - ✅ **Advanced Typography**: Fluid text scaling with clamp() functions
-- ✅ **Interactive Animations**: Smooth scroll-based effects
+- ✅ **Responsive Theme Toggle**: Proportional sizing across devices
 - ✅ **Performance Optimized**: Fast loading and smooth interactions
 - ✅ **Accessibility**: Screen reader support and keyboard navigation
 - ✅ **SEO Optimized**: Meta tags and semantic HTML
@@ -308,3 +324,28 @@ This project is open source and available under the [MIT License](LICENSE).
 ---
 
 **Built with ❤️ by Paolo Astrino** | **Data Analyst & ML Enthusiast** | **2025**
+
+## 🧲 Magnet Lines Animation
+
+### ✨ Interactive Visualization System
+
+The portfolio features a custom-built **Magnet Lines Animation** that creates an interactive magnetic field visualization in the hero section:
+
+**Key Features:**
+- **Mouse Tracking**: Lines rotate dynamically to follow cursor movement
+- **Responsive Design**: Scales proportionally across all device sizes
+- **Performance Optimized**: Vanilla JavaScript with hardware acceleration
+- **Visual Appeal**: Creates engaging user interaction and professional aesthetic
+
+**Technical Implementation:**
+- **Grid System**: 8x8 responsive grid of interactive elements
+- **CSS Custom Properties**: Dynamic rotation using `--rotate` variables
+- **Viewport Scaling**: Uses `vmin` units for consistent sizing
+- **Touch Compatible**: Works seamlessly on mobile devices
+
+**Responsive Behavior:**
+- **Desktop**: 120vmin container with 1.5vmin × 15vmin lines
+- **Mobile**: 150vmin container with 0.75vmin × 12vmin lines
+- **Real-time Scaling**: Maintains proportions across all screen sizes
+
+This animation demonstrates advanced CSS and JavaScript integration while providing an engaging user experience that reflects the technical expertise showcased in the portfolio.

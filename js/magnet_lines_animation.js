@@ -9,8 +9,7 @@ class MagnetLines {
     this.container = document.querySelector(containerSelector);
     if (!this.container) {
       console.error(`MagnetLines: Container "${containerSelector}" not found`);
-      return;
-    } // Default options
+      return;    } // Default options
     this.options = {
       rows: 9,
       columns: 9,
@@ -21,7 +20,11 @@ class MagnetLines {
       baseAngle: -10,
       className: "",
       ...options,
-    };
+    };    // Enforce square grid - always set columns to match rows
+    if (options.columns && options.columns !== this.options.rows) {
+      console.warn('MagnetLines: columns value ignored - animation enforces square grid (columns = rows)');
+    }
+    this.options.columns = this.options.rows;
 
     this.isInitialized = false;
     this.boundPointerMove = this.onPointerMove.bind(this);
