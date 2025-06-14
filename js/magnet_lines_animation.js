@@ -75,20 +75,10 @@ class MagnetLines {
     for (let i = 0; i < total; i++) {
       const span = document.createElement("span");
 
-      // Only set rotation - let CSS handle all visual styling
+      // ONLY set rotation - CSS handles ALL visual styling
       span.style.setProperty("--rotate", `${this.options.baseAngle}deg`);
 
-      // Apply styling only if explicitly provided (backward compatibility)
-      if (this.options.lineColor) {
-        span.style.backgroundColor = this.options.lineColor;
-      }
-      if (this.options.lineWidth) {
-        span.style.width = this.options.lineWidth;
-      }
-      if (this.options.lineHeight) {
-        span.style.height = this.options.lineHeight;
-      }
-
+      // No styling overrides - CSS controls everything
       this.container.appendChild(span);
     }
   }

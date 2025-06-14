@@ -6,8 +6,12 @@
   justify-items: center;
   align-items: center;
 
+  /* ALWAYS SQUARE CONSTRAINT - fundamental rule */
   width: 200vmin;
   height: 200vmin;
+  aspect-ratio: 1 !important; /* Force square ratio */
+  min-width: 0;
+  min-height: 0;
 }
 
 .magnetLines-container span {
@@ -23,55 +27,104 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Fully responsive sizing based on viewport */
-  width: clamp(30vmin, 40vw, 50vmin);
-  height: clamp(30vmin, 40vw, 50vmin);
-  aspect-ratio: 1;
+  /* SCREEN RESPONSIVE DIMENSIONS - scales with viewport like other elements */
+  width: clamp(
+    20rem,
+    30vw,
+    35rem
+  ); /* Responsive in rem/vw like other elements */
+  height: clamp(20rem, 30vw, 35rem); /* Same value to maintain square */
+  aspect-ratio: 1 !important; /* FORCE SQUARE - non-negotiable */
   pointer-events: auto;
   /* Responsive positioning and spacing */
   margin: clamp(1rem, 4vw, 3rem) auto;
-  /* Adaptive background with responsive opacity */
-  background: rgba(0, 0, 0, clamp(0.01, 0.02, 0.03));
-  border-radius: clamp(8px, 2.5vw, 20px);
-  overflow: hidden;
-  /* Responsive glassmorphism styling */
-  backdrop-filter: blur(clamp(5px, 1.5vw, 15px));
-  border: clamp(0.5px, 0.1vw, 2px) solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 clamp(4px, 1.5vw, 12px) clamp(16px, 5vw, 40px)
-    rgba(0, 0, 0, clamp(0.05, 0.1, 0.15));
+  /* Pure positional box - no visual effects */
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
 }
 
 .magnet-lines-hero-container .magnetLines-container {
+  /* ALWAYS SQUARE CONSTRAINT - animation grid must be square */
   width: 80%; /* Make animation smaller than the container */
   height: 80%; /* Make animation smaller than the container */
-  aspect-ratio: 1;
+  aspect-ratio: 1 !important; /* FORCE SQUARE GRID - fundamental constraint */
   opacity: 1;
   margin: auto; /* Center the animation within the container */
+  /* Ensure grid cells are perfectly square */
+  min-width: 0;
+  min-height: 0;
 }
 
 .magnet-lines-hero-container .magnetLines-container span {
-  background-color: rgba(255, 255, 255, clamp(0.7, 0.8, 0.9));
-  /* Fully responsive line sizing based on viewport */
-  width: clamp(0.3vmin, 1vw, 1.5vmin);
-  height: clamp(6vmin, 10vw, 15vmin);
-  border-radius: clamp(0.03vmin, 0.08vw, 0.12vmin);
+  /* Default: black bars for light theme */
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  /* SCREEN RESPONSIVE bar sizing - like other UI elements */
+  width: clamp(0.1rem, 0.5vw, 0.3rem) !important; /* Responsive thickness */
+  height: clamp(2rem, 4vw, 3rem) !important; /* Responsive length */
+  border-radius: clamp(0.05rem, 0.1vw, 0.1rem); /* Responsive rounding */
+  /* Smooth transition for gradient effect only - NOT for rotation */
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Dark theme - white bars */
+[data-theme="dark"] .magnet-lines-hero-container .magnetLines-container span,
+.dark .magnet-lines-hero-container .magnetLines-container span,
+body.dark .magnet-lines-hero-container .magnetLines-container span {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Light theme - black bars (explicit for clarity) */
+[data-theme="light"] .magnet-lines-hero-container .magnetLines-container span,
+.light .magnet-lines-hero-container .magnetLines-container span,
+body.light .magnet-lines-hero-container .magnetLines-container span {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Blue gradient effect when container is hovered - subtle for all bars */
+.magnet-lines-hero-container:hover .magnetLines-container span {
+  background-color: rgba(59, 130, 246, 0.3) !important;
+  box-shadow: 0 0 clamp(2px, 0.5vw, 4px) rgba(59, 130, 246, 0.2);
+}
+
+/* Enhanced neon blue effect for individual bars on direct hover */
+.magnet-lines-hero-container .magnetLines-container span:hover {
+  background-color: rgba(34, 211, 238, 0.9) !important;
+  box-shadow: 0 0 clamp(8px, 2vw, 16px) rgba(34, 211, 238, 0.8),
+    0 0 clamp(16px, 4vw, 32px) rgba(34, 211, 238, 0.4);
+  transform: scale(1.1);
+  z-index: 10;
+  position: relative;
 }
 
 /* Simple responsive adjustments without complex media queries */
 @media (max-width: 768px) {
   .magnet-lines-hero-container {
-    /* Mobile-optimized responsive sizing */
-    width: clamp(40vmin, 70vw, 65vmin);
-    height: clamp(40vmin, 70vw, 65vmin);
-    margin: clamp(1rem, 4vw, 3rem) auto;
-    /* Enhanced mobile glassmorphism */
-    backdrop-filter: blur(clamp(8px, 2vw, 20px));
-    border-radius: clamp(12px, 3vw, 25px);
+    /* SCREEN RESPONSIVE mobile sizing - like other mobile elements */
+    width: clamp(15rem, 50vw, 25rem); /* Mobile responsive in rem/vw */
+    height: clamp(15rem, 50vw, 25rem); /* Same value to maintain square */
+    aspect-ratio: 1 !important; /* FORCE SQUARE on mobile too */
+    margin: clamp(1rem, 4vw, 2rem) auto;
+    /* Pure positional box on mobile too */
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
   }
 
   .magnet-lines-hero-container .magnetLines-container span {
-    /* Mobile-optimized bar sizing */
-    width: clamp(0.4vmin, 1.2vw, 1.8vmin);
-    height: clamp(8vmin, 12vw, 18vmin);
+    /* Mobile responsive bar sizing - consistent with mobile UI patterns */
+    width: clamp(
+      0.15rem,
+      0.8vw,
+      0.4rem
+    ) !important; /* Slightly thicker on mobile */
+    height: clamp(
+      2.5rem,
+      5vw,
+      4rem
+    ) !important; /* Longer for touch interaction */
   }
 }
