@@ -63,13 +63,7 @@
 }
 
 .magnet-lines-hero-container .magnetLines-container span {
-  /* Default: black bars for light theme */
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.8
-  ) !important; /* PROPORTIONAL RESPONSIVE bar sizing - maintains square grid appearance */
+  /* PROPORTIONAL RESPONSIVE bar sizing - maintains square grid appearance */
   width: clamp(0.05rem, 0.8vw, 0.2rem) !important; /* Proportional thickness */
   height: clamp(
     1.27rem,
@@ -79,33 +73,28 @@
   border-radius: clamp(0.025rem, 0.1vw, 0.05rem); /* Proportional rounding */
   /* Smooth transition for gradient effect only - NOT for rotation */
   transition: background 0.3s ease, box-shadow 0.3s ease;
+  /* Default color will be overridden by theme-specific rules below */
 }
 
-/* Dark theme - white bars */
+/* Dark theme - WHITE bars (stronger specificity) */
 [data-theme="dark"] .magnet-lines-hero-container .magnetLines-container span,
 .dark .magnet-lines-hero-container .magnetLines-container span,
 body.dark .magnet-lines-hero-container .magnetLines-container span {
   background-color: rgba(255, 255, 255, 0.8) !important;
 }
 
-/* Light theme - black bars (explicit for clarity) */
+/* Light theme - BLACK bars (stronger specificity) */
 [data-theme="light"] .magnet-lines-hero-container .magnetLines-container span,
 .light .magnet-lines-hero-container .magnetLines-container span,
 body.light .magnet-lines-hero-container .magnetLines-container span {
   background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
-/* Blue gradient effect when container is hovered - subtle for all bars */
-.magnet-lines-hero-container:hover .magnetLines-container span {
-  background-color: rgba(59, 130, 246, 0.3) !important;
-  box-shadow: 0 0 clamp(2px, 0.5vw, 4px) rgba(59, 130, 246, 0.2);
-}
-
 /* Enhanced neon blue effect for individual bars on direct hover */
 .magnet-lines-hero-container .magnetLines-container span:hover {
-  background-color: rgba(34, 211, 238, 0.9) !important;
-  box-shadow: 0 0 clamp(8px, 2vw, 16px) rgba(34, 211, 238, 0.8),
-    0 0 clamp(16px, 4vw, 32px) rgba(34, 211, 238, 0.4);
+  background-color: rgba(5, 137, 157, 0.9) !important;
+  box-shadow: 0 0 clamp(8px, 2vw, 16px) rgba(23, 215, 245, 0.8),
+    0 0 clamp(16px, 4vw, 32px) rgba(65, 214, 237, 0.4);
   transform: scale(1.1);
   z-index: 10;
   position: relative;
