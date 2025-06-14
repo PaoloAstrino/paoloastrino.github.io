@@ -37,7 +37,7 @@
   --golden-ratio: 1.618;
 
   /* Base font size for calculations (16px = 1rem) */
-  --base-font-size: 1.5rem;
+  --base-font-size: 1.3rem;
 
   /* Golden ratio scale for home screen typography */
   --font-xs: calc(
