@@ -24,16 +24,20 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 100vh; /* Use full viewport height */
+  aspect-ratio: 1; /* Force square aspect ratio */
+  max-width: 100vh; /* Limit width to viewport height to maintain square */
   pointer-events: auto;
   background: rgba(0, 0, 0, 0.02);
   border-radius: 15px;
   overflow: hidden;
+  margin: 0 auto; /* Center the container */
 }
 
 .magnet-lines-hero-container .magnetLines-container {
-  width: 200vmin;
-  height: 200vmin;
+  width: 100%; /* Fill the square container */
+  height: 100%; /* Fill the square container */
+  aspect-ratio: 1; /* Ensure square grid */
   opacity: 1;
 }
 
@@ -47,11 +51,13 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .magnet-lines-hero-container {
-    height: 40vh;
+    height: 80vmin; /* Use vmin for mobile consistency */
+    max-width: 80vmin; /* Maintain square on mobile */
   }
   .magnet-lines-hero-container .magnetLines-container {
-    width: 150vmin;
-    height: 150vmin;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1; /* Force square on mobile too */
   }
 
   .magnet-lines-hero-container .magnetLines-container span {

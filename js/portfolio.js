@@ -1247,11 +1247,14 @@ function initLiquidChrome() {
 }
 
 // Magnet Lines Animation Initialization
+// Global reference to hero magnet lines instance
+let heroMagnetLinesInstance = null;
+
 function initHeroMagnetLines() {
   try {
     const heroMagnetContainer = document.getElementById("heroMagnetLines");
     if (heroMagnetContainer && typeof MagnetLines !== "undefined") {
-      new MagnetLines("#heroMagnetLines", {
+      heroMagnetLinesInstance = new MagnetLines("#heroMagnetLines", {
         rows: 8,
         columns: 8,
         containerSize: "50vmin",
@@ -1262,10 +1265,65 @@ function initHeroMagnetLines() {
         className: "hero-magnet-lines",
       });
 
+      // Add navigation reset functionality
+      initMagnetLinesNavigationReset();
+
       console.log("✨ Hero Magnet Lines initialized successfully");
     }
   } catch (error) {
     console.error("❌ Error initializing Hero Magnet Lines:", error);
+  }
+}
+
+function initMagnetLinesNavigationReset() {
+  // Reset animation when navigation occurs
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (
+        heroMagnetLinesInstance &&
+        typeof heroMagnetLinesInstance.resetToBaseAngle === "function"
+      ) {
+        setTimeout(() => {
+          heroMagnetLinesInstance.resetToBaseAngle();
+        }, 100); // Small delay to ensure navigation has started
+      }
+    });
+  });
+
+  // Reset on hash change (direct URL navigation)
+  window.addEventListener("hashchange", () => {
+    if (
+      heroMagnetLinesInstance &&
+      typeof heroMagnetLinesInstance.resetToBaseAngle === "function"
+    ) {
+      heroMagnetLinesInstance.resetToBaseAngle();
+    }
+  });
+
+  // Reset when returning to hero section (intersection observer)
+  const heroSection = document.querySelector(".hero");
+  if (heroSection) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && heroMagnetLinesInstance) {
+            // Reset when hero comes into view
+            setTimeout(() => {
+              if (
+                typeof heroMagnetLinesInstance.resetToBaseAngle === "function"
+              ) {
+                heroMagnetLinesInstance.resetToBaseAngle();
+              }
+            }, 200);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(heroSection);
   }
 }
 

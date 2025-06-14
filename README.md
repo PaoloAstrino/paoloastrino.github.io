@@ -83,7 +83,7 @@ font-size: clamp(0.875rem, 1.4vw, 0.95rem);
 ```css
 /* Responsive container that scales with viewport */
 .magnetLines-container {
-  width: 120vmin;  /* Scales proportionally */
+  width: 120vmin; /* Scales proportionally */
   height: 120vmin;
   display: grid;
   grid-template-columns: repeat(var(--columns), 1fr);
@@ -91,8 +91,8 @@ font-size: clamp(0.875rem, 1.4vw, 0.95rem);
 
 /* Individual lines with responsive dimensions */
 .magnetLines-container span {
-  width: 1.5vmin;   /* Line thickness */
-  height: 15vmin;   /* Line length */
+  width: 1.5vmin; /* Line thickness */
+  height: 15vmin; /* Line length */
   transform: rotate(var(--rotate)); /* Dynamic rotation */
 }
 ```
@@ -191,7 +191,7 @@ paoloastrino.github.io/
 ### Advanced Features
 
 - **Intersection Observer API**: Scroll animations
-- **CSS Custom Properties**: Theme system  
+- **CSS Custom Properties**: Theme system
 - **LocalStorage**: Theme persistence
 - **Responsive Images**: Performance optimization
 - **Progressive Enhancement**: Accessibility support
@@ -332,18 +332,21 @@ This project is open source and available under the [MIT License](LICENSE).
 The portfolio features a custom-built **Magnet Lines Animation** that creates an interactive magnetic field visualization in the hero section:
 
 **Key Features:**
+
 - **Mouse Tracking**: Lines rotate dynamically to follow cursor movement
 - **Responsive Design**: Scales proportionally across all device sizes
 - **Performance Optimized**: Vanilla JavaScript with hardware acceleration
 - **Visual Appeal**: Creates engaging user interaction and professional aesthetic
 
 **Technical Implementation:**
+
 - **Grid System**: 8x8 responsive grid of interactive elements
 - **CSS Custom Properties**: Dynamic rotation using `--rotate` variables
 - **Viewport Scaling**: Uses `vmin` units for consistent sizing
 - **Touch Compatible**: Works seamlessly on mobile devices
 
 **Responsive Behavior:**
+
 - **Desktop**: 120vmin container with 1.5vmin × 15vmin lines
 - **Mobile**: 150vmin container with 0.75vmin × 12vmin lines
 - **Real-time Scaling**: Maintains proportions across all screen sizes
