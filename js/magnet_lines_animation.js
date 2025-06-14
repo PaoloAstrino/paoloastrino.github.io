@@ -66,7 +66,6 @@ class MagnetLines {
     this.container.style.width = this.options.containerSize;
     this.container.style.height = this.options.containerSize;
   }
-
   createSpans() {
     // Clear existing spans
     this.container.innerHTML = "";
@@ -76,11 +75,19 @@ class MagnetLines {
     for (let i = 0; i < total; i++) {
       const span = document.createElement("span");
 
-      // Set initial styles
+      // Only set rotation - let CSS handle all visual styling
       span.style.setProperty("--rotate", `${this.options.baseAngle}deg`);
-      span.style.backgroundColor = this.options.lineColor;
-      span.style.width = this.options.lineWidth;
-      span.style.height = this.options.lineHeight;
+
+      // Apply styling only if explicitly provided (backward compatibility)
+      if (this.options.lineColor) {
+        span.style.backgroundColor = this.options.lineColor;
+      }
+      if (this.options.lineWidth) {
+        span.style.width = this.options.lineWidth;
+      }
+      if (this.options.lineHeight) {
+        span.style.height = this.options.lineHeight;
+      }
 
       this.container.appendChild(span);
     }

@@ -1257,10 +1257,10 @@ function initHeroMagnetLines() {
       heroMagnetLinesInstance = new MagnetLines("#heroMagnetLines", {
         rows: 8,
         columns: 8,
-        containerSize: "50vmin",
-        lineColor: "rgba(255, 255, 255, 0.8)",
-        lineWidth: "0.2vmin",
-        lineHeight: "4vmin",
+        containerSize: "100%", // Use full container size
+        // lineColor: removed - let CSS handle styling
+        // lineWidth: removed - let CSS handle styling
+        // lineHeight: removed - let CSS handle styling
         baseAngle: 0,
         className: "hero-magnet-lines",
       });
@@ -1276,30 +1276,36 @@ function initHeroMagnetLines() {
 }
 
 function initMagnetLinesNavigationReset() {
-  // Reset animation when navigation occurs
-  const navLinks = document.querySelectorAll(".nav-link");
-
-  navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      if (
-        heroMagnetLinesInstance &&
-        typeof heroMagnetLinesInstance.resetToBaseAngle === "function"
-      ) {
-        setTimeout(() => {
-          heroMagnetLinesInstance.resetToBaseAngle();
-        }, 100); // Small delay to ensure navigation has started
-      }
-    });
-  });
-
-  // Reset on hash change (direct URL navigation)
-  window.addEventListener("hashchange", () => {
+  // Helper function to reset both instances
+  const resetBothInstances = () => {
     if (
       heroMagnetLinesInstance &&
       typeof heroMagnetLinesInstance.resetToBaseAngle === "function"
     ) {
       heroMagnetLinesInstance.resetToBaseAngle();
     }
+    if (
+      mobileMagnetLinesInstance &&
+      typeof mobileMagnetLinesInstance.resetToBaseAngle === "function"
+    ) {
+      mobileMagnetLinesInstance.resetToBaseAngle();
+    }
+  };
+
+  // Reset animation when navigation occurs
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      setTimeout(() => {
+        resetBothInstances();
+      }, 100); // Small delay to ensure navigation has started
+    });
+  });
+
+  // Reset on hash change (direct URL navigation)
+  window.addEventListener("hashchange", () => {
+    resetBothInstances();
   });
 
   // Reset when returning to hero section (intersection observer)

@@ -17,51 +17,61 @@
   transform: rotate(var(--rotate));
 }
 
-/* Hero Section Magnet Lines Styling */
+/* Hero Section Magnet Lines Styling - Single Responsive Container */
 .magnet-lines-hero-container {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100vh; /* Use full viewport height */
-  aspect-ratio: 1; /* Force square aspect ratio */
-  max-width: 100vh; /* Limit width to viewport height to maintain square */
+  /* Fully responsive sizing based on viewport */
+  width: clamp(30vmin, 40vw, 50vmin);
+  height: clamp(30vmin, 40vw, 50vmin);
+  aspect-ratio: 1;
   pointer-events: auto;
-  background: rgba(0, 0, 0, 0.02);
-  border-radius: 15px;
+  /* Responsive positioning and spacing */
+  margin: clamp(1rem, 4vw, 3rem) auto;
+  /* Adaptive background with responsive opacity */
+  background: rgba(0, 0, 0, clamp(0.01, 0.02, 0.03));
+  border-radius: clamp(8px, 2.5vw, 20px);
   overflow: hidden;
-  margin: 0 auto; /* Center the container */
+  /* Responsive glassmorphism styling */
+  backdrop-filter: blur(clamp(5px, 1.5vw, 15px));
+  border: clamp(0.5px, 0.1vw, 2px) solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 clamp(4px, 1.5vw, 12px) clamp(16px, 5vw, 40px)
+    rgba(0, 0, 0, clamp(0.05, 0.1, 0.15));
 }
 
 .magnet-lines-hero-container .magnetLines-container {
-  width: 100%; /* Fill the square container */
-  height: 100%; /* Fill the square container */
-  aspect-ratio: 1; /* Ensure square grid */
+  width: 80%; /* Make animation smaller than the container */
+  height: 80%; /* Make animation smaller than the container */
+  aspect-ratio: 1;
   opacity: 1;
+  margin: auto; /* Center the animation within the container */
 }
 
 .magnet-lines-hero-container .magnetLines-container span {
-  background-color: rgba(137, 71, 71, 0.8);
-  width: 1.5vmin;
-  height: 15vmin;
-  border-radius: 0.075vmin;
+  background-color: rgba(255, 255, 255, clamp(0.7, 0.8, 0.9));
+  /* Fully responsive line sizing based on viewport */
+  width: clamp(0.3vmin, 1vw, 1.5vmin);
+  height: clamp(6vmin, 10vw, 15vmin);
+  border-radius: clamp(0.03vmin, 0.08vw, 0.12vmin);
 }
 
-/* Responsive adjustments */
+/* Simple responsive adjustments without complex media queries */
 @media (max-width: 768px) {
   .magnet-lines-hero-container {
-    height: 80vmin; /* Use vmin for mobile consistency */
-    max-width: 80vmin; /* Maintain square on mobile */
-  }
-  .magnet-lines-hero-container .magnetLines-container {
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 1; /* Force square on mobile too */
+    /* Mobile-optimized responsive sizing */
+    width: clamp(40vmin, 70vw, 65vmin);
+    height: clamp(40vmin, 70vw, 65vmin);
+    margin: clamp(1rem, 4vw, 3rem) auto;
+    /* Enhanced mobile glassmorphism */
+    backdrop-filter: blur(clamp(8px, 2vw, 20px));
+    border-radius: clamp(12px, 3vw, 25px);
   }
 
   .magnet-lines-hero-container .magnetLines-container span {
-    width: 0.75vmin;
-    height: 12vmin;
+    /* Mobile-optimized bar sizing */
+    width: clamp(0.4vmin, 1.2vw, 1.8vmin);
+    height: clamp(8vmin, 12vw, 18vmin);
   }
 }
