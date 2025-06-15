@@ -35,10 +35,10 @@
   ); /* Responsive in rem/vw like other elements */
   height: clamp(20rem, 30vw, 35rem); /* Same value to maintain square */
   aspect-ratio: 1 !important; /* FORCE SQUARE - non-negotiable */
-  pointer-events: auto; /* Responsive positioning and spacing */
+  pointer-events: auto;  /* Responsive positioning and spacing */
   margin: clamp(1rem, 4vw, 3rem) auto;
-  margin-left: calc(50% + 8vw); /* Proportional 8vw left shift from center */
-  transform: translateX(-50%); /* Center the container properly */
+  /* Move container 20px to the left */
+  transform: translateX(-20px);
   /* Pure positional box - no visual effects */
   background: transparent;
   border: none;
@@ -57,44 +57,44 @@
   /* Ensure grid cells are perfectly square */
   min-width: 0;
   min-height: 0;
-  /* Add responsive spacing between grid items */
-  gap: clamp(0.2rem, 1vw, 0.8rem); /* Responsive gap between bars */
-  column-gap: clamp(0.3rem, 1.5vw, 1rem); /* Extra space between columns */
 }
 
 .magnet-lines-hero-container .magnetLines-container span {
-  /* PROPORTIONAL RESPONSIVE bar sizing - maintains square grid appearance */
-  width: clamp(0.05rem, 0.8vw, 0.2rem) !important; /* Proportional thickness */
-  height: clamp(
-    1.27rem,
-    5.06vw,
-    2.53rem
-  ) !important; /* Proportional length - increased by 15% more */
-  border-radius: clamp(0.025rem, 0.1vw, 0.05rem); /* Proportional rounding */
+  /* Default: black bars for light theme */
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  /* SCREEN RESPONSIVE bar sizing - like other UI elements */
+  width: clamp(0.1rem, 0.5vw, 0.3rem) !important; /* Responsive thickness */
+  height: clamp(2rem, 4vw, 3rem) !important; /* Responsive length */
+  border-radius: clamp(0.05rem, 0.1vw, 0.1rem); /* Responsive rounding */
   /* Smooth transition for gradient effect only - NOT for rotation */
   transition: background 0.3s ease, box-shadow 0.3s ease;
-  /* Default color will be overridden by theme-specific rules below */
 }
 
-/* Dark theme - WHITE bars (stronger specificity) */
+/* Dark theme - white bars */
 [data-theme="dark"] .magnet-lines-hero-container .magnetLines-container span,
 .dark .magnet-lines-hero-container .magnetLines-container span,
 body.dark .magnet-lines-hero-container .magnetLines-container span {
   background-color: rgba(255, 255, 255, 0.8) !important;
 }
 
-/* Light theme - BLACK bars (stronger specificity) */
+/* Light theme - black bars (explicit for clarity) */
 [data-theme="light"] .magnet-lines-hero-container .magnetLines-container span,
 .light .magnet-lines-hero-container .magnetLines-container span,
 body.light .magnet-lines-hero-container .magnetLines-container span {
   background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
+/* Blue gradient effect when container is hovered - subtle for all bars */
+.magnet-lines-hero-container:hover .magnetLines-container span {
+  background-color: rgba(59, 130, 246, 0.3) !important;
+  box-shadow: 0 0 clamp(2px, 0.5vw, 4px) rgba(59, 130, 246, 0.2);
+}
+
 /* Enhanced neon blue effect for individual bars on direct hover */
 .magnet-lines-hero-container .magnetLines-container span:hover {
-  background-color: rgba(5, 137, 157, 0.9) !important;
-  box-shadow: 0 0 clamp(8px, 2vw, 16px) rgba(23, 215, 245, 0.8),
-    0 0 clamp(16px, 4vw, 32px) rgba(65, 214, 237, 0.4);
+  background-color: rgba(34, 211, 238, 0.9) !important;
+  box-shadow: 0 0 clamp(8px, 2vw, 16px) rgba(34, 211, 238, 0.8),
+    0 0 clamp(16px, 4vw, 32px) rgba(34, 211, 238, 0.4);
   transform: scale(1.1);
   z-index: 10;
   position: relative;
@@ -104,27 +104,28 @@ body.light .magnet-lines-hero-container .magnetLines-container span {
 @media (max-width: 768px) {
   .magnet-lines-hero-container {
     /* SCREEN RESPONSIVE mobile sizing - like other mobile elements */
-    width: clamp(15rem, 50vw, 30rem); /* Mobile responsive in rem/vw */
-    height: clamp(15rem, 50vw, 30rem); /* Same value to maintain square */
+    width: clamp(15rem, 50vw, 25rem); /* Mobile responsive in rem/vw */
+    height: clamp(15rem, 50vw, 25rem); /* Same value to maintain square */
     aspect-ratio: 1 !important; /* FORCE SQUARE on mobile too */
-    margin: clamp(1rem, 4vw, 2rem) auto; /* Reset to center on mobile */
-    margin-left: auto; /* Override desktop offset - stay centered on mobile */
-    margin-right: auto; /* Ensure centered on mobile */
-    transform: none; /* Remove desktop transform on mobile */
+    margin: clamp(1rem, 4vw, 2rem) auto;
     /* Pure positional box on mobile too */
     background: transparent;
     border: none;
     box-shadow: none;
     border-radius: 0;
   }
+
   .magnet-lines-hero-container .magnetLines-container span {
-    /* Mobile: proportional sizing - maintains square grid appearance */
-    width: clamp(0.06rem, 1vw, 0.25rem) !important; /* Proportional thickness */
+    /* Mobile responsive bar sizing - consistent with mobile UI patterns */
+    width: clamp(
+      0.15rem,
+      0.8vw,
+      0.4rem
+    ) !important; /* Slightly thicker on mobile */
     height: clamp(
-      1.52rem,
-      5.06vw,
-      2.53rem
-    ) !important; /* Proportional length - increased by 15% more */
-    border-radius: clamp(0.03rem, 0.1vw, 0.06rem); /* Proportional rounding */
+      2.5rem,
+      5vw,
+      4rem
+    ) !important; /* Longer for touch interaction */
   }
 }
