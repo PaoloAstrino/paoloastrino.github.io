@@ -1261,7 +1261,7 @@ function initHeroMagnetLines() {
         // lineColor: removed - let CSS handle styling
         // lineWidth: removed - let CSS handle styling
         // lineHeight: removed - let CSS handle styling
-        baseAngle: 0,
+        baseAngle: 90, // All bars start perfectly vertical
         className: "hero-magnet-lines",
       });
 

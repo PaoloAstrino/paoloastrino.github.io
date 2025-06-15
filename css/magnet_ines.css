@@ -35,7 +35,7 @@
   ); /* Responsive in rem/vw like other elements */
   height: clamp(20rem, 30vw, 35rem); /* Same value to maintain square */
   aspect-ratio: 1 !important; /* FORCE SQUARE - non-negotiable */
-  pointer-events: auto;  /* Responsive positioning and spacing */
+  pointer-events: auto; /* Responsive positioning and spacing */
   margin: clamp(1rem, 4vw, 3rem) auto;
   /* Move container 20px to the left */
   transform: translateX(-20px);
@@ -103,29 +103,41 @@ body.light .magnet-lines-hero-container .magnetLines-container span {
 /* Simple responsive adjustments without complex media queries */
 @media (max-width: 768px) {
   .magnet-lines-hero-container {
-    /* SCREEN RESPONSIVE mobile sizing - like other mobile elements */
-    width: clamp(15rem, 50vw, 25rem); /* Mobile responsive in rem/vw */
-    height: clamp(15rem, 50vw, 25rem); /* Same value to maintain square */
+    /* SCREEN RESPONSIVE mobile sizing - use vmin to ensure square on all orientations */
+    width: clamp(15rem, 40vmin, 25rem); /* Use vmin for true square ratio */
+    height: clamp(
+      15rem,
+      40vmin,
+      25rem
+    ); /* Same value with vmin to maintain square */
     aspect-ratio: 1 !important; /* FORCE SQUARE on mobile too */
     margin: clamp(1rem, 4vw, 2rem) auto;
+    /* Remove horizontal offset on mobile for better centering */
+    transform: none;
     /* Pure positional box on mobile too */
     background: transparent;
     border: none;
     box-shadow: none;
     border-radius: 0;
+    /* IMPORTANT: Contain bars within container on mobile */
+    overflow: hidden;
   }
 
+  .magnet-lines-hero-container .magnetLines-container {
+    /* Ensure animation grid stays within bounds on mobile */
+    overflow: hidden;
+  }
   .magnet-lines-hero-container .magnetLines-container span {
-    /* Mobile responsive bar sizing - consistent with mobile UI patterns */
+    /* Mobile responsive bar sizing - use vmin for consistent sizing relative to container */
     width: clamp(
       0.15rem,
-      0.8vw,
+      1vmin,
       0.4rem
-    ) !important; /* Slightly thicker on mobile */
+    ) !important; /* Use vmin for responsive thickness */
     height: clamp(
-      2.5rem,
-      5vw,
-      4rem
-    ) !important; /* Longer for touch interaction */
+      2rem,
+      6vmin,
+      3.5rem
+    ) !important; /* Use vmin for responsive length relative to container */
   }
 }
