@@ -2902,15 +2902,7 @@ html[data-theme="light"] .scroll-progress {
       1.1vw,
       0.924rem
     ); /* 0.7rem-0.84rem increased by 10% */
-    padding: clamp(
-      0.22rem,
-      0.33vw,
-      0.264rem
-    ) clamp(
-      0.55rem,
-      0.88vw,
-      0.792rem
-    ); /* Increased by 10% */
+    padding: clamp(0.22rem, 0.33vw, 0.264rem) clamp(0.55rem, 0.88vw, 0.792rem); /* Increased by 10% */
     border-radius: clamp(
       19.8px,
       2.2vw,
@@ -2924,16 +2916,8 @@ html[data-theme="light"] .scroll-progress {
       1.21vw,
       0.99rem
     ); /* 0.75rem-0.9rem increased by 10% */
-    gap: clamp(
-      0.44rem,
-      0.66vw,
-      0.528rem
-    ); /* 0.4rem-0.48rem increased by 10% */
-    margin-top: clamp(
-      0.2rem,
-      0.4vw,
-      0.1rem
-    ); /* 1.73x margin */
+    gap: clamp(0.44rem, 0.66vw, 0.528rem); /* 0.4rem-0.48rem increased by 10% */
+    margin-top: clamp(0.2rem, 0.4vw, 0.1rem); /* 1.73x margin */
   }
 
   .explore-btn i {
