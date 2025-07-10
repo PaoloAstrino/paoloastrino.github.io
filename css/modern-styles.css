@@ -1700,6 +1700,32 @@ html[data-theme="light"] .skill-tag:hover {
   color: hsl(var(--primary) / 0.8);
 }
 
+/* Project Status Styles */
+.project-status {
+  display: flex;
+  gap: 0.6rem;
+  margin: 0; /* Remove margins for consistent alignment */
+  min-height: 2rem; /* Minimum height to maintain alignment */
+  align-items: flex-start; /* Align badges to top */
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 0; /* Clean rectangular shape */
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: none; /* No border for clean look */
+  height: 1.5rem; /* Consistent height for all badges */
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap; /* Prevent text wrapping in badges */
+}
+
+.status-badge.work-in-progress {
+  background: hsl(var(--primary)); /* Blue background matching site theme */
+  color: hsl(var(--primary-foreground)); /* White text for contrast */
+}
+
 /* Contact Section */
 .contact-section {
   padding: 6rem 0; /* Increased from 3rem for better vertical spacing */
@@ -2130,7 +2156,7 @@ html[data-theme="light"] .skill-tag:hover {
   border-radius: 0; /* Clean rectangular shape */
   text-decoration: none;
   transition: all 0.3s ease;
-  border: none; /* Clean, no border */
+  border: none;
 }
 
 .social-link:hover {
@@ -2601,158 +2627,158 @@ html[data-theme="light"] .scroll-progress {
 
   .privacy-commitment i {
     font-size: clamp(0.65rem, 4.2vw, 0.75rem);
-    .legal-link {
-      font-size: clamp(0.65rem, 4vw, 0.75rem);
-    }
+  }
 
-    .footer p {
-      font-size: clamp(0.65rem, 4vw, 0.75rem);
-    }
+  .legal-link {
+    font-size: clamp(0.65rem, 4vw, 0.75rem);
+  }
 
-    .legal-separator {
-      font-size: clamp(0.65rem, 4vw, 0.75rem);
-    }
-  } /* Fullscreen Desktop Optimization - 1.73x Scaling (15% bigger) */
-  @media (min-width: 1600px) {
-    .dataloud-glass-card {
-      /* Remove var(--card-width) constraint and use direct viewport scaling */
-      width: min(
-        76.12vw,
-        /* Direct viewport width */ 1522px /* Maximum pixel width */
-      );
-      height: calc(min(76.12vw, 1522px) * 1.618); /* Golden ratio maintained */
-      padding: clamp(
-        calc(1.2rem * 1.73),
-        calc(2vw * 1.73 + 1rem * 1.73),
-        calc(3.5rem * 1.73)
-      );
-    }
-    .dataloud-glass-card .project-icon-wrapper {
-      width: clamp(
-        calc(60px * 1.73),
-        calc(8vw * 1.73 + 2rem * 1.73),
-        calc(140px * 1.73)
-      ); /* 1.73x icon wrapper scaling */
-      height: clamp(
-        calc(60px * 1.73),
-        calc(8vw * 1.73 + 2rem * 1.73),
-        calc(140px * 1.73)
-      );
-      margin-bottom: clamp(
+  .footer p {
+    font-size: clamp(0.65rem, 4vw, 0.75rem);
+  }
+
+  .legal-separator {
+    font-size: clamp(0.65rem, 4vw, 0.75rem);
+  }
+} /* Fullscreen Desktop Optimization - 1.73x Scaling (15% bigger) */
+@media (min-width: 1600px) {
+  .dataloud-glass-card {
+    /* Remove var(--card-width) constraint and use direct viewport scaling */
+    width: min(
+      76.12vw,
+      /* Direct viewport width */ 1522px /* Maximum pixel width */
+    );
+    height: calc(min(76.12vw, 1522px) * 1.618); /* Golden ratio maintained */
+    padding: clamp(
+      calc(1.2rem * 1.73),
+      calc(2vw * 1.73 + 1rem * 1.73),
+      calc(3.5rem * 1.73)
+    );
+  }
+  .dataloud-glass-card .project-icon-wrapper {
+    width: clamp(
+      calc(60px * 1.73),
+      calc(8vw * 1.73 + 2rem * 1.73),
+      calc(140px * 1.73)
+    ); /* 1.73x icon wrapper scaling */
+    height: clamp(
+      calc(60px * 1.73),
+      calc(8vw * 1.73 + 2rem * 1.73),
+      calc(140px * 1.73)
+    );
+    margin-bottom: clamp(
+      calc(0.5rem * 1.73),
+      calc(1vw * 1.73 + 0.3rem * 1.73),
+      calc(1.5rem * 1.73)
+    ); /* 1.73x margin */
+  }
+
+  .dataloud-glass-card .project-icon-wrapper i {
+    font-size: clamp(
+      calc(1.8rem * 1.73),
+      calc(4vw * 1.73 + 1rem * 1.73),
+      calc(3.5rem * 1.73)
+    ); /* 1.73x icon scaling */
+  }
+
+  .dataloud-glass-card h3 {
+    font-size: clamp(
+      calc(1rem * 1.73),
+      calc(1.5vw * 1.73 + 0.5rem * 1.73),
+      calc(2rem * 1.73)
+    ); /* 1.73x title scaling */
+  }
+  .dataloud-glass-card p {
+    font-size: clamp(
+      calc(0.8rem * 1.73),
+      calc(1vw * 1.73 + 0.3rem * 1.73),
+      calc(1.2rem * 1.73)
+    ); /* 1.73x description scaling */
+  }
+  .dataloud-glass-card .tech-pill {
+    font-size: clamp(
+      calc(0.7rem * 1.73),
+      calc(0.8vw * 1.73 + 0.4rem * 1.73),
+      calc(1rem * 1.73)
+    ); /* 1.73x tech pill text scaling */
+    padding: clamp(
+        calc(0.15rem * 1.73),
+        calc(0.3vw * 1.73 + 0.1rem * 1.73),
+        calc(0.35rem * 1.73)
+      )
+      clamp(
         calc(0.5rem * 1.73),
-        calc(1vw * 1.73 + 0.3rem * 1.73),
-        calc(1.5rem * 1.73)
-      );
-    }
-
-    .dataloud-glass-card .project-icon-wrapper i {
-      font-size: clamp(
-        calc(1.8rem * 1.73),
-        calc(4vw * 1.73 + 1rem * 1.73),
-        calc(3.5rem * 1.73)
-      ); /* 1.73x icon scaling */
-    }
-
-    .dataloud-glass-card h3 {
-      font-size: clamp(
-        calc(1rem * 1.73),
-        calc(1.5vw * 1.73 + 0.5rem * 1.73),
-        calc(2rem * 1.73)
-      ); /* 1.73x title scaling */
-    }
-
-    .dataloud-glass-card p {
-      font-size: clamp(
-        calc(0.8rem * 1.73),
-        calc(1vw * 1.73 + 0.3rem * 1.73),
-        calc(1.2rem * 1.73)
-      ); /* 1.73x description scaling */
-    }
-    .dataloud-glass-card .tech-pill {
-      font-size: clamp(
-        calc(0.7rem * 1.73),
-        calc(0.8vw * 1.73 + 0.4rem * 1.73),
+        calc(0.8vw * 1.73 + 0.3rem * 1.73),
         calc(1rem * 1.73)
-      ); /* 1.73x tech pill text scaling */
-      padding: clamp(
-          calc(0.15rem * 1.73),
-          calc(0.3vw * 1.73 + 0.1rem * 1.73),
-          calc(0.35rem * 1.73)
-        )
-        clamp(
-          calc(0.5rem * 1.73),
-          calc(0.8vw * 1.73 + 0.3rem * 1.73),
-          calc(1rem * 1.73)
-        ); /* 1.73x padding */
-      border-radius: clamp(
-        calc(15px * 1.73),
-        calc(2vw * 1.73 + 10px * 1.73),
-        calc(35px * 1.73)
-      ); /* 1.73x border radius */
-    }
+      ); /* 1.73x padding */
+    border-radius: clamp(
+      calc(15px * 1.73),
+      calc(2vw * 1.73 + 10px * 1.73),
+      calc(35px * 1.73)
+    ); /* 1.73x border radius */
+  }
 
-    .dataloud-glass-card .explore-btn {
-      font-size: clamp(
-        calc(0.8rem * 1.73),
-        calc(1vw * 1.73 + 0.3rem * 1.73),
-        calc(1.2rem * 1.73)
-      ); /* 1.73x button text scaling */
-      gap: clamp(
-        calc(0.3rem * 1.73),
-        calc(0.5vw * 1.73 + 0.2rem * 1.73),
-        calc(0.7rem * 1.73)
-      ); /* 1.73x gap */
-      margin-top: clamp(
+  .dataloud-glass-card .explore-btn {
+    font-size: clamp(
+      calc(0.8rem * 1.73),
+      calc(1vw * 1.73 + 0.3rem * 1.73),
+      calc(1.2rem * 1.73)
+    ); /* 1.73x button text scaling */
+    gap: clamp(
+      calc(0.3rem * 1.73),
+      calc(0.5vw * 1.73 + 0.2rem * 1.73),
+      calc(0.7rem * 1.73)
+    ); /* 1.73x gap */
+    margin-top: clamp(
+      calc(0.2rem * 1.73),
+      calc(0.4vw * 1.73 + 0.1rem * 1.73),
+      calc(0.5rem * 1.73)
+    ); /* 1.73x margin */
+  }
+
+  .dataloud-glass-card .explore-btn i {
+    font-size: clamp(
+      calc(0.7rem * 1.73),
+      calc(0.9vw * 1.73 + 0.3rem * 1.73),
+      calc(1.1rem * 1.73)
+    ); /* 1.73x button icon scaling */
+  }
+
+  .dataloud-glass-card .glass-content {
+    gap: clamp(
+      calc(0.8rem * 1.73),
+      calc(1.5vw * 1.73 + 0.5rem * 1.73),
+      calc(2rem * 1.73)
+    ); /* 1.73x content gap */
+  }
+
+  .dataloud-glass-card .tech-stack {
+    gap: clamp(
+      calc(0.3rem * 1.73),
+      calc(0.5vw * 1.73 + 0.2rem * 1.73),
+      calc(0.7rem * 1.73)
+    ); /* 1.73x tech stack gap */
+    margin: clamp(
         calc(0.2rem * 1.73),
         calc(0.4vw * 1.73 + 0.1rem * 1.73),
         calc(0.5rem * 1.73)
-      ); /* 1.73x margin */
-    }
-
-    .dataloud-glass-card .explore-btn i {
-      font-size: clamp(
-        calc(0.7rem * 1.73),
-        calc(0.9vw * 1.73 + 0.3rem * 1.73),
-        calc(1.1rem * 1.73)
-      ); /* 1.73x button icon scaling */
-    }
-
-    .dataloud-glass-card .glass-content {
-      gap: clamp(
-        calc(0.8rem * 1.73),
-        calc(1.5vw * 1.73 + 0.5rem * 1.73),
-        calc(2rem * 1.73)
-      ); /* 1.73x content gap */
-    }
-
-    .dataloud-glass-card .tech-stack {
-      gap: clamp(
-        calc(0.3rem * 1.73),
-        calc(0.5vw * 1.73 + 0.2rem * 1.73),
-        calc(0.7rem * 1.73)
-      ); /* 1.73x tech stack gap */
-      margin: clamp(
-          calc(0.2rem * 1.73),
-          calc(0.4vw * 1.73 + 0.1rem * 1.73),
-          calc(0.5rem * 1.73)
-        )
-        0; /* 1.73x margin */
-    }
+      )
+      0; /* 1.73x margin */
   }
+}
 
-  /* Large Screen Optimization */
-  @media (min-width: 1920px) {
-    .dataloud-glass-card {
-      /* Maintain 2x badge width and golden ratio (1:1.618) on large screens */
-      width: min(
-        var(--card-width),
-        44vw,
-        880px
-      ); /* 40vw and 800px increased by 10% */
-      height: calc(
-        min(var(--card-width), 44vw, 880px) * 1.618
-      ); /* Golden ratio */
-    }
+/* Large Screen Optimization */
+@media (min-width: 1920px) {
+  .dataloud-glass-card {
+    /* Maintain 2x badge width and golden ratio (1:1.618) on large screens */
+    width: min(
+      var(--card-width),
+      44vw,
+      880px
+    ); /* 40vw and 800px increased by 10% */
+    height: calc(
+      min(var(--card-width), 44vw, 880px) * 1.618
+    ); /* Golden ratio */
   }
 }
 
@@ -2876,7 +2902,15 @@ html[data-theme="light"] .scroll-progress {
       1.1vw,
       0.924rem
     ); /* 0.7rem-0.84rem increased by 10% */
-    padding: clamp(0.22rem, 0.33vw, 0.264rem) clamp(0.55rem, 0.88vw, 0.792rem); /* Increased by 10% */
+    padding: clamp(
+      0.22rem,
+      0.33vw,
+      0.264rem
+    ) clamp(
+      0.55rem,
+      0.88vw,
+      0.792rem
+    ); /* Increased by 10% */
     border-radius: clamp(
       19.8px,
       2.2vw,
@@ -2890,15 +2924,24 @@ html[data-theme="light"] .scroll-progress {
       1.21vw,
       0.99rem
     ); /* 0.75rem-0.9rem increased by 10% */
-    gap: clamp(0.44rem, 0.66vw, 0.528rem); /* 0.4rem-0.48rem increased by 10% */
+    gap: clamp(
+      0.44rem,
+      0.66vw,
+      0.528rem
+    ); /* 0.4rem-0.48rem increased by 10% */
+    margin-top: clamp(
+      0.2rem,
+      0.4vw,
+      0.1rem
+    ); /* 1.73x margin */
   }
 
   .explore-btn i {
     font-size: clamp(
       0.88rem,
-      1.32vw,
-      1.056rem
-    ); /* 0.8rem-0.96rem increased by 10% */
+      2.75vw,
+      1.1rem
+    ); /* 0.8rem-1rem increased by 10% */
   }
 
   .glass-content {
