@@ -39,6 +39,12 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 
+# Next.js
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
 # Environment & Configuration
 .env
 .env.local
