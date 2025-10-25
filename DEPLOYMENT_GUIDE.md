@@ -51,6 +51,7 @@ git push origin main
 ### Step 4: Access Your Portfolio
 
 Your portfolio will be available at:
+
 - **https://paoloastrino.github.io/**
 
 ## 🔧 Local Testing
@@ -73,12 +74,14 @@ pnpm start
 ## 📁 What Gets Deployed
 
 The GitHub Actions workflow will:
+
 1. Install dependencies with pnpm
 2. Build your Next.js app (`pnpm build`)
 3. Export static files to `out/` folder
 4. Deploy the `out/` folder to GitHub Pages
 
 ### Deployed Files Include:
+
 - ✓ All pages (index.html, 404.html)
 - ✓ JavaScript bundles (optimized)
 - ✓ CSS files (Tailwind compiled)
@@ -98,21 +101,25 @@ After initial deployment, to update your portfolio:
 ## 🐛 Troubleshooting
 
 ### Build Fails in GitHub Actions
+
 - Check the Actions tab for error logs
 - Ensure all dependencies are in `package.json`
 - Test build locally: `pnpm build`
 
 ### Site Not Updating
+
 - Check that GitHub Actions workflow completed successfully
 - Clear browser cache (Ctrl + Shift + R)
 - Wait 2-3 minutes for CDN to update
 
 ### 404 Errors
+
 - Ensure GitHub Pages source is set to "GitHub Actions"
 - Check that `.nojekyll` file exists in `public/` folder
 - Verify `basePath` in `next.config.mjs` is set to `''`
 
 ### CSS Not Loading
+
 - Check browser console for errors
 - Verify `images.unoptimized: true` in `next.config.mjs`
 - Clear cache and hard reload
@@ -120,6 +127,7 @@ After initial deployment, to update your portfolio:
 ## 📞 Support
 
 If you encounter issues:
+
 1. Check GitHub Actions logs in the Actions tab
 2. Review Next.js static export docs: https://nextjs.org/docs/app/building-your-application/deploying/static-exports
 3. Verify GitHub Pages settings

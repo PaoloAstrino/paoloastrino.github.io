@@ -5,7 +5,7 @@ A clean, modern portfolio website built with Next.js and Tailwind CSS, featuring
 ## ✨ Features
 
 - **Minimalist Design** - Clean typography with Geist font and strategic use of whitespace
-- **Responsive Layout** - Mobile-first design that works on all devices  
+- **Responsive Layout** - Mobile-first design that works on all devices
 - **Theme Toggle** - Seamless dark/light mode switching
 - **Smooth Animations** - Subtle scroll-triggered animations and hover effects
 - **Modern Stack** - Built with Next.js 15, TypeScript, and Tailwind CSS
@@ -47,6 +47,7 @@ This portfolio is configured for automatic deployment to GitHub Pages using GitH
      - **Source**: Select "GitHub Actions"
 
 2. **Push your changes:**
+
    ```bash
    git add .
    git commit -m "Deploy Next.js portfolio"
@@ -96,7 +97,3 @@ The portfolio is designed to be easily customizable:
 ## 📄 License
 
 Open source and available under the [MIT License](LICENSE).
-
----
-
-**Built with ❤️ using [v0.dev](https://v0.dev) by Felix Macaspac**
