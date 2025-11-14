@@ -264,6 +264,14 @@ export default function Home() {
             <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
               {[
                 {
+                  title: "Local Hybrid Retrieval-Augmented Document QA",
+                  excerpt: "We present a question-answering system that resolves the trade-off between cloud-based AI and local processing by combining semantic understanding with keyword precision, operating entirely on local infrastructure.",
+                  tech: ["NLP", "Retrieval-Augmented Generation", "Local AI"],
+                  status: "Published",
+                  github: null,
+                  link: "https://arxiv.org/abs/2511.10297",
+                },
+                {
                   title: "Odo - Oral Health Detection System",
                   excerpt: "AI-powered computer vision application that helps dental professionals detect oral illnesses and conditions through photo analysis.",
                   tech: ["Python", "Computer Vision", "Deep Learning", "Medical AI"],
@@ -306,11 +314,15 @@ export default function Home() {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between text-xs text-muted-foreground font-mono">
                       <span>{post.status}</span>
-                      {post.github && (
+                      {post.github ? (
                         <Link href={post.github} target="_blank" className="hover:text-foreground transition-colors">
                           GitHub →
                         </Link>
-                      )}
+                      ) : post.link ? (
+                        <Link href={post.link} target="_blank" className="hover:text-foreground transition-colors">
+                          View Paper →
+                        </Link>
+                      ) : null}
                     </div>
 
                     <h3 className="text-lg sm:text-xl font-medium group-hover:text-muted-foreground transition-colors duration-300">
@@ -561,7 +573,6 @@ export default function Home() {
                     viewBox="0 0 20 20"
                   >
                     <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-}
                   </svg>
                 )}
               </button>
