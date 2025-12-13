@@ -7,12 +7,23 @@ export default function Home() {
   const [isDark, setIsDark] = useState(true)
   const [activeSection, setActiveSection] = useState("")
   const sectionsRef = useRef<HTMLElement[]>([])
+  const [isMobileDevice, setIsMobileDevice] = useState(false)
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDark)
   }, [isDark])
 
   useEffect(() => {
+    const isMobile = (typeof navigator !== 'undefined' && /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) || (typeof window !== 'undefined' && window.innerWidth <= 768)
+    if (isMobile) {
+      setIsMobileDevice(true)
+      sectionsRef.current.forEach((section) => {
+        section?.classList.remove('opacity-0')
+      })
+      return
+    }
+
+    setIsMobileDevice(false)
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
