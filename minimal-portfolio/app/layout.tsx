@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   title: "Paolo Astrino - Data Analyst & ML Enthusiast",
   description: "Data Analyst & ML Enthusiast from Padova, Italy. Specializing in Python, Machine Learning, and data-driven solutions.",
   generator: "v0.app",
+  icons: {
+    icon: "/favicon-black.svg",
+  },
 }
 
 export default function RootLayout({
