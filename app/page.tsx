@@ -55,9 +55,8 @@ export default function Home() {
             <button
               key={section}
               onClick={() => document.getElementById(section)?.scrollIntoView({ behavior: "smooth" })}
-              className={`w-2 h-8 rounded-full transition-all duration-500 ${
-                activeSection === section ? "bg-foreground" : "bg-muted-foreground/30 hover:bg-muted-foreground/60"
-              }`}
+              className={`w-2 h-8 rounded-full transition-all duration-500 ${activeSection === section ? "bg-foreground" : "bg-muted-foreground/30 hover:bg-muted-foreground/60"
+                }`}
               aria-label={`Navigate to ${section}`}
             />
           ))}
@@ -73,7 +72,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-5 gap-12 sm:gap-16 w-full">
             <div className="lg:col-span-3 space-y-6 sm:space-y-8">
               <div className="space-y-3 sm:space-y-2">
-                <div className="text-sm text-muted-foreground font-mono tracking-wider">PORTFOLIO / 2025</div>
+                <div className="text-sm text-muted-foreground font-mono tracking-wider">PORTFOLIO / 2026</div>
                 <h1 className="text-6xl sm:text-7xl lg:text-7xl font-light tracking-tight">
                   Paolo
                   <br />
@@ -99,27 +98,58 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="lg:col-span-2 flex flex-col justify-end space-y-6 sm:space-y-8 mt-8 lg:mt-0">
-              <div className="space-y-4">
-                <div className="text-sm text-muted-foreground font-mono">CURRENTLY</div>
-                <div className="space-y-2">
-                  <div className="text-base text-foreground">Junior Developer Freelance</div>
-                  <div className="text-base text-muted-foreground">@ Freelance</div>
-                  <div className="text-sm text-muted-foreground">Jul 2025 — Present</div>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <div className="text-sm text-muted-foreground font-mono">FOCUS</div>
-                <div className="flex flex-wrap gap-2">
-                  {["Python", "React", "Node.js", "Data Analytics", "Machine Learning"].map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 text-xs border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300"
+            <div className="lg:col-span-2 flex flex-col justify-between lg:pt-3 space-y-12 lg:space-y-0 mt-8 lg:mt-0">
+              <Link
+                href="#connect"
+                onClick={(e) => {
+                  e.preventDefault()
+                  document.getElementById("connect")?.scrollIntoView({ behavior: "smooth" })
+                }}
+                className="group inline-block"
+              >
+                <h2 className="text-6xl sm:text-7xl lg:text-7xl font-light tracking-tight leading-[1.1] transition-colors duration-500">
+                  Got an idea?
+                  <span className="text-muted-foreground group-hover:text-foreground transition-all duration-500 whitespace-nowrap inline-flex items-center">
+                    Let's talk.
+                    <svg
+                      className="w-[0.7em] h-[0.7em] transform group-hover:translate-x-4 transition-transform duration-500 ml-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
                     >
-                      {skill}
-                    </span>
-                  ))}
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </span>
+                </h2>
+              </Link>
+
+              <div className="space-y-6 sm:space-y-8">
+                <div className="space-y-4">
+                  <div className="text-sm text-muted-foreground font-mono">CURRENTLY</div>
+                  <div className="space-y-2">
+                    <div className="text-base text-foreground">Full Stack Developer</div>
+                    <div className="text-base text-muted-foreground">@ Freelance</div>
+                    <div className="text-sm text-muted-foreground">Jul 2025 — Present</div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="text-sm text-muted-foreground font-mono">FOCUS</div>
+                  <div className="flex flex-wrap gap-2">
+                    {["Python", "React", "DevOps", "Machine Learning", "Database"].map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-3 py-1 text-xs border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -134,14 +164,14 @@ export default function Home() {
           <div className="space-y-12 sm:space-y-16 w-full">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
               <h2 className="text-4xl sm:text-4xl font-light">Experience</h2>
-              <div className="text-sm text-muted-foreground font-mono">2023 — 2025</div>
+              <div className="text-sm text-muted-foreground font-mono">2023 — 2026</div>
             </div>
 
             <div className="space-y-8 sm:space-y-12">
               {[
                 {
                   year: "2025",
-                  role: "Junior Developer Freelance",
+                  role: "Full Stack Developer Freelance",
                   company: "Freelance",
                   description: "Developed responsive front-end components using React, built backend services with Node.js, and applied Python for data processing and automation tasks.",
                   tech: ["Python", "React", "Node.js", "Frontend Development"],
@@ -275,6 +305,14 @@ export default function Home() {
             <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
               {[
                 {
+                  title: "CUBO - Industrial-Grade Local RAG",
+                  excerpt: "Enterprise-grade RAG system engineered for privacy-first environments. Features tiered hybrid retrieval, O(1) memory scaling for 50GB+ corpora, and specialized support for European languages on consumer hardware.",
+                  tech: ["Python", "SQLite", "FAISS", "Ollama", "RAG"],
+                  status: "Completed",
+                  github: "https://github.com/PaoloAstrino/cubo",
+                  featured: true,
+                },
+                {
                   title: "Local Hybrid Retrieval-Augmented Document QA",
                   excerpt: "We present a question-answering system that resolves the trade-off between cloud-based AI and local processing by combining semantic understanding with keyword precision, operating entirely on local infrastructure.",
                   tech: ["NLP", "Retrieval-Augmented Generation", "Local AI"],
@@ -286,13 +324,6 @@ export default function Home() {
                   title: "Odo - Oral Health Detection System",
                   excerpt: "AI-powered computer vision application that helps dental professionals detect oral illnesses and conditions through photo analysis.",
                   tech: ["Python", "Computer Vision", "Deep Learning", "Medical AI"],
-                  status: "Work in Progress",
-                  github: null,
-                },
-                {
-                  title: "CUBO - Local RAG Chatbot",
-                  excerpt: "CUBO is a lightweight RAG chatbot that operates entirely locally without internet connectivity, prioritizing user privacy and high-quality document retrieval for secure, offline AI conversations.",
-                  tech: ["Python", "LangChain", "Local LLM", "Privacy-First"],
                   status: "Work in Progress",
                   github: null,
                 },
@@ -317,10 +348,13 @@ export default function Home() {
                   status: "Completed",
                   github: "https://github.com/paoloastrino/eating-habits-and-emissions",
                 },
-              ].map((post, index) => (
+              ].map((post: any, index) => (
                 <article
                   key={index}
-                  className="group p-6 sm:p-8 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-500 hover:shadow-lg cursor-pointer"
+                  className={`group p-6 sm:p-8 border rounded-lg transition-all duration-500 hover:shadow-lg cursor-pointer ${post.featured
+                    ? "border-primary/50 shadow-[0_0_40px_-12px_var(--color-primary)] bg-primary/[0.02]"
+                    : "border-border hover:border-muted-foreground/50"
+                    }`}
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between text-xs text-muted-foreground font-mono">
@@ -343,7 +377,7 @@ export default function Home() {
                     <p className="text-base text-muted-foreground leading-relaxed">{post.excerpt}</p>
 
                     <div className="flex flex-wrap gap-2">
-                      {post.tech.map((tech) => (
+                      {post.tech.map((tech: string) => (
                         <span
                           key={tech}
                           className="px-2 py-1 text-xs border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300"
@@ -555,7 +589,7 @@ export default function Home() {
         <footer className="py-12 sm:py-16 border-t border-border">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 sm:gap-8">
             <div className="space-y-2">
-              <div className="text-sm text-muted-foreground">© 2025 Paolo Astrino. All rights reserved.</div>
+              <div className="text-sm text-muted-foreground">© 2026 Paolo Astrino. All rights reserved.</div>
               <div className="text-xs text-muted-foreground">Privacy-First Portfolio • No Tracking • No Data Collection</div>
             </div>
 
