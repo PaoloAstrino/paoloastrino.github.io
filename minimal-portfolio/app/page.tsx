@@ -294,7 +294,8 @@ export default function Home() {
                   excerpt: "CUBO is a lightweight RAG chatbot that operates entirely locally without internet connectivity, prioritizing user privacy and high-quality document retrieval for secure, offline AI conversations.",
                   tech: ["Python", "LangChain", "Local LLM", "Privacy-First"],
                   status: "Work in Progress",
-                  github: null,
+                  github: "https://github.com/PaoloAstrino/cubo",
+                  link: "https://arxiv.org/abs/2602.03731",
                 },
                 {
                   title: "SEO Analysis for Niche Perfume Brands",
@@ -325,15 +326,18 @@ export default function Home() {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between text-xs text-muted-foreground font-mono">
                       <span>{post.status}</span>
-                      {post.github ? (
-                        <Link href={post.github} target="_blank" className="hover:text-foreground transition-colors">
-                          GitHub →
-                        </Link>
-                      ) : post.link ? (
-                        <Link href={post.link} target="_blank" className="hover:text-foreground transition-colors">
-                          View Paper →
-                        </Link>
-                      ) : null}
+                      <div className="flex gap-4">
+                        {post.github && (
+                          <Link href={post.github} target="_blank" className="hover:text-foreground transition-colors">
+                            GitHub →
+                          </Link>
+                        )}
+                        {post.link && (
+                          <Link href={post.link} target="_blank" className="hover:text-foreground transition-colors">
+                            View Paper →
+                          </Link>
+                        )}
+                      </div>
                     </div>
 
                     <h3 className="text-lg sm:text-xl font-medium group-hover:text-muted-foreground transition-colors duration-300">
@@ -599,7 +603,6 @@ export default function Home() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M8 12
                     d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
                   />
                 </svg>

@@ -310,6 +310,7 @@ export default function Home() {
                   tech: ["Python", "SQLite", "FAISS", "Ollama", "RAG"],
                   status: "Completed",
                   github: "https://github.com/PaoloAstrino/cubo",
+                  link: "https://arxiv.org/abs/2602.03731",
                   featured: true,
                 },
                 {
@@ -351,24 +352,30 @@ export default function Home() {
               ].map((post: any, index) => (
                 <article
                   key={index}
-                  className={`group p-6 sm:p-8 border rounded-lg transition-all duration-500 hover:shadow-lg cursor-pointer ${post.featured
+                  className={`group relative p-6 sm:p-8 border rounded-lg transition-all duration-500 hover:shadow-lg cursor-pointer ${post.featured
                     ? "border-primary/50 shadow-[0_0_40px_-12px_var(--color-primary)] bg-primary/[0.02]"
                     : "border-border hover:border-muted-foreground/50"
                     }`}
                 >
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between text-xs text-muted-foreground font-mono">
+                    <div className="flex items-start justify-between text-xs text-muted-foreground font-mono">
                       <span>{post.status}</span>
-                      {post.github ? (
-                        <Link href={post.github} target="_blank" className="hover:text-foreground transition-colors">
-                          GitHub →
-                        </Link>
-                      ) : post.link ? (
-                        <Link href={post.link} target="_blank" className="hover:text-foreground transition-colors">
-                          View Paper →
-                        </Link>
-                      ) : null}
+                      <div />
                     </div>
+                    { (post.github || post.link) && (
+                      <div className="absolute top-4 right-4 flex flex-col items-end gap-2 text-xs text-muted-foreground font-mono">
+                        {post.github && (
+                          <Link href={post.github} target="_blank" className="hover:text-foreground transition-colors">
+                            GitHub →
+                          </Link>
+                        )}
+                        {post.link && (
+                          <Link href={post.link} target="_blank" className="hover:text-foreground transition-colors">
+                            View Paper →
+                          </Link>
+                        )}
+                      </div>
+                    )}
 
                     <h3 className="text-lg sm:text-xl font-medium group-hover:text-muted-foreground transition-colors duration-300">
                       {post.title}
