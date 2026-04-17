@@ -82,10 +82,10 @@ export default function Home() {
 
               <div className="space-y-6 max-w-md">
                 <p className="text-lg sm:text-xl lg:text-xl text-muted-foreground leading-relaxed">
-                  Data Analyst & ML Enthusiast leveraging
-                  <span className="text-foreground"> data-driven</span> and
-                  <span className="text-foreground"> AI-powered</span> solutions to solve real-world challenges. Whether it's learning a new tool or solving a new problem, I'm always ready to
-                  <span className="text-foreground"> dive in and figure it out</span>.
+                  Project Manager & Full Stack Developer focused on
+                  <span className="text-foreground"> purposeful building</span>. I don't just follow roadmaps—I help define them by identifying the root of a problem and
+                  <span className="text-foreground"> engineering high-impact solutions</span> with AI-native speed and a
+                  <span className="text-foreground"> builder's autonomy</span>.
                 </p>
 
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-base text-muted-foreground">
@@ -132,7 +132,7 @@ export default function Home() {
                 <div className="space-y-4">
                   <div className="text-sm text-muted-foreground font-mono">CURRENTLY</div>
                   <div className="space-y-2">
-                    <div className="text-base text-foreground">Full Stack Developer</div>
+                    <div className="text-base text-foreground">Technical Problem Solver & Builder</div>
                     <div className="text-base text-muted-foreground">@ Freelance</div>
                     <div className="text-sm text-muted-foreground">Jul 2025 — Present</div>
                   </div>
@@ -141,7 +141,7 @@ export default function Home() {
                 <div className="space-y-4">
                   <div className="text-sm text-muted-foreground font-mono">FOCUS</div>
                   <div className="flex flex-wrap gap-2">
-                    {["Python", "React", "DevOps", "Machine Learning", "Database"].map((skill) => (
+                    {["Python", "React", "Product Strategy", "Solution Architecture", "DevOps"].map((skill) => (
                       <span
                         key={skill}
                         className="px-3 py-1 text-xs border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300"
@@ -171,9 +171,9 @@ export default function Home() {
               {[
                 {
                   year: "2025",
-                  role: "Full Stack Developer Freelance",
+                  role: "Project Manager & Full Stack Developer",
                   company: "Freelance",
-                  description: "Developed responsive front-end components using React, built backend services with Node.js, and applied Python for data processing and automation tasks.",
+                  description: "Operating as a generalist to eliminate product bottlenecks. I identify business problems and own the entire lifecycle from discovery to implementation, leveraging AI-native workflows to build high-utility solutions at scale.",
                   tech: ["Python", "React", "Node.js", "Frontend Development"],
                 },
                 {
@@ -410,6 +410,10 @@ export default function Home() {
 
             <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
               {[
+                {
+                  category: "Strategy & Problem Solving",
+                  skills: ["Problem Discovery", "Solution Architecture", "Agile Execution", "Product Decision Making"],
+                },
                 {
                   category: "Programming & Data Analysis",
                   skills: ["Python", "SQL", "R", "VBA"],
