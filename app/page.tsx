@@ -2,6 +2,39 @@
 
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
+import Typed from "react-typed"
+import RotatingText from "@/components/RotatingText"
+import LogoLoop from "@/components/LogoLoop"
+import DarkVeil from "@/components/DarkVeil"
+import { 
+  SiReact, 
+  SiNextdotjs, 
+  SiTypescript, 
+  SiPython, 
+  SiPytorch, 
+  SiPostgresql, 
+  SiNodedotjs, 
+  SiSqlite, 
+  SiOllama, 
+  SiGit,
+  SiDocker,
+  SiTailwindcss
+} from "react-icons/si";
+
+const techLogos = [
+  { node: <SiPython className="w-14 h-14 md:w-20 md:h-20 text-muted-foreground hover:text-foreground transition-colors duration-300 select-none" />, href: "https://www.python.org", title: "Python" },
+  { node: <SiReact className="w-14 h-14 md:w-20 md:h-20 text-muted-foreground hover:text-foreground transition-colors duration-300 select-none" />, href: "https://react.dev", title: "React" },
+  { node: <SiNextdotjs className="w-14 h-14 md:w-20 md:h-20 text-muted-foreground hover:text-foreground transition-colors duration-300 select-none" />, href: "https://nextjs.org", title: "Next.js" },
+  { node: <SiPytorch className="w-14 h-14 md:w-20 md:h-20 text-muted-foreground hover:text-foreground transition-colors duration-300 select-none" />, href: "https://pytorch.org", title: "PyTorch" },
+  { node: <SiPostgresql className="w-14 h-14 md:w-20 md:h-20 text-muted-foreground hover:text-foreground transition-colors duration-300 select-none" />, href: "https://www.postgresql.org", title: "PostgreSQL" },
+  { node: <SiNodedotjs className="w-14 h-14 md:w-20 md:h-20 text-muted-foreground hover:text-foreground transition-colors duration-300 select-none" />, href: "https://nodejs.org", title: "Node.js" },
+  { node: <SiTypescript className="w-14 h-14 md:w-20 md:h-20 text-muted-foreground hover:text-foreground transition-colors duration-300 select-none" />, href: "https://www.typescriptlang.org", title: "TypeScript" },
+  { node: <SiTailwindcss className="w-14 h-14 md:w-20 md:h-20 text-muted-foreground hover:text-foreground transition-colors duration-300 select-none" />, href: "https://tailwindcss.com", title: "Tailwind CSS" },
+  { node: <SiSqlite className="w-14 h-14 md:w-20 md:h-20 text-muted-foreground hover:text-foreground transition-colors duration-300 select-none" />, href: "https://www.sqlite.org", title: "SQLite" },
+  { node: <SiOllama className="w-14 h-14 md:w-20 md:h-20 text-muted-foreground hover:text-foreground transition-colors duration-300 select-none" />, href: "https://ollama.com", title: "Ollama" },
+  { node: <SiGit className="w-14 h-14 md:w-20 md:h-20 text-muted-foreground hover:text-foreground transition-colors duration-300 select-none" />, href: "https://git-scm.com", title: "Git" },
+  { node: <SiDocker className="w-14 h-14 md:w-20 md:h-20 text-muted-foreground hover:text-foreground transition-colors duration-300 select-none" />, href: "https://www.docker.com", title: "Docker" },
+];
 
 export default function Home() {
   const [isDark, setIsDark] = useState(true)
@@ -49,31 +82,30 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground relative">
-      <nav className="fixed left-8 top-1/2 -translate-y-1/2 z-10 hidden lg:block">
-        <div className="flex flex-col gap-4">
-          {["intro", "experience", "education", "projects", "skills", "connect"].map((section) => (
-            <button
-              key={section}
-              onClick={() => document.getElementById(section)?.scrollIntoView({ behavior: "smooth" })}
-              className={`w-2 h-8 rounded-full transition-all duration-500 ${activeSection === section ? "bg-foreground" : "bg-muted-foreground/30 hover:bg-muted-foreground/60"
-                }`}
-              aria-label={`Navigate to ${section}`}
-            />
-          ))}
+      
+      {/* Header placed outside <main> to allow full-viewport WebGL background canvas */}
+      <header
+        id="intro"
+        ref={(el) => { if (el) sectionsRef.current[0] = el }}
+        className="min-h-screen flex flex-col justify-center py-20 opacity-0 relative overflow-hidden w-full"
+      >
+        {/* Shifting atmospheric DarkVeil background canvas extending absolute edge-to-edge */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.22] select-none">
+          <DarkVeil 
+            noiseIntensity={0.012} 
+            warpAmount={0.2} 
+            speed={0.35} 
+            hueShift={340}
+          />
         </div>
-      </nav>
 
-      <main className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
-        <header
-          id="intro"
-          ref={(el) => { if (el) sectionsRef.current[0] = el }}
-          className="min-h-screen flex items-center opacity-0"
-        >
-          <div className="grid lg:grid-cols-5 gap-12 sm:gap-16 w-full">
+        {/* Content container aligned with main site width */}
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 w-full relative z-10 flex flex-col justify-center">
+          <div className="grid lg:grid-cols-5 gap-12 sm:gap-16 w-full items-start">
             <div className="lg:col-span-3 space-y-6 sm:space-y-8">
               <div className="space-y-3 sm:space-y-2">
-                <div className="text-sm text-muted-foreground font-mono tracking-wider">PORTFOLIO / 2026</div>
-                <h1 className="text-6xl sm:text-7xl lg:text-7xl font-light tracking-tight">
+                <div className="text-base text-muted-foreground font-mono tracking-wider">PORTFOLIO / 2026</div>
+                <h1 className="text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight">
                   Paolo
                   <br />
                   <span className="text-muted-foreground">Astrino</span>
@@ -81,16 +113,16 @@ export default function Home() {
               </div>
 
               <div className="space-y-6 max-w-md">
-                <p className="text-lg sm:text-xl lg:text-xl text-muted-foreground leading-relaxed">
+                <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed font-light">
                   Project Manager & Full Stack Developer focused on
                   <span className="text-foreground"> purposeful building</span>. I don't just follow roadmaps—I help define them by identifying the root of a problem and
                   <span className="text-foreground"> engineering high-impact solutions</span> with AI-native speed and a
                   <span className="text-foreground"> builder's autonomy</span>.
                 </p>
 
-                <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-base text-muted-foreground">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-lg text-muted-foreground">
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></div>
                     Available for work
                   </div>
                   <div>Padova, Italy</div>
@@ -98,63 +130,78 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="lg:col-span-2 flex flex-col justify-between lg:pt-3 space-y-12 lg:space-y-0 mt-8 lg:mt-0">
-              <Link
-                href="#connect"
-                onClick={(e) => {
-                  e.preventDefault()
-                  document.getElementById("connect")?.scrollIntoView({ behavior: "smooth" })
-                }}
-                className="group inline-block"
-              >
-                <h2 className="text-6xl sm:text-7xl lg:text-7xl font-light tracking-tight leading-[1.1] transition-colors duration-500">
-                  Got an idea?
-                  <span className="text-muted-foreground group-hover:text-foreground transition-all duration-500 whitespace-nowrap inline-flex items-center">
-                    Let's talk.
-                    <svg
-                      className="w-[0.7em] h-[0.7em] transform group-hover:translate-x-4 transition-transform duration-500 ml-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1}
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </span>
-                </h2>
-              </Link>
-
-              <div className="space-y-6 sm:space-y-8">
-                <div className="space-y-4">
-                  <div className="text-sm text-muted-foreground font-mono">CURRENTLY</div>
-                  <div className="space-y-2">
-                    <div className="text-base text-foreground">Technical Problem Solver & Builder</div>
-                    <div className="text-base text-muted-foreground">@ Freelance</div>
-                    <div className="text-sm text-muted-foreground">Jul 2025 — Present</div>
-                  </div>
+            <div className="lg:col-span-2 space-y-8 lg:pt-3 mt-8 lg:mt-0">
+              <div className="space-y-4">
+                <div className="text-base text-muted-foreground font-mono">CURRENTLY</div>
+                <div className="space-y-2">
+                  <div className="text-lg text-foreground">Technical Problem Solver & Builder</div>
+                  <div className="text-base text-muted-foreground">@ Freelance</div>
+                  <div className="text-base text-muted-foreground">Jul 2025 — Present</div>
                 </div>
+              </div>
 
-                <div className="space-y-4">
-                  <div className="text-sm text-muted-foreground font-mono">FOCUS</div>
-                  <div className="flex flex-wrap gap-2">
-                    {["Python", "React", "Product Strategy", "Solution Architecture", "DevOps"].map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1 text-xs border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+              <div className="space-y-4">
+                <div className="text-base text-muted-foreground font-mono">FOCUS</div>
+                <div className="flex flex-wrap gap-2.5">
+                  {["Python", "React", "Product Strategy", "Solution Architecture", "DevOps"].map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-3 py-1 text-sm border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300"
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
-        </header>
+
+          <div className="w-full mt-16 sm:mt-24 border-t border-border/40 pt-12 sm:pt-16 text-center">
+            <Link
+              href="#connect"
+              onClick={(e) => {
+                e.preventDefault()
+                document.getElementById("connect")?.scrollIntoView({ behavior: "smooth" })
+              }}
+              className="group block w-full"
+            >
+              <h2 className="text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight leading-[1.1] transition-colors duration-500 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 select-none">
+                <span className="text-foreground">Got an idea?</span>
+                <span className="text-muted-foreground group-hover:text-foreground transition-all duration-500 inline-flex items-center gap-x-4">
+                  <span className="relative inline-flex overflow-hidden h-[1.2em] items-center align-middle">
+                    <RotatingText
+                      texts={["Let's talk.", "Let's build.", "Let's create.", "Let's connect.", "Let's solve."]}
+                      mainClassName="inline-flex overflow-hidden"
+                      staggerDuration={0.02}
+                      splitBy="characters"
+                      rotationInterval={2500}
+                      initial={{ y: "30%", opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: "-30%", opacity: 0 }}
+                      transition={{ type: "spring", damping: 30, stiffness: 350 }}
+                    />
+                  </span>
+                  <svg
+                    className="w-[0.7em] h-[0.7em] transform group-hover:translate-x-4 transition-transform duration-500 shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </span>
+              </h2>
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      <main className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
 
         <section
           id="experience"
@@ -164,7 +211,7 @@ export default function Home() {
           <div className="space-y-12 sm:space-y-16 w-full">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
               <h2 className="text-4xl sm:text-4xl font-light">Experience</h2>
-              <div className="text-sm text-muted-foreground font-mono">2023 — 2026</div>
+              <div className="text-base text-muted-foreground font-mono">2023 — 2026</div>
             </div>
 
             <div className="space-y-8 sm:space-y-12">
@@ -203,17 +250,17 @@ export default function Home() {
 
                   <div className="lg:col-span-6 space-y-3">
                     <div>
-                      <h3 className="text-lg sm:text-xl font-medium">{job.role}</h3>
-                      <div className="text-base text-muted-foreground">{job.company}</div>
+                      <h3 className="text-xl sm:text-2xl font-light">{job.role}</h3>
+                      <div className="text-lg text-muted-foreground">{job.company}</div>
                     </div>
-                    <p className="text-base text-muted-foreground leading-relaxed max-w-lg">{job.description}</p>
+                    <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">{job.description}</p>
                   </div>
 
-                  <div className="lg:col-span-4 flex flex-wrap gap-2 lg:justify-end mt-2 lg:mt-0">
+                  <div className="lg:col-span-4 flex flex-wrap gap-2.5 lg:justify-end items-start mt-2 lg:mt-0">
                     {job.tech.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 py-1 text-xs text-muted-foreground rounded group-hover:border-muted-foreground/50 transition-colors duration-500"
+                        className="inline-flex items-center h-fit px-3 py-1 text-sm border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300 text-muted-foreground select-none"
                       >
                         {tech}
                       </span>
@@ -233,7 +280,7 @@ export default function Home() {
           <div className="space-y-12 sm:space-y-16 w-full">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
               <h2 className="text-4xl sm:text-4xl font-light">Education</h2>
-              <div className="text-sm text-muted-foreground font-mono">2020 — 2025</div>
+              <div className="text-base text-muted-foreground font-mono">2020 — 2025</div>
             </div>
 
             <div className="space-y-8 sm:space-y-12">
@@ -272,17 +319,17 @@ export default function Home() {
 
                   <div className="lg:col-span-6 space-y-3">
                     <div>
-                      <h3 className="text-lg sm:text-xl font-medium">{edu.role}</h3>
-                      <div className="text-base text-muted-foreground">{edu.company}</div>
+                      <h3 className="text-xl sm:text-2xl font-light">{edu.role}</h3>
+                      <div className="text-lg text-muted-foreground">{edu.company}</div>
                     </div>
-                    <p className="text-base text-muted-foreground leading-relaxed max-w-lg">{edu.description}</p>
+                    <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">{edu.description}</p>
                   </div>
 
-                  <div className="lg:col-span-4 flex flex-wrap gap-2 lg:justify-end mt-2 lg:mt-0">
+                  <div className="lg:col-span-4 flex flex-wrap gap-2.5 lg:justify-end items-start mt-2 lg:mt-0">
                     {edu.tech.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 py-1 text-xs text-muted-foreground rounded group-hover:border-muted-foreground/50 transition-colors duration-500"
+                        className="inline-flex items-center h-fit px-3 py-1 text-sm border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300 text-muted-foreground select-none"
                       >
                         {tech}
                       </span>
@@ -358,12 +405,12 @@ export default function Home() {
                     }`}
                 >
                   <div className="space-y-4">
-                    <div className="flex items-start justify-between text-xs text-muted-foreground font-mono">
+                    <div className="flex items-start justify-between text-sm text-muted-foreground font-mono">
                       <span>{post.status}</span>
                       <div />
                     </div>
                     { (post.github || post.link) && (
-                      <div className="absolute top-4 right-4 flex flex-col items-end gap-2 text-xs text-muted-foreground font-mono">
+                      <div className="absolute top-4 right-4 flex flex-col items-end gap-2 text-sm text-muted-foreground font-mono">
                         {post.github && (
                           <Link href={post.github} target="_blank" className="hover:text-foreground transition-colors">
                             GitHub →
@@ -377,17 +424,17 @@ export default function Home() {
                       </div>
                     )}
 
-                    <h3 className="text-lg sm:text-xl font-medium group-hover:text-muted-foreground transition-colors duration-300">
+                    <h3 className="text-xl sm:text-2xl font-light group-hover:text-muted-foreground transition-colors duration-300">
                       {post.title}
                     </h3>
 
-                    <p className="text-base text-muted-foreground leading-relaxed">{post.excerpt}</p>
+                    <p className="text-lg text-muted-foreground leading-relaxed">{post.excerpt}</p>
 
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2.5 items-start">
                       {post.tech.map((tech: string) => (
                         <span
                           key={tech}
-                          className="px-2 py-1 text-xs border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300"
+                          className="inline-flex items-center h-fit px-3 py-1 text-sm border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300 text-muted-foreground select-none"
                         >
                           {tech}
                         </span>
@@ -399,6 +446,19 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <div className="w-screen relative left-[50%] -translate-x-[50%] py-20 my-16 overflow-hidden">
+          <LogoLoop
+            logos={techLogos}
+            speed={60}
+            gap={112}
+            logoHeight={80}
+            fadeOut={false}
+            pauseOnHover={true}
+            scaleOnHover={true}
+            className="[--logoloop-logoHeight:56px] md:[--logoloop-logoHeight:80px] [--logoloop-gap:64px] md:[--logoloop-gap:112px]"
+          />
+        </div>
 
         <section
           id="skills"
@@ -449,7 +509,7 @@ export default function Home() {
                       {skillGroup.skills.map((skill) => (
                         <span
                           key={skill}
-                          className="px-3 py-1 text-xs border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300"
+                          className="px-3 py-1 text-sm border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300"
                         >
                           {skill}
                         </span>
@@ -492,14 +552,14 @@ export default function Home() {
                   <div key={index} className="p-4 border border-border rounded-lg hover:border-muted-foreground/50 transition-colors">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                       <div>
-                        <h4 className="text-base font-medium">{cert.title}</h4>
-                        <p className="text-sm text-muted-foreground">{cert.issuer} · {cert.year}</p>
+                        <h4 className="text-lg font-medium">{cert.title}</h4>
+                        <p className="text-base text-muted-foreground">{cert.issuer} · {cert.year}</p>
                       </div>
                       {cert.link && (
                         <Link
                           href={cert.link}
                           target="_blank"
-                          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                          className="text-base text-muted-foreground hover:text-foreground transition-colors"
                         >
                           Verify →
                         </Link>
@@ -512,7 +572,7 @@ export default function Home() {
                             key={course.name}
                             href={course.link}
                             target="_blank"
-                            className="text-xs px-2 py-1 border border-border rounded hover:border-muted-foreground/50 transition-colors"
+                            className="text-sm px-3 py-1 border border-border rounded hover:border-muted-foreground/50 transition-colors"
                           >
                             {course.name}
                           </Link>
@@ -532,7 +592,7 @@ export default function Home() {
               <h2 className="text-4xl sm:text-4xl font-light">Let's Connect</h2>
 
               <div className="space-y-6">
-                <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+                <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed font-light">
                   Feel free to reach out — whether it's to talk data, exchange ideas, or just have a good chat.
                 </p>
 
@@ -541,7 +601,7 @@ export default function Home() {
                     href="mailto:paoloastrino01@gmail.com"
                     className="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors duration-300"
                   >
-                    <span className="text-base sm:text-lg">paoloastrino01@gmail.com</span>
+                    <span className="text-lg sm:text-xl">paoloastrino01@gmail.com</span>
                     <svg
                       className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300"
                       fill="none"
@@ -556,7 +616,7 @@ export default function Home() {
             </div>
 
             <div className="space-y-6 sm:space-y-8">
-              <div className="text-sm text-muted-foreground font-mono">ELSEWHERE</div>
+              <div className="text-base text-muted-foreground font-mono">ELSEWHERE</div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
@@ -571,10 +631,10 @@ export default function Home() {
                     className="group p-4 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-300 hover:shadow-sm"
                   >
                     <div className="space-y-2">
-                      <div className="text-base text-foreground group-hover:text-muted-foreground transition-colors duration-300">
+                      <div className="text-lg text-foreground group-hover:text-muted-foreground transition-colors duration-300">
                         {social.name}
                       </div>
-                      <div className="text-sm text-muted-foreground">{social.handle}</div>
+                      <div className="text-base text-muted-foreground">{social.handle}</div>
                     </div>
                   </Link>
                 ))}
@@ -586,8 +646,8 @@ export default function Home() {
         <footer className="py-12 sm:py-16 border-t border-border">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 sm:gap-8">
             <div className="space-y-2">
-              <div className="text-sm text-muted-foreground">© 2026 Paolo Astrino. All rights reserved.</div>
-              <div className="text-xs text-muted-foreground">Privacy-First Portfolio • No Tracking • No Data Collection</div>
+              <div className="text-base text-muted-foreground">© 2026 Paolo Astrino. All rights reserved.</div>
+              <div className="text-sm text-muted-foreground">Privacy-First Portfolio • No Tracking • No Data Collection</div>
             </div>
 
             <div className="flex items-center gap-4">
