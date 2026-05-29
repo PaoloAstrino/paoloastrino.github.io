@@ -1,0 +1,12 @@
+packages:
+  - '.'
+
+strict-dep-builds: false
+
+# For pnpm v11
+allowBuilds:
+  sharp: true
+
+# For pnpm v10
+onlyBuiltDependencies:
+  - sharp
