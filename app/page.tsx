@@ -6,6 +6,7 @@ import Typed from "react-typed"
 import RotatingText from "@/components/RotatingText"
 import LogoLoop from "@/components/LogoLoop"
 import DarkVeil from "@/components/DarkVeil"
+import FadeContent from "@/components/FadeContent"
 import { 
   SiReact, 
   SiNextdotjs, 
@@ -569,32 +570,32 @@ export default function Home() {
                   skills: ["Problem Discovery", "Solution Architecture", "Agile Execution", "Product Decision Making"],
                 },
                 {
-                  category: "Programming & Data Analysis",
-                  skills: ["Python", "SQL", "R", "VBA"],
+                  category: "Programming & Full-Stack",
+                  skills: ["Python", "TypeScript", "SQL", "FastAPI", "React", "Node.js", "R", "VBA"],
                 },
                 {
-                  category: "Data Visualization",
-                  skills: ["Power BI", "Excel Charts", "Matplotlib"],
+                  category: "Asynchronous Systems & DevOps",
+                  skills: ["Docker & Docker Compose", "Celery", "Redis (Pub/Sub & Task Queue)", "Git", "Shell Scripting"],
                 },
                 {
-                  category: "Databases",
-                  skills: ["PostgreSQL", "MySQL", "Supabase"],
+                  category: "Databases & Data Engines",
+                  skills: ["PostgreSQL", "MySQL", "SQLite", "FAISS", "Supabase"],
                 },
                 {
-                  category: "Machine Learning",
-                  skills: ["Scikit-learn", "Pandas", "NumPy", "PyTorch", "CUDA"],
+                  category: "Machine Learning & AI",
+                  skills: ["Retrieval-Augmented Generation (RAG)", "Ollama", "PyTorch", "Scikit-learn", "Pandas", "NumPy"],
                 },
                 {
-                  category: "Quantitative Finance",
-                  skills: ["Algorithmic Trading", "Risk Management", "Portfolio Optimization"],
-                },
-                {
-                  category: "Advanced Computing",
-                  skills: ["GPU Computing", "Parallel Processing", "Optimization Algorithms"],
+                  category: "Advanced Computing & FinTech",
+                  skills: ["CUDA (GPU Computing)", "Parallel Processing", "Algorithmic Trading", "Risk Management"],
                 },
               ].map((skillGroup, index) => (
-                <div
+                <FadeContent
                   key={index}
+                  blur={true}
+                  duration={1000}
+                  ease="power2.out"
+                  initialOpacity={0}
                   className="group p-6 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-500"
                 >
                   <div className="space-y-4">
@@ -610,7 +611,7 @@ export default function Home() {
                       ))}
                     </div>
                   </div>
-                </div>
+                </FadeContent>
               ))}
             </div>
 
