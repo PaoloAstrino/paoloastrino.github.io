@@ -602,12 +602,18 @@ export default function Home() {
                     <h3 className="text-lg font-medium">{skillGroup.category}</h3>
                     <div className="flex flex-wrap gap-2">
                       {skillGroup.skills.map((skill) => (
-                        <span
+                        <Link
                           key={skill}
-                          className="px-3 py-1 text-sm border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300"
+                          href={`https://www.google.com/search?q=${encodeURIComponent(skill + " programming definition")}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-3 py-1 text-sm border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300 select-none"
+                          style={{
+                            cursor: `url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyMCcgaGVpZ2h0PScyMCcgdmlld0JveD0nMCAwIDI0IDI0JyBmaWxsPSdub25lJyBzdHJva2U9JyM4ODg4ODgnIHN0cm9rZS13aWR0aD0nMi41JyBzdHJva2UtbGluZWNhcD0ncm91bmQnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnPjxjaXJjbGUgY3g9JzExJyBjeT0nMTEnIHI9JzcnPjwvY2lyY2xlPjxsaW5lIHgxPScyMScgeTE9JzIxJyB4Mj0nMTYuNjUnIHkyPScxNi42NSc+PC9saW5lPjwvc3ZnPg==") 8 8, pointer`
+                          }}
                         >
                           {skill}
-                        </span>
+                        </Link>
                       ))}
                     </div>
                   </div>
