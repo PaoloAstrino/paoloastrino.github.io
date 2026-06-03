@@ -354,7 +354,7 @@ export default function Home() {
                 {
                   title: "Enterprise ML & Real-Time Monitoring Platform for Large-Scale IoT Data",
                   role: "Lead Full-Stack Engineer & Software Architect (Freelance Contractor)",
-                  excerpt: "Transformed a client's proprietary, research-grade Machine Learning algorithms into a robust, production-ready enterprise SaaS platform. Productized isolated academic executables into a scalable, high-throughput system capable of safely ingesting massive IoT datasets (25GB+), training complex predictive models asynchronously, and running continuous real-time monitoring dashboards.",
+                  excerpt: "Transformed research-grade ML algorithms into a production-ready enterprise SaaS. Productized isolated academic executables into a scalable platform capable of safely ingesting massive IoT datasets (25GB+), training models asynchronously, and running real-time monitoring dashboards.",
                   tech: ["FastAPI (Python)", "React", "TypeScript", "Celery", "Redis", "PostgreSQL", "Docker", "Shell Scripting"],
                   status: "Completed",
                   github: null,
@@ -363,30 +363,23 @@ export default function Home() {
                   details: [
                     {
                       title: "Massive Data Ingestion",
-                      text: "Designed a memory-efficient chunked streaming pipeline (10MB chunks) to handle file uploads up to 25GB+ with 1M-row batch validation, avoiding server memory exhaustion."
+                      text: "Chunked pipeline uploading 25GB+ files with 1M-row batch validation, preventing server exhaustion."
                     },
                     {
-                      title: "Asynchronous Heavy Compute",
-                      text: "Implemented a scalable task queue using Celery and Redis to decouple the core API from long-running ML training sessions (ranging from 30 mins to 6+ hours) tracking years of sensor data."
+                      title: "Async Heavy Compute",
+                      text: "Celery and Redis task queue handling long-running ML training sessions (up to 6+ hours)."
                     },
                     {
-                      title: "24/7 Real-Time Dashboards",
-                      text: "Built a high-throughput WebSocket streaming architecture capable of running continuously for months, broadcasting 200+ live sensor metrics to multiple concurrent users."
+                      title: "Live Dashboards",
+                      text: "WebSocket streaming architecture broadcasting 200+ live metrics to concurrent users."
                     },
                     {
-                      title: "Process Resilience & DevOps",
-                      text: "Engineered automated orphan process cleanup, active health monitoring (10s intervals) of the underlying ML executables, and database connection leak prevention. Delivered a fully containerized architecture via Docker Compose with centralized configuration management."
+                      title: "Resilience & DevOps",
+                      text: "Orphan process cleanup, active health monitoring, and containerized Docker Compose deployment."
                     }
                   ],
-                  architecture: `Frontend (Real-time Dashboard)
-       ↓ WebSocket/HTTP
-FastAPI Backend (REST API + WebSocket)
-       ↓ Celery Tasks
-Redis (Pub/Sub + Task Queue)
-       ↓ Process Control
-Proprietary ML Executables (Training/Prediction)
-       ↓
-Database + 20GB+ Data Storage`
+                  architecture: `React Dashboard ⇆ FastAPI Backend (WebSockets)
+  ↳ Celery & Redis Task Queue ↳ ML Executables ⇆ PostgreSQL`
                 },
                 {
                   title: "CUBO - Industrial-Grade Local RAG",
