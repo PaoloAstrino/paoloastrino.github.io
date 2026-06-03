@@ -388,7 +388,6 @@ export default function Home() {
                   status: "Completed",
                   github: "https://github.com/PaoloAstrino/cubo",
                   link: "https://arxiv.org/abs/2602.03731",
-                  featured: true,
                 },
                 {
                   title: "Local Hybrid Retrieval-Augmented Document QA",
