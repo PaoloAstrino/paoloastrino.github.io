@@ -352,6 +352,43 @@ export default function Home() {
             <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
               {[
                 {
+                  title: "Enterprise ML & Real-Time Monitoring Platform for Large-Scale IoT Data",
+                  role: "Lead Full-Stack Engineer & Software Architect (Freelance Contractor)",
+                  excerpt: "Transformed a client's proprietary, research-grade Machine Learning algorithms into a robust, production-ready enterprise SaaS platform. Productized isolated academic executables into a scalable, high-throughput system capable of safely ingesting massive IoT datasets (25GB+), training complex predictive models asynchronously, and running continuous real-time monitoring dashboards.",
+                  tech: ["FastAPI (Python)", "React", "TypeScript", "Celery", "Redis", "PostgreSQL", "Docker", "Shell Scripting"],
+                  status: "Completed",
+                  github: null,
+                  featured: true,
+                  colSpan2: true,
+                  details: [
+                    {
+                      title: "Massive Data Ingestion",
+                      text: "Designed a memory-efficient chunked streaming pipeline (10MB chunks) to handle file uploads up to 25GB+ with 1M-row batch validation, avoiding server memory exhaustion."
+                    },
+                    {
+                      title: "Asynchronous Heavy Compute",
+                      text: "Implemented a scalable task queue using Celery and Redis to decouple the core API from long-running ML training sessions (ranging from 30 mins to 6+ hours) tracking years of sensor data."
+                    },
+                    {
+                      title: "24/7 Real-Time Dashboards",
+                      text: "Built a high-throughput WebSocket streaming architecture capable of running continuously for months, broadcasting 200+ live sensor metrics to multiple concurrent users."
+                    },
+                    {
+                      title: "Process Resilience & DevOps",
+                      text: "Engineered automated orphan process cleanup, active health monitoring (10s intervals) of the underlying ML executables, and database connection leak prevention. Delivered a fully containerized architecture via Docker Compose with centralized configuration management."
+                    }
+                  ],
+                  architecture: `Frontend (Real-time Dashboard)
+       ↓ WebSocket/HTTP
+FastAPI Backend (REST API + WebSocket)
+       ↓ Celery Tasks
+Redis (Pub/Sub + Task Queue)
+       ↓ Process Control
+Proprietary ML Executables (Training/Prediction)
+       ↓
+Database + 20GB+ Data Storage`
+                },
+                {
                   title: "CUBO - Industrial-Grade Local RAG",
                   excerpt: "Enterprise-grade RAG system engineered for privacy-first environments. Features tiered hybrid retrieval, O(1) memory scaling for 50GB+ corpora, and specialized support for European languages on consumer hardware.",
                   tech: ["Python", "SQLite", "FAISS", "Ollama", "RAG"],
@@ -402,45 +439,110 @@ export default function Home() {
                   className={`group relative p-6 sm:p-8 border rounded-lg transition-all duration-500 hover:shadow-lg cursor-pointer ${post.featured
                     ? "border-primary/50 shadow-[0_0_40px_-12px_var(--color-primary)] bg-primary/[0.02]"
                     : "border-border hover:border-muted-foreground/50"
-                    }`}
+                    } ${post.colSpan2 ? "lg:col-span-2" : ""}`}
                 >
-                  <div className="space-y-4">
-                    <div className="flex items-start justify-between text-sm text-muted-foreground font-mono">
-                      <span>{post.status}</span>
-                      <div />
-                    </div>
-                    { (post.github || post.link) && (
-                      <div className="absolute top-4 right-4 flex flex-col items-end gap-2 text-sm text-muted-foreground font-mono">
-                        {post.github && (
-                          <Link href={post.github} target="_blank" className="hover:text-foreground transition-colors">
-                            GitHub →
-                          </Link>
-                        )}
-                        {post.link && (
-                          <Link href={post.link} target="_blank" className="hover:text-foreground transition-colors">
-                            View Paper →
-                          </Link>
+                  {post.colSpan2 ? (
+                    <div className="space-y-6">
+                      <div className="flex items-start justify-between text-sm text-muted-foreground font-mono">
+                        <span>{post.status}</span>
+                        <div />
+                      </div>
+
+                      <div className="space-y-2">
+                        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-light group-hover:text-muted-foreground transition-colors duration-300">
+                          {post.title}
+                        </h3>
+                        {post.role && (
+                          <div className="text-base text-muted-foreground font-mono tracking-wide">
+                            {post.role}
+                          </div>
                         )}
                       </div>
-                    )}
 
-                    <h3 className="text-xl sm:text-2xl font-light group-hover:text-muted-foreground transition-colors duration-300">
-                      {post.title}
-                    </h3>
+                      <div className="grid lg:grid-cols-12 gap-8 pt-4 border-t border-border/30">
+                        {/* Left Side: Overview & Architecture */}
+                        <div className="lg:col-span-6 space-y-6">
+                          <div className="space-y-3">
+                            <h4 className="text-sm text-muted-foreground font-mono uppercase tracking-wider">Project Overview</h4>
+                            <p className="text-lg text-muted-foreground leading-relaxed font-light">
+                              {post.excerpt}
+                            </p>
+                          </div>
 
-                    <p className="text-lg text-muted-foreground leading-relaxed">{post.excerpt}</p>
+                          {post.architecture && (
+                            <div className="space-y-3 pt-2">
+                              <h4 className="text-sm text-muted-foreground font-mono uppercase tracking-wider">System Architecture</h4>
+                              <pre className="p-4 bg-muted/10 border border-border/50 rounded-lg text-xs font-mono text-muted-foreground overflow-x-auto leading-relaxed whitespace-pre">
+                                {post.architecture}
+                              </pre>
+                            </div>
+                          )}
+                        </div>
 
-                    <div className="flex flex-wrap gap-2.5 items-start">
-                      {post.tech.map((tech: string) => (
-                        <span
-                          key={tech}
-                          className="inline-flex items-center h-fit px-3 py-1 text-sm border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300 text-muted-foreground select-none"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+                        {/* Right Side: Key Contributions */}
+                        <div className="lg:col-span-6 space-y-6">
+                          <h4 className="text-sm text-muted-foreground font-mono uppercase tracking-wider">Key Contributions & Architecture Highlights</h4>
+                          <div className="space-y-5">
+                            {post.details?.map((detail: any, i: number) => (
+                              <div key={i} className="space-y-1">
+                                <h5 className="text-base font-medium text-foreground">{detail.title}</h5>
+                                <p className="text-base text-muted-foreground leading-relaxed font-light">{detail.text}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2.5 items-start pt-6 border-t border-border/30">
+                        {post.tech.map((tech: string) => (
+                          <span
+                            key={tech}
+                            className="inline-flex items-center h-fit px-3 py-1 text-sm border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300 text-muted-foreground select-none"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="space-y-4">
+                      <div className="flex items-start justify-between text-sm text-muted-foreground font-mono">
+                        <span>{post.status}</span>
+                        <div />
+                      </div>
+                      { (post.github || post.link) && (
+                        <div className="absolute top-4 right-4 flex flex-col items-end gap-2 text-sm text-muted-foreground font-mono">
+                          {post.github && (
+                            <Link href={post.github} target="_blank" className="hover:text-foreground transition-colors">
+                              GitHub →
+                            </Link>
+                          )}
+                          {post.link && (
+                            <Link href={post.link} target="_blank" className="hover:text-foreground transition-colors">
+                              View Paper →
+                            </Link>
+                          )}
+                        </div>
+                      )}
+
+                      <h3 className="text-xl sm:text-2xl font-light group-hover:text-muted-foreground transition-colors duration-300">
+                        {post.title}
+                      </h3>
+
+                      <p className="text-lg text-muted-foreground leading-relaxed">{post.excerpt}</p>
+
+                      <div className="flex flex-wrap gap-2.5 items-start">
+                        {post.tech.map((tech: string) => (
+                          <span
+                            key={tech}
+                            className="inline-flex items-center h-fit px-3 py-1 text-sm border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300 text-muted-foreground select-none"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </article>
               ))}
             </div>
