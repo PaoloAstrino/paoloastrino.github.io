@@ -429,7 +429,7 @@ export default function Home() {
               ].map((post: any, index) => (
                 <article
                   key={index}
-                  className={`group relative p-6 sm:p-8 border rounded-lg transition-all duration-500 hover:shadow-lg cursor-pointer ${post.featured
+                  className={`group relative p-6 sm:p-8 border rounded-lg transition-all duration-500 hover:shadow-lg cursor-pointer w-full max-w-full overflow-hidden ${post.featured
                     ? "border-primary/50 shadow-[0_0_40px_-12px_var(--color-primary)] bg-primary/[0.02]"
                     : "border-border hover:border-muted-foreground/50"
                     } ${post.colSpan2 ? "lg:col-span-2" : ""}`}
@@ -452,12 +452,12 @@ export default function Home() {
                         )}
                       </div>
 
-                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4 border-t border-border/30">
+                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 pt-4 border-t border-border/30">
                         {/* Left Side: Overview & Architecture */}
                         <div className="col-span-1 lg:col-span-6 space-y-6 min-w-0">
                           <div className="space-y-3">
                             <h4 className="text-sm text-muted-foreground font-mono uppercase tracking-wider">Project Overview</h4>
-                            <p className="text-lg text-muted-foreground leading-relaxed font-light">
+                            <p className="text-lg text-muted-foreground leading-relaxed font-light font-sans break-words">
                               {post.excerpt}
                             </p>
                           </div>
@@ -473,7 +473,7 @@ export default function Home() {
                         </div>
 
                         {/* Right Side: Key Contributions */}
-                        <div className="col-span-1 lg:col-span-6 space-y-6">
+                        <div className="col-span-1 lg:col-span-6 space-y-6 min-w-0">
                           <h4 className="text-sm text-muted-foreground font-mono uppercase tracking-wider">Key Contributions & Architecture Highlights</h4>
                           <div className="space-y-5">
                             {post.details?.map((detail: any, i: number) => (
@@ -721,24 +721,30 @@ export default function Home() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
-                  { name: "GitHub", handle: "@paoloastrino", url: "https://github.com/paoloastrino" },
-                  { name: "LinkedIn", handle: "paolo-astrino", url: "https://www.linkedin.com/in/paolo-astrino-9792061a3" },
-                  { name: "Portfolio", handle: "paoloastrino.github.io", url: "https://paoloastrino.github.io/" },
-                  { name: "Download CV", handle: "PDF Resume", url: "/CV/CV_PaoloAstrino_eng.pdf" },
-                ].map((social) => (
-                  <Link
-                    key={social.name}
-                    href={social.url}
-                    className="group p-4 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-300 hover:shadow-sm"
-                  >
-                    <div className="space-y-2">
-                      <div className="text-lg text-foreground group-hover:text-muted-foreground transition-colors duration-300">
-                        {social.name}
+                  { name: "GitHub", handle: "@paoloastrino", url: "https://github.com/paoloastrino", isExternal: true },
+                  { name: "LinkedIn", handle: "paolo-astrino", url: "https://www.linkedin.com/in/paolo-astrino-9792061a3", isExternal: true },
+                  { name: "Portfolio", handle: "paoloastrino.github.io", url: "https://paoloastrino.github.io/", isExternal: true },
+                  { name: "Download CV", handle: "PDF Resume", url: "/CV/CV_PaoloAstrino_eng.pdf", isExternal: true, download: true },
+                ].map((social) => {
+                  const Comp = social.isExternal ? 'a' : Link;
+                  return (
+                    <Comp
+                      key={social.name}
+                      href={social.url}
+                      target={social.isExternal ? "_blank" : undefined}
+                      rel={social.isExternal ? "noopener noreferrer" : undefined}
+                      download={social.download ? "" : undefined}
+                      className="group p-4 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-300 hover:shadow-sm"
+                    >
+                      <div className="space-y-2">
+                        <div className="text-lg text-foreground group-hover:text-muted-foreground transition-colors duration-300">
+                          {social.name}
+                        </div>
+                        <div className="text-base text-muted-foreground">{social.handle}</div>
                       </div>
-                      <div className="text-base text-muted-foreground">{social.handle}</div>
-                    </div>
-                  </Link>
-                ))}
+                    </Comp>
+                  );
+                })}
               </div>
             </div>
           </div>
