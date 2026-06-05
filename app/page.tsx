@@ -463,7 +463,7 @@ export default function Home() {
                           </div>
 
                           {post.architecture && (
-                            <div className="space-y-3 pt-2">
+                            <div className="space-y-3 pt-2 hidden lg:block">
                               <h4 className="text-sm text-muted-foreground font-mono uppercase tracking-wider">System Architecture</h4>
                               <pre className="p-4 bg-muted/10 border border-border/50 rounded-lg text-xs font-mono text-muted-foreground overflow-x-auto leading-relaxed whitespace-pre">
                                 {post.architecture}
@@ -479,7 +479,7 @@ export default function Home() {
                             {post.details?.map((detail: any, i: number) => (
                               <div key={i} className="space-y-1">
                                 <h5 className="text-base font-medium text-foreground">{detail.title}</h5>
-                                <p className="text-base text-muted-foreground leading-relaxed font-light">{detail.text}</p>
+                                <p className="text-base text-muted-foreground leading-relaxed font-light hidden lg:block">{detail.text}</p>
                               </div>
                             ))}
                           </div>
