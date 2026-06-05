@@ -88,7 +88,7 @@ export default function Home() {
       <header
         id="intro"
         ref={(el) => { if (el) sectionsRef.current[0] = el }}
-        className="min-h-screen flex flex-col justify-center py-20 opacity-0 relative overflow-hidden w-full"
+        className="min-h-screen flex flex-col justify-center py-12 sm:py-20 opacity-0 relative overflow-hidden w-full"
       >
         {/* Shifting atmospheric DarkVeil background canvas extending absolute edge-to-edge */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.22] select-none">
@@ -157,7 +157,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="w-full mt-16 sm:mt-24 border-t border-border/40 pt-12 sm:pt-16 text-center">
+          <div className="w-full mt-10 sm:mt-24 border-t border-border/40 pt-8 sm:pt-16 text-center">
             <Link
               href="#connect"
               onClick={(e) => {
@@ -166,7 +166,7 @@ export default function Home() {
               }}
               className="group block w-full"
             >
-              <h2 className="text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight leading-[1.1] transition-colors duration-500 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 select-none">
+              <h2 className="text-4xl sm:text-7xl lg:text-8xl font-light tracking-tight leading-[1.1] transition-colors duration-500 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 select-none">
                 <span className="text-foreground">Got an idea?</span>
                 <span className="text-muted-foreground group-hover:text-foreground transition-all duration-500 inline-flex items-center gap-x-4">
                   <span className="relative inline-flex overflow-hidden h-[1.2em] items-center align-middle">
@@ -452,9 +452,9 @@ export default function Home() {
                         )}
                       </div>
 
-                      <div className="grid lg:grid-cols-12 gap-8 pt-4 border-t border-border/30">
+                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4 border-t border-border/30">
                         {/* Left Side: Overview & Architecture */}
-                        <div className="lg:col-span-6 space-y-6">
+                        <div className="col-span-1 lg:col-span-6 space-y-6 min-w-0">
                           <div className="space-y-3">
                             <h4 className="text-sm text-muted-foreground font-mono uppercase tracking-wider">Project Overview</h4>
                             <p className="text-lg text-muted-foreground leading-relaxed font-light">
@@ -473,7 +473,7 @@ export default function Home() {
                         </div>
 
                         {/* Right Side: Key Contributions */}
-                        <div className="lg:col-span-6 space-y-6">
+                        <div className="col-span-1 lg:col-span-6 space-y-6">
                           <h4 className="text-sm text-muted-foreground font-mono uppercase tracking-wider">Key Contributions & Architecture Highlights</h4>
                           <div className="space-y-5">
                             {post.details?.map((detail: any, i: number) => (
