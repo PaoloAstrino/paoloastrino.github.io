@@ -406,25 +406,11 @@ export default function Home() {
                   github: null,
                 },
                 {
-                  title: "SEO Analysis for Niche Perfume Brands",
-                  excerpt: "Web scraping tool analyzing perfume brand websites with keyword extraction and visualizations.",
-                  tech: ["Python", "MySQL", "BeautifulSoup4", "Pandas"],
-                  status: "Completed",
-                  github: "https://github.com/PaoloAstrino/niche-perfume-seo-analysis",
-                },
-                {
                   title: "GPU-Accelerated Trading Strategy Optimizer",
                   excerpt: "GPU-powered trading system optimizing multiple rules with enhanced returns and performance.",
                   tech: ["Python", "PyTorch", "CUDA", "Quantitative Finance"],
                   status: "Completed",
                   github: "https://github.com/PaoloAstrino/pso-trading-optimizer",
-                },
-                {
-                  title: "Eating Habits and Emissions Analysis",
-                  excerpt: "Data analysis of dietary patterns and greenhouse gas emissions in Europe.",
-                  tech: ["Python", "Pandas", "Plotly", "Geopandas"],
-                  status: "Completed",
-                  github: "https://github.com/paoloastrino/eating-habits-and-emissions",
                 },
               ].map((post: any, index) => (
                 <article
