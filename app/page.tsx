@@ -5,9 +5,17 @@ import { useEffect, useRef, useState } from "react"
 import Typed from "react-typed"
 import RotatingText from "@/components/RotatingText"
 import LogoLoop from "@/components/LogoLoop"
-import DarkVeil from "@/components/DarkVeil"
+import { Particles } from "@/components/ui/particles"
 import FadeContent from "@/components/FadeContent"
-import { 
+import { BentoGrid, BentoCard } from "@/components/ui/bento-grid"
+import {
+  LaptopIcon,
+  ChatBubbleIcon,
+  ReaderIcon,
+  EyeOpenIcon,
+  LightningBoltIcon,
+} from "@radix-ui/react-icons"
+import {
   SiReact, 
   SiNextdotjs, 
   SiTypescript, 
@@ -90,13 +98,14 @@ export default function Home() {
         ref={(el) => { if (el) sectionsRef.current[0] = el }}
         className="min-h-screen flex flex-col justify-center py-12 sm:py-20 opacity-0 relative overflow-hidden w-full"
       >
-        {/* Shifting atmospheric DarkVeil background canvas extending absolute edge-to-edge */}
-        <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.22] select-none">
-          <DarkVeil 
-            noiseIntensity={0.012} 
-            warpAmount={0.2} 
-            speed={0.35} 
-            hueShift={340}
+        {/* Futuristic atmospheric Particles background extending absolute edge-to-edge */}
+        <div className="absolute inset-0 z-0 pointer-events-none select-none">
+          <Particles
+            className="absolute inset-0"
+            quantity={100}
+            staticity={30}
+            ease={50}
+            color={isDark ? "#ffffff" : "#000000"}
           />
         </div>
 
@@ -350,180 +359,197 @@ export default function Home() {
           <div className="space-y-12 sm:space-y-16 w-full">
             <h2 className="text-4xl sm:text-4xl font-light">Featured Projects</h2>
 
-            <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
-              {[
-                {
-                  title: "Enterprise ML & Real-Time Monitoring Platform for Large-Scale IoT Data",
-                  role: "Lead Full-Stack Engineer & Software Architect (Freelance Contractor)",
-                  excerpt: "Transformed research-grade ML algorithms into a production-ready enterprise SaaS. Productized isolated academic executables into a scalable platform capable of safely ingesting massive IoT datasets (25GB+), training models asynchronously, and running real-time monitoring dashboards.",
-                  tech: ["FastAPI (Python)", "React", "TypeScript", "Celery", "Redis", "PostgreSQL", "Docker", "Shell Scripting"],
-                  status: "Completed",
-                  github: null,
-                  featured: true,
-                  colSpan2: true,
-                  details: [
-                    {
-                      title: "Massive Data Ingestion",
-                      text: "Chunked pipeline uploading 25GB+ files with 1M-row batch validation, preventing server exhaustion."
-                    },
-                    {
-                      title: "Async Heavy Compute",
-                      text: "Celery and Redis task queue handling long-running ML training sessions (up to 6+ hours)."
-                    },
-                    {
-                      title: "Live Dashboards",
-                      text: "WebSocket streaming architecture broadcasting 200+ live metrics to concurrent users."
-                    },
-                    {
-                      title: "Resilience & DevOps",
-                      text: "Orphan process cleanup, active health monitoring, and containerized Docker Compose deployment."
-                    }
-                  ],
-                  architecture: `React Dashboard ⇆ FastAPI Backend (WebSockets)
-  ↳ Celery & Redis Task Queue ↳ ML Executables ⇆ PostgreSQL`
-                },
-                {
-                  title: "CUBO - Industrial-Grade Local RAG",
-                  excerpt: "Enterprise-grade RAG system engineered for privacy-first environments. Features tiered hybrid retrieval, O(1) memory scaling for 50GB+ corpora, and specialized support for European languages on consumer hardware.",
-                  tech: ["Python", "SQLite", "FAISS", "Ollama", "RAG"],
-                  status: "Completed",
-                  github: "https://github.com/PaoloAstrino/cubo",
-                  link: "https://arxiv.org/abs/2602.03731",
-                },
-                {
-                  title: "Local Hybrid Retrieval-Augmented Document QA",
-                  excerpt: "We present a question-answering system that resolves the trade-off between cloud-based AI and local processing by combining semantic understanding with keyword precision, operating entirely on local infrastructure.",
-                  tech: ["NLP", "Retrieval-Augmented Generation", "Local AI"],
-                  status: "Published",
-                  github: null,
-                  link: "https://arxiv.org/abs/2511.10297",
-                },
-                {
-                  title: "Odo - Oral Health Detection System",
-                  excerpt: "AI-powered computer vision application that helps dental professionals detect oral illnesses and conditions through photo analysis.",
-                  tech: ["Python", "Computer Vision", "Deep Learning", "Medical AI"],
-                  status: "Work in Progress",
-                  github: null,
-                },
-                {
-                  title: "GPU-Accelerated Trading Strategy Optimizer",
-                  excerpt: "GPU-powered trading system optimizing multiple rules with enhanced returns and performance.",
-                  tech: ["Python", "PyTorch", "CUDA", "Quantitative Finance"],
-                  status: "Completed",
-                  github: "https://github.com/PaoloAstrino/pso-trading-optimizer",
-                },
-              ].map((post: any, index) => (
-                <article
-                  key={index}
-                  className={`group relative p-6 sm:p-8 border rounded-lg transition-all duration-500 hover:shadow-lg cursor-pointer w-full max-w-full overflow-hidden ${post.featured
-                    ? "border-primary/50 shadow-[0_0_40px_-12px_var(--color-primary)] bg-primary/[0.02]"
-                    : "border-border hover:border-muted-foreground/50"
-                    } ${post.colSpan2 ? "lg:col-span-2" : ""}`}
-                >
-                  {post.colSpan2 ? (
-                    <div className="space-y-6">
-                      <div className="flex items-start justify-between text-sm text-muted-foreground font-mono">
-                        <span>{post.status}</span>
-                        <div />
+            <div className="grid gap-6 sm:gap-8 lg:grid-cols-3">
+              {/* Card 1: Enterprise ML & Monitoring (col-span-2, row-span-2) */}
+              <article
+                className="group relative p-6 sm:p-8 border border-primary/50 shadow-[0_0_40px_-12px_var(--color-primary)] bg-primary/[0.02] rounded-lg transition-all duration-500 hover:shadow-xl cursor-pointer col-span-3 lg:col-span-2 lg:row-span-2 flex flex-col justify-between overflow-hidden"
+              >
+                <div className="space-y-6">
+                  <div className="flex items-start justify-between text-xs text-muted-foreground font-mono">
+                    <span>Completed</span>
+                    <span className="text-primary font-medium tracking-wider uppercase">Featured Project</span>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h3 className="text-2xl sm:text-3xl font-light text-foreground transition-colors duration-300">
+                      Enterprise ML & Real-Time Monitoring Platform for Large-Scale IoT Data
+                    </h3>
+                    <div className="text-sm text-muted-foreground font-mono tracking-wide">
+                      Lead Full-Stack Engineer & Software Architect (Freelance Contractor)
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 pt-4 border-t border-border/30">
+                    {/* Left Side: Overview */}
+                    <div className="col-span-1 lg:col-span-6 space-y-4">
+                      <div className="space-y-1.5">
+                        <h4 className="text-[10px] text-muted-foreground font-mono uppercase tracking-wider">Project Overview</h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed font-light">
+                          Transformed research-grade ML algorithms into a production-ready enterprise SaaS. Productized isolated academic executables into a scalable platform capable of safely ingesting massive IoT datasets (25GB+), training models asynchronously, and running real-time monitoring dashboards.
+                        </p>
                       </div>
 
-                      <div className="space-y-2">
-                        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-light group-hover:text-muted-foreground transition-colors duration-300">
-                          {post.title}
-                        </h3>
-                        {post.role && (
-                          <div className="text-base text-muted-foreground font-mono tracking-wide">
-                            {post.role}
-                          </div>
-                        )}
+                      <div className="space-y-1.5 pt-1 hidden lg:block">
+                        <h4 className="text-[10px] text-muted-foreground font-mono uppercase tracking-wider">System Architecture</h4>
+                        <pre className="p-3 bg-muted/10 border border-border/50 rounded text-[9px] font-mono text-muted-foreground/80 overflow-x-auto leading-normal whitespace-pre">
+                          {`React Dashboard ⇆ FastAPI Backend (WebSockets)
+  ↳ Celery & Redis Task Queue ↳ ML Executables ⇆ PostgreSQL`}
+                        </pre>
                       </div>
+                    </div>
 
-                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 pt-4 border-t border-border/30">
-                        {/* Left Side: Overview & Architecture */}
-                        <div className="col-span-1 lg:col-span-6 space-y-6 min-w-0">
-                          <div className="space-y-3">
-                            <h4 className="text-sm text-muted-foreground font-mono uppercase tracking-wider">Project Overview</h4>
-                            <p className="text-lg text-muted-foreground leading-relaxed font-light font-sans break-words">
-                              {post.excerpt}
-                            </p>
+                    {/* Right Side: Contributions */}
+                    <div className="col-span-1 lg:col-span-6 space-y-4">
+                      <h4 className="text-[10px] text-muted-foreground font-mono uppercase tracking-wider">Contributions & Architecture Highlights</h4>
+                      <div className="space-y-3.5">
+                        {[
+                          { title: "Massive Data Ingestion", text: "Chunked pipeline uploading 25GB+ files with 1M-row validation, preventing server exhaustion." },
+                          { title: "Async Heavy Compute", text: "Celery & Redis task queue handling ML training sessions up to 6+ hours." },
+                          { title: "Live Dashboards", text: "WebSocket streaming architecture broadcasting 200+ live metrics to concurrent users." },
+                        ].map((detail, i) => (
+                          <div key={i} className="space-y-0.5">
+                            <h5 className="text-sm font-medium text-foreground">{detail.title}</h5>
+                            <p className="text-xs text-muted-foreground font-light leading-relaxed">{detail.text}</p>
                           </div>
-
-                          {post.architecture && (
-                            <div className="space-y-3 pt-2 hidden lg:block">
-                              <h4 className="text-sm text-muted-foreground font-mono uppercase tracking-wider">System Architecture</h4>
-                              <pre className="p-4 bg-muted/10 border border-border/50 rounded-lg text-xs font-mono text-muted-foreground overflow-x-auto leading-relaxed whitespace-pre">
-                                {post.architecture}
-                              </pre>
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Right Side: Key Contributions */}
-                        <div className="col-span-1 lg:col-span-6 space-y-6 min-w-0">
-                          <h4 className="text-sm text-muted-foreground font-mono uppercase tracking-wider">Key Contributions & Architecture Highlights</h4>
-                          <div className="space-y-5">
-                            {post.details?.map((detail: any, i: number) => (
-                              <div key={i} className="space-y-1">
-                                <h5 className="text-base font-medium text-foreground">{detail.title}</h5>
-                                <p className="text-base text-muted-foreground leading-relaxed font-light hidden lg:block">{detail.text}</p>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-wrap gap-2.5 items-start pt-6 border-t border-border/30">
-                        {post.tech.map((tech: string) => (
-                          <span
-                            key={tech}
-                            className="inline-flex items-center h-fit px-3 py-1 text-sm border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300 text-muted-foreground select-none"
-                          >
-                            {tech}
-                          </span>
                         ))}
                       </div>
                     </div>
-                  ) : (
-                    <div className="space-y-4">
-                      <div className="flex items-start justify-between text-sm text-muted-foreground font-mono">
-                        <span>{post.status}</span>
-                        <div />
-                      </div>
-                      { (post.github || post.link) && (
-                        <div className="absolute top-4 right-4 flex flex-col items-end gap-2 text-sm text-muted-foreground font-mono">
-                          {post.github && (
-                            <Link href={post.github} target="_blank" className="hover:text-foreground transition-colors">
-                              GitHub →
-                            </Link>
-                          )}
-                          {post.link && (
-                            <Link href={post.link} target="_blank" className="hover:text-foreground transition-colors">
-                              View Paper →
-                            </Link>
-                          )}
-                        </div>
-                      )}
+                  </div>
+                </div>
 
-                      <h3 className="text-xl sm:text-2xl font-light group-hover:text-muted-foreground transition-colors duration-300">
-                        {post.title}
-                      </h3>
+                <div className="flex flex-wrap gap-2 pt-6 border-t border-border/30 mt-6">
+                  {["FastAPI (Python)", "React", "TypeScript", "Celery", "Redis", "PostgreSQL", "Docker", "Shell Scripting"].map((tech) => (
+                    <span key={tech} className="inline-flex items-center h-fit px-2.5 py-0.5 text-xs border border-border rounded-full text-muted-foreground select-none">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </article>
 
-                      <p className="text-lg text-muted-foreground leading-relaxed">{post.excerpt}</p>
-
-                      <div className="flex flex-wrap gap-2.5 items-start">
-                        {post.tech.map((tech: string) => (
-                          <span
-                            key={tech}
-                            className="inline-flex items-center h-fit px-3 py-1 text-sm border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300 text-muted-foreground select-none"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
+              {/* Card 2: CUBO - Industrial-Grade Local RAG (col-span-1, row-span-2) */}
+              <article
+                className="group relative p-6 border border-border hover:border-muted-foreground/50 rounded-lg transition-all duration-500 hover:shadow-lg cursor-pointer col-span-3 lg:col-span-1 lg:row-span-2 flex flex-col justify-between overflow-hidden"
+              >
+                <div className="space-y-6">
+                  <div className="flex items-start justify-between text-xs text-muted-foreground font-mono">
+                    <span>Completed</span>
+                    <div className="flex gap-2">
+                      <Link href="https://github.com/PaoloAstrino/cubo" target="_blank" className="hover:text-foreground transition-colors">
+                        GitHub →
+                      </Link>
+                      <Link href="https://arxiv.org/abs/2602.03731" target="_blank" className="hover:text-foreground transition-colors ml-1">
+                        Paper →
+                      </Link>
                     </div>
-                  )}
-                </article>
-              ))}
+                  </div>
+
+                  <div className="space-y-2">
+                    <h3 className="text-2xl font-light text-foreground transition-colors duration-300">
+                      CUBO - Industrial-Grade Local RAG
+                    </h3>
+                  </div>
+
+                  <p className="text-sm text-muted-foreground leading-relaxed font-light">
+                    Enterprise-grade RAG system engineered for privacy-first environments. Features tiered hybrid retrieval, O(1) memory scaling for 50GB+ corpora, and specialized support for European languages on consumer hardware.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-2 pt-6 border-t border-border/30 mt-6">
+                  {["Python", "SQLite", "FAISS", "Ollama", "RAG"].map((tech) => (
+                    <span key={tech} className="inline-flex items-center h-fit px-2.5 py-0.5 text-xs border border-border rounded-full text-muted-foreground select-none">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </article>
+
+              {/* Card 3: Local Hybrid QA Research Paper (col-span-1) */}
+              <article
+                className="group relative p-6 border border-border hover:border-muted-foreground/50 rounded-lg transition-all duration-500 hover:shadow-lg cursor-pointer col-span-3 lg:col-span-1 flex flex-col justify-between overflow-hidden"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-start justify-between text-xs text-muted-foreground font-mono">
+                    <span>Published</span>
+                    <Link href="https://arxiv.org/abs/2511.10297" target="_blank" className="hover:text-foreground transition-colors">
+                      Paper →
+                    </Link>
+                  </div>
+
+                  <h3 className="text-xl font-light text-foreground transition-colors duration-300">
+                    Local Hybrid Retrieval QA
+                  </h3>
+
+                  <p className="text-sm text-muted-foreground leading-relaxed font-light">
+                    We present a question-answering system that resolves the trade-off between cloud-based AI and local processing by combining semantic understanding with keyword precision, operating entirely on local infrastructure.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-2 pt-4 border-t border-border/30 mt-4">
+                  {["NLP", "RAG", "Local AI"].map((tech) => (
+                    <span key={tech} className="inline-flex items-center h-fit px-2.5 py-0.5 text-xs border border-border rounded-full text-muted-foreground select-none">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </article>
+
+              {/* Card 4: Odo Oral Health Detection (col-span-1) */}
+              <article
+                className="group relative p-6 border border-border hover:border-muted-foreground/50 rounded-lg transition-all duration-500 hover:shadow-lg cursor-pointer col-span-3 lg:col-span-1 flex flex-col justify-between overflow-hidden"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-start justify-between text-xs text-muted-foreground font-mono">
+                    <span>Work in Progress</span>
+                    <div />
+                  </div>
+
+                  <h3 className="text-xl font-light text-foreground transition-colors duration-300">
+                    Odo - Oral Health Detection
+                  </h3>
+
+                  <p className="text-sm text-muted-foreground leading-relaxed font-light">
+                    AI-powered computer vision application that helps dental professionals detect oral illnesses and conditions through photo analysis.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-2 pt-4 border-t border-border/30 mt-4">
+                  {["Python", "Computer Vision", "Deep Learning", "Medical AI"].map((tech) => (
+                    <span key={tech} className="inline-flex items-center h-fit px-2.5 py-0.5 text-xs border border-border rounded-full text-muted-foreground select-none">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </article>
+
+              {/* Card 5: GPU Trading Optimizer (col-span-1) */}
+              <article
+                className="group relative p-6 border border-border hover:border-muted-foreground/50 rounded-lg transition-all duration-500 hover:shadow-lg cursor-pointer col-span-3 lg:col-span-1 flex flex-col justify-between overflow-hidden"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-start justify-between text-xs text-muted-foreground font-mono">
+                    <span>Completed</span>
+                    <Link href="https://github.com/PaoloAstrino/pso-trading-optimizer" target="_blank" className="hover:text-foreground transition-colors">
+                      GitHub →
+                    </Link>
+                  </div>
+
+                  <h3 className="text-xl font-light text-foreground transition-colors duration-300">
+                    GPU Strategy Optimizer
+                  </h3>
+
+                  <p className="text-sm text-muted-foreground leading-relaxed font-light">
+                    GPU-powered trading system optimizing multiple trading rules with PyTorch/CUDA, achieving substantial speedups and parameter grid validation.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-2 pt-4 border-t border-border/30 mt-4">
+                  {["Python", "PyTorch", "CUDA", "FinTech"].map((tech) => (
+                    <span key={tech} className="inline-flex items-center h-fit px-2.5 py-0.5 text-xs border border-border rounded-full text-muted-foreground select-none">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </article>
             </div>
           </div>
         </section>
