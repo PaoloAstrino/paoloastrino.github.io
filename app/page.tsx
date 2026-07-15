@@ -430,135 +430,107 @@ export default function Home() {
           ref={(el) => { if (el) sectionsRef.current[2] = el }}
           className="min-h-screen flex items-center py-20 sm:py-32 opacity-0"
         >
-          <div className="space-y-12 sm:space-y-16 w-full">
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-              <h2 className="text-4xl sm:text-4xl font-light">Experience</h2>
-              <div className="text-base text-muted-foreground font-mono">2023 — 2026</div>
-            </div>
+          <div className="space-y-16 w-full">
+            <h2 className="text-4xl sm:text-4xl font-light border-b border-border/40 pb-4">Background</h2>
 
-            <div className="space-y-8 sm:space-y-12">
-              {[
-                {
-                  year: "2025",
-                  role: "Project Manager & Full Stack Developer",
-                  company: "Freelance",
-                  description: "Operating as a generalist to eliminate product bottlenecks. I identify business problems and own the entire lifecycle from discovery to implementation, leveraging AI-native workflows to build high-utility solutions at scale.",
-                  tech: ["Python", "React", "Node.js", "Frontend Development"],
-                },
-                {
-                  year: "2025",
-                  role: "Credit Analyst",
-                  company: "Power 4U",
-                  description: "Analyzed large volumes of customer portfolio and payment behavior data using Excel, supported strategic decisions through data-driven insights.",
-                  tech: ["Excel", "Risk Analysis", "Data Insights"],
-                },
-                {
-                  year: "2023",
-                  role: "Junior Data Analyst & Back Office",
-                  company: "Adecco",
-                  description: "Monitored personnel and vehicle costs, developed Excel VBA macros, automating repetitive tasks and saving 10+ hours per week.",
-                  tech: ["VBA", "Automation", "Cost Analysis"],
-                },
-              ].map((job, index) => (
-                <div
-                  key={index}
-                  className="group grid lg:grid-cols-12 gap-4 sm:gap-8 py-6 sm:py-8 border-b border-border/50 hover:border-border transition-colors duration-500"
-                >
-                  <div className="lg:col-span-2">
-                    <div className="text-2xl sm:text-2xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500">
-                      {job.year}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-start">
+              {/* Left Column: Experience */}
+              <div className="space-y-8 sm:space-y-10">
+                <h3 className="text-xl font-mono text-muted-foreground uppercase tracking-wider">Experience</h3>
+                <div className="space-y-8">
+                  {[
+                    {
+                      year: "2025",
+                      role: "Project Manager & Full Stack Developer",
+                      company: "Freelance",
+                      description: "Operating as a generalist to eliminate product bottlenecks. I identify business problems and own the entire lifecycle from discovery to implementation, leveraging AI-native workflows to build high-utility solutions at scale.",
+                      tech: ["Python", "React", "Node.js", "Frontend Development"],
+                    },
+                    {
+                      year: "2025",
+                      role: "Credit Analyst",
+                      company: "Power 4U",
+                      description: "Analyzed large volumes of customer portfolio and payment behavior data using Excel, supported strategic decisions through data-driven insights.",
+                      tech: ["Excel", "Risk Analysis", "Data Insights"],
+                    },
+                    {
+                      year: "2023",
+                      role: "Junior Data Analyst & Back Office",
+                      company: "Adecco",
+                      description: "Monitored personnel and vehicle costs, developed Excel VBA macros, automating repetitive tasks and saving 10+ hours per week.",
+                      tech: ["VBA", "Automation", "Cost Analysis"],
+                    },
+                  ].map((job, index) => (
+                    <div key={index} className="space-y-3 pb-6 border-b border-border/30 last:border-b-0">
+                      <div className="flex justify-between items-baseline gap-2">
+                        <h4 className="text-xl sm:text-2xl font-light text-foreground">{job.role}</h4>
+                        <span className="text-sm font-mono text-muted-foreground whitespace-nowrap">{job.year}</span>
+                      </div>
+                      <div className="text-base text-muted-foreground font-mono">{job.company}</div>
+                      <p className="text-base text-muted-foreground leading-relaxed font-light">{job.description}</p>
+                      <div className="flex flex-wrap gap-2 pt-1">
+                        {job.tech.map((tech) => (
+                          <span
+                            key={tech}
+                            className="inline-flex items-center h-fit px-2.5 py-0.5 text-xs border border-border rounded-full text-muted-foreground select-none"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-
-                  <div className="lg:col-span-6 space-y-3">
-                    <div>
-                      <h3 className="text-xl sm:text-2xl font-light">{job.role}</h3>
-                      <div className="text-lg text-muted-foreground">{job.company}</div>
-                    </div>
-                    <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">{job.description}</p>
-                  </div>
-
-                  <div className="lg:col-span-4 flex flex-wrap gap-2.5 lg:justify-end items-start mt-2 lg:mt-0">
-                    {job.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="inline-flex items-center h-fit px-3 py-1 text-sm border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300 text-muted-foreground select-none"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
+              </div>
 
-        <section
-          id="education"
-          ref={(el) => { if (el) sectionsRef.current[3] = el }}
-          className="min-h-screen flex items-center py-20 sm:py-32 opacity-0"
-        >
-          <div className="space-y-12 sm:space-y-16 w-full">
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-              <h2 className="text-4xl sm:text-4xl font-light">Education</h2>
-              <div className="text-base text-muted-foreground font-mono">2020 — 2025</div>
-            </div>
-
-            <div className="space-y-8 sm:space-y-12">
-              {[
-                {
-                  year: "2025",
-                  role: "Master's in Data Analytics for Business and Society",
-                  company: "Ca' Foscari University",
-                  description: "Graduated with Master's degree focusing on Data Analytics, Business Intelligence, and Machine Learning applications.",
-                  tech: ["Data Analytics", "Business Intelligence", "ML"],
-                },
-                {
-                  year: "2024-25",
-                  role: "Intelligent Systems (Erasmus+)",
-                  company: "Universitat de les Illes Balears",
-                  description: "Exchange program focused on AI, Machine Learning, and Intelligent Systems.",
-                  tech: ["AI", "Machine Learning", "International"],
-                },
-                {
-                  year: "2020-23",
-                  role: "Bachelor's Degree in Economics",
-                  company: "Università degli Studi di Padova",
-                  description: "Graduated with Bachelor's degree in Economics with focus on quantitative methods and statistics.",
-                  tech: ["Economics", "Statistics", "Quantitative Methods"],
-                },
-              ].map((edu, index) => (
-                <div
-                  key={index}
-                  className="group grid lg:grid-cols-12 gap-4 sm:gap-8 py-6 sm:py-8 border-b border-border/50 hover:border-border transition-colors duration-500"
-                >
-                  <div className="lg:col-span-2">
-                    <div className="text-2xl sm:text-2xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500">
-                      {edu.year}
+              {/* Right Column: Education */}
+              <div className="space-y-8 sm:space-y-10">
+                <h3 className="text-xl font-mono text-muted-foreground uppercase tracking-wider">Education</h3>
+                <div className="space-y-8">
+                  {[
+                    {
+                      year: "2025",
+                      role: "Master's in Data Analytics for Business and Society",
+                      company: "Ca' Foscari University",
+                      description: "Graduated with Master's degree focusing on Data Analytics, Business Intelligence, and Machine Learning applications.",
+                      tech: ["Data Analytics", "Business Intelligence", "ML"],
+                    },
+                    {
+                      year: "2024-25",
+                      role: "Intelligent Systems (Erasmus+)",
+                      company: "Universitat de les Illes Balears",
+                      description: "Exchange program focused on AI, Machine Learning, and Intelligent Systems.",
+                      tech: ["AI", "Machine Learning", "International"],
+                    },
+                    {
+                      year: "2020-23",
+                      role: "Bachelor's Degree in Economics",
+                      company: "Università degli Studi di Padova",
+                      description: "Graduated with Bachelor's degree in Economics with focus on quantitative methods and statistics.",
+                      tech: ["Economics", "Statistics", "Quantitative Methods"],
+                    },
+                  ].map((edu, index) => (
+                    <div key={index} className="space-y-3 pb-6 border-b border-border/30 last:border-b-0">
+                      <div className="flex justify-between items-baseline gap-2">
+                        <h4 className="text-xl sm:text-2xl font-light text-foreground">{edu.role}</h4>
+                        <span className="text-sm font-mono text-muted-foreground whitespace-nowrap">{edu.year}</span>
+                      </div>
+                      <div className="text-base text-muted-foreground font-mono">{edu.company}</div>
+                      <p className="text-base text-muted-foreground leading-relaxed font-light">{edu.description}</p>
+                      <div className="flex flex-wrap gap-2 pt-1">
+                        {edu.tech.map((tech) => (
+                          <span
+                            key={tech}
+                            className="inline-flex items-center h-fit px-2.5 py-0.5 text-xs border border-border rounded-full text-muted-foreground select-none"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-
-                  <div className="lg:col-span-6 space-y-3">
-                    <div>
-                      <h3 className="text-xl sm:text-2xl font-light">{edu.role}</h3>
-                      <div className="text-lg text-muted-foreground">{edu.company}</div>
-                    </div>
-                    <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">{edu.description}</p>
-                  </div>
-
-                  <div className="lg:col-span-4 flex flex-wrap gap-2.5 lg:justify-end items-start mt-2 lg:mt-0">
-                    {edu.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="inline-flex items-center h-fit px-3 py-1 text-sm border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300 text-muted-foreground select-none"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </section>
@@ -578,7 +550,7 @@ export default function Home() {
 
         <section
           id="skills"
-          ref={(el) => { if (el) sectionsRef.current[4] = el }}
+          ref={(el) => { if (el) sectionsRef.current[3] = el }}
           className="min-h-screen flex items-center py-20 sm:py-32 opacity-0"
         >
           <div className="space-y-12 sm:space-y-16 w-full">
@@ -708,7 +680,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="connect" ref={(el) => { if (el) sectionsRef.current[5] = el }} className="min-h-screen flex items-center py-20 sm:py-32 opacity-0">
+        <section id="connect" ref={(el) => { if (el) sectionsRef.current[4] = el }} className="min-h-screen flex items-center py-20 sm:py-32 opacity-0">
           <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 w-full">
             <div className="space-y-6 sm:space-y-8">
               <h2 className="text-4xl sm:text-4xl font-light">Let's Connect</h2>
