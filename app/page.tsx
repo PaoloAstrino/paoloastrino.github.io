@@ -123,12 +123,56 @@ export default function Home() {
           <div className="grid lg:grid-cols-5 gap-12 sm:gap-16 w-full items-center">
             {/* Left Column: Bio */}
             <div className="lg:col-span-3 space-y-8">
-              <div className="space-y-3">
+              <div className="space-y-4">
                 <div className="text-xs text-muted-foreground font-mono tracking-widest uppercase">PORTFOLIO / 2026</div>
-                <h1 className="text-6xl sm:text-7xl lg:text-8xl font-extralight tracking-tight leading-none text-foreground">
+                <h1 className="text-6xl sm:text-8xl lg:text-[10rem] font-extralight tracking-tighter leading-[0.85] text-foreground">
                   Paolo
                   <span className="text-muted-foreground block font-light">Astrino</span>
                 </h1>
+              </div>
+
+              {/* "Got an idea?" animation directly under the name */}
+              <div className="w-full border-t border-b border-border/10 py-6 my-6">
+                <Link
+                  href="#connect"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    document.getElementById("connect")?.scrollIntoView({ behavior: "smooth" })
+                  }}
+                  className="group block w-full"
+                >
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight leading-[1.1] transition-colors duration-500 flex flex-wrap items-center gap-x-3 gap-y-2 select-none">
+                    <span className="text-foreground">Got an idea?</span>
+                    <span className="text-muted-foreground group-hover:text-foreground transition-all duration-500 inline-flex items-center gap-x-2">
+                      <span className="relative inline-flex overflow-hidden h-[1.2em] items-center align-middle">
+                        <RotatingText
+                          texts={["Let's talk.", "Let's build.", "Let's create.", "Let's connect.", "Let's solve."]}
+                          mainClassName="inline-flex overflow-hidden"
+                          staggerDuration={0.02}
+                          splitBy="characters"
+                          rotationInterval={2500}
+                          initial={{ y: "30%", opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          exit={{ y: "-30%", opacity: 0 }}
+                          transition={{ type: "spring", damping: 30, stiffness: 350 }}
+                        />
+                      </span>
+                      <svg
+                        className="w-[0.7em] h-[0.7em] transform group-hover:translate-x-2 transition-transform duration-500 shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1}
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
+                      </svg>
+                    </span>
+                  </h2>
+                </Link>
               </div>
 
               <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed font-light max-w-xl">
@@ -176,49 +220,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          <div className="w-full mt-12 sm:mt-16 border-t border-border/40 pt-8 text-center">
-            <Link
-              href="#connect"
-              onClick={(e) => {
-                e.preventDefault()
-                document.getElementById("connect")?.scrollIntoView({ behavior: "smooth" })
-              }}
-              className="group block w-full"
-            >
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-light tracking-tight leading-[1.1] transition-colors duration-500 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 select-none">
-                <span className="text-foreground">Got an idea?</span>
-                <span className="text-muted-foreground group-hover:text-foreground transition-all duration-500 inline-flex items-center gap-x-3">
-                  <span className="relative inline-flex overflow-hidden h-[1.2em] items-center align-middle">
-                    <RotatingText
-                      texts={["Let's talk.", "Let's build.", "Let's create.", "Let's connect.", "Let's solve."]}
-                      mainClassName="inline-flex overflow-hidden"
-                      staggerDuration={0.02}
-                      splitBy="characters"
-                      rotationInterval={2500}
-                      initial={{ y: "30%", opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: "-30%", opacity: 0 }}
-                      transition={{ type: "spring", damping: 30, stiffness: 350 }}
-                    />
-                  </span>
-                  <svg
-                    className="w-[0.7em] h-[0.7em] transform group-hover:translate-x-3 transition-transform duration-500 shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </span>
-              </h2>
-            </Link>
-          </div>
         </div>
       </header>
 
@@ -257,7 +258,12 @@ export default function Home() {
                     <div className="col-span-1 lg:col-span-6 space-y-4">
                       <div className="space-y-1.5">
                         <h4 className="text-[10px] text-muted-foreground font-mono uppercase tracking-wider">Project Overview</h4>
-                        <p className="text-sm text-muted-foreground leading-relaxed font-light line-clamp-3 lg:line-clamp-none">
+                        {/* Mobile Concise */}
+                        <p className="text-sm text-muted-foreground leading-relaxed font-light lg:hidden">
+                          Enterprise SaaS productizing ML algorithms into a scalable IoT platform with real-time dashboards.
+                        </p>
+                        {/* Desktop Detailed */}
+                        <p className="text-sm text-muted-foreground leading-relaxed font-light hidden lg:block">
                           Transformed research-grade ML algorithms into a production-ready enterprise SaaS. Productized isolated academic executables into a scalable platform capable of safely ingesting massive IoT datasets (25GB+), training models asynchronously, and running real-time monitoring dashboards.
                         </p>
                       </div>
@@ -322,7 +328,12 @@ export default function Home() {
                     </h3>
                   </div>
 
-                  <p className="text-sm text-muted-foreground leading-relaxed font-light line-clamp-2 sm:line-clamp-none">
+                  {/* Mobile Concise */}
+                  <p className="text-sm text-muted-foreground leading-relaxed font-light sm:hidden">
+                    Privacy-first local RAG system scaling to 50GB+ corpora on consumer hardware.
+                  </p>
+                  {/* Desktop Detailed */}
+                  <p className="text-sm text-muted-foreground leading-relaxed font-light hidden sm:block">
                     Enterprise-grade RAG system engineered for privacy-first environments. Features tiered hybrid retrieval, O(1) memory scaling for 50GB+ corpora, and specialized support for European languages on consumer hardware.
                   </p>
                 </div>
@@ -352,7 +363,12 @@ export default function Home() {
                     Local Hybrid Retrieval QA
                   </h3>
 
-                  <p className="text-sm text-muted-foreground leading-relaxed font-light line-clamp-2 sm:line-clamp-none">
+                  {/* Mobile Concise */}
+                  <p className="text-sm text-muted-foreground leading-relaxed font-light sm:hidden">
+                    A local QA system combining semantic search and keyword precision without cloud dependency.
+                  </p>
+                  {/* Desktop Detailed */}
+                  <p className="text-sm text-muted-foreground leading-relaxed font-light hidden sm:block">
                     We present a question-answering system that resolves the trade-off between cloud-based AI and local processing by combining semantic understanding with keyword precision, operating entirely on local infrastructure.
                   </p>
                 </div>
@@ -380,7 +396,12 @@ export default function Home() {
                     Odo - Oral Health Detection
                   </h3>
 
-                  <p className="text-sm text-muted-foreground leading-relaxed font-light line-clamp-2 sm:line-clamp-none">
+                  {/* Mobile Concise */}
+                  <p className="text-sm text-muted-foreground leading-relaxed font-light sm:hidden">
+                    Computer vision AI helping dentists detect oral conditions through image analysis.
+                  </p>
+                  {/* Desktop Detailed */}
+                  <p className="text-sm text-muted-foreground leading-relaxed font-light hidden sm:block">
                     AI-powered computer vision application that helps dental professionals detect oral illnesses and conditions through photo analysis.
                   </p>
                 </div>
@@ -410,7 +431,12 @@ export default function Home() {
                     GPU Strategy Optimizer
                   </h3>
 
-                  <p className="text-sm text-muted-foreground leading-relaxed font-light line-clamp-2 sm:line-clamp-none">
+                  {/* Mobile Concise */}
+                  <p className="text-sm text-muted-foreground leading-relaxed font-light sm:hidden">
+                    GPU-accelerated trading optimizer scaling strategies with PyTorch and CUDA.
+                  </p>
+                  {/* Desktop Detailed */}
+                  <p className="text-sm text-muted-foreground leading-relaxed font-light hidden sm:block">
                     GPU-powered trading system optimizing multiple trading rules with PyTorch/CUDA, achieving substantial speedups and parameter grid validation.
                   </p>
                 </div>
@@ -446,6 +472,7 @@ export default function Home() {
                       role: "Project Manager & Full Stack Developer",
                       company: "Freelance",
                       description: "Operating as a generalist to eliminate product bottlenecks. I identify business problems and own the entire lifecycle from discovery to implementation, leveraging AI-native workflows to build high-utility solutions at scale.",
+                      shortDescription: "Generalist PM & Developer solving product bottlenecks and engineering custom SaaS/ML solutions.",
                       tech: ["Python", "React", "Node.js", "Frontend Development"],
                     },
                     {
@@ -453,6 +480,7 @@ export default function Home() {
                       role: "Credit Analyst",
                       company: "Power 4U",
                       description: "Analyzed large volumes of customer portfolio and payment behavior data using Excel, supported strategic decisions through data-driven insights.",
+                      shortDescription: "Data-driven credit risk analysis and customer portfolio monitoring using Excel.",
                       tech: ["Excel", "Risk Analysis", "Data Insights"],
                     },
                     {
@@ -460,6 +488,7 @@ export default function Home() {
                       role: "Junior Data Analyst & Back Office",
                       company: "Adecco",
                       description: "Monitored personnel and vehicle costs, developed Excel VBA macros, automating repetitive tasks and saving 10+ hours per week.",
+                      shortDescription: "Cost monitoring and task automation using Excel VBA macros, saving 10+ hours weekly.",
                       tech: ["VBA", "Automation", "Cost Analysis"],
                     },
                   ].map((job, index) => (
@@ -469,7 +498,14 @@ export default function Home() {
                         <span className="text-sm font-mono text-muted-foreground whitespace-nowrap">{job.year}</span>
                       </div>
                       <div className="text-base text-muted-foreground font-mono">{job.company}</div>
-                      <p className="text-base text-muted-foreground leading-relaxed font-light line-clamp-2 lg:line-clamp-none">{job.description}</p>
+                      {/* Mobile Concise */}
+                      <p className="text-base text-muted-foreground leading-relaxed font-light lg:hidden">
+                        {job.shortDescription}
+                      </p>
+                      {/* Desktop Detailed */}
+                      <p className="text-base text-muted-foreground leading-relaxed font-light hidden lg:block">
+                        {job.description}
+                      </p>
                       <div className="flex flex-wrap gap-2 pt-1">
                         {job.tech.map((tech) => (
                           <span
@@ -495,6 +531,7 @@ export default function Home() {
                       role: "Master's in Data Analytics for Business and Society",
                       company: "Ca' Foscari University",
                       description: "Graduated with Master's degree focusing on Data Analytics, Business Intelligence, and Machine Learning applications.",
+                      shortDescription: "Master's degree focusing on Data Analytics, BI, and Machine Learning.",
                       tech: ["Data Analytics", "Business Intelligence", "ML"],
                     },
                     {
@@ -502,6 +539,7 @@ export default function Home() {
                       role: "Intelligent Systems (Erasmus+)",
                       company: "Universitat de les Illes Balears",
                       description: "Exchange program focused on AI, Machine Learning, and Intelligent Systems.",
+                      shortDescription: "Erasmus exchange program specializing in AI and Intelligent Systems.",
                       tech: ["AI", "Machine Learning", "International"],
                     },
                     {
@@ -509,6 +547,7 @@ export default function Home() {
                       role: "Bachelor's Degree in Economics",
                       company: "Università degli Studi di Padova",
                       description: "Graduated with Bachelor's degree in Economics with focus on quantitative methods and statistics.",
+                      shortDescription: "Bachelor's degree in Economics focused on statistics and quantitative methods.",
                       tech: ["Economics", "Statistics", "Quantitative Methods"],
                     },
                   ].map((edu, index) => (
@@ -518,7 +557,14 @@ export default function Home() {
                         <span className="text-sm font-mono text-muted-foreground whitespace-nowrap">{edu.year}</span>
                       </div>
                       <div className="text-base text-muted-foreground font-mono">{edu.company}</div>
-                      <p className="text-base text-muted-foreground leading-relaxed font-light line-clamp-2 lg:line-clamp-none">{edu.description}</p>
+                      {/* Mobile Concise */}
+                      <p className="text-base text-muted-foreground leading-relaxed font-light lg:hidden">
+                        {edu.shortDescription}
+                      </p>
+                      {/* Desktop Detailed */}
+                      <p className="text-base text-muted-foreground leading-relaxed font-light hidden lg:block">
+                        {edu.description}
+                      </p>
                       <div className="flex flex-wrap gap-2 pt-1">
                         {edu.tech.map((tech) => (
                           <span
@@ -587,7 +633,7 @@ export default function Home() {
               ].map((skillGroup, index) => (
                 <FadeContent
                   key={index}
-                  blur={true}
+                  blur={false}
                   duration={1000}
                   ease="power2.out"
                   initialOpacity={0}
