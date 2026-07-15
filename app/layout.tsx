@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Geist } from "next/font/google"
 import Script from "next/script"
+import { CookieBanner } from "@/components/CookieBanner"
 import "./globals.css"
 
 const geist = Geist({
@@ -87,6 +88,12 @@ export default function RootLayout({
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
+            
+            // Default consent to denied for GDPR compliance
+            gtag('consent', 'default', {
+              'analytics_storage': 'denied'
+            });
+
             gtag('js', new Date());
             gtag('config', 'G-Z54PYY1DNB');
           `}
@@ -97,6 +104,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
+        <CookieBanner />
       </body>
     </html>
   )

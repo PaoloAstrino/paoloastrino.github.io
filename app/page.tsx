@@ -780,7 +780,7 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 sm:gap-8">
             <div className="space-y-2">
               <div className="text-base text-muted-foreground">© 2026 Paolo Astrino. All rights reserved.</div>
-              <div className="text-sm text-muted-foreground">Privacy-First Portfolio • No Tracking • No Data Collection</div>
+              <div className="text-sm text-muted-foreground">Portfolio • Padova, Italy</div>
             </div>
 
             <div className="flex items-center gap-4">
