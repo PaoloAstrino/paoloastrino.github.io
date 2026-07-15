@@ -105,7 +105,7 @@ export default function Home() {
       <header
         id="intro"
         ref={(el) => { if (el) sectionsRef.current[0] = el }}
-        className="min-h-screen flex flex-col justify-center py-12 sm:py-20 opacity-0 relative overflow-hidden w-full"
+        className="min-h-[85vh] sm:min-h-[90vh] flex flex-col justify-center py-16 sm:py-24 opacity-0 relative overflow-hidden w-full border-b border-border/10"
       >
         {/* Futuristic atmospheric Particles background extending absolute edge-to-edge */}
         <div className="absolute inset-0 z-0 pointer-events-none select-none">
@@ -119,63 +119,65 @@ export default function Home() {
         </div>
 
         {/* Content container aligned with main site width */}
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 w-full relative z-10 flex flex-col justify-center">
-          <div className="grid lg:grid-cols-5 gap-12 sm:gap-16 w-full items-start">
-            <div className="lg:col-span-3 space-y-6 sm:space-y-8">
-              <div className="space-y-3 sm:space-y-2">
-                <div className="text-base text-muted-foreground font-mono tracking-wider">PORTFOLIO / 2026</div>
-                <h1 className="text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 w-full relative z-10">
+          <div className="grid lg:grid-cols-5 gap-12 sm:gap-16 w-full items-center">
+            {/* Left Column: Bio */}
+            <div className="lg:col-span-3 space-y-8">
+              <div className="space-y-3">
+                <div className="text-xs text-muted-foreground font-mono tracking-widest uppercase">PORTFOLIO / 2026</div>
+                <h1 className="text-6xl sm:text-7xl lg:text-8xl font-extralight tracking-tight leading-none text-foreground">
                   Paolo
-                  <br />
-                  <span className="text-muted-foreground">Astrino</span>
+                  <span className="text-muted-foreground block font-light">Astrino</span>
                 </h1>
               </div>
 
-              <div className="space-y-6 max-w-md">
-                <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed font-light">
-                  Project Manager & Full Stack Developer focused on
-                  <span className="text-foreground"> purposeful building</span>. I don't just follow roadmaps—I help define them by identifying the root of a problem and
-                  <span className="text-foreground"> engineering high-impact solutions</span> with AI-native speed and a
-                  <span className="text-foreground"> builder's autonomy</span>.
-                </p>
-
-                <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-lg text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></div>
-                    Available for work
-                  </div>
-                  <div>Padova, Italy</div>
-                </div>
-              </div>
+              <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed font-light max-w-xl">
+                Project Manager & Full Stack Developer focused on
+                <span className="text-foreground"> purposeful building</span>. I help define product roadmaps by identifying the root of a problem and
+                <span className="text-foreground"> engineering high-impact solutions</span> with AI-native speed and a
+                <span className="text-foreground"> builder's autonomy</span>.
+              </p>
             </div>
 
-            <div className="lg:col-span-2 space-y-8 lg:pt-3 mt-8 lg:mt-0">
+            {/* Right Column: Profile Card */}
+            <div className="lg:col-span-2 bg-primary/[0.01] border border-border/80 rounded-2xl p-6 sm:p-8 space-y-8 backdrop-blur-sm mt-8 lg:mt-0 shadow-sm hover:border-muted-foreground/30 transition-all duration-300">
               <div className="space-y-4">
-                <div className="text-base text-muted-foreground font-mono">CURRENTLY</div>
-                <div className="space-y-2">
-                  <div className="text-lg text-foreground">Technical Problem Solver & Builder</div>
+                <div className="text-xs text-muted-foreground font-mono uppercase tracking-wider">Currently</div>
+                <div className="space-y-1">
+                  <div className="text-lg font-medium text-foreground">Technical Problem Solver & Builder</div>
                   <div className="text-base text-muted-foreground">@ Freelance</div>
-                  <div className="text-base text-muted-foreground">Jul 2025 — Present</div>
+                  <div className="text-sm text-muted-foreground/75">Jul 2025 — Present</div>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <div className="text-base text-muted-foreground font-mono">FOCUS</div>
-                <div className="flex flex-wrap gap-2.5">
+                <div className="text-xs text-muted-foreground font-mono uppercase tracking-wider">Expertise</div>
+                <div className="flex flex-wrap gap-2">
                   {["Python", "React", "Product Strategy", "Solution Architecture", "DevOps"].map((skill) => (
                     <span
                       key={skill}
-                      className="px-3 py-1 text-sm border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300"
+                      className="px-3 py-1 text-xs border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300 select-none bg-background/50 text-muted-foreground hover:text-foreground"
                     >
                       {skill}
                     </span>
                   ))}
                 </div>
               </div>
+
+              <div className="space-y-4 pt-4 border-t border-border/30">
+                <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2 bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20 px-2.5 py-1 rounded-full text-xs font-medium">
+                    <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                    Available for work
+                  </div>
+                  <span className="text-border">|</span>
+                  <span>Padova, Italy</span>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="w-full mt-10 sm:mt-24 border-t border-border/40 pt-8 sm:pt-16 text-center">
+          <div className="w-full mt-12 sm:mt-16 border-t border-border/40 pt-8 text-center">
             <Link
               href="#connect"
               onClick={(e) => {
@@ -184,9 +186,9 @@ export default function Home() {
               }}
               className="group block w-full"
             >
-              <h2 className="text-4xl sm:text-7xl lg:text-8xl font-light tracking-tight leading-[1.1] transition-colors duration-500 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 select-none">
+              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-light tracking-tight leading-[1.1] transition-colors duration-500 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 select-none">
                 <span className="text-foreground">Got an idea?</span>
-                <span className="text-muted-foreground group-hover:text-foreground transition-all duration-500 inline-flex items-center gap-x-4">
+                <span className="text-muted-foreground group-hover:text-foreground transition-all duration-500 inline-flex items-center gap-x-3">
                   <span className="relative inline-flex overflow-hidden h-[1.2em] items-center align-middle">
                     <RotatingText
                       texts={["Let's talk.", "Let's build.", "Let's create.", "Let's connect.", "Let's solve."]}
@@ -201,7 +203,7 @@ export default function Home() {
                     />
                   </span>
                   <svg
-                    className="w-[0.7em] h-[0.7em] transform group-hover:translate-x-4 transition-transform duration-500 shrink-0"
+                    className="w-[0.7em] h-[0.7em] transform group-hover:translate-x-3 transition-transform duration-500 shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -255,7 +257,7 @@ export default function Home() {
                     <div className="col-span-1 lg:col-span-6 space-y-4">
                       <div className="space-y-1.5">
                         <h4 className="text-[10px] text-muted-foreground font-mono uppercase tracking-wider">Project Overview</h4>
-                        <p className="text-sm text-muted-foreground leading-relaxed font-light">
+                        <p className="text-sm text-muted-foreground leading-relaxed font-light line-clamp-3 lg:line-clamp-none">
                           Transformed research-grade ML algorithms into a production-ready enterprise SaaS. Productized isolated academic executables into a scalable platform capable of safely ingesting massive IoT datasets (25GB+), training models asynchronously, and running real-time monitoring dashboards.
                         </p>
                       </div>
@@ -270,7 +272,7 @@ export default function Home() {
                     </div>
 
                     {/* Right Side: Contributions */}
-                    <div className="col-span-1 lg:col-span-6 space-y-4">
+                    <div className="hidden lg:block col-span-1 lg:col-span-6 space-y-4">
                       <h4 className="text-[10px] text-muted-foreground font-mono uppercase tracking-wider">Contributions & Architecture Highlights</h4>
                       <div className="space-y-3.5">
                         {[
@@ -320,7 +322,7 @@ export default function Home() {
                     </h3>
                   </div>
 
-                  <p className="text-sm text-muted-foreground leading-relaxed font-light">
+                  <p className="text-sm text-muted-foreground leading-relaxed font-light line-clamp-2 sm:line-clamp-none">
                     Enterprise-grade RAG system engineered for privacy-first environments. Features tiered hybrid retrieval, O(1) memory scaling for 50GB+ corpora, and specialized support for European languages on consumer hardware.
                   </p>
                 </div>
@@ -350,7 +352,7 @@ export default function Home() {
                     Local Hybrid Retrieval QA
                   </h3>
 
-                  <p className="text-sm text-muted-foreground leading-relaxed font-light">
+                  <p className="text-sm text-muted-foreground leading-relaxed font-light line-clamp-2 sm:line-clamp-none">
                     We present a question-answering system that resolves the trade-off between cloud-based AI and local processing by combining semantic understanding with keyword precision, operating entirely on local infrastructure.
                   </p>
                 </div>
@@ -378,7 +380,7 @@ export default function Home() {
                     Odo - Oral Health Detection
                   </h3>
 
-                  <p className="text-sm text-muted-foreground leading-relaxed font-light">
+                  <p className="text-sm text-muted-foreground leading-relaxed font-light line-clamp-2 sm:line-clamp-none">
                     AI-powered computer vision application that helps dental professionals detect oral illnesses and conditions through photo analysis.
                   </p>
                 </div>
@@ -408,7 +410,7 @@ export default function Home() {
                     GPU Strategy Optimizer
                   </h3>
 
-                  <p className="text-sm text-muted-foreground leading-relaxed font-light">
+                  <p className="text-sm text-muted-foreground leading-relaxed font-light line-clamp-2 sm:line-clamp-none">
                     GPU-powered trading system optimizing multiple trading rules with PyTorch/CUDA, achieving substantial speedups and parameter grid validation.
                   </p>
                 </div>
@@ -467,7 +469,7 @@ export default function Home() {
                         <span className="text-sm font-mono text-muted-foreground whitespace-nowrap">{job.year}</span>
                       </div>
                       <div className="text-base text-muted-foreground font-mono">{job.company}</div>
-                      <p className="text-base text-muted-foreground leading-relaxed font-light">{job.description}</p>
+                      <p className="text-base text-muted-foreground leading-relaxed font-light line-clamp-2 lg:line-clamp-none">{job.description}</p>
                       <div className="flex flex-wrap gap-2 pt-1">
                         {job.tech.map((tech) => (
                           <span
@@ -516,7 +518,7 @@ export default function Home() {
                         <span className="text-sm font-mono text-muted-foreground whitespace-nowrap">{edu.year}</span>
                       </div>
                       <div className="text-base text-muted-foreground font-mono">{edu.company}</div>
-                      <p className="text-base text-muted-foreground leading-relaxed font-light">{edu.description}</p>
+                      <p className="text-base text-muted-foreground leading-relaxed font-light line-clamp-2 lg:line-clamp-none">{edu.description}</p>
                       <div className="flex flex-wrap gap-2 pt-1">
                         {edu.tech.map((tech) => (
                           <span
