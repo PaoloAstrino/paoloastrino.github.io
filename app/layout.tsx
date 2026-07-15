@@ -24,30 +24,54 @@ export default function RootLayout({
 }>) {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Paolo Astrino",
-    "jobTitle": "Project Manager & Full Stack Developer",
-    "url": "https://paoloastrino.github.io/",
-    "image": "https://paoloastrino.github.io/placeholder-user.jpg",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Padova",
-      "addressCountry": "IT"
-    },
-    "sameAs": [
-      "https://github.com/paoloastrino",
-      "https://www.linkedin.com/in/paolo-astrino-9792061a3"
-    ],
-    "knowsAbout": [
-      "Python",
-      "React",
-      "Product Strategy",
-      "Solution Architecture",
-      "DevOps",
-      "Full Stack Development",
-      "Next.js"
-    ],
-    "description": "Technical Problem Solver & Builder focused on purposeful building and engineering high-impact solutions with AI-native speed."
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://paoloastrino.github.io/#person",
+        "name": "Paolo Astrino",
+        "jobTitle": "Project Manager & Full Stack Developer",
+        "url": "https://paoloastrino.github.io/",
+        "image": "https://paoloastrino.github.io/placeholder-user.jpg",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Padova",
+          "addressCountry": "IT"
+        },
+        "sameAs": [
+          "https://github.com/paoloastrino",
+          "https://www.linkedin.com/in/paolo-astrino-9792061a3"
+        ],
+        "knowsAbout": [
+          "Python",
+          "React",
+          "Product Strategy",
+          "Solution Architecture",
+          "DevOps",
+          "Full Stack Development",
+          "Next.js"
+        ],
+        "description": "Technical Problem Solver & Builder focused on purposeful building and engineering high-impact solutions with AI-native speed."
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://paoloastrino.github.io/#business",
+        "name": "Paolo Astrino",
+        "url": "https://paoloastrino.github.io/",
+        "image": "https://paoloastrino.github.io/placeholder-user.jpg",
+        "founder": {
+          "@id": "https://paoloastrino.github.io/#person"
+        },
+        "vatID": "IT05792580283",
+        "email": "paolo.astrino@pec.it",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Padova",
+          "addressRegion": "PD",
+          "addressCountry": "IT"
+        }
+      }
+    ]
   }
 
   return (
