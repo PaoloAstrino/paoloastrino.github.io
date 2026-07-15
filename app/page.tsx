@@ -45,6 +45,15 @@ const techLogos = [
   { node: <SiDocker className="w-14 h-14 md:w-20 md:h-20 text-muted-foreground hover:text-foreground transition-colors duration-300 select-none" />, href: "https://www.docker.com", title: "Docker" },
 ];
 
+const trackGAEvent = (action: string, category: string, label: string) => {
+  if (typeof window !== "undefined" && (window as any).gtag) {
+    (window as any).gtag("event", action, {
+      event_category: category,
+      event_label: label,
+    });
+  }
+};
+
 export default function Home() {
   const [isDark, setIsDark] = useState(true)
   const [activeSection, setActiveSection] = useState("")
@@ -712,6 +721,7 @@ export default function Home() {
                 <div className="space-y-4">
                   <Link
                     href="mailto:paoloastrino01@gmail.com"
+                    onClick={() => trackGAEvent("click_email", "Contact", "mailto:paoloastrino01@gmail.com")}
                     className="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors duration-300"
                   >
                     <span className="text-lg sm:text-xl">paoloastrino01@gmail.com</span>
@@ -746,6 +756,10 @@ export default function Home() {
                       target={social.isExternal ? "_blank" : undefined}
                       rel={social.isExternal ? "noopener noreferrer" : undefined}
                       download={social.download ? "" : undefined}
+                      onClick={() => {
+                        const eventName = social.download ? "download_cv" : `click_${social.name.toLowerCase().replace(" ", "_")}`;
+                        trackGAEvent(eventName, "Elsewhere", social.url);
+                      }}
                       className="group p-4 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-300 hover:shadow-sm"
                     >
                       <div className="space-y-2">
